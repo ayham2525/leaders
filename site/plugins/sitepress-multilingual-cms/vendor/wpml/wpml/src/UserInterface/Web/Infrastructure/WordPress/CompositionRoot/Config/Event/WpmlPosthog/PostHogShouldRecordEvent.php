@@ -24,6 +24,7 @@ class PostHogShouldRecordEvent {
 
   /** @return void */
   public function register() {
+    // This action hook can be used manually or inside a scheduled event.
     add_action(
       self::EVENT_NAME,
       function () {
@@ -31,14 +32,12 @@ class PostHogShouldRecordEvent {
       }
     );
 
-    add_action(
-      'init',
-      function () {
-        if ( ! wp_next_scheduled( self::EVENT_NAME ) ) {
-          wp_schedule_event( time() + MINUTE_IN_SECONDS, 'daily', self::EVENT_NAME );
-        }
-      }
-    );
+    // Clean up legacy scheduled events only if they exist
+    // this is because we don't need any scheduled actions for this event anymore.
+    // @see wpmldev-5938
+    if ( wp_next_scheduled( self::EVENT_NAME ) ) {
+      wp_clear_scheduled_hook( self::EVENT_NAME );
+    }
   }
 
 

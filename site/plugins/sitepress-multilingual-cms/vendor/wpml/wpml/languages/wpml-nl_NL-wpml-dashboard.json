@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "nl"
+            "lang": "nl_NL"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Onvertaalde teksten die ik tegenkom op de frontend terwijl ik ben ingelogd"
@@ -875,6 +875,9 @@
          "credit": [
             "credit",
             "credits"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sexacte prijzen%2$s )"
          ],
          "Translation service additional options": [
             "Extra opties voor vertaaldienst"

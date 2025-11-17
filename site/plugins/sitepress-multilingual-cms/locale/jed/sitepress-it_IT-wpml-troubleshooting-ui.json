@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "it"
+            "lang": "it_IT"
          },
          "Preparing...": [
             "Preparazione in corso..."
@@ -87,7 +87,6 @@
          ],
          "Processing... %s stuck translation found so far": [
             "Elaborazione in corso... %s traduzione bloccata trovata finora",
-            "Processing... %s stuck translations found so far",
             "Elaborazione in corso... %s traduzioni bloccate trovate finora"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -98,7 +97,6 @@
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
             "%s lavoro di traduzione bloccato trovato. WPML lo tradurrà automaticamente in background.\nPuoi controllare il progresso nel Pannello di Traduzione.",
-            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
             "%s lavori di traduzione bloccati trovati. WPML li tradurrà automaticamente in background.\nPuoi controllare il loro progresso nel Pannello di Traduzione."
          ]
       }

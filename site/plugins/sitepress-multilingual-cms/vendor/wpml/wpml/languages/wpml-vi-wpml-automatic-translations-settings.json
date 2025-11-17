@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "vi"
+            "lang": "vi_VN"
          },
          "Could not fetch engines data": [
             "Không thể lấy dữ liệu công cụ"

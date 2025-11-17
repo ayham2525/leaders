@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Your pending automatic translations will be canceled.": [
             "您待处理的自动翻译将被取消。"

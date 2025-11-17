@@ -2,6 +2,7 @@
 
 namespace WPML\UserInterface\Web\Infrastructure\CompositionRoot\Config;
 
+use Throwable;
 use WPML\Core\Port\Endpoint\EndpointInterface;
 use WPML\DicInterface;
 use WPML\UserInterface\Web\Core\SharedKernel\Config\Endpoint\Endpoint;
@@ -27,8 +28,8 @@ class EndpointLoader {
     ApiInterface $api
   ) {
     $this->endpoint = $endpoint;
-    $this->dic = $dic;
-    $this->api = $api;
+    $this->dic      = $dic;
+    $this->api      = $api;
     $this->register();
   }
 
@@ -45,6 +46,7 @@ class EndpointLoader {
 
   /**
    * @param array<string,mixed> $params
+   *
    * @return mixed
    */
   public function handle( $params ) {
@@ -52,6 +54,7 @@ class EndpointLoader {
 
     if ( ! $handlerString ) {
       $this->api->responseJsonError( 'Endpoint handler missing.' );
+
       return;
     }
 
@@ -67,15 +70,24 @@ class EndpointLoader {
       // in the error log. The user wouldn't see them on the screen anyway.
       $this->outputBufferActive = ob_start();
 
-        // Get our response data.
-        $result = $handler->handle( $params );
+      // Get our response data.
+      $result = $handler->handle( $params );
 
       // End: Flush all output created on the $handler->handle( $params ) call.
       $this->outputBufferActive && ob_end_clean();
       $this->outputBufferActive = false;
 
+      // Check if result contains a custom status_code
+      if ( isset( $result['status'] ) ) {
+        $status = $result['status'];
+        if ( is_int( $status ) ) {
+          unset( $result['status'] );
+          return $this->api->responseJsonWithStatusCode( $result, $status );
+        }
+      }
+
       return $this->api->responseJsonSuccess( $result );
-    } catch ( \Throwable $e ) {
+    } catch ( Throwable $e ) {
       // In case of an error we still need to flush the output buffer.
       $this->outputBufferActive && ob_end_clean();
       $this->outputBufferActive = false;

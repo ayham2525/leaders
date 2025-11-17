@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "de"
+            "lang": "de_DE"
          },
          "Start batch sync": [
             "Batch-Synchronisation starten"

@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "it"
+            "lang": "it_IT"
          },
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "Se desideri tradurre automaticamente i contenuti del tuo sito, devi utilizzare l'editor di traduzione avanzato."

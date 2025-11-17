@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko"
+            "lang": "ko_KR"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "프론트엔드에서 로그인 상태로 마주치는 번역되지 않은 문자열"
@@ -865,8 +865,11 @@
          "Summary": [
             "요약"
          ],
-         "Credit": [
+         "credit": [
             "크레딧"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$s정확한 가격%2$s )"
          ],
          "Translation service additional options": [
             "번역 서비스 추가 옵션"

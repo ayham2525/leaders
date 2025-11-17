@@ -865,8 +865,11 @@
          "Summary": [
             "สรุป"
          ],
-         "Credit": [
+         "credit": [
             "เครดิต"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sราคาที่แน่นอน%2$s )"
          ],
          "Translation service additional options": [
             "ตัวเลือกเพิ่มเติมของบริการแปล"

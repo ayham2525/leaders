@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n > 1);",
-            "lang": "tr"
+            "lang": "tr_TR"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Giriş yapmış durumdayken ön yüzde karşılaştığım çevrilmemiş dizeler"
@@ -875,6 +875,9 @@
          "credit": [
             "kredi",
             "kredi"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$stam fiyatlandırma%2$s )"
          ],
          "Translation service additional options": [
             "Çeviri hizmeti ek seçenekleri"

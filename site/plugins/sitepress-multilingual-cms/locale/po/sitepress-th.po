@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.4\n"
+"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-21T14:44:12+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sitepress\n"
@@ -28,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">WPML 4.8.4 release notes</a>"
-msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">เอกสารประกอบ</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">บันทึกประจำรุ่น WPML 4.8.4</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">เอกสารประกอบ</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">บันทึกประจำรุ่น WPML 4.8.5</a>"
 
 #. Author of the plugin
 #: sitepress.php
@@ -41,183 +41,183 @@ msgstr "OnTheGoSystems"
 msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:188
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr "ปุ่ม: ข้อความ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:193
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:187
 msgid "Button: Link"
 msgstr "ปุ่ม: ลิงก์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:203
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr "หัวเรื่อง: ชื่อเรื่อง"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:208
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:202
 msgid "Heading: Link"
 msgstr "หัวข้อ: ลิงก์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:218
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr "HTML"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:228
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:222
 msgid "Photo: Link"
 msgstr "รูปภาพ: ลิงก์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:238
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr "ตัวแก้ไขข้อความ: ข้อความ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:263
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:257
 msgid "Callout: Heading"
 msgstr "กล่องข้อความ: หัวข้อ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:268
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:262
 msgid "Callout: Text"
 msgstr "กล่องข้อความ: เนื้อหา"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:273
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:267
 msgid "Callout: Call to action text"
 msgstr "กล่องข้อความ: ข้อความเรียกร้องให้ดำเนินการ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:278
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:272
 msgid "Callout: Link"
 msgstr "กล่องข้อความ: ลิงก์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:288
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:282
 msgid "Contact Form: Name Field Placeholder"
 msgstr "แบบฟอร์มติดต่อ: ตัวอย่างช่องชื่อ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:293
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:287
 msgid "Contact Form: Subject Field Placeholder"
 msgstr "แบบฟอร์มติดต่อ: ตัวอย่างช่องหัวข้อ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:298
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:292
 msgid "Contact Form: Email Field Placeholder"
 msgstr "แบบฟอร์มติดต่อ: ตัวอย่างช่องอีเมล"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:303
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:297
 msgid "Contact Form: Phone Field Placeholder"
 msgstr "แบบฟอร์มติดต่อ: ตัวอย่างช่องโทรศัพท์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:308
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:302
 msgid "Contact Form: Your Message Placeholder"
 msgstr "แบบฟอร์มติดต่อ: ตัวอย่างช่องข้อความของคุณ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:313
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:307
 msgid "Contact Form: Checkbox Text"
 msgstr "แบบฟอร์มติดต่อ: ข้อความช่องทำเครื่องหมาย"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:318
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:312
 msgid "Contact Form: Terms and Conditions"
 msgstr "แบบฟอร์มติดต่อ: ข้อกำหนดและเงื่อนไข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:323
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:317
 msgid "Contact Form: Success Message"
 msgstr "แบบฟอร์มติดต่อ: ข้อความสำเร็จ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:328
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:322
 msgid "Contact Form: Button Text"
 msgstr "แบบฟอร์มติดต่อ: ข้อความปุ่ม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:333
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:327
 msgid "Contact Form: Redirect Link"
 msgstr "แบบฟอร์มติดต่อ: ลิงก์เปลี่ยนเส้นทาง"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:343
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:337
 msgid "Call to Action: Heading"
 msgstr "เรียกร้องให้ดำเนินการ: หัวข้อ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:348
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:342
 msgid "Call to Action: Text"
 msgstr "เรียกร้องให้ดำเนินการ: ข้อความ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:353
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:347
 msgid "Call to Action: Button text"
 msgstr "เรียกร้องให้ดำเนินการ: ข้อความปุ่ม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:358
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:352
 msgid "Call to Action: Button link"
 msgstr "เรียกร้องให้ดำเนินการ: ลิงก์ปุ่ม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:369
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:363
 msgid "Subscribe form: Checkbox Text"
 msgstr "แบบฟอร์มสมัครสมาชิก: ข้อความช่องทำเครื่องหมาย"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:374
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:368
 msgid "Subscribe form: Terms and Conditions"
 msgstr "แบบฟอร์มสมัครสมาชิก: ข้อกำหนดและเงื่อนไข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:379
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:373
 msgid "Subscribe form: Notification Subject"
 msgstr "แบบฟอร์มสมัครสมาชิก: หัวข้อการแจ้งเตือน"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:384
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:378
 msgid "Subscribe form: Success Message"
 msgstr "แบบฟอร์มสมัครสมาชิก: ข้อความสำเร็จ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:389
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:383
 msgid "Subscribe form: Button Text"
 msgstr "แบบฟอร์มสมัครสมาชิก: ข้อความปุ่ม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:394
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:388
 msgid "Subscribe form: Redirect Link"
 msgstr "แบบฟอร์มสมัครสมาชิก: ลิงก์เปลี่ยนเส้นทาง"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:409
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:403
 msgid "Icon: Text"
 msgstr "ไอคอน: ข้อความ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:414
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:408
 msgid "Icon: Link"
 msgstr "ไอคอน: ลิงก์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:429
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:423
 msgid "Map: Address"
 msgstr "แผนที่: ที่อยู่"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:439
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:433
 msgid "Testimonial: Heading"
 msgstr "คำรับรอง: หัวข้อ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:451
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:445
 msgid "Number Counter: Text before number"
 msgstr "ตัวนับจำนวน: ข้อความก่อนตัวเลข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:456
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:450
 msgid "Number Counter: Text after number"
 msgstr "ตัวนับจำนวน: ข้อความหลังตัวเลข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:461
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:455
 msgid "Number Counter: Number Prefix"
 msgstr "ตัวนับจำนวน: คำนำหน้าตัวเลข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:466
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:460
 msgid "Number Counter: Number Suffix"
 msgstr "ตัวนับจำนวน: คำต่อท้ายตัวเลข"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:476
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:470
 msgid "Posts: No Results Message"
 msgstr "โพสต์: ข้อความไม่พบผลลัพธ์"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:481
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:475
 msgid "Posts: Button Text"
 msgstr "โพสต์: ข้อความปุ่ม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:486
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:480
 msgid "Posts: Terms Label"
 msgstr "โพสต์: ป้ายกำกับคำ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:491
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:485
 msgid "Posts: More Link Text"
 msgstr "โพสต์: ข้อความลิงก์เพิ่มเติม"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:501
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:495
 msgid "Posts Slider: More Link Text"
 msgstr "สไลด์เดอร์โพสต์: ข้อความลิงก์เพิ่มเติม"
 
@@ -1168,12 +1168,12 @@ msgstr "เพิ่ม %1$s งานลงในตัวแก้ไขกา
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr "คุณได้เปิดใช้งานตัวแก้ไขการแปลขั้นสูงสำหรับไซต์นี้ แต่คุณกำลังอัปเดตการแปลเก่า WPML ได้เปิดตัวแก้ไขการแปลมาตรฐาน เพื่อให้คุณสามารถอัปเดตการแปลนี้ได้ เมื่อคุณแปลเนื้อหาใหม่ คุณจะได้รับตัวแก้ไขการแปลขั้นสูงพร้อมคุณสมบัติทั้งหมด หากต้องการเปลี่ยนการตั้งค่าของคุณ ให้ไปที่การตั้งค่า WPML."
 
-#: classes/ATE/sitekey/Endpoint.php:39
+#: classes/ATE/sitekey/Endpoint.php:49
 msgid "Initializing AMS credentials."
 msgstr "กำลังเริ่มต้นข้อมูลรับรอง AMS."
 
 #: classes/ATE/TranslateEverything/TranslatableData/View.php:97
-#: classes/setup/endpoints/LicenseStep.php:73
+#: classes/setup/endpoints/LicenseStep.php:84
 msgid "Server error. Please refresh and try again."
 msgstr "ข้อผิดพลาดของเซิร์ฟเวอร์ โปรดรีเฟรชและลองอีกครั้ง."
 
@@ -2885,7 +2885,7 @@ msgstr "ตำแหน่งของลิงก์ hreflang"
 msgid "A user does not have a proper license to enable ATE."
 msgstr "ผู้ใช้ไม่มีใบอนุญาตที่เหมาะสมในการเปิดใช้งาน ATE."
 
-#: classes/setup/endpoints/LicenseStep.php:54
+#: classes/setup/endpoints/LicenseStep.php:53
 msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr "ขอบคุณสำหรับการลงทะเบียน WPML บนเว็บไซต์นี้ คุณจะได้รับการอัปเดตอัตโนมัติเมื่อมีเวอร์ชันใหม่."
 

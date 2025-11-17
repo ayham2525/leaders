@@ -69,6 +69,8 @@ use WPML\UserInterface\Web\Infrastructure\WordPress\CompositionRoot\Config\Exist
 return [
   \WPML\UserInterface\Web\Infrastructure\CompositionRoot\Config\ContentStats\Controller::class =>
     [ 'api' => Api::class, ],
+  \WPML\UserInterface\Web\Infrastructure\CompositionRoot\Config\PostHog\Controller::class =>
+    [ 'api' => Api::class, 'plugin' => Plugin::class, ],
   TranslationService::class                                                                    =>
     [ 'batchBuilder' => StringBatchBuilder::class ],
   TranslatorNoteService::class                                                                 =>

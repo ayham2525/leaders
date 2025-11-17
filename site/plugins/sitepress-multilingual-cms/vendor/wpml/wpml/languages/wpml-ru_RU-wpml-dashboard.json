@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
-            "lang": "ru"
+            "lang": "ru_RU"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Непереведенные строки, с которыми я сталкиваюсь на фронтенде, будучи авторизованным"
@@ -85,8 +85,7 @@
          "%d item selected": [
             "%d элемент выбран",
             "%d items selected",
-            "%d items selected",
-            "%d элементов выбрано"
+            "%d items selected"
          ],
          "(%d words to translate)": [
             "(%d слов для перевода)"
@@ -94,8 +93,7 @@
          "%s item not showing.": [
             "%s элемент не отображается.",
             "%s items not showing.",
-            "%s items not showing.",
-            "%s элементов не отображаются."
+            "%s items not showing."
          ],
          "Show all selected items": [
             "Показать все выбранные элементы"
@@ -616,8 +614,7 @@
          "<s>1 item</s> is being translated automatically.": [
             "<s>1 элемент</s> переводится автоматически.",
             "<s>%d items</s> are being translated automatically.",
-            "<s>%d items</s> are being translated automatically.",
-            "<s>%d элементов</s> переводятся автоматически."
+            "<s>%d items</s> are being translated automatically."
          ],
          "You can track their progress at the top of the page.": [
             "Вы можете отслеживать их прогресс в верхней части страницы."
@@ -649,8 +646,7 @@
          "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
             "<s>1 элемент</s> был успешно назначен Вам! Чтобы проверить его статус, пожалуйста, перейдите в раздел <s>WPML → Переводы</s>. <translations_queue/>",
             "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
-            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
-            "<s>%d элемента</s> были успешно назначены Вам! Для получения обновлений статуса, пожалуйста, перейдите в раздел <s>WPML → Переводы</s>. <translations_queue/>"
+            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>"
          ],
          "Currently logged in translator summary": [
             "Сводка для текущего авторизованного переводчика"
@@ -661,8 +657,7 @@
          "<s>1 item</s> has been duplicated.": [
             "<s>1 элемент</s> был продублирован.",
             "<s>%d items</s> have been duplicated.",
-            "<s>%d items</s> have been duplicated.",
-            "<s>%d элемента</s> были продублированы."
+            "<s>%d items</s> have been duplicated."
          ],
          "Duplication summary": [
             "Сводка дублирования"
@@ -697,8 +692,7 @@
          "<s>1 item</s> has been successfully sent to translators!": [
             "<s>1 элемент</s> был успешно отправлен переводчикам!",
             "<s>%d items</s> have been successfully sent to translators!",
-            "<s>%d items</s> have been successfully sent to translators!",
-            "<s>%d элемента</s> были успешно отправлены переводчикам!"
+            "<s>%d items</s> have been successfully sent to translators!"
          ],
          "Local translations summary": [
             "Сводка локальных переводов"
@@ -724,8 +718,7 @@
          "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
             "<s>%d элемент</s> отправляется на перевод в %s. Пожалуйста, перейдите на их сайт, чтобы начать перевод.",
             "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
-            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
-            "<s>%d элементов</s> отправляются на перевод в %s. Пожалуйста, перейдите на их сайт, чтобы начать перевод."
+            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation."
          ],
          "Translation service translations summary": [
             "Сводка переводов службы переводов"
@@ -889,8 +882,10 @@
          "credit": [
             "кредит",
             "Кредита",
-            "Кредитов",
-            "кредитов"
+            "Кредитов"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sточная цена%2$s )"
          ],
          "Translation service additional options": [
             "Дополнительные опции службы перевода"
@@ -982,8 +977,7 @@
          "%d translation left in the queue. Preparing more content for translation.": [
             "Остался %d перевод в очереди. Подготовка дополнительного контента для перевода.",
             "%d translations left in the queue. Preparing more content for translation.",
-            "%d translations left in the queue. Preparing more content for translation.",
-            "Осталось %d переводов в очереди. Подготовка дополнительного контента для перевода."
+            "%d translations left in the queue. Preparing more content for translation."
          ],
          "Preparing content for translation...": [
             "Подготовка контента для перевода..."
@@ -991,8 +985,7 @@
          "%d translation left in the queue...": [
             "Остался %d перевод в очереди...",
             "%d translations left in the queue...",
-            "%d translations left in the queue...",
-            "Осталось %d переводов в очереди..."
+            "%d translations left in the queue..."
          ],
          "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
             "Автоматический перевод всего контента завершён. В очереди нет ожидающих переводов."
@@ -1033,8 +1026,7 @@
          "<s>1 translation</s> has been successfully translated automatically": [
             "<s>1 перевод</s> успешно переведён автоматически",
             "<s>%d translations</s> have been successfully translated automatically",
-            "<s>%d translations</s> have been successfully translated automatically",
-            "<s>%d переводов</s> успешно переведены автоматически"
+            "<s>%d translations</s> have been successfully translated automatically"
          ],
          "Automatic jobs in progress": [
             "Выполняются автоматические задания"
@@ -1042,8 +1034,7 @@
          "<s>%d automatic translation</s> is in progress": [
             "<s>%d автоматический перевод</s> выполняется",
             "<s>%d automatic translations</s> are in progress",
-            "<s>%d automatic translations</s> are in progress",
-            "<s>%d автоматических переводов</s> выполняются"
+            "<s>%d automatic translations</s> are in progress"
          ],
          "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
             "Ваш язык по умолчанию, %s, должен быть сопоставлен с поддерживаемым языком для использования автоматического перевода"

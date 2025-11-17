@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
+class ComposerStaticInite74054b9991bd666f19c2a6666610512
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -158,6 +158,7 @@ class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
         'WPML\\ATE\\Proxies\\Dashboard' => __DIR__ . '/../..' . '/classes/ATE/proxies/Dashboard.php',
         'WPML\\ATE\\Proxies\\Proxy' => __DIR__ . '/../..' . '/classes/ATE/proxies/Proxy.php',
         'WPML\\ATE\\Proxies\\ProxyInterceptorLoader' => __DIR__ . '/../..' . '/classes/ATE/proxies/ProxyInterceptorLoader.php',
+        'WPML\\ATE\\Proxies\\ProxyRoutingRules' => __DIR__ . '/../..' . '/classes/ATE/proxies/ProxyRoutingRules.php',
         'WPML\\ATE\\Proxies\\Widget' => __DIR__ . '/../..' . '/classes/ATE/proxies/Widget.php',
         'WPML\\AbsoluteLinks\\BlockProtector' => __DIR__ . '/../..' . '/inc/absolute-links/BlockProtector.php',
         'WPML\\Action\\Type' => __DIR__ . '/../..' . '/classes/action-filter-loader/class-wpml-action-type.php',
@@ -732,7 +733,9 @@ class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
         'WPML\\Notices\\SiteKey\\Notice' => __DIR__ . '/../..' . '/classes/notices/site-key/Notice.php',
         'WPML\\Options\\Reset' => __DIR__ . '/../..' . '/classes/options/Reset.php',
         'WPML\\Plugins' => __DIR__ . '/../..' . '/classes/plugins/Plugins.php',
+        'WPML\\PostHog\\Config\\PostHogConfig' => __DIR__ . '/../..' . '/classes/PostHog/PostHogConfig.php',
         'WPML\\PostHog\\Event\\CaptureEvent' => __DIR__ . '/../..' . '/classes/PostHog/CaptureEvent.php',
+        'WPML\\PostHog\\State\\PostHogState' => __DIR__ . '/../..' . '/classes/PostHog/PostHogState.php',
         'WPML\\PostTranslation\\SpecialPage\\Hooks' => __DIR__ . '/../..' . '/classes/post-translation/SpecialPage/Hooks.php',
         'WPML\\Posts\\CountPerPostType' => __DIR__ . '/../..' . '/classes/post-translation/endpoints/CountPerPostType.php',
         'WPML\\Posts\\DeleteTranslatedContentOfLanguages' => __DIR__ . '/../..' . '/classes/post-translation/endpoints/DeleteTranslatedContentOfLanguages.php',
@@ -826,6 +829,13 @@ class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
         'WPML\\TM\\ATE\\ClonedSites\\Lock' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/Lock.php',
         'WPML\\TM\\ATE\\ClonedSites\\Report' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/Report.php',
         'WPML\\TM\\ATE\\ClonedSites\\SecondaryDomains' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SecondaryDomains.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\AmsApiTester' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/AmsApiTester.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\ClonedSiteResetter' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/ClonedSiteResetter.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\Resetter\\AmsCredentialsCleaner' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/Resetter/AmsCredentialsCleaner.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\Resetter\\SetupStepRewinder' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/Resetter/SetupStepRewinder.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\Resetter\\SiteKeyCleaner' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/Resetter/SiteKeyCleaner.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\Service' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/Service.php',
+        'WPML\\TM\\ATE\\ClonedSites\\SetupMigration\\SiteKeyRemoveServiceFactory' => __DIR__ . '/../..' . '/classes/ATE/API/ClonedSites/SetupMigration/SiteKeyRemoveServiceFactory.php',
         'WPML\\TM\\ATE\\Download\\Consumer' => __DIR__ . '/../..' . '/classes/ATE/Download/Consumer.php',
         'WPML\\TM\\ATE\\Download\\Job' => __DIR__ . '/../..' . '/classes/ATE/Download/Job.php',
         'WPML\\TM\\ATE\\Download\\Process' => __DIR__ . '/../..' . '/classes/ATE/Download/Process.php',
@@ -880,7 +890,12 @@ class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
         'WPML\\TM\\ATE\\Review\\ReviewStatus' => __DIR__ . '/../..' . '/classes/ATE/Review/ReviewStatus.php',
         'WPML\\TM\\ATE\\Review\\ReviewTranslation' => __DIR__ . '/../..' . '/classes/ATE/Review/ReviewTranslation.php',
         'WPML\\TM\\ATE\\Review\\StatusIcons' => __DIR__ . '/../..' . '/classes/ATE/Review/StatusIcons.php',
+        'WPML\\TM\\ATE\\Sitekey\\DirectSync' => __DIR__ . '/../..' . '/classes/ATE/sitekey/DirectSync.php',
         'WPML\\TM\\ATE\\Sitekey\\Endpoint' => __DIR__ . '/../..' . '/classes/ATE/sitekey/Endpoint.php',
+        'WPML\\TM\\ATE\\Sitekey\\SitekeyApiClient' => __DIR__ . '/../..' . '/classes/ATE/sitekey/SitekeyApiClient.php',
+        'WPML\\TM\\ATE\\Sitekey\\SitekeyConfirmationFlag' => __DIR__ . '/../..' . '/classes/ATE/sitekey/SitekeyConfirmationFlag.php',
+        'WPML\\TM\\ATE\\Sitekey\\SitekeyConfirmationService' => __DIR__ . '/../..' . '/classes/ATE/sitekey/SitekeyConfirmationService.php',
+        'WPML\\TM\\ATE\\Sitekey\\SitekeyProvider' => __DIR__ . '/../..' . '/classes/ATE/sitekey/SitekeyProvider.php',
         'WPML\\TM\\ATE\\Sitekey\\Sync' => __DIR__ . '/../..' . '/classes/ATE/sitekey/Sync.php',
         'WPML\\TM\\ATE\\StatusBar' => __DIR__ . '/../..' . '/classes/ATE/StatusBar.php',
         'WPML\\TM\\ATE\\StatusIcons' => __DIR__ . '/../..' . '/classes/ATE/StatusIcons.php',
@@ -2090,9 +2105,9 @@ class ComposerStaticInit8d510f5578a18be69429c698c1d95ba2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8d510f5578a18be69429c698c1d95ba2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8d510f5578a18be69429c698c1d95ba2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit8d510f5578a18be69429c698c1d95ba2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite74054b9991bd666f19c2a6666610512::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite74054b9991bd666f19c2a6666610512::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite74054b9991bd666f19c2a6666610512::$classMap;
 
         }, null, ClassLoader::class);
     }

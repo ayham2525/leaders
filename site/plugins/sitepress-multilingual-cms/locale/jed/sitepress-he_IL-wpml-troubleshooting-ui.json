@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "he"
+            "lang": "he_IL"
          },
          "Preparing...": [
             "מכין..."
@@ -87,7 +87,6 @@
          ],
          "Processing... %s stuck translation found so far": [
             "מעבד... נמצא %s תרגום תקוע עד כה",
-            "Processing... %s stuck translations found so far",
             "מעבד... נמצאו %s תרגומים תקועים עד כה"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -98,7 +97,6 @@
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
             "נמצאה %s משימת תרגום תקועה. WPML יתרגם אותה אוטומטית ברקע.\nתוכל לבדוק את ההתקדמות בלוח המחוונים של התרגום.",
-            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
             "נמצאו %s משימות תרגום תקועות. WPML יתרגם אותן אוטומטית ברקע.\nתוכל לבדוק את התקדמותן בלוח המחוונים של התרגום."
          ]
       }

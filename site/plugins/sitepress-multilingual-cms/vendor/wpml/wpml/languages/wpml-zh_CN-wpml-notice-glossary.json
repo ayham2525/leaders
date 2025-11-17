@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Add glossary terms": [
             "添加术语表条目"

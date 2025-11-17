@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "he"
+            "lang": "he_IL"
          },
          "Add glossary terms": [
             "הוסף מונחים למילון"
@@ -39,7 +39,6 @@
          ],
          "%d item in the <a>Glossary</a>": [
             "%d פריט ב<a>מילון</a>",
-            "%d items in the <a>Glossary</a>",
             "%d פריטים ב<a>מילון</a>"
          ],
          "Dismiss": [

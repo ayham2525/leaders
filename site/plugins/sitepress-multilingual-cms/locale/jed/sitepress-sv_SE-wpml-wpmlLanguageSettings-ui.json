@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "sv"
+            "lang": "sv_SE"
          },
          "Choose the image file type for flags": [
             "Välj bildfilstyp för flaggor"

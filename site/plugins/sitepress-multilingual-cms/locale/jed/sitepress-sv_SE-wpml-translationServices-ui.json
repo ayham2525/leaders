@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "sv"
+            "lang": "sv_SE"
          },
          "Connect this site to your %s account": [
             "Anslut denna webbplats till ditt %s-konto"

@@ -84,7 +84,6 @@
          ],
          "%d item selected": [
             "%d item selecionado",
-            "%d items selected",
             "%d itens selecionados"
          ],
          "(%d words to translate)": [
@@ -92,7 +91,6 @@
          ],
          "%s item not showing.": [
             "%s item não exibido.",
-            "%s items not showing.",
             "%s itens não exibidos."
          ],
          "Show all selected items": [
@@ -613,7 +611,6 @@
          ],
          "<s>1 item</s> is being translated automatically.": [
             "<s>1 item</s> está sendo traduzido automaticamente.",
-            "<s>%d items</s> are being translated automatically.",
             "<s>%d itens</s> estão sendo traduzidos automaticamente."
          ],
          "You can track their progress at the top of the page.": [
@@ -645,7 +642,6 @@
          ],
          "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
             "<s>1 item</s> foi atribuído a Vossa Excelência com êxito! Para verificar seu status, queira dirigir-se a <s>WPML → Traduções</s>. <translations_queue/>",
-            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
             "<s>%d itens</s> foram atribuídos a Vossa Excelência com êxito! Para atualizações de status, queira dirigir-se a <s>WPML → Traduções</s>. <translations_queue/>"
          ],
          "Currently logged in translator summary": [
@@ -656,7 +652,6 @@
          ],
          "<s>1 item</s> has been duplicated.": [
             "<s>1 item</s> foi duplicado.",
-            "<s>%d items</s> have been duplicated.",
             "<s>%d itens</s> foram duplicados."
          ],
          "Duplication summary": [
@@ -691,7 +686,6 @@
          ],
          "<s>1 item</s> has been successfully sent to translators!": [
             "<s>1 item</s> foi enviado aos tradutores com êxito!",
-            "<s>%d items</s> have been successfully sent to translators!",
             "<s>%d itens</s> foram enviados aos tradutores com êxito!"
          ],
          "Local translations summary": [
@@ -717,7 +711,6 @@
          ],
          "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
             "<s>%d item</s> está sendo enviado para tradução para %s. Por favor, continue para o site deles para iniciar a tradução.",
-            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
             "<s>%d itens</s> estão sendo enviados para tradução para %s. Por favor, continue para o site deles para iniciar a tradução."
          ],
          "Translation service translations summary": [
@@ -881,8 +874,10 @@
          ],
          "credit": [
             "crédito",
-            "Créditos",
             "créditos"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$spreços exatos%2$s )"
          ],
          "Translation service additional options": [
             "Opções adicionais do serviço de tradução"
@@ -973,7 +968,6 @@
          ],
          "%d translation left in the queue. Preparing more content for translation.": [
             "%d tradução restante na fila. Preparando mais conteúdo para tradução.",
-            "%d translations left in the queue. Preparing more content for translation.",
             "%d traduções restantes na fila. Preparando mais conteúdo para tradução."
          ],
          "Preparing content for translation...": [
@@ -981,7 +975,6 @@
          ],
          "%d translation left in the queue...": [
             "%d tradução restante na fila...",
-            "%d translations left in the queue...",
             "%d traduções restantes na fila..."
          ],
          "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
@@ -1022,7 +1015,6 @@
          ],
          "<s>1 translation</s> has been successfully translated automatically": [
             "<s>1 tradução</s> foi automaticamente traduzida com sucesso",
-            "<s>%d translations</s> have been successfully translated automatically",
             "<s>%d traduções</s> foram automaticamente traduzidas com sucesso"
          ],
          "Automatic jobs in progress": [
@@ -1030,7 +1022,6 @@
          ],
          "<s>%d automatic translation</s> is in progress": [
             "<s>%d tradução automática</s> está em andamento",
-            "<s>%d automatic translations</s> are in progress",
             "<s>%d traduções automáticas</s> estão em andamento"
          ],
          "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [

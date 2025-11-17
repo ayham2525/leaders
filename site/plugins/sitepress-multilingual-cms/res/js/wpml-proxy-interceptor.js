@@ -9,14 +9,15 @@
     const domains = opts.domains
     const proxyPath = opts.proxyPath
     const nonce = opts.nonce
+    const excludedRequests = Array.isArray( opts.excludedRequests ) ? opts.excludedRequests : []
     const original = captureOriginalApis()
     const patched = {
-      fetch: patchFetch( original.fetch, domains, proxyPath, nonce ),
+      fetch: patchFetch( original.fetch, domains, proxyPath, nonce, excludedRequests ),
     }
 
     applyPatches( patched )
     // Setup stylesheet link rewriting (existing + future additions)
-    const cleanupCss = setupStylesheetProxy( domains, proxyPath, nonce )
+    const cleanupCss = setupStylesheetProxy( domains, proxyPath, nonce, excludedRequests )
     return function () {
       restoreOriginalApis( original )
       if (typeof cleanupCss === 'function') {
@@ -40,12 +41,12 @@
     window.fetch = o.fetch
   }
 
-  function patchFetch ( originalFetch, domainsToRedirect, proxyPath, nonce ) {
+  function patchFetch ( originalFetch, domainsToRedirect, proxyPath, nonce, excludedRequests ) {
     const toProxyUrl = createProxyUrlBuilder( domainsToRedirect, proxyPath, nonce )
     return function ( input, init ) {
       // Extract URL to check if we need to proxy
       const url = getUrlFromInput( input )
-      const shouldProxy = shouldProxyUrl( url, domainsToRedirect, proxyPath )
+      const shouldProxy = shouldProxyUrl( url, domainsToRedirect, proxyPath, excludedRequests )
 
       if (!shouldProxy) {
         return originalFetch( input, init )
@@ -96,9 +97,9 @@
     }
   }
 
-  function shouldProxyUrl ( url, domainToRedirect, proxyPath ) {
-
+  function shouldProxyUrl ( url, domainToRedirect, proxyPath, excludedRequests ) {
     if (isAlreadyProxied( url, proxyPath )) return false
+    if (shouldBypassExcluded( url, excludedRequests )) return false
     const hostname = getHostname( url )
     if (!hostname) return false
 
@@ -145,9 +146,22 @@
 
   function toAbsoluteUrl ( url ) { return new URL( url, window.location.origin ).toString() }
 
+  function shouldBypassExcluded ( url, excludedUrls ) {
+    if (!Array.isArray( excludedUrls ) || !excludedUrls.length) return false
+    try {
+
+      for (let excludedUrl of excludedUrls) {
+        if (excludedUrl === url) {
+          return true
+        }
+      }
+    } catch (e) { /* noop */ }
+    return false
+  }
+
   // Rewrites <link rel="stylesheet" href="..."> pointing to configured external domains
   // to go through the same-origin proxy, and observes DOM for newly added/changed links.
-  function setupStylesheetProxy ( domains, proxyPath, nonce ) {
+  function setupStylesheetProxy ( domains, proxyPath, nonce, excludedRequests ) {
     try {
       const toProxyUrl = createProxyUrlBuilder( domains, proxyPath, nonce )
 
@@ -167,7 +181,7 @@
           if (linkEl.integrity) return
           const href = linkEl.getAttribute( 'href' ) || ''
           if (!href) return
-          if (!shouldProxyUrl( href, domains, proxyPath )) return
+          if (!shouldProxyUrl( href, domains, proxyPath, excludedRequests )) return
           const proxied = toProxyUrl( href )
           if (proxied && proxied !== href) {
             linkEl.setAttribute( 'href', proxied )

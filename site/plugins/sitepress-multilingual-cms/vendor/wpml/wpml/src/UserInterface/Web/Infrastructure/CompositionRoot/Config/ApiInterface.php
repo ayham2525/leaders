@@ -50,6 +50,14 @@ interface ApiInterface {
   public function responseJsonError( $data );
 
 
+  /**
+   * @param array<mixed> $data
+   * @param int $status_code
+   * @return mixed
+   */
+  public function responseJsonWithStatusCode( $data, $status_code );
+
+
   public function isRestRequest(): bool;
 
 

@@ -2,18 +2,18 @@
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.4\n"
+"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-21T14:44:12+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sitepress\n"
-"Language: vi\n"
+"Language: vi_VN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Plugin Name of the plugin
@@ -28,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">WPML 4.8.4 release notes</a>"
-msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Tài liệu</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">Ghi chú phát hành WPML 4.8.4</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Tài liệu</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">Ghi chú phát hành WPML 4.8.5</a>"
 
 #. Author of the plugin
 #: sitepress.php
@@ -41,183 +41,183 @@ msgstr "OnTheGoSystems"
 msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:188
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr "Nút: Văn bản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:193
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:187
 msgid "Button: Link"
 msgstr "Nút: Liên kết"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:203
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr "Đề mục: Tiêu đề"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:208
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:202
 msgid "Heading: Link"
 msgstr "Tiêu đề: Liên kết"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:218
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr "HTML"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:228
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:222
 msgid "Photo: Link"
 msgstr "Ảnh: Liên kết"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:238
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr "Trình soạn thảo văn bản: Văn bản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:263
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:257
 msgid "Callout: Heading"
 msgstr "Callout: Tiêu đề"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:268
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:262
 msgid "Callout: Text"
 msgstr "Callout: Văn bản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:273
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:267
 msgid "Callout: Call to action text"
 msgstr "Callout: Văn bản kêu gọi hành động"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:278
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:272
 msgid "Callout: Link"
 msgstr "Callout: Liên kết"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:288
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:282
 msgid "Contact Form: Name Field Placeholder"
 msgstr "Biểu mẫu liên hệ: Giữ chỗ trường Tên"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:293
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:287
 msgid "Contact Form: Subject Field Placeholder"
 msgstr "Biểu mẫu liên hệ: Giữ chỗ trường Chủ đề"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:298
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:292
 msgid "Contact Form: Email Field Placeholder"
 msgstr "Biểu mẫu liên hệ: Giữ chỗ trường Email"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:303
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:297
 msgid "Contact Form: Phone Field Placeholder"
 msgstr "Biểu mẫu liên hệ: Giữ chỗ trường Điện thoại"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:308
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:302
 msgid "Contact Form: Your Message Placeholder"
 msgstr "Biểu mẫu liên hệ: Giữ chỗ Tin nhắn của bạn"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:313
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:307
 msgid "Contact Form: Checkbox Text"
 msgstr "Biểu mẫu liên hệ: Văn bản hộp kiểm"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:318
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:312
 msgid "Contact Form: Terms and Conditions"
 msgstr "Biểu mẫu Liên hệ: Điều khoản và Điều kiện"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:323
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:317
 msgid "Contact Form: Success Message"
 msgstr "Biểu mẫu Liên hệ: Thông báo Thành công"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:328
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:322
 msgid "Contact Form: Button Text"
 msgstr "Biểu mẫu Liên hệ: Văn bản Nút"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:333
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:327
 msgid "Contact Form: Redirect Link"
 msgstr "Biểu mẫu Liên hệ: Liên kết Chuyển hướng"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:343
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:337
 msgid "Call to Action: Heading"
 msgstr "Lời kêu gọi hành động: Tiêu đề"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:348
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:342
 msgid "Call to Action: Text"
 msgstr "Lời kêu gọi hành động: Văn bản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:353
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:347
 msgid "Call to Action: Button text"
 msgstr "Lời kêu gọi hành động: Văn bản nút"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:358
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:352
 msgid "Call to Action: Button link"
 msgstr "Lời kêu gọi hành động: Liên kết nút"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:369
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:363
 msgid "Subscribe form: Checkbox Text"
 msgstr "Biểu mẫu Đăng ký: Văn bản Hộp kiểm"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:374
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:368
 msgid "Subscribe form: Terms and Conditions"
 msgstr "Biểu mẫu Đăng ký: Điều khoản và Điều kiện"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:379
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:373
 msgid "Subscribe form: Notification Subject"
 msgstr "Biểu mẫu Đăng ký: Chủ đề Thông báo"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:384
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:378
 msgid "Subscribe form: Success Message"
 msgstr "Biểu mẫu Đăng ký: Thông báo Thành công"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:389
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:383
 msgid "Subscribe form: Button Text"
 msgstr "Biểu mẫu Đăng ký: Văn bản Nút"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:394
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:388
 msgid "Subscribe form: Redirect Link"
 msgstr "Biểu mẫu Đăng ký: Liên kết Chuyển hướng"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:409
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:403
 msgid "Icon: Text"
 msgstr "Biểu tượng: Văn bản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:414
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:408
 msgid "Icon: Link"
 msgstr "Biểu tượng: Liên kết"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:429
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:423
 msgid "Map: Address"
 msgstr "Bản đồ: Địa chỉ"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:439
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:433
 msgid "Testimonial: Heading"
 msgstr "Đánh giá: Tiêu đề"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:451
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:445
 msgid "Number Counter: Text before number"
 msgstr "Bộ đếm số: Văn bản trước số"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:456
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:450
 msgid "Number Counter: Text after number"
 msgstr "Bộ đếm số: Văn bản sau số"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:461
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:455
 msgid "Number Counter: Number Prefix"
 msgstr "Bộ đếm số: Tiền tố Số"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:466
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:460
 msgid "Number Counter: Number Suffix"
 msgstr "Bộ đếm số: Hậu tố Số"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:476
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:470
 msgid "Posts: No Results Message"
 msgstr "Bài viết: Thông báo Không có Kết quả"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:481
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:475
 msgid "Posts: Button Text"
 msgstr "Bài viết: Văn bản Nút"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:486
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:480
 msgid "Posts: Terms Label"
 msgstr "Bài viết: Nhãn Điều khoản"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:491
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:485
 msgid "Posts: More Link Text"
 msgstr "Bài viết: Văn bản Liên kết Thêm"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:501
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:495
 msgid "Posts Slider: More Link Text"
 msgstr "Trình chiếu Bài viết: Văn bản Liên kết Thêm"
 
@@ -1168,12 +1168,12 @@ msgstr "Đã thêm %1$s công việc vào Trình biên tập Dịch thuật Nân
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr "Bạn đã kích hoạt Trình chỉnh sửa dịch nâng cao cho trang web này, nhưng bạn đang cập nhật một bản dịch cũ. WPML đã mở Trình chỉnh sửa dịch chuẩn để bạn có thể cập nhật bản dịch này. Khi bạn dịch nội dung mới, bạn sẽ nhận được Trình chỉnh sửa dịch nâng cao với tất cả các tính năng của nó. Để thay đổi cài đặt của bạn, hãy đi đến Cài đặt WPML."
 
-#: classes/ATE/sitekey/Endpoint.php:39
+#: classes/ATE/sitekey/Endpoint.php:49
 msgid "Initializing AMS credentials."
 msgstr "Đang khởi tạo thông tin đăng nhập AMS."
 
 #: classes/ATE/TranslateEverything/TranslatableData/View.php:97
-#: classes/setup/endpoints/LicenseStep.php:73
+#: classes/setup/endpoints/LicenseStep.php:84
 msgid "Server error. Please refresh and try again."
 msgstr "Lỗi máy chủ. Vui lòng làm mới và thử lại."
 
@@ -2885,7 +2885,7 @@ msgstr "Vị trí của các liên kết hreflang"
 msgid "A user does not have a proper license to enable ATE."
 msgstr "Người dùng không có giấy phép phù hợp để bật ATE."
 
-#: classes/setup/endpoints/LicenseStep.php:54
+#: classes/setup/endpoints/LicenseStep.php:53
 msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr "Cảm ơn bạn đã đăng ký WPML trên trang web này. Bạn sẽ nhận được các bản cập nhật tự động khi có phiên bản mới."
 

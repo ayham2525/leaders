@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Get More Features with WPML's Advanced Translation Editor": [
             "使用WPML的高级翻译编辑器获取更多功能"

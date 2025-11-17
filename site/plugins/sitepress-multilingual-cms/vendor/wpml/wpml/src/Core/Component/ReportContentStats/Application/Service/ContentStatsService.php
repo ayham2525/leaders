@@ -7,16 +7,27 @@ use WPML\Core\Component\ReportContentStats\Application\Query\ContentStatsTransla
 use WPML\Core\Component\ReportContentStats\Domain\ContentStatsCalculator;
 use WPML\Core\Component\ReportContentStats\Domain\Repository\PostTypesStatsRepositoryInterface;
 use WPML\Core\Component\ReportContentStats\Domain\Repository\PostTypesToCalculateRepositoryInterface;
+use WPML\Core\SharedKernel\Component\Installer\Application\Query\WpmlSiteKeyQueryInterface;
 use WPML\Core\SharedKernel\Component\Language\Application\Query\LanguagesQueryInterface;
 use WPML\Core\SharedKernel\Component\Post\Application\Query\Dto\PostTypeDto;
+use WPML\Core\SharedKernel\Component\Site\Application\Query\SiteMigrationLockQueryInterface;
 
 class ContentStatsService {
+
+  /** @var SiteMigrationLockQueryInterface */
+  private $siteMigrationLockQuery;
+
+  /** @var WpmlSiteKeyQueryInterface */
+  private $siteKeyQuery;
 
   /** @var CanCollectStatsQueryInterface */
   private $canCollectStatsQuery;
 
   /** @var LastSentService */
   private $lastSentService;
+
+  /** @var RetryService */
+  private $retryService;
 
   /** @var PostTypesToCalculateRepositoryInterface */
   private $postTypesToCalculateRepository;
@@ -35,16 +46,22 @@ class ContentStatsService {
 
 
   public function __construct(
+    SiteMigrationLockQueryInterface $siteMigrationLockQuery,
+    WpmlSiteKeyQueryInterface $siteKeyQuery,
     CanCollectStatsQueryInterface $canCollectStatsQuery,
     LastSentService $lastSentService,
+    RetryService $retryService,
     PostTypesToCalculateRepositoryInterface $postTypesToCalculateRepository,
     PostTypesStatsRepositoryInterface $postTypesStatsRepository,
     ContentStatsTranslatableTypesQueryInterface $translatableTypesQuery,
     LanguagesQueryInterface $languagesQuery,
     ContentStatsCalculator $contentStatsCalculator
   ) {
+    $this->siteMigrationLockQuery         = $siteMigrationLockQuery;
+    $this->siteKeyQuery                   = $siteKeyQuery;
     $this->canCollectStatsQuery           = $canCollectStatsQuery;
     $this->lastSentService                = $lastSentService;
+    $this->retryService                   = $retryService;
     $this->postTypesToCalculateRepository = $postTypesToCalculateRepository;
     $this->postTypesStatsRepository       = $postTypesStatsRepository;
     $this->translatableTypesQuery         = $translatableTypesQuery;
@@ -55,12 +72,27 @@ class ContentStatsService {
 
   /**
    * @return false|string[]
+   * @throws SiteLockedException
+   * @throws MissingSiteKeyException
    * @throws ContentStatsServiceException
    */
   public function processPostTypes() {
     if ( ! $this->canProcess() ) {
       throw new ContentStatsServiceException(
         'Stats collection is disabled'
+      );
+    }
+
+    if ( $this->siteMigrationLockQuery->isLocked() ) {
+      throw new SiteLockedException(
+        'Site is locked for migration, 
+        stats collection will start when unlocked.'
+      );
+    }
+
+    if ( ! $this->siteKeyQuery->get() ) {
+      throw new MissingSiteKeyException(
+        'Site key is missing'
       );
     }
 
@@ -76,8 +108,15 @@ class ContentStatsService {
 
 
   public function canProcess(): bool {
-    return $this->canCollectStatsQuery->get() &&
-           $this->lastSentService->neverSentOrSent30DaysAgo();
+    if ( ! $this->canCollectStatsQuery->get() ) {
+      return false;
+    }
+
+    if ( $this->retryService->isInRetryMode() ) {
+      return $this->retryService->shouldRetry();
+    }
+
+    return $this->lastSentService->neverSentOrSent30DaysAgo();
   }
 
 

@@ -2,18 +2,18 @@
 # This file is distributed under the same license as the WPML Multilingual CMS plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPML Multilingual CMS 4.8.4\n"
+"Project-Id-Version: WPML Multilingual CMS 4.8.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sitepress-multilingual-cms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-21T14:44:12+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:26:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sitepress\n"
-"Language: fr\n"
+"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Plugin Name of the plugin
@@ -28,8 +28,8 @@ msgstr "https://wpml.org/"
 
 #. Description of the plugin
 #: sitepress.php
-msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">WPML 4.8.4 release notes</a>"
-msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-4/\">Notes de version de WPML 4.8.4</a>"
+msgid "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">WPML 4.8.5 release notes</a>"
+msgstr "WPML Multilingual CMS | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/wpml-4-8-5/\">Notes de version de WPML 4.8.5</a>"
 
 #. Author of the plugin
 #: sitepress.php
@@ -41,183 +41,183 @@ msgstr "OnTheGoSystems"
 msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:188
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:182
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:342
 msgid "Button: Text"
 msgstr "Bouton : Texte"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:193
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:187
 msgid "Button: Link"
 msgstr "Bouton : Lien"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:203
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:197
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:247
 msgid "Heading: Title"
 msgstr "Titre : Titre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:208
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:202
 msgid "Heading: Link"
 msgstr "Titre : Lien"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:218
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:212
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:357
 msgid "HTML"
 msgstr "HTML"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:228
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:222
 msgid "Photo: Link"
 msgstr "Photo : Lien"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:238
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:232
 #: addons/wpml-page-builders/classes/Integrations/Elementor/class-wpml-elementor-translatable-nodes.php:262
 msgid "Text Editor: Text"
 msgstr "Éditeur de texte : Texte"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:263
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:257
 msgid "Callout: Heading"
 msgstr "Encadré : Titre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:268
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:262
 msgid "Callout: Text"
 msgstr "Encadré : Texte"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:273
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:267
 msgid "Callout: Call to action text"
 msgstr "Encadré : Texte d'appel à l'action"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:278
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:272
 msgid "Callout: Link"
 msgstr "Encadré : Lien"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:288
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:282
 msgid "Contact Form: Name Field Placeholder"
 msgstr "Formulaire de contact : Texte indicatif du champ Nom"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:293
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:287
 msgid "Contact Form: Subject Field Placeholder"
 msgstr "Formulaire de contact : Texte indicatif du champ Sujet"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:298
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:292
 msgid "Contact Form: Email Field Placeholder"
 msgstr "Formulaire de contact : Texte indicatif du champ Email"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:303
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:297
 msgid "Contact Form: Phone Field Placeholder"
 msgstr "Formulaire de contact : Texte indicatif du champ Téléphone"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:308
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:302
 msgid "Contact Form: Your Message Placeholder"
 msgstr "Formulaire de contact : Texte indicatif du champ Votre message"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:313
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:307
 msgid "Contact Form: Checkbox Text"
 msgstr "Formulaire de contact : Texte de la case à cocher"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:318
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:312
 msgid "Contact Form: Terms and Conditions"
 msgstr "Formulaire de contact : Conditions générales"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:323
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:317
 msgid "Contact Form: Success Message"
 msgstr "Formulaire de contact : Message de réussite"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:328
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:322
 msgid "Contact Form: Button Text"
 msgstr "Formulaire de contact : Texte du bouton"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:333
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:327
 msgid "Contact Form: Redirect Link"
 msgstr "Formulaire de contact : Lien de redirection"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:343
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:337
 msgid "Call to Action: Heading"
 msgstr "Appel à l'action : Titre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:348
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:342
 msgid "Call to Action: Text"
 msgstr "Appel à l'action : Texte"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:353
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:347
 msgid "Call to Action: Button text"
 msgstr "Appel à l'action : Texte du bouton"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:358
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:352
 msgid "Call to Action: Button link"
 msgstr "Appel à l'action : Lien du bouton"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:369
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:363
 msgid "Subscribe form: Checkbox Text"
 msgstr "Formulaire d'abonnement : Texte de la case à cocher"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:374
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:368
 msgid "Subscribe form: Terms and Conditions"
 msgstr "Formulaire d'abonnement : Conditions générales"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:379
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:373
 msgid "Subscribe form: Notification Subject"
 msgstr "Formulaire d'abonnement : Objet de la notification"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:384
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:378
 msgid "Subscribe form: Success Message"
 msgstr "Formulaire d'abonnement : Message de réussite"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:389
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:383
 msgid "Subscribe form: Button Text"
 msgstr "Formulaire d'abonnement : Texte du bouton"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:394
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:388
 msgid "Subscribe form: Redirect Link"
 msgstr "Formulaire d'abonnement : Lien de redirection"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:409
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:403
 msgid "Icon: Text"
 msgstr "Icône : Texte"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:414
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:408
 msgid "Icon: Link"
 msgstr "Icône : Lien"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:429
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:423
 msgid "Map: Address"
 msgstr "Carte : Adresse"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:439
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:433
 msgid "Testimonial: Heading"
 msgstr "Témoignage : Titre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:451
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:445
 msgid "Number Counter: Text before number"
 msgstr "Compteur numérique : Texte avant le nombre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:456
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:450
 msgid "Number Counter: Text after number"
 msgstr "Compteur numérique : Texte après le nombre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:461
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:455
 msgid "Number Counter: Number Prefix"
 msgstr "Compteur numérique : Préfixe du nombre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:466
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:460
 msgid "Number Counter: Number Suffix"
 msgstr "Compteur numérique : Suffixe du nombre"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:476
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:470
 msgid "Posts: No Results Message"
 msgstr "Articles : Message en l'absence de résultats"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:481
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:475
 msgid "Posts: Button Text"
 msgstr "Articles : Texte du bouton"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:486
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:480
 msgid "Posts: Terms Label"
 msgstr "Articles : Étiquette des termes"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:491
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:485
 msgid "Posts: More Link Text"
 msgstr "Articles : Texte du lien Plus"
 
-#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:501
+#: addons/wpml-page-builders/classes/Integrations/BeaverBuilder/class-wpml-beaver-builder-translatable-nodes.php:495
 msgid "Posts Slider: More Link Text"
 msgstr "Carrousel d'articles : Texte du lien Plus"
 
@@ -1168,12 +1168,12 @@ msgstr "%1$s tâches ajoutées à l'éditeur de traduction avancé."
 msgid "You activated the Advanced Translation Editor for this site, but you are updating an old translation. WPML opened the Standard Translation Editor, so you can update this translation. When you translate new content, you'll get the Advanced Translation Editor with all its features. To change your settings, go to WPML Settings."
 msgstr "Vous avez activé l'Éditeur de traduction avancé pour ce site, mais vous mettez à jour une ancienne traduction. WPML a ouvert l'Éditeur de traduction standard pour que vous puissiez mettre à jour cette traduction. Lorsque vous traduirez du nouveau contenu, vous obtiendrez l'Éditeur de traduction avancé avec toutes ses fonctionnalités. Pour modifier vos paramètres, allez dans Paramètres WPML."
 
-#: classes/ATE/sitekey/Endpoint.php:39
+#: classes/ATE/sitekey/Endpoint.php:49
 msgid "Initializing AMS credentials."
 msgstr "Initialisation des informations d'identification AMS."
 
 #: classes/ATE/TranslateEverything/TranslatableData/View.php:97
-#: classes/setup/endpoints/LicenseStep.php:73
+#: classes/setup/endpoints/LicenseStep.php:84
 msgid "Server error. Please refresh and try again."
 msgstr "Erreur serveur. Veuillez actualiser et réessayer."
 
@@ -2611,16 +2611,14 @@ msgstr "Traduction automatique"
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d jour"
-msgstr[1] "%d days"
-msgstr[2] "%d jours"
+msgstr[1] "%d jours"
 
 #. translators: %d is for the number of hour(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:457
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d heure"
-msgstr[1] "%d hours"
-msgstr[2] "%d heures"
+msgstr[1] "%d heures"
 
 #. translators: %d is for the number of minute(s).
 #: classes/notices/wpml-tm-post-edit-notices.php:465
@@ -2628,15 +2626,13 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minute"
 msgstr[1] "%d minutes"
-msgstr[2] "%d minutes"
 
 #. translators: %1$1s and %2$2s is used for adding html tags to make WPML support a link. %3$s is a list of numeric ids.
 #: classes/notices/wpml-tm-post-edit-notices.php:515
 msgid "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translation is stuck: %3$3s"
 msgid_plural "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
 msgstr[0] "Un problème est survenu avec la traduction automatique. Veuillez contacter le %1$1ssupport WPML%2$2s et signaler que la traduction automatique suivante est bloquée : %3$3s"
-msgstr[1] "Something went wrong with automatic translation. Please contact %1$1sWPML support%2$2s and report that the following automatic translations are stuck: %3$3s"
-msgstr[2] "Un problème est survenu avec la traduction automatique. Veuillez contacter le %1$1ssupport WPML%2$2s et signaler que les traductions automatiques suivantes sont bloquées : %3$3s"
+msgstr[1] "Un problème est survenu avec la traduction automatique. Veuillez contacter le %1$1ssupport WPML%2$2s et signaler que les traductions automatiques suivantes sont bloquées : %3$3s"
 
 #: classes/plugins/Plugins.php:131
 msgid "WPML Translation Management is now included in WPML Multilingual CMS."
@@ -2893,7 +2889,7 @@ msgstr "Position des liens hreflang"
 msgid "A user does not have a proper license to enable ATE."
 msgstr "Un utilisateur ne dispose pas d'une licence appropriée pour activer ATE."
 
-#: classes/setup/endpoints/LicenseStep.php:54
+#: classes/setup/endpoints/LicenseStep.php:53
 msgid "Thank you for registering WPML on this site. You will receive automatic updates when new versions are available."
 msgstr "Merci d'avoir enregistré WPML sur ce site. Vous recevrez des mises à jour automatiques lorsque de nouvelles versions seront disponibles."
 
@@ -3151,15 +3147,13 @@ msgstr "WPML ne peut pas communiquer avec le service de traduction distant. Veui
 msgid "%d feedback was updated."
 msgid_plural "%d feedback were updated."
 msgstr[0] "Le retour d'information de %d a été mis à jour."
-msgstr[1] "%d feedback were updated."
-msgstr[2] "Les retours d'information de %d ont été mis à jour."
+msgstr[1] "Les retours d'information de %d ont été mis à jour."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:28
 msgid "%d feedback was trashed."
 msgid_plural "%d feedback were trashed."
 msgstr[0] "Le retour d'information de %d a été mis à la corbeille."
-msgstr[1] "%d feedback were trashed."
-msgstr[2] "Les retours d'information de %d ont été mis à la corbeille."
+msgstr[1] "Les retours d'information de %d ont été mis à la corbeille."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:30
 msgid "The trashed feedback will be permanently deleted after %d days."
@@ -3169,15 +3163,13 @@ msgstr "Les retours mis à la corbeille seront définitivement supprimés après
 msgid "%d feedback was restored."
 msgid_plural "%d feedback were restored."
 msgstr[0] "Le retour d'information de %d a été restauré."
-msgstr[1] "%d feedback were restored."
-msgstr[2] "Les retours d'information de %d ont été restaurés."
+msgstr[1] "Les retours d'information de %d ont été restaurés."
 
 #: classes/translation-feedback/notices/wpml-tf-backend-notices.php:36
 msgid "%d feedback was permanently deleted."
 msgid_plural "%d feedback were permanently deleted."
 msgstr[0] "Le retour d'information de %d a été définitivement supprimé."
-msgstr[1] "%d feedback were permanently deleted."
-msgstr[2] "Les retours d'information de %d ont été définitivement supprimés."
+msgstr[1] "Les retours d'information de %d ont été définitivement supprimés."
 
 #: classes/translation-feedback/notices/wpml-tf-promote-notices.php:31
 msgid "Want to know if recent translations you received have problems?"
@@ -3758,8 +3750,7 @@ msgstr "Navigation"
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] "%s élément"
-msgstr[1] "%s items"
-msgstr[2] "%s éléments"
+msgstr[1] "%s éléments"
 
 #: classes/utilities/class-wpml-flags.php:108
 msgid "Flag for %s"

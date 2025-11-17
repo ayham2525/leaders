@@ -168,6 +168,25 @@ class Parser {
 
 
   /**
+   * @return array<Script>
+   * @throws Exception
+   */
+  public function parseCheckPosthogShouldRecordScript() {
+    $scripts = [];
+
+    foreach ( $this->configRaw['checkPosthogShouldRecord'] as $id => $scriptRaw ) {
+
+      $scriptRaw['id'] = $scriptRaw['id'] ?? $id;
+      if ( $script = $this->parseScript( $scriptRaw ) ) {
+        $scripts[] = $script;
+      }
+    }
+
+    return $scripts;
+  }
+
+
+  /**
    * Parses 'adminPages' to $config->adminPages.
    *
    * @param ?Config $config

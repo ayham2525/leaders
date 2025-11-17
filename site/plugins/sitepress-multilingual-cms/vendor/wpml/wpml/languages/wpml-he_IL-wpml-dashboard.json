@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "he"
+            "lang": "he_IL"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "מחרוזות לא מתורגמות שאני נתקל בהן בחזית בזמן התחברות"
@@ -84,7 +84,6 @@
          ],
          "%d item selected": [
             "%d פריט נבחר",
-            "%d items selected",
             "%d פריטים נבחרו"
          ],
          "(%d words to translate)": [
@@ -92,7 +91,6 @@
          ],
          "%s item not showing.": [
             "%s פריט לא מוצג.",
-            "%s items not showing.",
             "%s פריטים לא מוצגים."
          ],
          "Show all selected items": [
@@ -613,7 +611,6 @@
          ],
          "<s>1 item</s> is being translated automatically.": [
             "<s>פריט אחד</s> מתורגם אוטומטית.",
-            "<s>%d items</s> are being translated automatically.",
             "<s>%d פריטים</s> מתורגמים אוטומטית."
          ],
          "You can track their progress at the top of the page.": [
@@ -645,7 +642,6 @@
          ],
          "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
             "<s>פריט אחד</s> הוקצה לך בהצלחה! כדי לבדוק את הסטטוס שלו, אנא עבור אל <s>WPML ← תרגומים</s>. <translations_queue/>",
-            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
             "<s>%d פריטים</s> הוקצו לך בהצלחה! לעדכוני סטטוס, אנא עבור אל <s>WPML ← תרגומים</s>. <translations_queue/>"
          ],
          "Currently logged in translator summary": [
@@ -656,7 +652,6 @@
          ],
          "<s>1 item</s> has been duplicated.": [
             "<s>פריט אחד</s> שוכפל.",
-            "<s>%d items</s> have been duplicated.",
             "<s>%d פריטים</s> שוכפלו."
          ],
          "Duplication summary": [
@@ -691,7 +686,6 @@
          ],
          "<s>1 item</s> has been successfully sent to translators!": [
             "<s>פריט אחד</s> נשלח בהצלחה למתרגמים!",
-            "<s>%d items</s> have been successfully sent to translators!",
             "<s>%d פריטים</s> נשלחו בהצלחה למתרגמים!"
          ],
          "Local translations summary": [
@@ -717,7 +711,6 @@
          ],
          "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
             "<s>%d פריט</s> נשלח לתרגום ל-%s. אנא המשך לאתר שלהם כדי להתחיל את התרגום.",
-            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
             "<s>%d פריטים</s> נשלחים לתרגום ל-%s. אנא המשך לאתר שלהם כדי להתחיל את התרגום."
          ],
          "Translation service translations summary": [
@@ -881,8 +874,10 @@
          ],
          "credit": [
             "קרדיט",
-            "קרדיטים",
             "קרדיטים"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sתמחור מדויק%2$s )"
          ],
          "Translation service additional options": [
             "אפשרויות נוספות לשירות תרגום"
@@ -973,7 +968,6 @@
          ],
          "%d translation left in the queue. Preparing more content for translation.": [
             "%d תרגום נותר בתור. מכין עוד תוכן לתרגום.",
-            "%d translations left in the queue. Preparing more content for translation.",
             "%d תרגומים נותרו בתור. מכין עוד תוכן לתרגום."
          ],
          "Preparing content for translation...": [
@@ -981,7 +975,6 @@
          ],
          "%d translation left in the queue...": [
             "%d תרגום נותר בתור...",
-            "%d translations left in the queue...",
             "%d תרגומים נותרו בתור..."
          ],
          "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
@@ -1022,7 +1015,6 @@
          ],
          "<s>1 translation</s> has been successfully translated automatically": [
             "<s>תרגום אחד</s> תורגם בהצלחה באופן אוטומטי",
-            "<s>%d translations</s> have been successfully translated automatically",
             "<s>%d תרגומים</s> תורגמו בהצלחה באופן אוטומטי"
          ],
          "Automatic jobs in progress": [
@@ -1030,7 +1022,6 @@
          ],
          "<s>%d automatic translation</s> is in progress": [
             "<s>תרגום אוטומטי %d</s> מתבצע כעת",
-            "<s>%d automatic translations</s> are in progress",
             "<s>%d תרגומים אוטומטיים</s> מתבצעים כעת"
          ],
          "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [

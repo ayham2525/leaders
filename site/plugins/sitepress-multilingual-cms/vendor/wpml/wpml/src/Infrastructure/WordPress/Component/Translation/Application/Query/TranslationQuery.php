@@ -65,7 +65,7 @@ class TranslationQuery implements TranslationQueryInterface {
     }
 
     $ids   = $this->queryPrepare->prepareIn( $jobIds, '%d' );
-    $query = $this->getBasicQuery() . " WHERE job.job_id IN ($ids) LIMIT " . count( $jobIds );
+    $query = $this->getBasicQueryForJobIds() . " AND job.job_id IN ($ids) LIMIT " . count( $jobIds );
 
     try {
       $rows = $this->queryHandler->query( $query );
@@ -80,7 +80,7 @@ class TranslationQuery implements TranslationQueryInterface {
 
 
   public function getOneByJobId( int $jobId ) {
-    $query = $this->getBasicQuery() . " WHERE job.job_id = %d LIMIT 1";
+    $query = $this->getBasicQueryForJobIds() . " AND job.job_id = %d LIMIT 1";
 
     try {
       $row = $this->queryHandler->queryOne(
@@ -105,7 +105,9 @@ class TranslationQuery implements TranslationQueryInterface {
     }
 
     $ids   = $this->queryPrepare->prepareIn( $translatedElementIds, '%d' );
-    $query = $this->getBasicQuery() . " WHERE translation.element_id IN ($ids) LIMIT " . count( $translatedElementIds );
+    $query = $this->getBasicQueryWithMaxJobId()
+             . " WHERE translation.element_id IN ($ids) LIMIT "
+             . count( $translatedElementIds );
 
     try {
       $rows = $this->queryHandler->query( $query );
@@ -141,7 +143,7 @@ class TranslationQuery implements TranslationQueryInterface {
 
     $sourceLanguageNotNull = " AND translation.source_language_code IS NOT NULL";
 
-    $query = $this->getBasicQuery() . $tridIn . $type . $sourceLanguageNotNull;
+    $query = $this->getBasicQueryWithMaxJobId() . $tridIn . $type . $sourceLanguageNotNull;
 
     try {
       $rows = $this->queryHandler->query( $query );
@@ -171,6 +173,9 @@ class TranslationQuery implements TranslationQueryInterface {
   }
 
 
+  /**
+   * Returns the basic query for translations
+   */
   private function getBasicQuery(): string {
     return "
       SELECT
@@ -190,17 +195,44 @@ class TranslationQuery implements TranslationQueryInterface {
         `translation`.`element_type`,
         `translation`.`element_id` AS `translated_element_id`,
         `original`.`element_id` AS `original_element_id`
-      FROM `{$this->queryPrepare->prefix()}icl_translations` AS `translation`
+        FROM `{$this->queryPrepare->prefix()}icl_translations` AS `translation`
       INNER JOIN `{$this->queryPrepare->prefix()}icl_translations` AS `original` 
       ON `original`.`trid` = `translation`.`trid` AND `original`.`source_language_code` IS NULL
       INNER JOIN `{$this->queryPrepare->prefix()}icl_translation_status` AS `status` 
-      ON `status`.`translation_id` = `translation`.`translation_id`
+      ON `status`.`translation_id` = `translation`.`translation_id`";
+  }
+
+
+  /**
+   * Returns the INNER JOIN for job table (optimized for job ID queries)
+   */
+  private function innerJoinJobsTable(): string {
+    return "
+      INNER JOIN `{$this->queryPrepare->prefix()}icl_translate_job` AS `job` 
+        ON `job`.`rid` = `status`.`rid`";
+  }
+
+
+  /**
+   * Returns the LEFT JOIN with MAX subquery for job table
+   */
+  private function leftJoinWithMaxJobId(): string {
+    return "
       LEFT JOIN `{$this->queryPrepare->prefix()}icl_translate_job` AS `job` ON `job`.`job_id` = (
         SELECT MAX(`job_id`) 
         FROM `{$this->queryPrepare->prefix()}icl_translate_job` 
         WHERE `rid` = `status`.`rid`
-      )
-    ";
+      )";
+  }
+
+
+  private function getBasicQueryForJobIds(): string {
+    return $this->getBasicQuery() . $this->innerJoinJobsTable();
+  }
+
+
+  private function getBasicQueryWithMaxJobId(): string {
+    return $this->getBasicQuery() . $this->leftJoinWithMaxJobId();
   }
 
 

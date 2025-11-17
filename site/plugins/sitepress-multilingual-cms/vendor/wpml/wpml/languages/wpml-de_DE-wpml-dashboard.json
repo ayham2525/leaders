@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "de"
+            "lang": "de_DE"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Nicht übersetzte Zeichenketten, auf die ich im Frontend angemeldet stoße"
@@ -875,6 +875,9 @@
          "credit": [
             "Credit",
             "Credits"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ %3$0.2f € | %1$sgenaue Preisangabe%2$s )"
          ],
          "Translation service additional options": [
             "Zusätzliche Optionen für den Übersetzungsdienst"

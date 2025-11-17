@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "sv"
+            "lang": "sv_SE"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Oöversatta strängar som jag stöter på i frontend medan jag är inloggad"
@@ -875,6 +875,9 @@
          "credit": [
             "kredit",
             "krediter"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sexakt prissättning%2$s )"
          ],
          "Translation service additional options": [
             "Ytterligare alternativ för översättningstjänst"

@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "it"
+            "lang": "it_IT"
          },
          "How Browser Language Redirect Affects Google Indexing": [
             "In che modo il reindirizzamento in base alla lingua del browser influisce sull'indicizzazione di Google"

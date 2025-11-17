@@ -161,6 +161,15 @@ class Api implements ApiInterface {
   }
 
 
+  /**
+   * @param array<mixed> $data
+   * @param int $status_code
+   */
+  public function responseJsonWithStatusCode( $data, $status_code ) {
+      return \rest_ensure_response( new \WP_REST_Response( $data, $status_code ) );
+  }
+
+
   public function isRestRequest(): bool {
     return defined( 'REST_REQUEST' );
   }

@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "我在登录状态下在前端遇到的未翻译字符串"
@@ -865,8 +865,11 @@
          "Summary": [
             "摘要"
          ],
-         "Credit": [
+         "credit": [
             "点数"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "（约 €%3$0.2f | %1$s精确定价%2$s）"
          ],
          "Translation service additional options": [
             "翻译服务附加选项"

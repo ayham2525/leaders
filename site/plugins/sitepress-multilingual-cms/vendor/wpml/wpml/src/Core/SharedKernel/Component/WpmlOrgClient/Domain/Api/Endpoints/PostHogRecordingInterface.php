@@ -11,7 +11,8 @@ interface PostHogRecordingInterface {
    *
    * @return array{
    *   success: bool,
-   *   shouldRecord: bool
+   *   shouldRecord: bool,
+   *   isResponseError: bool
    * }
    */
   public function run( string $siteKey, string $recordingMode = 'default' ): array;

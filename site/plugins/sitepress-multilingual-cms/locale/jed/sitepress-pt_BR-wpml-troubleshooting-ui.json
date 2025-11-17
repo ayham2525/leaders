@@ -87,7 +87,6 @@
          ],
          "Processing... %s stuck translation found so far": [
             "Processando... %s tradução travada encontrada até agora",
-            "Processing... %s stuck translations found so far",
             "Processando... %s traduções travadas encontradas até agora"
          ],
          "Something went wrong while checking for stuck translation jobs. Please <a>contact WPML support</a>.": [
@@ -98,7 +97,6 @@
          ],
          "%s stuck translation job found. WPML will translate it automatically in the background.\nYou can check the progress in the Translation Dashboard.": [
             "%s trabalho de tradução travado encontrado. O WPML vai traduzi-lo automaticamente em segundo plano.\nVocê pode verificar o progresso no Painel de Tradução.",
-            "%s stuck translation jobs found. WPML will translate them automatically in the background.\nYou can check their progress in the Translation Dashboard.",
             "%s trabalhos de tradução travados encontrados. O WPML vai traduzi-los automaticamente em segundo plano.\nVocê pode verificar o progresso deles no Painel de Tradução."
          ]
       }

@@ -2,7 +2,7 @@
 
 declare( strict_types=1 );
 
-use WPML\ATE\Proxies\ProxyInterceptorLoader;
+use WPML\ATE\Proxies\ProxyRoutingRules;
 
 /**
  * Minimal REST proxy endpoint as a single class.
@@ -92,6 +92,9 @@ final class WPML_Proxy {
 			$url     = $self->buildUrl( (string) $p['url'], $p['query'] );
 			$headers = $self->parseHeaders( $p['headers'], isset( $p['content_type'] ) ? (string) $p['content_type'] : null );
 
+			if ( ! isset( $headers['Accept'] ) && ! isset( $headers['accept'] ) ) {
+				$headers['Accept'] = '*/*'; // [wpmldev-5894] [WPML PROXY] Ensure wp_remote_request sets a default Accept header to prevent empty response bodies from AMS requests when cURL is not installed
+			}
 			$args = [
 				'method'      => (string) $p['method'],
 				'headers'     => $headers,
@@ -239,14 +242,6 @@ final class WPML_Proxy {
 		}
 	}
 
-	private function allowedHosts() {
-		$hosts = ProxyInterceptorLoader::getAllowedDomains();
-		if ( is_array( $hosts ) && ! empty( $hosts ) ) {
-			return $hosts;
-		}
-
-		return [ '*.wpml.org' ];
-	}
 
 	private function isAllowedHost( string $host, array $allowed ) {
 		foreach ( $allowed as $pattern ) {
@@ -400,6 +395,10 @@ final class WPML_Proxy {
 		if ( function_exists( 'fastcgi_finish_request' ) ) {
 			@fastcgi_finish_request(); }
 		exit;
+	}
+
+	public static function allowedHosts() {
+		return ProxyRoutingRules::getAllowedDomains();
 	}
 
 	public static function routeMatches( $rest_route ) {

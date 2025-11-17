@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "es"
+            "lang": "es_ES"
          },
          "Choose the image file type for flags": [
             "Seleccione el tipo de archivo de imagen para los marcadores"

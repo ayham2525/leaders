@@ -41,4 +41,8 @@ interface ConfigInterface {
   public function loadContentStatsScripts();
 
 
+  /** @return void */
+  public function loadCheckPosthogShouldRecordScript();
+
+
 }

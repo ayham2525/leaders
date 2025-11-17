@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko"
+            "lang": "ko_KR"
          },
          "Could not fetch engines data": [
             "엔진 데이터를 가져올 수 없습니다"

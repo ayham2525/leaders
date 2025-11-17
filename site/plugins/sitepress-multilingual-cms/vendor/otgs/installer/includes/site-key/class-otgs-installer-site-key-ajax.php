@@ -67,6 +67,9 @@ class OTGS_Installer_Site_Key_Ajax {
 				$this->repositories->refresh();
 				$this->clean_plugins_update_cache();
 				do_action( 'otgs_installer_site_key_update', $repository->get_id() );
+
+				// Checks if posthog should start recording for this site
+				do_action('check_posthog_should_record');
 			} else {
 				$error = __( 'Invalid site key for the current site.', 'installer' ) . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
 			}
@@ -118,6 +121,9 @@ class OTGS_Installer_Site_Key_Ajax {
 							'registered_by' => get_current_user_id(),
 						) );
 						$repository->set_subscription( $subscription_data );
+
+						// Checks if posthog should start recording for this site
+						do_action('check_posthog_should_record');
 					} else {
 						$repository->set_subscription( null );
 						$error = __( 'Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key.', 'installer' );

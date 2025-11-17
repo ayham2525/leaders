@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Could not fetch engines data": [
             "无法获取引擎数据"

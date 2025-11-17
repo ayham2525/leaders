@@ -9,6 +9,7 @@ use WPML\Core\Component\Troubleshooting\TranslationTablesOptimization\Domain\Tra
 use WPML\Core\Component\Troubleshooting\TranslationTablesOptimization\Domain\TranslationElements\CompressFix\Factory as CompressFixFactory;
 use WPML\Core\Component\Troubleshooting\TranslationTablesOptimization\Domain\TranslationElements\RemoveOld\Factory as RemoveOldFactory;
 use WPML\Core\Component\Troubleshooting\TranslationTablesOptimization\Domain\TranslationPackageColumnInterface;
+use WPML\Core\Port\PluginInterface;
 use WPML\Core\SharedKernel\Component\Server\Domain\CacheInterface;
 use WPML\Core\SharedKernel\Component\Server\Domain\CheckRestIsEnabledInterface;
 use WPML\Core\SharedKernel\Component\Server\Domain\ServerInfoInterface;
@@ -22,6 +23,7 @@ use WPML\Infrastructure\WordPress\Component\Troubleshooting\TranslationTablesOpt
 use WPML\Infrastructure\WordPress\SharedKernel\Server\Application\CheckRestIsEnabled;
 use WPML\Infrastructure\WordPress\SharedKernel\Server\Application\ServerInfo;
 use WPML\Infrastructure\WordPress\SharedKernel\Server\Application\WordPressTransientCache;
+use WPML\Legacy\Port\Plugin;
 use WPML\UserInterface\Web\Core\Component\Dashboard\Application\Endpoint\GetPopulatedItemSections\PopulatedItemSectionsFilterInterface;
 use WPML\UserInterface\Web\Core\Component\Notices\PromoteUsingDashboard\Application\Repository\DashboardTranslationsRepositoryInterface;
 use WPML\UserInterface\Web\Core\Component\Notices\PromoteUsingDashboard\Application\Repository\ManualTranslationsCountRepositoryInterface;
@@ -216,6 +218,9 @@ return [
   \WPML\Core\Component\ReportContentStats\Domain\Repository\LastSentRepositoryInterface::class =>
     \WPML\Infrastructure\WordPress\Component\ReportContentStats\Domain\Repository\LastSentRepository::class,
 
+  \WPML\Core\Component\ReportContentStats\Domain\Repository\RetryRepositoryInterface::class =>
+    \WPML\Infrastructure\WordPress\Component\ReportContentStats\Domain\Repository\RetryRepository::class,
+
   \WPML\Core\Component\ReportContentStats\Domain\Repository\PostTypesStatsRepositoryInterface::class =>
     \WPML\Infrastructure\WordPress\Component\ReportContentStats\Domain\Repository\PostTypesStatsRepository::class,
 
@@ -242,6 +247,9 @@ return [
 
   \WPML\Core\SharedKernel\Component\Installer\Application\Query\WpmlSiteKeyQueryInterface::class =>
     \WPML\Legacy\SharedKernel\Installer\Application\Query\WpmlSiteKeyQuery::class,
+
+  \WPML\Core\SharedKernel\Component\Site\Application\Query\SiteMigrationLockQueryInterface::class =>
+    \WPML\Legacy\SharedKernel\Site\Application\Query\SiteMigrationLockQuery::class,
 
   \WPML\Core\SharedKernel\Component\Installer\Application\Query\WpmlActivePluginsQueryInterface::class =>
     \WPML\Legacy\SharedKernel\Installer\Application\Query\WpmlActivePluginsQuery::class,
@@ -282,12 +290,19 @@ return [
   \WPML\Core\Component\WordsToTranslate\Domain\Calculator\PrepareContent\Rules\ShortcodeInterface::class =>
     \WPML\Infrastructure\WordPress\Component\WordsToTranslate\Domain\Calculator\PrepareContent\Rules\Shortcode::class,
 
+  \WPML\Core\Component\PostHog\Application\Repository\RetryRepositoryInterface::class =>
+    \WPML\Infrastructure\WordPress\Component\PostHog\Application\Repository\RetryRepository::class,
+
   \WPML\Core\Component\PostHog\Application\Repository\PostHogStateRepositoryInterface::class =>
     \WPML\Infrastructure\WordPress\Component\PostHog\Application\Repository\PostHogStateRepository::class,
-
   \WPML\Core\SharedKernel\Component\WpmlOrgClient\Domain\Api\Endpoints\PostHogRecordingInterface::class =>
     \WPML\Infrastructure\WordPress\SharedKernel\WpmlOrgClient\Domain\Api\Endpoints\PostHogRecording\PostHogRecording::class, // phpcs:ignore
-
+  \WPML\Core\Component\WpmlProxy\Domain\Repository\WpmlProxyRepositoryInterface::class                  =>
+    \WPML\Infrastructure\WordPress\Component\WpmlProxy\Domain\Repository\WpmlProxyRepository::class,
+  \WPML\Core\Component\WpmlProxy\Application\Query\ProxyRoutingRulesInterface::class                    =>
+    \WPML\Legacy\Component\WpmlProxy\Application\Query\ProxyRoutingRules::class,
+  PluginInterface::class                  =>
+    Plugin::class,
   \WPML\Core\Component\PostHog\Application\Cookies\CookiesInterface::class =>
     \WPML\Infrastructure\WordPress\Component\PostHog\Application\Cookies\Cookies::class,
 
@@ -296,6 +311,12 @@ return [
 
   \WPML\Core\SharedKernel\Component\PostHog\Application\Hook\FilterAllowedPagesInterface::class =>
     \WPML\UserInterface\Web\Infrastructure\WordPress\Component\PostHog\Application\Hook\FilterAllowedPages::class,
+
+  \WPML\Core\Component\PostHog\Application\Query\PageAllowedForRecordingQueryInterface::class =>
+    \WPML\Infrastructure\WordPress\Component\PostHog\Application\Query\PageAllowedForRecordingQuery::class,
+
+  \WPML\Core\Component\PostHog\Application\Repository\PostHogDefaultRequestSentRepositoryInterface::class => // phpcs:ignore
+    \WPML\Infrastructure\WordPress\Component\PostHog\Application\Repository\PostHogDefaultRequestSentRepository::class, // phpcs:ignore
 
   /** USER INTERFACE **/
   \WPML\UserInterface\Web\Core\Component\Dashboard\Application\Hook\DashboardPublicationStatusFilterInterface::class =>

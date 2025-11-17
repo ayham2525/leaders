@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko"
+            "lang": "ko_KR"
          },
          "Start batch sync": [
             "일괄 동기화 시작"

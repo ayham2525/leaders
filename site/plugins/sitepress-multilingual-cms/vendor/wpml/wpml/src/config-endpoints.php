@@ -10,7 +10,10 @@ use WPML\UserInterface\Web\Core\Component\Communication\Application\Endpoint\Get
 use WPML\UserInterface\Web\Core\Component\Dashboard\Application\Endpoint\GetLocalTranslators\GetLocalTranslatorsController;
 use WPML\UserInterface\Web\Core\Component\MinimumRequirements\Application\EndPoint\MinimumRequirements\GetRequirementsController;
 use WPML\UserInterface\Web\Core\Component\PostHog\Application\Endpoint\Event\Capture\PostHogCaptureEventController;
+use WPML\UserInterface\Web\Core\Component\WpmlProxy\Application\Endpoint\GetWpmlProxyStatus\GetWpmlProxyStatusController;
+use WPML\UserInterface\Web\Core\Component\WpmlProxy\Application\Endpoint\SetWpmlProxyStatus\SetWpmlProxyStatusController;
 use WPML\UserInterface\Web\Infrastructure\CompositionRoot\Config\ContentStats\EndpointDataProvider;
+use WPML\UserInterface\Web\Infrastructure\CompositionRoot\Config\PostHog\EndpointDataProvider as PostHogEndpointDataProvider;
 
 /**
  * ONLY USE THIS FOR GENERAL ENDPOINTS.
@@ -81,9 +84,26 @@ return [
     'method'  => 'POST',
   ],
 
+  'getwpmlproxystatus' => [
+    'path'    => '/wpml-proxy/status',
+    'handler' => GetWpmlProxyStatusController::class,
+    'method'  => 'GET',
+  ],
+  'setwpmlproxystatus' => [
+    'path'    => '/wpml-proxy/status',
+    'handler' => SetWpmlProxyStatusController::class,
+    'method'  => 'POST',
+  ],
+
   EndpointDataProvider::ID => [
     'path'    => EndpointDataProvider::PATH,
     'handler' => EndpointDataProvider::HANDLER,
     'method'  => EndpointDataProvider::METHOD,
+  ],
+
+  PostHogEndpointDataProvider::ID => [
+    'path'    => PostHogEndpointDataProvider::PATH,
+    'handler' => PostHogEndpointDataProvider::HANDLER,
+    'method'  => PostHogEndpointDataProvider::METHOD,
   ],
 ];

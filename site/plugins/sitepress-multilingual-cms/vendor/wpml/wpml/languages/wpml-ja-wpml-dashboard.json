@@ -865,8 +865,11 @@
          "Summary": [
             "概要"
          ],
-         "Credit": [
+         "credit": [
             "クレジット"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "（約 €%3$0.2f | %1$s正確な価格%2$s）"
          ],
          "Translation service additional options": [
             "翻訳サービスの追加オプション"

@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "zh@Hans"
+            "lang": "zh_CN"
          },
          "Your site now meets WPML's minimum requirements": [
             "您的网站现在满足 WPML 的最低要求"

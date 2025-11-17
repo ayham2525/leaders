@@ -213,6 +213,17 @@ class Config implements ConfigInterface {
 
 
   /**
+   * @return void
+   * @throws Exception
+   * @throws \InvalidArgumentException
+   */
+  public function loadCheckPosthogShouldRecordScript() {
+    $scripts = $this->parser->parseCheckPosthogShouldRecordScript();
+    $this->loadScripts( $scripts );
+  }
+
+
+  /**
    * @param Page $page
    *
    * @return void

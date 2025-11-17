@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
-            "lang": "pl"
+            "lang": "pl_PL"
          },
          "Add glossary terms": [
             "Dodaj terminy do glosariusza"
@@ -38,8 +38,7 @@
             "Jak korzystać z glosariusza dla dokładnych tłumaczeń"
          ],
          "%d item in the <a>Glossary</a>": [
-            "%d pozycja w <a>Glosariuszu</a>",
-            "%d pozycji w <a>Glosariuszu</a>"
+            "%d pozycja w <a>Glosariuszu</a>"
          ]
       }
    }

@@ -1614,6 +1614,9 @@ class WP_Installer {
 					);
 					$this->save_settings();
 					$this->clean_plugins_update_cache();
+
+					// Checks if posthog should start recording for this site
+					do_action('check_posthog_should_record');
 				} else {
 					$error = __( 'Invalid site key for the current site.', 'installer' )
 					         . '<br /> <div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';

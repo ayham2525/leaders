@@ -40,6 +40,28 @@ class TranslationCoverageStatsQuery implements TranslationCoverageStatsQueryInte
 
 
   /**
+   * This query is searching for translation records in the icl_translations table
+   * per language and post type, then it searches for the related original posts
+   * to start summing the content for calculating the translation coverage.
+   *
+   * Example calculating translation coverage:
+   *  Post A (en--original) => 50 chars
+   *  Post A => es translation exists => 50 chars
+   *  Post A => fr translation does not exist => 0 chars
+   *  Post A => it translation does not exist => 0 chars
+   *
+   *  Post B (en--original) => 100 chars
+   *  Post B => es translation exists => 100 chars
+   *  Post B => fr translation exists => 100 chars
+   *  Post B => it translation does not exist => 0 chars
+   *
+   *  Total original content (en) => 150 chars
+   *  es coverage : (50+100) / 150 * 100 = 100%
+   *  fr coverage : (0+100) / 150 * 100 = 66.6%
+   *  it coverage : (0+0) / 150 * 100 = 0%
+   *
+   * @see wpmldev-4423 to see more verbose explanation.
+   *
    * @param string $defaultLanguageCode
    * @param string $postTypeName
    *
@@ -57,7 +79,9 @@ class TranslationCoverageStatsQuery implements TranslationCoverageStatsQueryInte
     FROM {$this->queryPrepare->prefix()}icl_languages langs
       LEFT JOIN {$this->queryPrepare->prefix()}icl_translations icl1
         ON langs.code = icl1.language_code
+             AND icl1.source_language_code = %s
              AND icl1.element_type = %s
+             AND icl1.element_id IS NOT NULL
       LEFT JOIN {$this->queryPrepare->prefix()}icl_translations icl2
         ON icl1.trid = icl2.trid
              AND icl2.source_language_code IS NULL
@@ -74,6 +98,7 @@ class TranslationCoverageStatsQuery implements TranslationCoverageStatsQueryInte
 
     $sqlPrepared = $this->queryPrepare->prepare(
       $sql,
+      $defaultLanguageCode,
       'post_' . $postTypeName,
       'post_' . $postTypeName,
       $postTypeName,

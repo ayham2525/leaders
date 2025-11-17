@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "sv"
+            "lang": "sv_SE"
          },
          "How Browser Language Redirect Affects Google Indexing": [
             "Hur språkbaserad webbläsaromdirigering påverkar Google-indexering"

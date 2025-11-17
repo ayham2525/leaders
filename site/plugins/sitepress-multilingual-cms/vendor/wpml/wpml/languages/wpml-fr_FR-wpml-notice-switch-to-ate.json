@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n > 1);",
-            "lang": "fr"
+            "lang": "fr_FR"
          },
          "Get More Features with WPML's Advanced Translation Editor": [
             "Obtenez plus de fonctionnalités avec l'Éditeur de traduction avancé de WPML"

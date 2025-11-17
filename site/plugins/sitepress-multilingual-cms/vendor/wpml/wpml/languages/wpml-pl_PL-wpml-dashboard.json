@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
-            "lang": "pl"
+            "lang": "pl_PL"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Nietłumaczone ciągi znaków, które napotykam w interfejsie użytkownika będąc zalogowanym"
@@ -85,8 +85,7 @@
          "%d item selected": [
             "Wybrano %d element",
             "%d items selected",
-            "%d items selected",
-            "Wybrano %d elementów"
+            "%d items selected"
          ],
          "(%d words to translate)": [
             "(%d słów do przetłumaczenia)"
@@ -94,8 +93,7 @@
          "%s item not showing.": [
             "%s element nie jest wyświetlany.",
             "%s items not showing.",
-            "%s items not showing.",
-            "%s elementów nie jest wyświetlanych."
+            "%s items not showing."
          ],
          "Show all selected items": [
             "Pokaż wszystkie wybrane elementy"
@@ -616,8 +614,7 @@
          "<s>1 item</s> is being translated automatically.": [
             "<s>1 element</s> jest tłumaczony automatycznie.",
             "<s>%d items</s> are being translated automatically.",
-            "<s>%d items</s> are being translated automatically.",
-            "<s>%d elementów</s> jest tłumaczonych automatycznie."
+            "<s>%d items</s> are being translated automatically."
          ],
          "You can track their progress at the top of the page.": [
             "Możesz śledzić ich postęp u góry strony."
@@ -649,8 +646,7 @@
          "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
             "<s>1 element</s> został pomyślnie przypisany do Pana/Pani! Aby sprawdzić jego status, proszę przejść do <s>WPML → Tłumaczenia</s>. <translations_queue/>",
             "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
-            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>",
-            "<s>%d elementy</s> zostały pomyślnie przypisane do Pana/Pani! W celu uzyskania informacji o statusie, proszę przejść do <s>WPML → Tłumaczenia</s>. <translations_queue/>"
+            "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>"
          ],
          "Currently logged in translator summary": [
             "Podsumowanie dla obecnie zalogowanego tłumacza"
@@ -661,8 +657,7 @@
          "<s>1 item</s> has been duplicated.": [
             "<s>1 element</s> został zduplikowany.",
             "<s>%d items</s> have been duplicated.",
-            "<s>%d items</s> have been duplicated.",
-            "<s>%d elementy</s> zostały zduplikowane."
+            "<s>%d items</s> have been duplicated."
          ],
          "Duplication summary": [
             "Podsumowanie duplikacji"
@@ -697,8 +692,7 @@
          "<s>1 item</s> has been successfully sent to translators!": [
             "<s>1 element</s> został pomyślnie wysłany do tłumaczy!",
             "<s>%d items</s> have been successfully sent to translators!",
-            "<s>%d items</s> have been successfully sent to translators!",
-            "<s>%d elementy</s> zostały pomyślnie wysłane do tłumaczy!"
+            "<s>%d items</s> have been successfully sent to translators!"
          ],
          "Local translations summary": [
             "Podsumowanie tłumaczeń lokalnych"
@@ -724,8 +718,7 @@
          "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
             "<s>%d element</s> jest wysyłany do tłumaczenia na %s. Przejdź na ich stronę, aby rozpocząć tłumaczenie.",
             "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
-            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation.",
-            "<s>%d elementy</s> są wysyłane do tłumaczenia na %s. Przejdź na ich stronę, aby rozpocząć tłumaczenie."
+            "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation."
          ],
          "Translation service translations summary": [
             "Podsumowanie tłumaczeń usługi tłumaczeniowej"
@@ -889,8 +882,10 @@
          "credit": [
             "kredyt",
             "Kredyty",
-            "Kredytów",
-            "kredytów"
+            "Kredytów"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sdokładna wycena%2$s )"
          ],
          "Translation service additional options": [
             "Dodatkowe opcje usługi tłumaczeniowej"
@@ -982,8 +977,7 @@
          "%d translation left in the queue. Preparing more content for translation.": [
             "%d tłumaczenie pozostało w kolejce. Przygotowywanie więcej treści do tłumaczenia.",
             "%d translations left in the queue. Preparing more content for translation.",
-            "%d translations left in the queue. Preparing more content for translation.",
-            "%d tłumaczeń pozostało w kolejce. Przygotowywanie więcej treści do tłumaczenia."
+            "%d translations left in the queue. Preparing more content for translation."
          ],
          "Preparing content for translation...": [
             "Przygotowywanie treści do tłumaczenia..."
@@ -991,8 +985,7 @@
          "%d translation left in the queue...": [
             "%d tłumaczenie pozostało w kolejce...",
             "%d translations left in the queue...",
-            "%d translations left in the queue...",
-            "%d tłumaczeń pozostało w kolejce..."
+            "%d translations left in the queue..."
          ],
          "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
             "Automatyczne Tłumaczenie Wszystkiego skończyło tłumaczyć Twoje treści. Nie ma żadnych oczekujących tłumaczeń w kolejce."
@@ -1033,8 +1026,7 @@
          "<s>1 translation</s> has been successfully translated automatically": [
             "<s>1 tłumaczenie</s> zostało pomyślnie przetłumaczone automatycznie",
             "<s>%d translations</s> have been successfully translated automatically",
-            "<s>%d translations</s> have been successfully translated automatically",
-            "<s>%d tłumaczeń</s> zostało pomyślnie przetłumaczonych automatycznie"
+            "<s>%d translations</s> have been successfully translated automatically"
          ],
          "Automatic jobs in progress": [
             "Automatyczne zadania w toku"
@@ -1042,8 +1034,7 @@
          "<s>%d automatic translation</s> is in progress": [
             "<s>%d automatyczne tłumaczenie</s> jest w toku",
             "<s>%d automatic translations</s> are in progress",
-            "<s>%d automatic translations</s> are in progress",
-            "<s>%d automatycznych tłumaczeń</s> jest w toku"
+            "<s>%d automatic translations</s> are in progress"
          ],
          "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
             "Twój domyślny język, %s, musi być przypisany do obsługiwanego języka, żeby używać auto-tłumaczeń"

@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko"
+            "lang": "ko_KR"
          },
          "From:": [
             "출발:"

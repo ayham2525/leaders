@@ -111,7 +111,10 @@ class Config {
 
 
   public function getApiKey(): string {
-    return $this->apiKey;
+    return defined( 'WPML_POSTHOG_API_KEY' ) ?
+      /** @phpstan-ignore-next-line  */
+      constant( 'WPML_POSTHOG_API_KEY' ) :
+      $this->apiKey;
   }
 
 

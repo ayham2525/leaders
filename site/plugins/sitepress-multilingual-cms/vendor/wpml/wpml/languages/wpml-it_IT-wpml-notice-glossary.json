@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "it"
+            "lang": "it_IT"
          },
          "Add glossary terms": [
             "Aggiungi termini al glossario"
@@ -39,7 +39,6 @@
          ],
          "%d item in the <a>Glossary</a>": [
             "%d elemento nel <a>Glossario</a>",
-            "%d items in the <a>Glossary</a>",
             "%d elementi nel <a>Glossario</a>"
          ],
          "Dismiss": [

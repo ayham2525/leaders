@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "es"
+            "lang": "es_ES"
          },
          "How Browser Language Redirect Affects Google Indexing": [
             "Cómo la redirección por idioma del navegador afecta la indexación de Google"

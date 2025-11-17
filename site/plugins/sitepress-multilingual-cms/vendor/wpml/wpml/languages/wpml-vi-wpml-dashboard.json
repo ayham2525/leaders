@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "vi"
+            "lang": "vi_VN"
          },
          "Untranslated strings that I encounter on front-end while logged in": [
             "Các chuỗi chưa dịch mà tôi gặp phải ở giao diện người dùng khi đã đăng nhập"
@@ -865,8 +865,11 @@
          "Summary": [
             "Tóm tắt"
          ],
-         "Credit": [
+         "credit": [
             "Điểm tín dụng"
+         ],
+         "( ~ €%3$0.2f | %1$sexact pricing%2$s )": [
+            "( ~ €%3$0.2f | %1$sgiá chính xác%2$s )"
          ],
          "Translation service additional options": [
             "Tùy chọn bổ sung cho dịch vụ dịch thuật"

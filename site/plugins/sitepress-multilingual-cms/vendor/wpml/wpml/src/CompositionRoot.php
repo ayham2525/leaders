@@ -88,6 +88,12 @@ class CompositionRoot {
   }
 
 
+  /** @return void */
+  public function loadCheckPosthogShouldRecordScript() {
+    $this->config->loadCheckPosthogShouldRecordScript();
+  }
+
+
   /**
    * List of all common interface implementations.
    *

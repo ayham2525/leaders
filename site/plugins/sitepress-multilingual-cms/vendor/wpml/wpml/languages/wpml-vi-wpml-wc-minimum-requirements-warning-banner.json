@@ -5,7 +5,7 @@
          "": {
             "domain": "messages",
             "plural_forms": "nplurals=1; plural=0;",
-            "lang": "vi"
+            "lang": "vi_VN"
          },
          "Your site doesn't meet WPML's minimum requirements": [
             "Trang web của bạn không đáp ứng các yêu cầu tối thiểu của WPML"

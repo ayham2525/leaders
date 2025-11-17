@@ -24,7 +24,8 @@ class PostHogRecording implements PostHogRecordingInterface {
    *
    * @return array{
    *   success: bool,
-   *   shouldRecord: bool
+   *   shouldRecord: bool,
+   *   isResponseError: bool
    * }
    */
   public function run( string $siteKey, string $recordingMode = 'default' ): array {
@@ -42,6 +43,7 @@ class PostHogRecording implements PostHogRecordingInterface {
       return [
         'success'      => false,
         'shouldRecord' => $recordingMode === RecordingModes::FORCE_ENABLE,
+        'isResponseError' => true,
       ];
     }
 
@@ -53,12 +55,14 @@ class PostHogRecording implements PostHogRecordingInterface {
       return [
         'success'      => false,
         'shouldRecord' => $recordingMode === RecordingModes::FORCE_ENABLE,
+        'isResponseError' => true,
       ];
     }
 
     return [
       'success'      => true,
       'shouldRecord' => boolval( $decodedBody['should_record'] ),
+      'isResponseError' => false,
     ];
   }
 

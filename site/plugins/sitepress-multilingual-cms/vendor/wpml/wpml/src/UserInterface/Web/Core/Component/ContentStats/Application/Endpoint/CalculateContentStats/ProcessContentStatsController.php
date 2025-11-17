@@ -7,6 +7,7 @@ use WPML\Core\Component\ReportContentStats\Application\Service\ContentStatsServi
 use WPML\Core\Component\ReportContentStats\Application\Service\LastSentService;
 use WPML\Core\Component\ReportContentStats\Application\Service\ReportPreparer\ReportPreparerService;
 use WPML\Core\Component\ReportContentStats\Application\Service\ReportSender\ReportSenderService;
+use WPML\Core\Component\ReportContentStats\Application\Service\RetryService;
 use WPML\Core\Port\Endpoint\EndpointInterface;
 
 class ProcessContentStatsController implements EndpointInterface {
@@ -23,17 +24,22 @@ class ProcessContentStatsController implements EndpointInterface {
   /** @var ReportSenderService */
   private $reportSenderService;
 
+  /** @var RetryService */
+  private $retryService;
+
 
   public function __construct(
     ContentStatsService $contentStatsService,
     LastSentService $lastSentService,
     ReportPreparerService $reportPreparerService,
-    ReportSenderService $reportSenderService
+    ReportSenderService $reportSenderService,
+    RetryService $retryService
   ) {
     $this->contentStatsService   = $contentStatsService;
     $this->lastSentService       = $lastSentService;
     $this->reportPreparerService = $reportPreparerService;
     $this->reportSenderService   = $reportSenderService;
+    $this->retryService          = $retryService;
   }
 
 
@@ -65,24 +71,27 @@ class ProcessContentStatsController implements EndpointInterface {
       // Sending the report
       $reportSentSuccessfully = $this->reportSenderService->send( $preparedReport );
 
-      /**
-       * next we're going to update the last sent timestamp
-       * and reset the post types stats data in DB for processing next month
-       * this happens even if sending report failed, to not add overhead to the site.
-       */
-
-      // updating last sent to current timestamp
-      $this->lastSentService->update( time() );
-
-      // Resetting post types stats data in DB for processing next month
-      $this->contentStatsService->resetPostTypesStatsData();
-
       if ( ! $reportSentSuccessfully ) {
+        $this->retryService->incrementAttempt();
+
+        if ( $this->retryService->hasExceededMaxAttempts() ) {
+          // Give up after max attempts, update last sent and reset data
+          $this->finalizeReportingCycle();
+
+          return [
+            'success' => false,
+            'message' => 'Error when sending report - max retry attempts exceeded, will try again in 30 days',
+          ];
+        }
+
         return [
           'success' => false,
-          'message' => 'Error when sending report',
+          'message' => 'Error when sending report - will retry in ' .
+                       $this->retryService->getRetryIntervalMinutes() . ' minutes',
         ];
       }
+
+      $this->finalizeReportingCycle();
     } catch ( ContentStatsServiceException $e ) {
       return [
         'success' => false,
@@ -94,6 +103,16 @@ class ProcessContentStatsController implements EndpointInterface {
       'success' => true,
       'message' => 'Report sent successfully!',
     ];
+  }
+
+
+  /**
+   * @return void
+   */
+  private function finalizeReportingCycle() {
+    $this->retryService->reset();
+    $this->lastSentService->update( time() );
+    $this->contentStatsService->resetPostTypesStatsData();
   }
 
 

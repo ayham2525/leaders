@@ -95,5 +95,6 @@ add_action(
   function () use ( $compositionRoot ) {
     $compositionRoot->loadAdminScripts();
     $compositionRoot->loadContentStatsScripts();
+    $compositionRoot->loadCheckPosthogShouldRecordScript();
   }
 );
