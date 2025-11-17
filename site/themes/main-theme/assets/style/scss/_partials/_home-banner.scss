@@ -1,0 +1,153 @@
+// =======================
+// Home Banner (palette + mixins)
+// =======================
+
+$overlay: rgba($black, .55);
+$overlay-strong: rgba($black, .72);
+
+.home-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  --header-h: 0px;
+  --media-aspect: 16 / 9; // optional: helps prevent layout shift before video paints
+
+  position: relative;
+  min-height: calc(100vh - var(--header-h, 0px));
+  padding-top: var(--header-h, 0px);
+  color: $white;
+  overflow: clip;
+  isolation: isolate;
+  z-index: 0;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0; // base layer for media stack
+    // If you set a poster via inline style="background-image:url(...)"
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    // Optional aspect-ratio helper when you DON'T want full-viewport height:
+    // aspect-ratio: var(--media-aspect);
+  }
+
+  // Base visual layers
+  &__video,
+  &__image,
+  &__fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;          // avoid inline gap/render quirks
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;              // media below overlays
+    transform: translateZ(0); // Safari/WebKit compositing help
+    backface-visibility: hidden;
+  }
+
+  &__image {
+    background-size: cover;
+    background-position: center;
+    filter: saturate(.95) contrast(1.05);
+  }
+
+  &__fallback { background: $black; }
+
+  // Overlay sits ABOVE video/image, never blocks interaction
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: $overlay;
+    z-index: 2;           // above video
+    pointer-events: none; // never intercept clicks
+    backdrop-filter: blur(2px);
+  }
+
+  // Subtle brand vignette above overlay
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 3;           // above overlay
+    pointer-events: none;
+    background:
+      radial-gradient(65% 70% at 50% 45%, transparent 20%, rgba($black, .30) 75%),
+      linear-gradient(180deg, rgba($red, .18) 0%, transparent 40%, rgba($black, .35) 100%);
+  }
+
+  // Foreground content on top of everything
+  &__inner {
+    position: relative;
+    z-index: 4; // content highest
+    min-height: calc(100vh - var(--header-h, 0px));
+    display: grid;
+    place-items: center;
+  }
+
+  &__content {
+    text-align: center;
+    max-width: 900px;
+    margin-inline: auto;
+    padding: clamp(16px, 4vw, 40px);
+  }
+
+  &__title {
+    margin: 0 0 1.25rem;
+    line-height: 1.25;
+    font-weight: 700;
+    font-size: clamp(28px, 4.2vw, 48px);
+    letter-spacing: .2px;
+
+    .is-rtl & { letter-spacing: 0; word-spacing: 2px; }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    padding: .85rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    line-height: 1;
+    color: $white;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba($white,.12), rgba($white,.06));
+    border: 1px solid rgba($white,.25);
+    box-shadow: 0 8px 20px rgba($black,.25), inset 0 1px 0 rgba($white,.22);
+    transition: transform .2s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: rgba($gold,.85);
+      background: linear-gradient(180deg, rgba($gold,.25), rgba($gold,.15));
+      box-shadow: 0 10px 24px rgba($red,.30), 0 0 0 8px rgba($gold,.10);
+    }
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 14px rgba($red,.28), 0 0 0 4px rgba($gold,.12);
+      background: linear-gradient(180deg, rgba($gold,.18), rgba($gold,.10));
+    }
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($white,.9), 0 0 0 7px rgba($gold,.38);
+    }
+  }
+
+  &__btn-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    background: rgba($black,.45);
+    border: 1px solid rgba($white,.35);
+
+    svg { display: block; }
+  }
+
+  @include MaxQuery($xs) {
+    &__overlay { background: $overlay-strong; }
+    &__btn { padding: .8rem 1.2rem; }
+  }
+}

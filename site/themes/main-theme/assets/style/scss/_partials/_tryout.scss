@@ -1,0 +1,268 @@
+/* ============================
+   TRYOUT SINGLE PAGE
+=============================== */
+
+/* BANNER */
+.tryout-banner {
+  position: relative;
+  height: 55vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(211,47,47,0.55); // RED overlay
+  }
+
+  .tryout-title-page {
+    position: relative;
+    z-index: 5;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 800;
+  }
+}
+
+/* BRANCH SECTION */
+.tryout-branch {
+  background: #111;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: .3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(211,47,47,.25);
+  }
+}
+
+.branch-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* SPORT CARD */
+.tryout-sport-card {
+  background: #1b1b1b;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.3);
+  transition: .3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  .tryout-img-wrapper {
+    border-radius: 14px;
+    overflow: hidden;
+
+    img {
+       width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: all .4s ease;
+    filter: grayscale(100%) brightness(.85);
+
+    }
+  }
+
+  &:hover img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.05);
+  }
+}
+
+.sport-title {
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+/* BUTTONS */
+/* BUTTONS */
+.tryout-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+
+  .btn {
+    flex: 1;
+    padding: 9px 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* MAP BUTTON */
+  .btn-location {
+    background: transparent !important;
+    color: $gold !important;
+    border: 1px solid $gold !important;
+
+    i {
+      font-size: 1rem;
+      margin-left: 4px;
+    }
+
+    &:hover {
+       background: transparent !important;
+        color: $gold !important;
+        border: 1px solid $gold !important;
+
+    }
+  }
+
+  /* BOOK BUTTON */
+  .btn-book {
+      background: transparent !important;
+        color: $gold !important;
+        border: 1px solid $gold !important;
+
+    i {
+      font-size: 1rem;
+      margin-left: 4px;
+    }
+
+    &:hover {
+      background: darken($red, 6%);
+    }
+  }
+
+  /* WHATSAPP BUTTON */
+  .btn-tryout-whatsapp {
+       background: transparent !important;
+        color: $gold !important;
+        border: 1px solid $gold !important;
+
+    i {
+      font-size: 1.1rem;
+      margin-left: 4px;
+    }
+
+    &:hover {
+        background: transparent !important;
+        color: $gold !important;
+        border: 1px solid $gold !important;
+    }
+  }
+}
+
+/* ============================
+   📱 MOBILE RESPONSIVE
+   Buttons full width stacked
+=============================== */
+@media (max-width: 768px) {
+  .tryout-buttons {
+    flex-direction: column;   /* Stack vertically */
+    gap: 12px;
+
+    .btn {
+      width: 100%;            /* Full width */
+      display: block;         /* Force block layout */
+    }
+  }
+}
+
+
+
+/* MODAL */
+.form-card {
+  background: $white;
+  border-radius: 14px;
+  color: $black;
+
+  input {
+      background: $white;
+      border: 1px solid $black;
+      color: $black;
+
+      &:focus {
+          border-color: $red;
+          box-shadow: none;
+      }
+  }
+}
+
+
+.ls-tryouts {
+
+    .tryout-item {
+        opacity: 0;
+        transform: translateY(25px);
+        transition: 0.35s ease;
+
+        &[data-delay] {
+            animation: fadeUp 0.8s forwards;
+            animation-delay: attr(data-delay s);
+        }
+    }
+
+    @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tryout-card {
+        background: $black;
+        border-radius: 22px;
+        padding: 0;
+        overflow: hidden;
+        border: 2px solid rgba($gold, 0.25);
+        transition: .3s ease;
+
+        &:hover {
+            transform: translateY(-6px);
+            border-color: $gold;
+            box-shadow: 0 0 22px rgba($gold, 0.45);
+        }
+    }
+
+    .tryout-thumb-wrapper {
+        overflow: hidden;
+        border-radius: 22px;
+    }
+
+    .tryout-thumb {
+        position: relative;
+        display: block;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform .45s ease;
+        }
+
+        .thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba($gold, 0.25);
+            opacity: 0;
+            transition: 0.35s;
+        }
+
+        &:hover img {
+            transform: scale(1.07);
+        }
+
+        &:hover .thumb-overlay {
+            opacity: 1;
+        }
+    }
+
+    .tryout-title a {
+        font-family: $tajawal;
+        font-size: 22px;
+        color: $white;
+        text-decoration: none;
+
+        &:hover { color: $gold; }
+    }
+}

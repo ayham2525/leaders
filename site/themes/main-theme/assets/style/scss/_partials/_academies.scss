@@ -1,0 +1,80 @@
+.ls-academies {
+
+    .academy-item {
+        opacity: 0;
+        transform: translateY(25px);
+        transition: 0.35s;
+
+        &[data-delay] {
+            animation: fadeUp 0.8s forwards;
+            animation-delay: attr(data-delay s);
+        }
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .academy-card {
+        background: $black;
+        border-radius: 22px;
+        padding: 0;
+        overflow: hidden;
+        border: 2px solid rgba($gold, 0.25);
+        transition: .3s ease;
+
+        &:hover {
+            transform: translateY(-6px);
+            border-color: $gold;
+            box-shadow: 0 0 22px rgba($gold, .4);
+        }
+    }
+
+    .academy-thumb-wrapper {
+        overflow: hidden;
+        border-radius: 22px;
+    }
+
+    .academy-thumb {
+        position: relative;
+        display: block;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform .45s ease;
+        }
+
+        .thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba($gold, 0.25);
+            opacity: 0;
+            transition: 0.35s;
+        }
+
+        &:hover img {
+            transform: scale(1.07);
+        }
+
+        &:hover .thumb-overlay {
+            opacity: 1;
+        }
+    }
+
+    .academy-title a {
+        font-family: $tajawal;
+        font-size: 22px;
+        color: $white;
+        text-decoration: none;
+
+        &:hover {
+            color: $gold;
+        }
+    }
+}

@@ -1,0 +1,2 @@
+<?php
+return ['items'=>['Options'=>['urls'=>[],'names'=>['options-page-theme-general-settings-page_title-dae8ace18bdcbcc6ae5aece263e14fe8','options-page-theme-general-settings-menu_title-dae8ace18bdcbcc6ae5aece263e14fe8'],'cmp'=>['WordPress',3]],'تحديث'=>['urls'=>[],'names'=>['options-page-theme-general-settings-update_button-061401dc3f165ecb0f56f8a811c80a17'],'cmp'=>['WordPress',3]],'تم تحديث الإعدادات'=>['urls'=>[],'names'=>['options-page-theme-general-settings-updated_message-b4b87bd62d75c073587cb9399c45d7cc'],'cmp'=>['WordPress',3]]]];

@@ -1,0 +1,77 @@
+.ls-sports-activities {
+    padding: 70px 0;
+    background: $black;
+
+    .sport-card {
+        background: $black;
+        border-radius: 22px;
+        padding: 0;
+        border: 2px solid rgba($gold, .25);
+        box-shadow: 0 0 18px rgba(0, 0, 0, .45);
+        transition: all .3s ease;
+        cursor: pointer;
+        overflow: visible; // outer card keeps glow
+
+        &:hover {
+            transform: translateY(-6px);
+            border-color: $gold;
+            box-shadow: 0 0 22px rgba($gold, .35);
+        }
+    }
+
+    /* NEW FIXED WRAPPER (VERY IMPORTANT) */
+    .sport-inner {
+        overflow: hidden;
+        border-radius: 22px; // same radius as card
+    }
+
+    .sport-thumb {
+        position: relative;
+        overflow: hidden;
+        display: block;
+
+        img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform .4s ease;
+            display: block;
+        }
+
+        .thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba($gold, 0.20);
+            opacity: 0;
+            transition: .35s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.08);
+        }
+
+        &:hover .thumb-overlay {
+            opacity: 1;
+        }
+    }
+
+    /* TITLE */
+    .sport-title {
+        margin: 18px 0 22px 0;
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+         background-color: transparent !important;
+
+        a {
+            color: $white;
+            text-decoration: none;
+            font-family: $tajawal;
+            background-color: transparent !important;
+
+            &:hover {
+                color: $gold;
+            }
+        }
+    }
+}

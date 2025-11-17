@@ -1,0 +1,48 @@
+.ls-page-banner {
+    position: relative;
+
+    .banner-wrapper {
+        position: relative;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 0;
+        border-bottom: 2px solid rgba($gold, .3);
+    }
+
+    .banner-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1;
+    }
+
+    .container {
+        position: relative;
+        z-index: 5;
+    }
+
+    .banner-title {
+        font-size: 48px;
+        font-weight: 700;
+        color: $gold;
+        margin-bottom: 15px;
+        font-family: $tajawal;
+    }
+
+    .banner-text {
+        font-size: 18px;
+        color: $white;
+        opacity: .85;
+        max-width: 760px;
+        margin: 0 auto;
+        font-family: $tajawal;
+    }
+
+    @include MaxQuery($sm) {
+        .banner-title { font-size: 32px; }
+        .banner-wrapper { min-height: 260px; }
+    }
+}

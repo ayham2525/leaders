@@ -1,0 +1,204 @@
+/* ===== Header (LTR/RTL aware) ===== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,.85) 0%,
+    rgba(255,255,255,.45) 25%,
+    rgba(33,33,33,.15) 60%,
+    rgba(0,0,0,.55) 100%
+  );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  transition: background .4s ease, box-shadow .4s ease;
+
+  .navbar-brand img {
+    max-width: 120px;
+    display: block;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,.25));
+  }
+
+  &.scrolled {
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.60) 30%,
+      rgba(33,33,33,.35) 100%
+    );
+    box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  }
+}
+
+/* Flip gradient in RTL */
+html[dir="rtl"] header {
+  background: linear-gradient(
+    270deg,
+    rgba(255,255,255,.85) 0%,
+    rgba(255,255,255,.45) 25%,
+    rgba(33,33,33,.15) 60%,
+    rgba(0,0,0,.55) 100%
+  );
+}
+html[dir="rtl"] header.scrolled {
+  background: linear-gradient(
+    270deg,
+    rgba(255,255,255,.95) 0%,
+    rgba(255,255,255,.60) 30%,
+    rgba(33,33,33,.35) 100%
+  );
+}
+
+/* ===== Header actions ===== */
+.menu-toggle {
+  position: relative;
+  inset-inline-start: 0;
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  margin: 0; padding: 0;
+  border: 0; background: transparent; color: $black;
+  cursor: pointer;
+}
+
+/* ===== Overlay ===== */
+.offcanvas-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 9998;
+  opacity: 0; transition: opacity .25s ease;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1; pointer-events: auto;
+  }
+}
+
+/* ===== Off-canvas menu ===== */
+.offcanvas-menu {
+  position: fixed; top: 0; bottom: 0;
+  width: 86vw; max-width: 360px;
+  background: $red; color: $white;
+  z-index: 9999;
+  padding: 18px 16px;
+  overflow-y: auto;
+
+  /* LTR default: anchored left */
+  left: 0;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform .35s ease, visibility 0s .35s;
+
+  &.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform .35s ease;
+  }
+}
+
+/* ===== RTL version: anchored right ===== */
+html[dir="rtl"] .offcanvas-menu {
+  left: auto;
+  right: 0;
+  transform: translateX(100%);
+}
+html[dir="rtl"] .offcanvas-menu.is-open {
+  transform: translateX(0);
+}
+
+/* ===== Close button inside menu ===== */
+.menu-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border: 0; background: transparent; color: $white;
+  cursor: pointer;
+}
+
+/* ===== WordPress menu list ===== */
+.side-nav {
+  list-style: none; margin: 54px 0 0; padding: 0;
+  display: flex; flex-direction: column; gap: 6px;
+
+  li { border-radius: 10px; overflow: hidden; }
+
+  a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    color: $white; text-decoration: none;
+    transition: background-color .25s ease, color .25s ease;
+
+    &:hover { background: $gold; color: $black; }
+  }
+}
+
+/* Lock body scroll when menu is open */
+body.menu-open { overflow: hidden; }
+
+/* ===== Floating quick links (LTR/RTL aware) ===== */
+.floating-quicklinks {
+  position: fixed;
+  top: 35vh;
+  right: 16px; /* default: English (LTR) right side */
+  z-index: 11000;
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+
+  a {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    color: $black;
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    pointer-events: auto; text-decoration: none;
+
+    &:hover, &:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+      outline: none;
+    }
+  }
+}
+
+/* ===== Arabic RTL: move icons to left ===== */
+html[dir="rtl"] .floating-quicklinks {
+  right: auto; left: 16px;
+}
+
+/* ===== Small screens ===== */
+@media (max-width: 576px) {
+  .navbar-brand{
+      margin-right:  0 !important;
+ margin-left: 0 !important;
+  }
+  header .navbar-brand img { 
+    max-width: 100px; 
+
+}
+
+  .offcanvas-menu {
+    width: 92vw;
+    max-width: 440px;
+    padding: 16px 12px;
+  }
+
+  .floating-quicklinks {
+    top: 28vh;
+
+    a { width: 42px; height: 42px; }
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .offcanvas-menu, .offcanvas-overlay,
+  .floating-quicklinks a { transition: none; }
+}

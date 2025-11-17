@@ -1,0 +1,109 @@
+.ls-academies {
+  background: linear-gradient(180deg, #0E0E0E 0%, #1A1A1A 100%);
+  color: $white;
+  padding: 90px 0;
+
+  /* SECTION HEADER */
+  .section-head {
+    .section-title {
+      font-family: $tajawal;
+      font-weight: 800;
+      color: $gold;
+      font-size: 2.5rem;
+      position: relative;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: $red;
+        margin: 12px auto 0;
+        border-radius: 2px;
+      }
+    }
+
+    .section-subtitle {
+      color: rgba($white, 0.7);
+      font-family: $jost;
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+  }
+
+  /* CARD */
+  .academy-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: transform .3s ease, box-shadow .3s ease;
+
+    &:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba($red, 0.35);
+    }
+
+    /* IMAGE */
+    .academy-thumb {
+      display: block;
+      overflow: hidden;
+      border-radius: 14px;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 14px;
+        transition: all .5s ease;
+        filter: grayscale(100%) brightness(.85);
+      }
+
+      &:hover img {
+        filter: grayscale(0%) brightness(1);
+        transform: scale(1.05);
+      }
+    }
+
+    /* TITLE FULL CENTER */
+    .academy-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      padding: 20px 15px;
+      text-align: center;
+      background: rgba(211, 47, 47, 0.55); /* Transparent red overlay */
+      color: #fff;
+      font-family: $tajawal;
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-radius: 8px;
+      backdrop-filter: blur(4px); /* Optional nicer effect */
+      z-index: 10;
+
+      a {
+        color: #fff;
+        text-decoration: none !important;
+
+        &:hover {
+          color: #FFD700;
+        }
+      }
+    }
+  }
+
+  /* MOBILE */
+  @include MaxQuery($sm) {
+    .academy-thumb img {
+      height: 220px;
+    }
+
+    .academy-title {
+      font-size: 1.1rem;
+      padding: 15px;
+    }
+  }
+}

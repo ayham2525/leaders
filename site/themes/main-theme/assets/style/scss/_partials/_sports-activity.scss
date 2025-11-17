@@ -1,0 +1,164 @@
+/* ================================
+   SPORTS ACTIVITY SINGLE PAGE
+================================ */
+
+/* BANNER */
+.activity-banner {
+  position: relative;
+  height: 55vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .activity-title-page {
+    position: relative;
+    z-index: 5;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 800;
+  }
+}
+
+/* BRANCH SECTION */
+.activity-branch {
+  background: #111;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: .3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(255, 215, 0, .25); /* Gold glow */
+  }
+}
+
+.branch-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* SPORT CARD */
+.activity-sport-card {
+  background: #1b1b1b;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.3);
+  transition: .3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  .activity-img-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 14px;
+    transition: all .4s ease;
+
+    img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      filter: grayscale(100%) brightness(.85);
+      transition: .4s ease;
+    }
+  }
+
+  &:hover img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.05);
+  }
+}
+
+.sport-title {
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+/* ============================
+   BUTTONS
+=============================== */
+.activity-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+
+  .btn {
+    flex: 1;
+    padding: 9px 14px;
+    font-size: .95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ALL THREE BUTTONS */
+  .btn-location,
+  .btn-book,
+  .btn-activity-whatsapp {
+    background: transparent !important;
+    color: $gold !important;
+    border: 1px solid $gold !important;
+
+    i {
+      font-size: 1rem;
+      margin-left: 4px;
+    }
+
+    &:hover {
+      background: transparent !important;
+      color: $gold !important;
+      border: 1px solid $gold !important;
+    }
+  }
+}
+
+/* ============================
+   📱 MOBILE RESPONSIVE BUTTONS
+=============================== */
+@media (max-width: 768px) {
+  .activity-buttons {
+    flex-direction: column;
+    gap: 12px;
+
+    .btn {
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+/* ============================
+   MODAL FORM (Same as Tryouts)
+=============================== */
+.form-card {
+  background: $white;
+  border-radius: 14px;
+  color: $black;
+
+  input {
+    background: $white;
+    border: 1px solid $black;
+    color: $black;
+
+    &:focus {
+      border-color: $gold;
+      box-shadow: none;
+    }
+  }
+
+  button {
+    font-weight: 700;
+  }
+}

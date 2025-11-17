@@ -1,0 +1,110 @@
+@use "../mixins" as *;
+
+.animated-text {
+  --anim-bg: #{$black};
+  --anim-title: #{$red};
+  --anim-text: #{$white};
+
+  background: var(--anim-bg);
+  color: var(--anim-text);
+  padding-top: 20px;
+  padding-bottom: 80px;
+  @include MaxQuery($mid){
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  font-family: $jost;
+
+  /* Arabic font on RTL */
+  html[dir="rtl"] & { font-family: $tajawal; }
+
+ 
+
+  &__wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  &__content {
+    background: rgba(0,0,0,.72);
+  
+    padding: clamp(20px, 3vw, 36px);
+    text-align: start; /* logical for rtl/ltr */
+  }
+
+  &__title {
+    margin: 0 0 12px 0;
+    color: var(--anim-title);
+    font-weight: 800;
+    font-size: clamp(22px, 2.4vw, 36px);
+    line-height: 1.2;
+    letter-spacing: .2px;
+  }
+
+  &__body {
+    font-size: 18px;
+    line-height: 1.9;
+    opacity: .95;
+
+    b, strong { color: var(--anim-title); }
+    p { margin: 0 0 12px 0; }
+  }
+
+  &__label {
+    margin-top: 10px;
+    font-size: clamp(14px, 1vw, 15px);
+    strong { color: var(--anim-title); font-weight: 800; }
+  }
+ &__values{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 14px;
+    direction: ltr;               /* layout base */
+    justify-content: flex-start;
+  }
+  html[dir="rtl"] &__values{
+    direction: rtl;
+    justify-content: flex-end;    /* Arabic: align to the right */
+  }
+
+  &__label{
+    color: var(--anim-title);
+    font-weight: 800;
+    font-size: clamp(14px, 1vw, 15px);
+  }
+
+  /* Stage: reserves space; JS sets exact width/height of tallest/widest chip */
+  &__chipstage{
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    min-height: 40px;             /* fallback; JS will overwrite */
+    min-width: 120px;             /* fallback; JS will overwrite */
+    vertical-align: middle;
+  }
+
+  /* All chips stacked in the same place; only one visible at a time */
+  &__chip{
+    position: absolute;
+    inset: 0;                     /* center via grid parent */
+    margin: auto;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba($red,.1);
+    border: 1px solid rgba($white,.08);
+    color: var(--anim-text);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .2px;
+    opacity: 0;                   /* JS controls */
+    transform: scale(.95);
+    pointer-events: none;
+  }
+}

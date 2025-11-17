@@ -1,0 +1,2 @@
+<?php
+return ['items'=>['المشاهدات'=>['urls'=>[],'names'=>[],'cmp'=>['wp_bootstrap_starter',2]],'مشاركة'=>['urls'=>[],'names'=>[],'cmp'=>['wp_bootstrap_starter',2]],'مقالات ذات صلة'=>['urls'=>[],'names'=>[],'cmp'=>['wp_bootstrap_starter',2]],'مشاهدة جميع المقالات'=>['urls'=>[],'names'=>[],'cmp'=>['wp_bootstrap_starter',2]],'Main Theme'=>['urls'=>[],'names'=>[],'cmp'=>['wp_bootstrap_starter',2]]]];

@@ -1,0 +1,114 @@
+/* ===========================
+   FOOTER - Leaders Sports
+=========================== */
+
+$brand-red:  #D32F2F;
+$brand-black:#212121;
+$brand-gold: #FFD700;
+$brand-white:#FFFFFF;
+
+.site-footer {
+  background: linear-gradient(180deg, #000000e0 0%, #000000f2 100%);
+  color: rgba(255,255,255,.85);
+  padding: 45px 0 28px;
+  border-top: 2px solid rgba(255,255,255,.06);
+  font-family: "Tajawal", sans-serif;
+
+  a {
+    color: rgba(255,255,255,.85);
+    text-decoration: none;
+    transition: .2s ease;
+  }
+
+  a:hover { color: $brand-gold; }
+
+  /* LOGO */
+  .footer-logo img {
+    max-height: 52px;
+    display: block;
+  }
+
+  .footer-site-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: $brand-white;
+  }
+
+  /* MENU */
+  .footer-menu {
+    gap: 12px 20px;
+    flex-wrap: wrap;
+
+    li { list-style: none; }
+
+    a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    a:hover {
+      background: rgba(255,255,255,.07);
+      transform: translateY(-1px);
+    }
+  }
+
+  /* LEGAL MENU */
+  .footer-legal {
+    gap: 12px;
+    flex-wrap: wrap;
+
+    a {
+      font-size: .9rem;
+      opacity: .8;
+    }
+
+    a:hover {
+      opacity: 1;
+      color: $brand-gold;
+    }
+  }
+
+  /* COPYRIGHT */
+  .footer-copy {
+    font-size: .95rem;
+    opacity: .75;
+  }
+
+  /* RTL FIX */
+  html[dir="rtl"] & {
+    .footer-menu { justify-content: flex-start !important; }
+    .footer-bottom .text-md-end { text-align: start !important; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 576px) {
+    padding: 30px 0 22px;
+
+    .footer-top {
+      text-align: center;
+
+      .footer-brand { margin-bottom: 15px; }
+      .footer-menu  { justify-content: center; }
+    }
+
+    .footer-bottom {
+      text-align: center;
+
+      .footer-legal { justify-content: center; }
+    }
+  }
+
+  .footer-menu-container{
+    display: flex;
+    justify-content: left;
+    @include MaxQuery($sm){
+      display: block;
+      & li{
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
