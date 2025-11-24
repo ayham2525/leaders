@@ -8,6 +8,10 @@
   height: 100vh;
   overflow: hidden;
   color: #fff;
+  & a, a:hover{
+    text-decoration: none !important;
+    color: $white;
+  }
 
   /* BACKGROUND MEDIA */
   &__media {
