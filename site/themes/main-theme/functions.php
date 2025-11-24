@@ -28,101 +28,162 @@ function leaders_needs_360_assets(): bool
 add_action('wp_enqueue_scripts', function () {
     $theme_ver = wp_get_theme()->get('Version') ?: '1.0.0';
 
-    // Main theme stylesheet
+    // ===============================
+    // MAIN THEME STYLES
+    // ===============================
     $main_css_rel = '/assets/style/css/main-theme.css';
     $main_css_abs = get_stylesheet_directory() . $main_css_rel;
     $main_ver     = file_exists($main_css_abs) ? filemtime($main_css_abs) : $theme_ver;
 
-    wp_enqueue_style('leaders-main', get_stylesheet_directory_uri() . $main_css_rel, [], $main_ver, 'all');
+    wp_enqueue_style(
+        'leaders-main',
+        get_stylesheet_directory_uri() . $main_css_rel,
+        [],
+        $main_ver
+    );
 
-    // External styles
-    wp_enqueue_style('leaders-font-awesome-css', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', [], '5.15.4');
-    wp_enqueue_script('sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', [], '11', true);
+    // ===============================
+    // THIRD-PARTY STYLES
+    // ===============================
+    wp_enqueue_style('leaders-fontawesome', 'https://use.fontawesome.com/releases/v5.15.4/css/all.css', [], '5.15.4');
+    wp_enqueue_style('leaders-owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4');
+    wp_enqueue_style('leaders-owl-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', ['leaders-owl-carousel'], '2.3.4');
+    wp_enqueue_style('leaders-fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', [], '3.5.7');
 
-    wp_enqueue_style('leaders-owl-carousel-css', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4');
-    wp_enqueue_style('leaders-owl-theme-css', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', ['leaders-owl-carousel-css'], '2.3.4');
-    wp_enqueue_style('leaders-fancybox-css', 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', [], '3.5.7');
-
-    // Bootstrap RTL/LTR
+    // ===============================
+    // BOOTSTRAP RTL/LTR
+    // ===============================
     if (defined('ICL_LANGUAGE_CODE') && ICL_LANGUAGE_CODE === 'ar') {
-        wp_enqueue_style('leaders-bootstrap-rtl-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css', [], '5.0.2');
+        wp_enqueue_style('leaders-bootstrap-rtl', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css', [], '5.0.2');
     } else {
-        wp_enqueue_style('leaders-bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', [], '5.3.2');
+        wp_enqueue_style('leaders-bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', [], '5.3.2');
     }
 
-    // Photo Sphere Viewer CSS (conditionally)
-    if (leaders_needs_360_assets()) {
-        wp_enqueue_style('leaders-photo-sphere-viewer-css', 'https://cdnjs.cloudflare.com/ajax/libs/photo-sphere-viewer/4.0.0/photo-sphere-viewer.min.css', [], '4.0.0');
+    // ===============================
+    // SWIPER CSS (for banner slide)
+    // ===============================
+    wp_enqueue_style(
+        'leaders-swiper-css',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+        [],
+        '11.0.0'
+    );
+
+    // ===============================
+    // 360° Viewer CSS (conditional)
+    // ===============================
+    if (function_exists('leaders_needs_360_assets') && leaders_needs_360_assets()) {
+        wp_enqueue_style(
+            'leaders-photo-sphere-css',
+            'https://cdnjs.cloudflare.com/ajax/libs/photo-sphere-viewer/4.0.0/photo-sphere-viewer.min.css',
+            [],
+            '4.0.0'
+        );
     }
 }, 10);
 
-/**
- * Enqueue scripts
- */
+
 add_action('wp_enqueue_scripts', function () {
     $theme_ver = wp_get_theme()->get('Version') ?: '1.0.0';
 
     // Core jQuery
     wp_enqueue_script('jquery');
 
-    // Bootstrap bundle
-    wp_enqueue_script('leaders-bootstrap-bundle-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js', [], '5.3.2', true);
-
-    // ✅ Owl Carousel JS (CDN)
-    wp_enqueue_script('leaders-owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', ['jquery'], '2.3.4', true);
-
-    // ✅ News slider JS
-    $news_rel = '/assets/js/news-slider.js';
-    $news_abs = get_stylesheet_directory() . $news_rel;
-    if (file_exists($news_abs)) {
-        wp_enqueue_script('leadersports-news-slider', get_stylesheet_directory_uri() . $news_rel, ['jquery', 'leaders-owl-carousel-js'], filemtime($news_abs), true);
-    } else {
-        if (defined('WP_DEBUG') && WP_DEBUG) error_log('[leaderssports] Missing JS: ' . $news_abs);
-    }
-
-    // Fancybox
-    wp_enqueue_script('leaders-fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', ['jquery'], '3.5.7', true);
-
-    // GSAP + ScrollTrigger
-    wp_enqueue_script('leaders-gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', [], '3.12.5', true);
-    wp_enqueue_script('leaders-gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', ['leaders-gsap'], '3.12.5', true);
-
-    // Header JS
-    $header_rel = '/assets/js/header.js';
-    $header_abs = get_stylesheet_directory() . $header_rel;
-    if (file_exists($header_abs)) {
-        wp_enqueue_script('leaders-header-academy', get_stylesheet_directory_uri() . $header_rel, [], filemtime($header_abs), true);
-    }
-
-    // About Academy animation
-    $about_anim_rel = '/assets/js/about-academy-anim.js';
-    $about_anim_abs = get_stylesheet_directory() . $about_anim_rel;
-    if (file_exists($about_anim_abs)) {
-        wp_enqueue_script('leaders-about-academy-anim', get_stylesheet_directory_uri() . $about_anim_rel, ['leaders-gsap', 'leaders-gsap-scrolltrigger'], filemtime($about_anim_abs), true);
-    }
-
-    // Animated Text init
-    $anim_rel = '/assets/js/animated-text-init.js';
-    $anim_abs = get_stylesheet_directory() . $anim_rel;
-    if (file_exists($anim_abs)) {
-        wp_enqueue_script('leaders-animated-text-init', get_stylesheet_directory_uri() . $anim_rel, ['leaders-gsap', 'leaders-gsap-scrolltrigger'], filemtime($anim_abs), true);
-    }
-    wp_enqueue_style(
-        'leaders-swiper-css',
-        'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css',
-        [],
-        '10.0.0'
-    );
-
+    // Bootstrap Bundle
     wp_enqueue_script(
-        'leaders-swiper-js',
-        'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js',
+        'leaders-bootstrap',
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js',
         [],
-        '10.0.0',
+        '5.3.2',
         true
     );
 
-    // Tryouts Slider JS
+    // SweetAlert
+    wp_enqueue_script('sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', [], '11', true);
+
+    // Owl Carousel
+    wp_enqueue_script(
+        'leaders-owl-carousel',
+        'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js',
+        ['jquery'],
+        '2.3.4',
+        true
+    );
+
+    // Fancybox
+    wp_enqueue_script(
+        'leaders-fancybox',
+        'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js',
+        ['jquery'],
+        '3.5.7',
+        true
+    );
+
+    // GSAP
+    wp_enqueue_script(
+        'leaders-gsap',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+        [],
+        '3.12.5',
+        true
+    );
+
+    wp_enqueue_script(
+        'leaders-gsap-scrolltrigger',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+        ['leaders-gsap'],
+        '3.12.5',
+        true
+    );
+
+    // ===============================
+    // SWIPER (banner slider)
+    // ===============================
+    wp_enqueue_script(
+        'leaders-swiper-js',
+        'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+        [],
+        '11.0.0',
+        true
+    );
+
+    // ===============================
+    // Banner Slider JS
+    // ===============================
+    $banner_rel = '/assets/js/home-banner-slider.js';
+    $banner_abs = get_stylesheet_directory() . $banner_rel;
+
+    if (file_exists($banner_abs)) {
+        wp_enqueue_script(
+            'leaders-home-banner-slider',
+            get_stylesheet_directory_uri() . $banner_rel,
+            ['leaders-swiper-js'],
+            filemtime($banner_abs),
+            true
+        );
+    } else {
+        if (WP_DEBUG) error_log('[leaderssports] Missing JS: ' . $banner_abs);
+    }
+
+    // ===============================
+    // News Slider JS
+    // ===============================
+    $news_rel = '/assets/js/news-slider.js';
+    $news_abs = get_stylesheet_directory() . $news_rel;
+
+    if (file_exists($news_abs)) {
+        wp_enqueue_script(
+            'leaders-news-slider',
+            get_stylesheet_directory_uri() . $news_rel,
+            ['jquery', 'leaders-owl-carousel'],
+            filemtime($news_abs),
+            true
+        );
+    }
+
+    // ===============================
+    // Tryouts
+    // ===============================
     $tryouts_rel = '/assets/js/tryouts.js';
     $tryouts_abs = get_stylesheet_directory() . $tryouts_rel;
 
@@ -134,20 +195,50 @@ add_action('wp_enqueue_scripts', function () {
             filemtime($tryouts_abs),
             true
         );
-    } else {
-        if (defined('WP_DEBUG') && WP_DEBUG) {
-            error_log('[leaderssports] Missing JS: ' . $tryouts_abs);
-        }
     }
 
+    // ===============================
+    // Header JS
+    // ===============================
+    $header_rel = '/assets/js/header.js';
+    $header_abs = get_stylesheet_directory() . $header_rel;
 
-    // 360/VR assets
-    if (leaders_needs_360_assets()) {
-        wp_enqueue_script('leaders-three-js', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', [], '0.128.0', true);
-        wp_enqueue_script('leaders-photo-sphere-viewer-js', 'https://cdnjs.cloudflare.com/ajax/libs/photo-sphere-viewer/4.0.0/photo-sphere-viewer.min.js', ['leaders-three-js'], '4.0.0', true);
-        wp_enqueue_script('leaders-aframe-js', 'https://aframe.io/releases/0.5.0/aframe.min.js', [], '0.5.0', true);
+    if (file_exists($header_abs)) {
+        wp_enqueue_script(
+            'leaders-header-js',
+            get_stylesheet_directory_uri() . $header_rel,
+            [],
+            filemtime($header_abs),
+            true
+        );
+    }
+
+    // ===============================
+    // About Academy Anim
+    // ===============================
+    $about_rel = '/assets/js/about-academy-anim.js';
+    $about_abs = get_stylesheet_directory() . $about_rel;
+
+    if (file_exists($about_abs)) {
+        wp_enqueue_script(
+            'leaders-about-anim',
+            get_stylesheet_directory_uri() . $about_rel,
+            ['leaders-gsap', 'leaders-gsap-scrolltrigger'],
+            filemtime($about_abs),
+            true
+        );
+    }
+
+    // ===============================
+    // 360° Viewer (conditional)
+    // ===============================
+    if (function_exists('leaders_needs_360_assets') && leaders_needs_360_assets()) {
+        wp_enqueue_script('leaders-three', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', [], '0.128.0', true);
+        wp_enqueue_script('leaders-photo-sphere', 'https://cdnjs.cloudflare.com/ajax/libs/photo-sphere-viewer/4.0.0/photo-sphere-viewer.min.js', ['leaders-three'], '4.0.0', true);
+        wp_enqueue_script('leaders-aframe', 'https://aframe.io/releases/0.5.0/aframe.min.js', [], '0.5.0', true);
     }
 }, 10);
+
 
 /**
  * Resource hints for external CDNs

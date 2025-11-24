@@ -58,31 +58,35 @@ $imgHtml = $imgId ? wp_get_attachment_image(
 <section
     class="about-academy"
     style="background-color: <?php echo esc_attr($bg); ?>; --about-title: <?php echo esc_attr($titleCol); ?>; --about-text: <?php echo esc_attr($textCol); ?>;">
-    <div class="container">
-        <div class="about-academy__wrap">
-            <div class="about-academy__media">
-                <?php echo $imgHtml; ?>
-                <span class="about-academy__red-swoosh" aria-hidden="true"></span>
-            </div>
-
-            <div class="about-academy__content">
-                <?php if ($title !== ''): ?>
-                    <h2 class="about-academy__title"><?php echo esc_html($title); ?></h2>
-                <?php endif; ?>
-
-                <?php if (!empty($mainText)): ?>
-                    <div class="about-academy__text">
-                        <?php echo wp_kses_post($mainText); ?>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="about-academy__wrap">
+                    <div class="about-academy__media">
+                        <?php echo $imgHtml; ?>
+                        <span class="about-academy__red-swoosh" aria-hidden="true"></span>
                     </div>
-                <?php endif; ?>
 
-                <?php if (!empty($extra)): ?>
-                    <div class="about-academy__extra">
-                        <?php echo wp_kses_post($extra); ?>
+                    <div class="about-academy__content">
+                        <?php if ($title !== ''): ?>
+                            <h2 class="about-academy__title"><?php echo esc_html($title); ?></h2>
+                        <?php endif; ?>
+
+                        <?php if (!empty($mainText)): ?>
+                            <div class="about-academy__text">
+                                <?php echo wp_kses_post($mainText); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($extra)): ?>
+                            <div class="about-academy__extra">
+                                <?php echo wp_kses_post($extra); ?>
+                            </div>
+                        <?php endif; ?>
+
+
                     </div>
-                <?php endif; ?>
-
-
+                </div>
             </div>
         </div>
     </div>

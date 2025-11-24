@@ -1,181 +1,161 @@
-// =======================
-// Home Banner (palette + mixins)
-// =======================
-
-$overlay: rgba($black, .55);
-$overlay-strong: rgba($black, .72);
+/* ===============================
+   HOME BANNER – EXACT LIKE DEMO
+================================ */
 
 .home-banner {
-  --header-h: 0px;
-  --media-aspect: 16 / 9;
-
   position: relative;
-  min-height: calc(100vh - var(--header-h, 0px));
-  padding-top: var(--header-h, 0px);
-  color: $white;
-  overflow: clip;
-  isolation: isolate;
-  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
 
-  // =========================
-  // MEDIA WRAPPER
-  // =========================
+  /* BACKGROUND MEDIA */
   &__media {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    z-index: 1;
   }
 
-  // =========================
-  // MEDIA LAYERS
-  // =========================
   &__video,
-  &__image,
-  &__fallback {
+  &__image {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-    z-index: 1;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  &__image {
     background-size: cover;
     background-position: center;
-    filter: saturate(.95) contrast(1.05);
+    object-fit: cover;
+    z-index: 2;
+
+    /* 🔥 Blur Effect */
+    filter: blur(1px);
+    transform: scale(1.05);
   }
 
-  &__fallback {
-    background: $black;
-  }
-
-  // =========================
-  // OVERLAYS
-  // =========================
   &__overlay {
     position: absolute;
     inset: 0;
-    background: $overlay;
-    z-index: 2;
-    pointer-events: none;
-    backdrop-filter: blur(2px);
+    background: rgba(0,0,0,.45);
+    z-index: 3;
   }
 
   &__gradient {
     position: absolute;
     inset: 0;
-    z-index: 3;
-    pointer-events: none;
     background:
-      radial-gradient(65% 70% at 50% 45%, transparent 20%, rgba($black, .30) 75%),
-      linear-gradient(180deg, rgba($red, .18) 0%, transparent 40%, rgba($black, .35) 100%);
+      linear-gradient(180deg, transparent 40%, rgba(0,0,0,.65) 100%);
+    z-index: 4;
   }
 
-  // =========================
-  // FOREGROUND CONTENT
-  // =========================
+  /* CONTENT */
   &__inner {
     position: relative;
-    z-index: 4;
-    min-height: calc(100vh - var(--header-h, 0px));
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
   }
 
   &__content {
-    max-width: 850px;
-    padding: clamp(16px, 3vw, 38px);
+    position: absolute;
+    bottom: 120px;
+    max-width: 750px;
+    z-index: 12;
+  }
+
+  &.is-rtl .home-banner__content {
+    right: 60px;
+    text-align: right;
+  }
+
+  &.is-ltr .home-banner__content {
+    left: 60px;
+    text-align: left;
   }
 
   &__title {
-    margin: 0 0 1rem;
-    line-height: 1.25;
-    font-weight: 700;
-    font-size: clamp(28px, 4vw, 46px);
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
   }
 
-  // =========================
-  // BUTTON (Link)
-  // =========================
   &__btn {
     display: inline-flex;
     align-items: center;
     gap: .5rem;
-    padding: .7rem 1.2rem;          // smaller size
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.95rem;             // better readable size
-    color: $white;
+    padding: 1rem 2rem;
+    background: #e4161a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
     text-decoration: none;
-    background: rgba($white, .12);
-    border: 1px solid rgba($white, .25);
-    box-shadow: 0 4px 14px rgba($black, .25), inset 0 1px 0 rgba($white,.25);
-    transition: all .25s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-      border-color: $gold;
-      background: rgba($gold, .25);
-      box-shadow: 0 6px 18px rgba($gold, .35);
-      color: $white;
-    }
-
-    &:active {
-      transform: translateY(0);
-      background: rgba($gold, .18);
-      box-shadow: 0 4px 12px rgba($gold, .25);
-    }
+    border-radius: 4px;
+    transition: .25s;
   }
 
-  &__btn-icon {
-    display: inline-grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    background: rgba($black,.50);
-    border: 1px solid rgba($white,.30);
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
+  &__btn:hover {
+    background: #b50f14;
+    transform: translateY(-2px);
   }
 
-  // =========================
-  // MOBILE OPTIMIZATIONS
-  // =========================
-  @include MaxQuery($xs) {
-    &__overlay {
-      background: $overlay-strong;
-    }
-    &__btn {
-      padding: .65rem 1rem;
-    }
+  /* SWIPER */
+  .homeBannerSlider,
+  .swiper-wrapper,
+  .swiper-slide {
+    height: 100%;
+  }
+
+  /* FADE FIX */
+  .swiper-slide {
+    position: absolute !important;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0 !important;
+    transition: opacity 1s ease !important;
+  }
+
+  .swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+    z-index: 8 !important;
+  }
+
+  /* PAGINATION BOXES */
+  .swiper-pagination {
+    bottom: 40px !important;
+    right: 60px;
+    display: flex;
+    gap: 12px;
+    width: auto;
+  }
+
+  .swiper-pagination-bullet {
+    width: 40px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent !important;
+    color: rgba(255,255,255,.7);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 0;
+    opacity: 1 !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    color: #e8cc33 !important;
+    background-color: transparent !important;
+    font-weight: 700;
   }
 }
 
-// ===============================
-// RTL / LTR TEXT ALIGNMENT
-// ===============================
-.home-banner.is-rtl .home-banner__content {
- 
-    text-align: right;
-    position: absolute;
-    right: 15px;
-}
-
-.home-banner.is-ltr .home-banner__content {
-  text-align: left;
-   position: absolute;
-    left: 30px;
+/* force full height */
+.homeBannerSlider,
+.homeBannerSlider .swiper-wrapper,
+.homeBannerSlider .swiper-slide {
+  height: 100vh !important;
 }

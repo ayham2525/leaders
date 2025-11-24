@@ -31,7 +31,7 @@ $dir       = is_rtl() ? 'rtl' : 'ltr'; // WP aware
 <section class="animated-text"
     dir="<?php echo esc_attr($dir); ?>"
     style="--anim-bg: <?php echo esc_attr($bg); ?>; --anim-title: <?php echo esc_attr($titleCol); ?>; --anim-text: <?php echo esc_attr($textCol); ?>;">
-    <div class="container p-0">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="animated-text__wrap" data-anim="section">
