@@ -119,26 +119,6 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
-    // GSAP
-    wp_enqueue_script(
-        'leaders-gsap',
-        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
-        [],
-        '3.12.5',
-        true
-    );
-
-    wp_enqueue_script(
-        'leaders-gsap-scrolltrigger',
-        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
-        ['leaders-gsap'],
-        '3.12.5',
-        true
-    );
-
-    // ===============================
-    // SWIPER (banner slider)
-    // ===============================
     wp_enqueue_script(
         'leaders-swiper-js',
         'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
@@ -146,6 +126,45 @@ add_action('wp_enqueue_scripts', function () {
         '11.0.0',
         true
     );
+
+    // GSAP
+    // wp_enqueue_script(
+    //     'leaders-gsap',
+    //     'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+    //     [],
+    //     '3.12.5',
+    //     true
+    // );
+
+    // wp_enqueue_script(
+    //     'leaders-gsap-scrolltrigger',
+    //     'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+    //     ['leaders-gsap'],
+    //     '3.12.5',
+    //     true
+    // );
+
+    // ===============================
+    // SWIPER (banner slider)
+    // ===============================
+
+
+
+    $testimonials_rel = '/assets/js/testimonials-slider.js';
+    $testimonials_abs = get_stylesheet_directory() . $testimonials_rel;
+
+    if (file_exists($testimonials_abs)) {
+        wp_enqueue_script(
+            'leaders-testimonials-slider',
+            get_stylesheet_directory_uri() . $testimonials_rel,
+            ['leaders-swiper-js'], // Swiper must load first
+            filemtime($testimonials_abs),
+            true
+        );
+    }
+
+
+
 
     // ===============================
     // Banner Slider JS
@@ -238,6 +257,8 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('leaders-aframe', 'https://aframe.io/releases/0.5.0/aframe.min.js', [], '0.5.0', true);
     }
 }, 10);
+
+
 
 
 /**

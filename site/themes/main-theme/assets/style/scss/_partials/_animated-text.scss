@@ -1,110 +1,143 @@
 @use "../mixins" as *;
 
-.animated-text {
-  --anim-bg: #{$black};
-  --anim-title: #{$red};
-  --anim-text: #{$white};
-
-  background: var(--anim-bg);
-  color: var(--anim-text);
-  padding-top: 20px;
-  padding-bottom: 80px;
-  @include MaxQuery($mid){
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-  font-family: $jost;
-
-  /* Arabic font on RTL */
-  html[dir="rtl"] & { font-family: $tajawal; }
-
- 
-
-  &__wrap {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  &__content {
-    background: rgba(0,0,0,.72);
-  
-    padding: clamp(20px, 3vw, 36px);
-    text-align: start; /* logical for rtl/ltr */
-  }
-
-  &__title {
-    margin: 0 0 12px 0;
-    color: var(--anim-title);
-    font-weight: 800;
-    font-size: clamp(22px, 2.4vw, 36px);
-    line-height: 1.2;
-    letter-spacing: .2px;
-  }
-
-  &__body {
-    font-size: 18px;
-    line-height: 1.9;
-    opacity: .95;
-
-    b, strong { color: var(--anim-title); }
-    p { margin: 0 0 12px 0; }
-  }
-
-  &__label {
-    margin-top: 10px;
-    font-size: clamp(14px, 1vw, 15px);
-    strong { color: var(--anim-title); font-weight: 800; }
-  }
- &__values{
-    display: inline-flex;
-    align-items: center;
-    gap: 10px 12px;
-    margin-top: 14px;
-    direction: ltr;               /* layout base */
-    justify-content: flex-start;
-  }
-  html[dir="rtl"] &__values{
-    direction: rtl;
-    justify-content: flex-end;    /* Arabic: align to the right */
-  }
-
-  &__label{
-    color: var(--anim-title);
-    font-weight: 800;
-    font-size: clamp(14px, 1vw, 15px);
-  }
-
-  /* Stage: reserves space; JS sets exact width/height of tallest/widest chip */
-  &__chipstage{
+.animated-text.testimonials {
+    background: var(--anim-bg) url('../img/image.png')
+        center top / cover no-repeat;
+    padding: 120px 0 100px;
+    text-align: center;
+    font-family: $jost;
     position: relative;
-    display: inline-grid;
-    place-items: center;
-    min-height: 40px;             /* fallback; JS will overwrite */
-    min-width: 120px;             /* fallback; JS will overwrite */
-    vertical-align: middle;
-  }
 
-  /* All chips stacked in the same place; only one visible at a time */
-  &__chip{
-    position: absolute;
-    inset: 0;                     /* center via grid parent */
-    margin: auto;
-    width: max-content;
-    max-width: 100%;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
+    html[dir="rtl"] & { font-family: $tajawal; }
+
+    /* ===== HEADER ===== */
+    .testimonials__header {
+        margin-bottom: 50px;
+    }
+
+    .testimonials__subtitle {
+        color: var(--anim-title);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+    }
+
+    .testimonials__title {
+        font-size: clamp(30px, 4vw, 54px);
+        font-weight: 900;
+        color: #fff;
+        margin: 0;
+    }
+
+    /* ===== SLIDER ===== */
+    .testimonials-slider {
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .testimonials__slide {
+        padding: 20px 15px;
+        color: #fff;
+    }
+
+    /* ===== QUOTE ICON ===== */
+    .testimonials__quote-icon svg {
+        width: 65px;
+        height: 65px;
+        fill: var(--anim-title);
+        margin-bottom: 25px;
+    }
+
+    /* ===== TEXT ===== */
+    .testimonials__text {
+        max-width: 900px;
+        margin: 0 auto 35px;
+        font-size: 22px;
+        line-height: 1.9;
+        color: #ddd;
+
+        html[dir="rtl"] & {
+            text-align: center;
+        }
+    }
+
+    /* ===== PROFILE (CENTERED) ===== */
+    .testimonials__profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .testimonials__avatar {
+        width: 85px;
+        height: 85px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid rgba(255,255,255,0.8);
+    }
+
+    .testimonials__profile-info {
+        text-align: center;
+
+        h4 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--anim-title);
+        }
+
+        span {
+            font-size: 15px;
+            opacity: 0.7;
+            color: #eee;
+        }
+    }
+
+    /* ===== PAGINATION ===== */
+/* ===== PAGINATION (SQUARE DOTS) ===== */
+.testimonials-pagination {
+    margin-top: 35px !important;
+    display: flex;
     justify-content: center;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba($red,.1);
-    border: 1px solid rgba($white,.08);
-    color: var(--anim-text);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: .2px;
-    opacity: 0;                   /* JS controls */
-    transform: scale(.95);
-    pointer-events: none;
-  }
+
+    .swiper-pagination-bullet {
+        width: 14px;
+        height: 14px;
+        background: #6f6f6f !important;   /* GRAY for inactive */
+        opacity: 1;
+        border-radius: 3px;
+        margin: 0 6px;
+        transition: 0.25s ease-in-out;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #D32F2F !important;   /* RED for active */
+        width: 18px;
+    }
+}
+
+
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+        padding: 90px 0;
+
+        .testimonials__text {
+            font-size: 18px;
+        }
+
+        .testimonials__avatar {
+            width: 70px;
+            height: 70px;
+        }
+
+        .testimonials__title {
+            font-size: 36px;
+        }
+    }
 }
