@@ -1,132 +1,207 @@
 @use "../mixins" as *;
 
-/* About Academy (RTL/LTR aware) */
+/* =======================================
+   ABOUT ACADEMY (New Light Theme)
+   Layout matches screenshot:
+   LEFT  → Title + paragraph + button
+   RIGHT → Grid cards
+========================================== */
+
 .about-academy {
-  /* ACF-injected vars (fallbacks) */
-  --about-bg: #{$black};
-  --about-title: #{$red};
-  --about-text: #{$white};
+    background: #f5f5f5;
+    padding: 90px 0;
 
-    padding-top: 80px;
-  padding-bottom: 80px;
-  @include MaxQuery($mid){
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+    font-family: $jost;
 
-  font-family: $jost;
-
-  /* Arabic font on RTL */
-  html[dir="rtl"] & { font-family: $tajawal; }
-
-  /* GRID
-     We use areas so we can flip order for LTR vs RTL without changing markup.
-  */
-  &__wrap {
-    display: grid;
-    grid-template-columns: 1fr .9fr;
-    grid-template-areas: "media content"; /* RTL default (image left, content right as in your Arabic design) */
-    gap: clamp(16px, 3vw, 32px);
-    align-items: stretch;
-
-    /* LTR pages → content on the left, image on the right */
-    :where(html:not([lang^="ar"])) &,
-    :where(body:not(.rtl)) & {
-      grid-template-columns: .9fr 1fr;
-      grid-template-areas: "content media";
+    html[dir="rtl"] & {
+        font-family: $tajawal;
     }
 
-    @include MaxQuery($mid) {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "content"
-        "media"; /* Mobile: read content first, then image */
+    /* ---------------------------
+       LEFT SIDE (TEXT AREA)
+    --------------------------- */
+    .section-label {
+        color: #d32f2f;
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        html[dir="rtl"] & {
+            text-align: right;
+        }
     }
-  }
 
-  &__media   { grid-area: media; }
-  &__content { grid-area: content; }
+    &__title {
+        font-size: clamp(30px, 3.4vw, 48px);
+        font-weight: 900;
+        color: $red;
+        line-height: 1.1;
+        margin-bottom: 20px;
 
-  &__media {
-    position: relative;
-    background: #000;
-    border-radius: 0;
-    overflow: hidden;
-    min-height: 360px;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), transparent 40%),
-        linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%);
-      pointer-events: none;
+        html[dir="rtl"] & {
+            text-align: right;
+        }
     }
-  }
 
-  /* keep your non-filtered image */
-  &__img {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: auto;  /* preserves natural aspect; change to 100% + object-fit if you want full cover */
-  }
+    &__text {
+        color: #444;
+        font-size: 17px;
+        line-height: 1.75;
+        max-width: 90%;
 
-  &__content {
-    background: rgba(0,0,0,.72);
-     padding: clamp(20px, 3vw, 32px);
-    text-align: start; /* logical alignment works for both LTR/RTL */
-  }
+        p { margin-bottom: 12px; }
 
-  &__title {
-    color: var(--about-title);
-    font-weight: 800;
-    font-size: clamp(22px, 2.4vw, 34px);
-    line-height: 1.2;
-    margin: 0 0 14px 0;
-    letter-spacing: .2px;
-  }
+        html[dir="rtl"] & {
+            text-align: right;
+        }
+    }
 
-  &__text {
-    color: var(--about-text);
-    opacity: .95;
-    font-size: clamp(14px, 1.05vw, 16px);
-    line-height: 1.9;
-
-    b, strong { color: var(--about-title); font-weight: 800; }
-    p { margin: 0 0 12px 0; }
-  }
-
-  &__extra {
-    margin-top: 8px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    display: inline-block;
-    background: rgba($red, .1);
-    color: var(--about-text);
-
-    b, strong { color: var(--about-title); }
-    p { margin: 0; }
-  }
-
-  &__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 14px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: var(--about-title);
+    /* Red Button */
+    .btn-red {
+        margin-top: 32px;
+    background: #d32f2f;
+    padding: 14px 34px;
     color: #fff;
     font-weight: 700;
+    text-transform: uppercase;
     font-size: 14px;
-    text-decoration: none;
-    transition: transform .15s ease, box-shadow .15s ease;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;      // <-- FIX: vertically center icon + text
+    justify-content: center;  // <-- FIX: horizontal centering
+    gap: 10px;
+    transition: .2s;
+    text-decoration: none !important;
+    line-height: 1;    
+    @include MaxQuery($mid){
+      margin-bottom: 32px;
+    }
+
+        .arrow {
+            font-size: 18px;
+            line-height: 0;
+            padding-top: 5px;
+        }
+
+        &:hover {
+            background: #b62828;
+        }
+
+        html[dir="rtl"] & {
+            flex-direction: row-reverse;
+
+            .arrow { transform: scaleX(-1); }
+        }
+    }
+
+    /* ---------------------------
+       RIGHT SIDE → CARD GRID
+    --------------------------- */
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+        padding-left: 40px;
+
+        :where(html[dir="rtl"]) & {
+            padding-left: 0;
+            padding-right: 40px;
+        }
+
+        @include MaxQuery($mid) {
+            padding: 0;
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+    background: #fff;
+    padding: 50px 30px;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+    border: 1px solid transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    transition: 
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border 0.25s ease;
 
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba($red,.35);
+        transform: translateY(-8px);
+        box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+        border-color: rgba(211,47,47,0.35); // subtle red highlight
     }
-  }
+}
+
+
+    .card-icon {
+        margin-bottom: 18px;
+
+        img, svg {
+            max-width: 125px;
+            height: auto;
+            display: block;
+        }
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #222;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    .card-text {
+        color: #666;
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 90%;
+        margin: 0 auto;
+
+        p { margin: 0; }
+    }
+
+    /* ---------------------------
+       RESPONSIVE
+    --------------------------- */
+    @include MaxQuery($mid) {
+        padding: 50px 0;
+
+        &__text {
+            max-width: 100%;
+        }
+    }
+
+    .card-icon {
+    margin-bottom: 18px;
+    transition: transform 0.25s ease;
+
+    img, svg {
+        max-width: 125px !important;
+        height: auto;
+        display: block;
+    }
+
+    .about-academy__card:hover & {
+        transform: scale(1.06);
+    }
+}
+
+html[dir="rtl"] .btn-red {
+    flex-direction: row-reverse;
+
+    .arrow {
+        transform: scaleX(-1);  // flip arrow direction
+    }
+}
+
 }
