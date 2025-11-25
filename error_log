@@ -1996,3 +1996,9 @@ Stack trace:
 #6 /home/leadersa/leaderssports.ae/index.php(17): require('/home/leadersa/...')
 #7 {main}
   thrown in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/home_banner.php on line 66
+[25-Nov-2025 07:42:55 UTC] WordPress database error Commands out of sync; you can't run this command now for query SHOW FULL COLUMNS FROM `lp_options` made by shutdown_action_hook, do_action('shutdown'), WP_Hook->do_action, WP_Hook->apply_filters, WPML_Notices->save_to_option, update_option
+[25-Nov-2025 18:46:50 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/about_academy.php on line 71
+[25-Nov-2025 18:46:51 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/about_academy.php on line 71
+[25-Nov-2025 18:46:51 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/about_academy.php on line 71
+[25-Nov-2025 18:46:52 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/about_academy.php on line 71
+[25-Nov-2025 18:46:52 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leadersa/leaderssports.ae/site/themes/main-theme/partials/about_academy.php on line 71

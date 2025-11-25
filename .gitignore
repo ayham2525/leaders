@@ -1,9 +1,22 @@
+# Core files we never want to track
 /index.php
 /wp-config.php
-.htaccess
-.DS_Store
-/*/.DS_Store
-/site/debug.log
-wp-config.php
 php.ini
-/php.inigit
+/php.ini
+
+# macOS system files
+.DS_Store
+*/.DS_Store
+
+# WordPress logs & debug
+/site/debug.log
+
+# Server files
+.htaccess
+
+# Prevent WordPress uploaded images
+site/uploads/
+
+# Prevent all images inside uploads
+site/uploads/**/*
+
