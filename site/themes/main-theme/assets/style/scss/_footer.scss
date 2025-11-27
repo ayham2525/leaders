@@ -10,7 +10,7 @@ $brand-white:#FFFFFF;
 .site-footer {
   // لو كان --anim-bg موجود يستخدمه، وإلا استخدم لون البراند الأساسي
   background-color: var(--anim-bg, $brand-black);
-  background-image: url('../img/image.png');
+  background-image: url('../img/texture_bg.png');
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -18,7 +18,6 @@ $brand-white:#FFFFFF;
   color: rgba(255,255,255,.85);
   padding: 45px 0 28px;
   border-top: 2px solid rgba(255,255,255,.06);
-  font-family: "Tajawal", sans-serif;
 
   a {
     color: rgba(255,255,255,.85);
