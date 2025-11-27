@@ -3,42 +3,31 @@
     const $slider = $(".ls-news__slider.owl-carousel");
 
     if ($slider.length && typeof $.fn.owlCarousel === "function") {
+      const isRTL = $("html").attr("dir") === "rtl";
+
       $slider.owlCarousel({
-        items: 4,
+        items: 1,              // سلايد واحد يحتوي (1 كبير + 4 صغار)
         loop: true,
-        margin: 20,
-        nav: false,
+        margin: 24,
+        nav: false,            // نستخدم أزرارنا custom
         dots: false,
         autoplay: true,
-        autoplayTimeout: 5000,
-        smartSpeed: 700,
-        rtl: $("html").attr("dir") === "rtl",
-        responsive: {
-          0: {
-            items: 1,
-            margin: 10,
-          },
-          576: {
-            items: 2,
-          },
-          992: {
-            items: 3,
-          },
-          1200: {
-            items: 4,
-          },
-        },
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        smartSpeed: 800,
+        rtl: isRTL,
       });
 
       // custom navigation
       $(".ls-news__next").on("click", function () {
         $slider.trigger("next.owl.carousel");
       });
+
       $(".ls-news__prev").on("click", function () {
         $slider.trigger("prev.owl.carousel");
       });
 
-      console.log("✅ Leaders News Slider initialized successfully");
+      console.log("✅ Leaders News 1-big + 4-small slider initialized");
     } else {
       console.warn("⚠️ OwlCarousel not found or .ls-news__slider missing");
     }

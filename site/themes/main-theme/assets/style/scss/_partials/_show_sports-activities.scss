@@ -1,77 +1,305 @@
 .ls-sports-activities {
-    padding: 70px 0;
-    background: $black;
+  background: $black;
+  color: $white;
 
-    .sport-card {
-        background: $black;
-        border-radius: 22px;
-        padding: 0;
-        border: 2px solid rgba($gold, .25);
-        box-shadow: 0 0 18px rgba(0, 0, 0, .45);
-        transition: all .3s ease;
-        cursor: pointer;
-        overflow: visible; // outer card keeps glow
+  /* اجعل السكشن full-width خارج أي container */
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 
-        &:hover {
-            transform: translateY(-6px);
-            border-color: $gold;
-            box-shadow: 0 0 22px rgba($gold, .35);
-        }
-    }
+  padding: 40px 0 60px;
 
-    /* NEW FIXED WRAPPER (VERY IMPORTANT) */
-    .sport-inner {
-        overflow: hidden;
-        border-radius: 22px; // same radius as card
-    }
+  /* إلغاء padding عن الكونتينر الداخلي لكن مع الحفاظ على عرض كامل */
+  > .container,
+  > .container-fluid {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    .sport-thumb {
-        position: relative;
-        overflow: hidden;
+  .section-head {
+    padding: 0 15px; // فقط للعناوين في الأعلى
+
+    .section-title {
+      font-weight: 800;
+      color: $gold;
+      font-size: 2.3rem;
+      position: relative;
+
+      &::after {
+        content: "";
         display: block;
-
-        img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            transition: transform .4s ease;
-            display: block;
-        }
-
-        .thumb-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba($gold, 0.20);
-            opacity: 0;
-            transition: .35s ease;
-        }
-
-        &:hover img {
-            transform: scale(1.08);
-        }
-
-        &:hover .thumb-overlay {
-            opacity: 1;
-        }
+        width: 70px;
+        height: 3px;
+        background: $red;
+        margin: 10px auto 0;
+        border-radius: 2px;
+      }
     }
 
-    /* TITLE */
-    .sport-title {
-        margin: 18px 0 22px 0;
-        font-size: 22px;
-        font-weight: 700;
-        text-align: center;
-         background-color: transparent !important;
-
-        a {
-            color: $white;
-            text-decoration: none;
-            font-family: $tajawal;
-            background-color: transparent !important;
-
-            &:hover {
-                color: $gold;
-            }
-        }
+    .section-subtitle {
+      color: rgba($white, 0.85);
+      font-size: 1rem;
+      margin-top: 8px;
     }
+  }
+
+  /* SLIDER */
+  .ls-sports-slider {
+    .sport-slide {
+      padding: 0; // سلايد واحد فول ويدث
+    }
+  }
+
+  .sport-slide-inner {
+    min-height: 380px;
+    display: flex;
+    align-items: stretch;
+
+    /* إزالة أي فراغ بين الأعمدة */
+    .row {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .row > [class^="col-"],
+    .row > [class*=" col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  /* PANEL النص – الأحمر */
+  .sport-text-panel {
+    height: 100%;
+    background: #b5302d; // قريب من الأحمر في المثال
+    padding: 40px 40px 40px 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+
+    .sport-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: rgba(#fff, 0.9);
+      margin-bottom: 12px;
+    }
+
+    .sport-name {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0 0 14px;
+      text-transform: uppercase;
+    }
+
+    .sport-desc {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: rgba(#fff, 0.88);
+      max-width: 420px;
+      margin-bottom: 20px;
+    }
+
+    .sport-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 2px solid rgba(#fff, 0.7);
+      width: fit-content;
+
+      &:hover {
+        color: $gold;
+        border-color: $gold;
+      }
+    }
+  }
+
+  /* PANEL الصورة */
+  .sport-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    overflow: hidden;
+
+    .sport-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: brightness(0.95);
+    }
+
+    .sport-image--placeholder {
+      background: radial-gradient(circle at center, #444 0, #111 60%);
+    }
+  }
+
+  /* تأثير hover على الصورة */
+  .sport-slide-inner:hover .sport-image {
+    transform: scale(1.06);
+    filter: brightness(1.02);
+  }
+
+  /* OWL NAV */
+  .owl-nav {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    button.owl-prev,
+    button.owl-next {
+        display: none !important;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba($gold, 0.75);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      color: $gold;
+      font-size: 18px;
+      transition: all 0.25s ease;
+
+      span {
+        line-height: 1;
+      }
+
+      &:hover {
+        background: $gold;
+        color: #111;
+        box-shadow: 0 0 14px rgba($gold, 0.65);
+      }
+    }
+  }
+
+  /* إجبار إظهار الأسهم على الديسكتوب حتى لو Owl عطاها disabled */
+  .owl-nav.disabled {
+    display: flex !important;
+  }
+
+  /* OWL DOTS */
+  .owl-dots {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    .owl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba($white, 0.35);
+      transition: all 0.25s ease;
+      padding: 0;
+
+      &.active {
+        width: 20px;
+        background: $red;
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  /* RTL */
+  html[dir="rtl"] &,
+  body.rtl & {
+    .sport-text-panel {
+      padding: 40px 12% 40px 40px;
+      text-align: right;
+
+      .sport-link {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .owl-nav {
+      direction: ltr; // arrows تبقى منطقية
+    }
+  }
+
+  /* MEDIUM (tablet) */
+  @include MaxQuery($mid) {
+    .sport-slide-inner {
+      flex-direction: column;
+
+      .sport-text-panel {
+        order: 2;
+      }
+
+      .sport-image-wrap {
+        order: 1;
+      }
+    }
+
+    .sport-text-panel {
+      padding: 30px 24px;
+
+      .sport-name {
+        font-size: 1.6rem;
+      }
+
+      .sport-desc {
+        max-width: none;
+      }
+    }
+
+    .sport-image-wrap {
+      min-height: 220px;
+
+      .sport-image {
+        min-height: 220px;
+      }
+    }
+  }
+
+  /* MOBILE */
+  @include MaxQuery($sm) {
+    padding: 30px 0 45px;
+
+    .section-head {
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    .sport-text-panel {
+      padding: 24px 18px;
+
+      .sport-name {
+        font-size: 1.4rem;
+      }
+
+      .sport-desc {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* على الموبايل لو Owl عطاها disabled نخفي الأسهم */
+    .owl-nav.disabled {
+      display: none !important;
+    }
+  }
 }

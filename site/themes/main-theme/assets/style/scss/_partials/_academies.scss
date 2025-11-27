@@ -20,16 +20,16 @@
 
     .academy-card {
         background: $black;
-        border-radius: 22px;
+        border-radius: 0 !important;
         padding: 0;
         overflow: hidden;
-        border: 2px solid rgba($gold, 0.25);
+        border: none !important;
         transition: .3s ease;
 
         &:hover {
             transform: translateY(-6px);
-            border-color: $gold;
-            box-shadow: 0 0 22px rgba($gold, .4);
+            //border-color: $gold;
+            box-shadow: 0 0 22px rgba(gray, .4);
         }
     }
 
@@ -77,4 +77,70 @@
             color: $gold;
         }
     }
+    
+    /* MOBILE */
+@include MaxQuery($sm) {
+  padding: 60px 0;
+
+  .section-head {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .academy-card {
+    transform: none !important; // لا ترفع الكارت على الموبايل
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      transform: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .academy-thumb {
+      img {
+        height: 220px;
+        transform: none; // لا تكبير على الهوفر بالموبايل
+      }
+
+      &:hover img {
+        transform: none;
+        filter: none;
+      }
+    }
+
+    /* على الموبايل نخلي المحتوى ثابت تحت الصورة بدون أوفرلاي */
+    .academy-body {
+      position: static;
+      padding: 14px 14px 18px;
+      background: #ffffff;
+      color: #111;
+      transform: none;
+      opacity: 1;
+    }
+
+    .academy-title {
+      font-size: 1.05rem;
+
+      a {
+        color: #111;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+    .academy-excerpt {
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.75);
+    }
+  }
+}
+
+
 }

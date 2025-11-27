@@ -8,7 +8,13 @@ $brand-gold: #FFD700;
 $brand-white:#FFFFFF;
 
 .site-footer {
-  background: linear-gradient(180deg, #000000e0 0%, #000000f2 100%);
+  // لو كان --anim-bg موجود يستخدمه، وإلا استخدم لون البراند الأساسي
+  background-color: var(--anim-bg, $brand-black);
+  background-image: url('../img/image.png');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+
   color: rgba(255,255,255,.85);
   padding: 45px 0 28px;
   border-top: 2px solid rgba(255,255,255,.06);
@@ -99,12 +105,14 @@ $brand-white:#FFFFFF;
     }
   }
 
-  .footer-menu-container{
+  .footer-menu-container {
     display: flex;
     justify-content: left;
-    @include MaxQuery($sm){
+
+    @include MaxQuery($sm) {
       display: block;
-      & li{
+
+      li {
         display: block;
         width: 100%;
         text-align: center;

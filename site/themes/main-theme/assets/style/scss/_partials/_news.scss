@@ -1,6 +1,5 @@
 /* =======================
-   News Slider (ACF Block: news)
-   Bigger items + arrows below slider (RTL/LTR supported)
+   News Grid – 4 small + 1 big (last post is big)
 ======================= */
 
 .ls-news {
@@ -13,7 +12,7 @@
     padding-block: clamp(24px, 3vw, 56px);
   }
 
-  /* === HEADER === */
+  /* HEADER */
   &__head {
     display: flex;
     align-items: center;
@@ -33,163 +32,209 @@
     font-family: $tajawal;
   }
 
-  /* === OWL === */
-  .owl-carousel {
-    opacity: 0;
-    transition: opacity .4s ease-in-out;
-  }
-
-  .owl-loaded {
-    opacity: 1;
-    display: block;
-  }
-
-  /* Equal height setup */
-  .owl-stage {
-    display: flex !important;
-    align-items: stretch !important;
-  }
-
-  .owl-item {
-    display: flex !important;
-    align-items: stretch !important;
-    justify-content: center;
-  }
-
-  &__item {
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
+  /* GRID: left (4 small) + right (big) */
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 3fr);
+    gap: 20px;
     align-items: stretch;
   }
 
-  /* === CARD === */
+  &__left {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(150px, 1fr);
+    gap: 16px;
+  }
+
+  &__item {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item--big {
+    /* على العمود اليمين تلقائي */
+  }
+
+  /* CARD base */
   &__card {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 28px rgba($black, .28);
+    //-radius: 18px;
+    box-shadow: 0 10px 25px rgba($black, .28);
     background: #000;
     text-decoration: none;
     height: 100%;
-    flex: 1 1 auto;
-    min-height: 400px;
+    color: $white;
 
-    @include MinQuery($mid) { min-height: 420px; }
-    @include MinQuery($desktop) { min-height: 440px; }
+    // ثبّت لون اللينك وما يخضع للـ theme
+    &, &:hover, &:focus {
+      color: $white;
+      text-decoration: none;
+    }
 
-    &:hover img { transform: scale(1.06); }
+    &:hover .ls-news__img {
+      transform: scale(1.06);
+    }
+      
   }
 
+  &__card--small {
+    min-height: 190px;
+  }
+
+  &__card--big {
+    min-height: 420px;
+
+    @include MinQuery($mid)     { min-height: 460px; }
+    @include MinQuery($desktop) { min-height: 480px; }
+  }
+
+  /* IMAGE */
   &__img {
-    flex: 1 1 auto;
     position: relative;
     width: 100%;
-
+    flex: 1 1 auto;
+    height: 100%;
+    margin-bottom: -2px; 
+    overflow: hidden;
+    transition: transform .6s ease; 
+    
     > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .6s ease;
+      display: block;
+     
     }
+    
   }
 
-  /* === Overlay === */
-  &__overlay {
+  /* Overlay gradient */
+   &__overlay {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,0.1) 70%);
-  }
-
-  /* === Caption === */
-  &__caption {
-    background: rgba(0,0,0,.65);
-    color: $white;
-    z-index: 2;
-    padding: 14px 18px;
-    font-family: $tajawal;
-    font-weight: 700;
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: 1.7;
-    display: flex;
-    align-items: center; // vertically centered text
-    justify-content: flex-start;
-    min-height: 110px;
-    border-radius: 0 0 20px 20px;
-    position: absolute;
-    inset-inline: 0;
+    top: 0;
+    right: 0;
     bottom: 0;
-    text-align: start;
-    direction: ltr; // default English layout
-
-    /* RTL Arabic: justify + middle-right alignment */
-    [dir="rtl"] & {
-      text-align: justify;
-      justify-content: flex-end;
-      direction: rtl;
-      padding-inline: 24px; // slightly wider padding for Arabic text
-    }
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, .9) 0%,
+      rgba(0, 0, 0, .2) 60%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
-  &__caption-in {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-  }
-
-  /* === ARROWS BELOW SLIDER === */
-  &__nav {
-    display: flex;
+  /* Duration pill */
+  &__duration {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 16px;
-    margin-top: clamp(20px, 3vw, 40px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+    z-index: 2;
 
-    [dir="rtl"] & {
-      flex-direction: row-reverse;
+    html[dir="rtl"] &,
+    body[dir="rtl"] & {
+      left: auto;
+      right: 12px;
     }
   }
 
-  &__prev,
-  &__next {
-    width: 48px;
-    height: 48px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    display: grid;
-    place-items: center;
-    color: var(--ls-title, $white);
-    background: rgba($white, .1);
-    border-radius: 50%;
-    transition: all .25s ease;
-    box-shadow: 0 5px 15px rgba($black, .25);
+  /* BODY */
+  &__body {
+    padding: 10px 14px 14px;
+    font-family: $tajawal;
+    position: relative;
+    z-index: 3;
+  }
 
-    &:hover,
-    &:focus {
-      background: rgba($white, .2);
-      transform: translateY(-2px);
+  &__body--big {
+    padding: 16px 18px 20px;
+  }
+
+  &__meta {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: .8;
+    margin-bottom: 4px;
+  }
+
+  &__heading {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    text-transform: none;
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
     }
   }
 
-  /* === RESPONSIVE === */
+  &__heading--big {
+    font-size: clamp(18px, 2vw, 22px);
+    margin-bottom: 8px;
+  }
+
+  &__excerpt {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: .85;
+  }
+
+  /* EMPTY */
+  &__empty {
+    text-align: center;
+    color: rgba($white, .7);
+    padding: 40px 0;
+  }
+
+  /* RESPONSIVE */
+  @include MaxQuery($desktop) {
+    &__grid {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 16px;
+    }
+    &__left {
+      grid-auto-rows: minmax(140px, 1fr);
+    }
+  }
+
   @include MaxQuery($mid) {
-    &__item {
-      max-width: 90%;
-      padding: 6px;
+    &__grid {
+      grid-template-columns: 1fr;
     }
-    &__card {
-      min-height: 340px;
+
+    &__left {
+      order: 2;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    &__caption {
-      min-height: 90px;
+
+    &__item--big {
+      order: 1;
+    }
+
+    &__card--big {
+      min-height: 360px;
     }
   }
 
@@ -198,100 +243,17 @@
       text-align: center;
       width: 100%;
     }
-    &__nav {
-      margin-top: 16px;
+
+    &__grid {
+      gap: 14px;
+    }
+
+    &__left {
+      grid-template-columns: 1fr;
+    }
+
+    &__card--small {
+      min-height: 220px;
     }
   }
 }
-
-.ls-news-archive {
-
-    .news-item {
-        display: flex;
-    }
-
-    .news-card {
-        background: $black;
-        border-radius: 20px;
-        padding: 0;                     // ★ Remove ALL padding
-        overflow: hidden;               // ★ Ensures image stays inside
-        border: 2px solid rgba($gold, .25);
-        transition: .35s ease;
-
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        &:hover {
-            border-color: $gold;
-            box-shadow: 0 0 22px rgba($gold, .4);
-            transform: translateY(-6px);
-        }
-    }
-
-    .news-thumb {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-        border-radius: 20px 20px 0 0;  // ★ Match card radius
-
-        img {
-            width: 100%;
-            display: block !important; // ★ Removes Bootstrap spacing
-            margin: 0 !important;
-            padding: 0 !important;
-
-            border-radius: 20px 20px 0 0 !important;  
-            aspect-ratio: 16/10;
-            object-fit: cover;
-
-            transition: transform .45s ease;
-        }
-
-        &:hover img {
-            transform: scale(1.07);
-        }
-    }
-
-    .news-title {
-        padding: 15px 15px 0;
-        text-align: center;
-        color: $white;
-        font-size: 20px;
-        font-weight: 700;
-        & a,a:hover{
-            color: $gold !important;
-        text-decoration: none !important;
-        }
-       
-    }
-
-    .news-excerpt {
-        padding: 0 20px;
-        text-align: center;
-        opacity: .9;
-        min-height: 70px;
-    }
-
-    .news-meta {
-        text-align: center;
-        padding-bottom: 5px;
-        opacity: .8;
-    }
-
-    .btn-news-read {
-        align-self: center;
-        margin: 15px 0 22px;
-        padding: 10px 24px;
-        background: $red;
-        border-radius: 50px;
-        color: $white;
-        transition: .3s;
-
-        &:hover {
-            background: $gold;
-            color: $black;
-        }
-    }
-}
-

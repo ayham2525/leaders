@@ -163,6 +163,20 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
+    $sports_activites_rel = '/assets/js/ls-sports-slider.js';
+    $sports_activites_abs = get_stylesheet_directory() . $sports_activites_rel;
+
+    if (file_exists($sports_activites_abs)) {
+        wp_enqueue_script(
+            'sports_activites-slider',
+            get_stylesheet_directory_uri() . $sports_activites_rel,
+            ['leaders-swiper-js'], // Swiper must load first
+            filemtime($sports_activites_abs),
+            true
+        );
+    }
+
+
 
 
 
