@@ -1,6 +1,6 @@
 </main><!-- /#main -->
 
-<footer id="site-footer" class="site-footer" role="contentinfo">
+<footer id="site-footer" class="site-footer js-scroll-up" role="contentinfo">
 	<div class="container">
 
 		<!-- TOP AREA -->

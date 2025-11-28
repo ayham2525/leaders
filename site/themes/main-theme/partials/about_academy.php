@@ -32,7 +32,7 @@ $link  = get_sub_field('link');
 
 ?>
 
-<section class="about-academy">
+<section class="about-academy js-scroll-up">
     <div class="container">
 
         <div class="row align-items-start">

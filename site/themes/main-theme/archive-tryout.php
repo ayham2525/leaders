@@ -21,7 +21,7 @@ $bg_color    = "#0E0E0E"; // Black
 </section>
 
 <!-- ==================== TRYOUTS GRID ==================== -->
-<section class="ls-tryouts py-5" style="background: <?php echo esc_attr($bg_color); ?>;">
+<section class="ls-tryouts py-5 js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
     <div class="container">
 
         <div class="row justify-content-center">

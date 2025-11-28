@@ -53,7 +53,7 @@ if (!$q->have_posts()) {
 }
 ?>
 
-<section class="ls-news ls-news--grid"
+<section class="ls-news ls-news--grid js-scroll-up"
     dir="<?php echo esc_attr($dir); ?>"
     style="--ls-bg:<?php echo esc_attr($bg); ?>; --ls-title:<?php echo esc_attr($title_color); ?>;">
 

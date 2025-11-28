@@ -38,7 +38,7 @@ if (function_exists('get_sub_field') && get_sub_field('visible')) :
     $academies = new WP_Query($query_args);
 ?>
 
-    <section class="ls-academies" style="background: <?php echo esc_attr($bg_color); ?>;">
+    <section class="ls-academies js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
         <div class="container">
 
             <?php if ($title || $subtitle) : ?>

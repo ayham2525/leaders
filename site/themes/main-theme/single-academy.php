@@ -2,7 +2,8 @@
 get_header();
 
 while (have_posts()) : the_post();
-    $banner = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    $banner        = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    $academy_info  = get_field('academy_info'); // main repeater
 ?>
 
     <!-- ==================== البانر ==================== -->
@@ -18,112 +19,189 @@ while (have_posts()) : the_post();
     <section class="academy-details py-5">
         <div class="container">
 
-            <?php if (have_rows('academy_info')): ?>
-                <?php while (have_rows('academy_info')): the_row();
+            <?php if (! empty($academy_info) && is_array($academy_info)) : ?>
 
-                    $branch_name  = get_sub_field('branch');
-                    $location_url = get_sub_field('location');
+                <?php foreach ($academy_info as $branch) :
+
+                    $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
+                    $location_url = isset($branch['location']) ? $branch['location'] : '';
+                    $sports       = isset($branch['sports'])   ? $branch['sports']   : [];
 
                 ?>
-                    <div class="academy-branch mb-5">
+                    <div class="academy-branch mb-5 js-scroll-up">
 
                         <!-- Branch Title -->
-                        <h2 class="branch-title text-white mb-4">
-                            <i class="fas fa-map-marker-alt text-red ml-2"></i>
-                            <?php echo esc_html($branch_name); ?>
-                        </h2>
+                        <?php if ($branch_name) : ?>
+                            <h2 class="branch-title text-white mb-4">
+                                <i class="fas fa-map-marker-alt text-red ml-2"></i>
+                                <?php echo esc_html($branch_name); ?>
+                            </h2>
+                        <?php endif; ?>
 
-                        <?php if (have_rows('sports')): ?>
-                            <?php while (have_rows('sports')): the_row();
+                        <?php if (! empty($sports) && is_array($sports)) :
 
-                                $sport_title = get_sub_field('sport_title');
-                                $fees        = get_sub_field('fees');
-                                $days        = get_sub_field('training_days');
+                            $sport_index = 0;
 
-                                $sport_img_id  = get_sub_field('image');
-                                $sport_img_url = wp_get_attachment_image_url($sport_img_id, 'full');
+                            foreach ($sports as $sport) :
+                                $sport_index++;
 
-                                $day_labels = (!empty($days))
-                                    ? array_map(fn($d) => $d['label'] ?? $d, $days)
-                                    : [];
-                            ?>
+                                $sport_title   = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
+                                $fees          = isset($sport['fees'])          ? $sport['fees']          : '';
+                                $days          = isset($sport['training_days']) ? $sport['training_days'] : [];
+                                $description   = isset($sport['text'])          ? $sport['text']          : '';
+                                // Inside foreach ($sports as $sport)
+                                $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
+                                $whatsapp_url = '';
 
-                                <!-- Sport Card -->
-                                <div class="sport-card mb-4">
-                                    <div class="row g-4 align-items-center">
+                                if ($whatsapp_raw !== '') {
+                                    // remove any non-digits (spaces, +, -, etc.)
+                                    $wa_number = preg_replace('/\D+/', '', $whatsapp_raw);
 
-                                        <!-- IMAGE -->
-                                        <?php if ($sport_img_url): ?>
-                                            <div class="col-md-5 col-sm-12">
-                                                <div class="sport-img-wrapper">
-                                                    <img src="<?php echo esc_url($sport_img_url); ?>"
-                                                        class="sport-img"
-                                                        alt="<?php echo esc_attr($sport_title); ?>">
-                                                </div>
+                                    // if number starts with 0 (e.g. 050xxxxxxx) convert to UAE intl format 97150xxxxxxx
+                                    if (strpos($wa_number, '0') === 0) {
+                                        $wa_number = '971' . substr($wa_number, 1);
+                                    }
+
+                                    // final WhatsApp URL
+                                    if ($wa_number !== '') {
+                                        $whatsapp_url = 'https://wa.me/' . $wa_number;
+                                    }
+                                }
+
+
+                                $sport_img_id  = isset($sport['image']) ? $sport['image'] : '';
+                                $sport_img_url = $sport_img_id ? wp_get_attachment_image_url($sport_img_id, 'full') : '';
+
+                                // Normalize training days labels
+                                $day_labels = [];
+                                if (! empty($days) && is_array($days)) {
+                                    foreach ($days as $d) {
+                                        if (is_array($d)) {
+                                            // if it's a repeater/choice array
+                                            $day_labels[] = isset($d['label']) ? $d['label'] : (isset($d['value']) ? $d['value'] : '');
+                                        } else {
+                                            $day_labels[] = $d;
+                                        }
+                                    }
+                                    $day_labels = array_filter($day_labels);
+                                }
+
+                        ?>
+
+                                <!-- Sport Card (new design) -->
+                                <div class="sport-card js-scroll-up">
+                                    <div class="sport-card-inner">
+
+                                        <!-- LEFT SIDE: Info -->
+                                        <div class="sport-info">
+
+                                            <!-- Jersey + Number -->
+                                            <div class="sport-jersey">
+                                                <span class="sport-number">
+                                                    <?php echo esc_html($sport_index); ?>
+                                                </span>
                                             </div>
-                                        <?php endif; ?>
 
-                                        <!-- CONTENT -->
-                                        <div class="col-md-7 col-sm-12">
-
-                                            <h4 class="sport-title text-white mb-3">
-                                                <i class="fas fa-trophy text-red ml-2"></i>
-                                                <?php echo esc_html($sport_title); ?>
-                                            </h4>
-
-                                            <?php if ($fees): ?>
-                                                <p class="mb-2 text-white">
-                                                    <i class="fas fa-money-bill-wave text-red ml-2"></i>
-                                                    <strong>الرسوم:</strong> <?php echo esc_html($fees); ?>
-                                                </p>
+                                            <!-- Name -->
+                                            <?php if ($sport_title) : ?>
+                                                <h3 class="sport-player-name">
+                                                    <?php echo esc_html($sport_title); ?>
+                                                </h3>
                                             <?php endif; ?>
 
-                                            <?php if (!empty($day_labels)): ?>
-                                                <p class="mb-3 text-white">
-                                                    <i class="fas fa-calendar-alt text-red ml-2"></i>
-                                                    <strong>الأيام:</strong> <?php echo esc_html(implode('، ', $day_labels)); ?>
-                                                </p>
-                                            <?php endif; ?>
-                                            <?php if (!empty(get_sub_field('text'))): ?>
-                                                <div class="mb-3 text-white">
+                                            <!-- Meta rows -->
+                                            <div class="sport-meta">
 
-                                                    <?php echo get_sub_field('text'); ?>
-                                                </div>
-                                            <?php endif; ?>
-
-                                            <!-- BUTTONS -->
-                                            <div class="sport-buttons">
-
-                                                <!-- Map Button -->
-                                                <?php if ($location_url): ?>
-                                                    <a href="<?php echo esc_url($location_url); ?>"
-                                                        target="_blank"
-                                                        class="btn btn-location">
-                                                        عرض الموقع على الخريطة
-                                                    </a>
+                                                <?php if ($fees) : ?>
+                                                    <div class="meta-row">
+                                                        <span class="meta-label">الرسوم:</span>
+                                                        <span class="meta-value"><?php echo esc_html($fees); ?></span>
+                                                    </div>
                                                 <?php endif; ?>
 
-                                                <!-- Booking Button -->
-                                                <button class="btn btn-book open-register"
-                                                    data-branch="<?php echo esc_attr($branch_name); ?>"
-                                                    data-sport="<?php echo esc_attr($sport_title); ?>">
-                                                    حجز
-                                                </button>
+                                                <?php if (! empty($day_labels)) : ?>
+                                                    <div class="meta-row">
+                                                        <span class="meta-label">أيام التدريب:</span>
+                                                        <span class="meta-value">
+                                                            <?php echo esc_html(implode('، ', $day_labels)); ?>
+                                                        </span>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if ($branch_name) : ?>
+                                                    <div class="meta-row">
+                                                        <span class="meta-label">الفرع:</span>
+                                                        <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                            </div>
+
+                                            <!-- Description -->
+                                            <?php if (! empty($description)) : ?>
+                                                <div class="sport-bio text-white-80">
+                                                    <?php echo wp_kses_post($description); ?>
+                                                </div>
+                                            <?php endif; ?>
+
+
+                                            <!-- Buttons -->
+                                            <div class="sport-actions">
+
+                                                <div class="sport-actions-icons">
+                                                    <?php if ($location_url) : ?>
+                                                        <a href="<?php echo esc_url($location_url); ?>"
+                                                            target="_blank"
+                                                            class="btn-location">
+                                                            <i class="fas fa-map-marker-alt"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+
+                                                    <?php if ($whatsapp_url) : ?>
+                                                        <a href="<?php echo esc_url($whatsapp_url); ?>"
+                                                            target="_blank"
+                                                            class="btn-whatsapp">
+                                                            <i class="fab fa-whatsapp"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
+
+                                                <?php if ($sport_title) : ?>
+                                                    <button class="btn btn-book open-register"
+                                                        data-branch="<?php echo esc_attr($branch_name); ?>"
+                                                        data-sport="<?php echo esc_attr($sport_title); ?>">
+                                                        <?php _e('حجز تجربة الأداء', 'main-theme');
+                                                        ?> </button>
+                                                <?php endif; ?>
 
                                             </div>
 
                                         </div>
 
+                                        <!-- RIGHT SIDE: Player image -->
+                                        <?php if ($sport_img_url) : ?>
+                                            <div class="sport-photo">
+                                                <img src="<?php echo esc_url($sport_img_url); ?>"
+                                                    alt="<?php echo esc_attr($sport_title); ?>"
+                                                    class="sport-img">
+                                            </div>
+                                        <?php endif; ?>
+
                                     </div>
                                 </div>
 
-                            <?php endwhile; ?>
-                        <?php endif; ?>
+                            <?php endforeach; // end sports foreach 
+                            ?>
+
+                        <?php endif; // has sports 
+                        ?>
 
                     </div>
+                <?php endforeach; // end branches foreach 
+                ?>
 
-                <?php endwhile; ?>
-            <?php endif; ?>
+            <?php endif; // has academy_info 
+            ?>
 
         </div>
     </section>
@@ -157,54 +235,94 @@ while (have_posts()) : the_post();
 
     <!-- ==================== JS ==================== -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener('DOMContentLoaded', function() {
 
-            const modal = new bootstrap.Modal(document.getElementById('academy-register-modal'));
+            /* ---------- Modal & AJAX ---------- */
+            const modalEl = document.getElementById('academy-register-modal');
+            let modal = null;
+
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                modal = new bootstrap.Modal(modalEl);
+            }
 
             // Open modal
-            document.querySelectorAll(".open-register").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    document.getElementById("branch_name").value = btn.dataset.branch;
-                    document.getElementById("sport_name").value = btn.dataset.sport;
-                    modal.show();
+            document.querySelectorAll('.open-register').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const branchInput = document.getElementById('branch_name');
+                    const sportInput = document.getElementById('sport_name');
+
+                    if (branchInput) branchInput.value = this.dataset.branch || '';
+                    if (sportInput) sportInput.value = this.dataset.sport || '';
+
+                    if (modal) {
+                        modal.show();
+                    }
                 });
             });
 
             // Submit to backend
-            const form = document.getElementById("academy-register-form");
+            const form = document.getElementById('academy-register-form');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
 
-            form.addEventListener("submit", async (e) => {
-                e.preventDefault();
+                    const data = new FormData(form);
 
-                let data = new FormData(form);
+                    const response = await fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
+                        method: 'POST',
+                        body: data
+                    });
 
-                const response = await fetch("<?php echo admin_url('admin-ajax.php'); ?>", {
-                    method: "POST",
-                    body: data
+                    let result = {};
+                    try {
+                        result = await response.json();
+                    } catch (err) {
+                        result = {
+                            success: false,
+                            message: 'حدث خطأ، حاول مرة أخرى.'
+                        };
+                    }
+
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: result.success ? 'success' : 'error',
+                            title: result.message || '',
+                            confirmButtonText: 'تم'
+                        });
+                    }
+
+                    if (result.success) {
+                        form.reset();
+                        if (modal) modal.hide();
+                    }
+                });
+            }
+
+            /* ---------- Scroll-up animation ---------- */
+            const scrollElements = document.querySelectorAll('.js-scroll-up');
+
+            if ('IntersectionObserver' in window && scrollElements.length) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            obs.unobserve(entry.target); // animate once
+                        }
+                    });
+                }, {
+                    threshold: 0.15
                 });
 
-                const result = await response.json();
-
-                Swal.fire({
-                    icon: result.success ? "success" : "error",
-                    title: result.message,
-                    confirmButtonText: "تم"
-                });
-
-                if (result.success) {
-                    form.reset();
-                    modal.hide();
-                }
-            });
+                scrollElements.forEach(el => observer.observe(el));
+            } else {
+                // Fallback: show all
+                scrollElements.forEach(el => el.classList.add('is-visible'));
+            }
         });
     </script>
 
-
-
 <?php
 endwhile;
-?>
 
-<?php
 get_footer();
 ?>

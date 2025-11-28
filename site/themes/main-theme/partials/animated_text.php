@@ -16,7 +16,7 @@ $subtitle  = trim((string) get_sub_field('repeater_text')) ?: '';
 $dir       = is_rtl() ? 'rtl' : 'ltr';
 ?>
 
-<section class="animated-text testimonials" dir="<?php echo esc_attr($dir); ?>"
+<section class="animated-text testimonials js-scroll-up" dir="<?php echo esc_attr($dir); ?>"
     style="--anim-bg: <?php echo esc_attr($bg); ?>; --anim-title: <?php echo esc_attr($titleCol); ?>; --anim-text: <?php echo esc_attr($textCol); ?>;">
 
     <div class="container">

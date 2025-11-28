@@ -12,7 +12,7 @@ if (get_sub_field('visible')):
     $title_color = get_sub_field('title_color') ?: '#FFD700';
 ?>
 
-    <section class="ls-tryouts-slider" style="background: <?php echo esc_attr($bg_color); ?>;">
+    <section class="ls-tryouts-slider js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
         <div class="container">
 
             <!-- SECTION HEAD -->

@@ -21,7 +21,7 @@ if (get_sub_field('visible')) :
     ]);
 ?>
 
-    <section class="ls-sports-activities" style="background: <?php echo esc_attr($bg_color); ?>;">
+    <section class="ls-sports-activities js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
         <div class="container-fluid px-0">
 
             <?php if ($title || $subtitle): ?>

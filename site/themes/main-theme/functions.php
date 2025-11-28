@@ -176,6 +176,19 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
+    $scroll_rel = '/assets/js/scroll-up.js';
+    $scroll_abs = get_stylesheet_directory() . $scroll_rel;
+
+    if (file_exists($scroll_abs)) {
+        wp_enqueue_script(
+            'page-banner',
+            get_stylesheet_directory_uri() . $scroll_rel,
+            ['leaders-swiper-js'], // Swiper must load first
+            filemtime($scroll_abs),
+            true
+        );
+    }
+
 
 
 

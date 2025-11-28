@@ -21,7 +21,7 @@ $page_sub    = 'تعرف على كافة برامج التدريب الرياض�
 </section>
 
 <!-- ==================== SPORTS ACTIVITIES GRID ==================== -->
-<section class="ls-sports-activities" style="background: <?php echo esc_attr($bg_color); ?>;">
+<section class="ls-sports-activities js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
     <div class="container">
 
         <div class="row justify-content-center">
