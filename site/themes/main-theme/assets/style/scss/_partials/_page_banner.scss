@@ -3,7 +3,7 @@
 
     .banner-wrapper {
         position: relative;
-        min-height: 50vh;
+        min-height: 70vh !important;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -29,7 +29,7 @@
         font-weight: 700;
         color: $gold;
         margin-bottom: 15px;
-        font-family: $tajawal;
+         
     }
 
     .banner-text {
@@ -38,8 +38,7 @@
         opacity: .85;
         max-width: 760px;
         margin: 0 auto;
-        font-family: $tajawal;
-    }
+     }
 
     @include MaxQuery($sm) {
         .banner-title { font-size: 32px; }

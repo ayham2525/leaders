@@ -5,7 +5,7 @@
 /* BANNER */
 .activity-banner {
   position: relative;
-  height: 55vh;
+  height: 70vh;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -18,11 +18,20 @@
   }
 
   .activity-title-page {
-    position: relative;
-    z-index: 5;
-    color: #fff;
-    font-size: 3rem;
-    font-weight: 800;
+     position: relative;
+  z-index: 3;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 800;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 24px;
+  display: flex;
+  align-items: center;      
+  justify-content: center;   
+  text-align: center;
+  width: fit-content;        
+  margin: 0 auto 20px;  
+  line-height: 1.2;     
   }
 }
 
