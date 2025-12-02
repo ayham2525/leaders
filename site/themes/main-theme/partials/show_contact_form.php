@@ -7,7 +7,7 @@ $title = get_sub_field('title');
 $form  = get_sub_field('form_code');
 ?>
 
-<section class="show_contact_form js-scroll-up py-5 pt-0">
+<section class="show_contact_form js-scroll-up">
     <div class="container">
         <div class="row align-items-start">
 
