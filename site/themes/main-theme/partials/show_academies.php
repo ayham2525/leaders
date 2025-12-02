@@ -126,7 +126,7 @@ if (function_exists('get_sub_field') && get_sub_field('visible')) :
                                 <div class="academy-body">
 
 
-                                    <h3 class="academy-title">
+                                    <h3 class="academy-title" style="background-color:transparent">
                                         <a href="<?php the_permalink(); ?>">
                                             <?php the_title(); ?>
                                         </a>
@@ -134,7 +134,9 @@ if (function_exists('get_sub_field') && get_sub_field('visible')) :
 
                                     <?php if (!empty($excerpt)) : ?>
                                         <p class="academy-excerpt">
-                                            <?php echo wp_kses_post($excerpt); ?>
+                                            <a href="<?php the_permalink(); ?>">
+                                                <?php echo wp_kses_post($excerpt); ?>
+                                            </a>
                                         </p>
                                     <?php endif; ?>
                                 </div>

@@ -106,8 +106,11 @@ $bg_color    = "#0E0E0E"; // Black
                                 </h3>
 
                                 <?php if (!empty($excerpt)) : ?>
+
                                     <p class="academy-excerpt">
-                                        <?php echo wp_kses_post($excerpt); ?>
+                                        <a style="background-color:transparent" href="<?php the_permalink(); ?>">
+                                            <?php echo wp_kses_post($excerpt); ?>
+                                        </a>
                                     </p>
                                 <?php endif; ?>
 
