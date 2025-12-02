@@ -297,3 +297,84 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ==== Arabic: RTL inputs & placeholders in academy register form ==== */
+html[lang="ar"] #academy-register-form input,
+html[lang="ar"] #academy-register-form textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Placeholder alignment (modern browsers) */
+html[lang="ar"] #academy-register-form input::placeholder,
+html[lang="ar"] #academy-register-form textarea::placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+/* WebKit (Safari / old Chrome) */
+html[lang="ar"] #academy-register-form input::-webkit-input-placeholder,
+html[lang="ar"] #academy-register-form textarea::-webkit-input-placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ==== English: LTR (explicit, in case you want to force it) ==== */
+html[lang="en"] #academy-register-form input,
+html[lang="en"] #academy-register-form textarea {
+    direction: ltr;
+    text-align: left;
+}
+
+html[lang="en"] #academy-register-form input::placeholder,
+html[lang="en"] #academy-register-form textarea::placeholder {
+    direction: ltr;
+    text-align: left;
+}
+
+html[lang="en"] #academy-register-form input::-webkit-input-placeholder,
+html[lang="en"] #academy-register-form textarea::-webkit-input-placeholder {
+    direction: ltr;
+    text-align: left;
+}
+
+
+/* ==== Arabic: RTL inputs & placeholders in activity register form ==== */
+html[lang="ar"] #activity-register-form input,
+html[lang="ar"] #activity-register-form textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Placeholder alignment (modern browsers) */
+html[lang="ar"] #activity-register-form input::placeholder,
+html[lang="ar"] #activity-register-form textarea::placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+/* WebKit (Safari / older Chrome) */
+html[lang="ar"] #activity-register-form input::-webkit-input-placeholder,
+html[lang="ar"] #activity-register-form textarea::-webkit-input-placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ==== English: LTR ==== */
+html[lang="en"] #activity-register-form input,
+html[lang="en"] #activity-register-form textarea {
+    direction: ltr;
+    text-align: left;
+}
+
+html[lang="en"] #activity-register-form input::placeholder,
+html[lang="en"] #activity-register-form textarea::placeholder {
+    direction: ltr;
+    text-align: left;
+}
+
+html[lang="en"] #activity-register-form input::-webkit-input-placeholder,
+html[lang="en"] #activity-register-form textarea::-webkit-input-placeholder {
+    direction: ltr;
+    text-align: left;
+}

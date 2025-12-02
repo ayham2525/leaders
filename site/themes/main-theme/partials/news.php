@@ -25,13 +25,15 @@ $section_title = get_sub_field('title') ?: __('Latest News', 'wp_bootstrap_start
 $is_rtl = is_rtl();
 $dir    = $is_rtl ? 'rtl' : 'ltr';
 
-// Query 5 posts only
+// Query 5 latest posts
 $args = [
     'post_type'           => 'post',
     'posts_per_page'      => 5,
     'post_status'         => 'publish',
     'ignore_sticky_posts' => true,
     'no_found_rows'       => true,
+    'orderby'             => 'date',
+    'order'               => 'DESC', // latest first
 ];
 
 // Multilingual
@@ -68,11 +70,18 @@ if (!$q->have_posts()) {
         <?php if ($q->have_posts()) : ?>
 
             <?php
-            // نحول النتائج إلى مصفوفة ثم نفصل الكبير عن الصغار
-            $posts      = $q->posts;
-            $big_post   = array_pop($posts);  // آخر واحد = الكبير
-            $small_posts = $posts;
             global $post;
+
+            // نحول النتائج إلى مصفوفة ثم نفصل الكبير عن الصغار
+            $posts       = $q->posts;
+            $big_post    = null;
+            $small_posts = [];
+
+            if (!empty($posts)) {
+                // أول خبر (الأحدث) = الكبير
+                $big_post    = array_shift($posts);
+                $small_posts = $posts; // الباقي للصغار
+            }
             ?>
 
             <div class="ls-news__grid">
@@ -128,7 +137,7 @@ if (!$q->have_posts()) {
                 </div><!-- /.ls-news__left -->
 
 
-                <!-- RIGHT: big post (last one) -->
+                <!-- RIGHT: big post (latest one) -->
                 <?php if ($big_post) : ?>
                     <?php
                     $post = $big_post;

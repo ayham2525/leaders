@@ -221,7 +221,24 @@ while (have_posts()) : the_post();
 
                     <input type="text" name="name" class="form-control mb-3" placeholder="الاسم الكامل" required>
                     <input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required>
-                    <input type="tel" name="phone" class="form-control mb-3" placeholder="رقم الهاتف" required>
+
+                    <!-- Phone with fixed 971 prefix -->
+                    <div class="mb-3">
+                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
+                        <div class="input-group">
+                            <span class="input-group-text">+971</span>
+                            <input
+                                type="tel"
+                                name="phone_suffix"
+                                class="form-control"
+                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
+                                inputmode="tel"
+                                dir="ltr"
+                                required>
+                        </div>
+                        <input type="hidden" name="phone" id="full_phone">
+                    </div>
+
                     <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
                     <input type="date" name="dob" class="form-control mb-4" required placeholder="تاريخ الميلاد">
 
@@ -267,6 +284,19 @@ while (have_posts()) : the_post();
             if (form) {
                 form.addEventListener('submit', async function(e) {
                     e.preventDefault();
+
+                    // Build full phone: 971 + suffix digits
+                    const suffixInput = form.querySelector('input[name="phone_suffix"]');
+                    const fullPhone = form.querySelector('#full_phone');
+
+                    if (suffixInput && fullPhone) {
+                        let suffix = suffixInput.value || '';
+                        // keep only digits
+                        suffix = suffix.replace(/\D+/g, '');
+                        // remove any leading zeros just in case
+                        suffix = suffix.replace(/^0+/, '');
+                        fullPhone.value = suffix ? ('971' + suffix) : '';
+                    }
 
                     const data = new FormData(form);
 

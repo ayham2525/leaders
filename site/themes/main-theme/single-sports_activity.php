@@ -216,7 +216,25 @@ while (have_posts()) : the_post();
 
                     <input type="text" name="name" class="form-control mb-3" placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
                     <input type="email" name="email" class="form-control mb-3" placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
-                    <input type="tel" name="phone" class="form-control mb-3" placeholder="<?php esc_attr_e('رقم الهاتف', 'main-theme'); ?>" required>
+
+                    <!-- Phone with fixed 971 prefix -->
+                    <div class="mb-3">
+                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
+                        <div class="input-group">
+                            <span class="input-group-text">+971</span>
+                            <input
+                                type="tel"
+                                name="phone_suffix"
+                                class="form-control"
+                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
+                                inputmode="tel"
+                                dir="ltr"
+                                required>
+                        </div>
+                        <input type="hidden" name="phone" id="activity_full_phone">
+                    </div>
+
+                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
                     <input type="date" name="dob" class="form-control mb-4" required>
 
                     <button type="submit" class="btn btn-red w-100">
@@ -257,6 +275,19 @@ while (have_posts()) : the_post();
             if (form) {
                 form.addEventListener("submit", async (e) => {
                     e.preventDefault();
+
+                    // Build full phone: 971 + suffix digits
+                    const suffixInput = form.querySelector('input[name="phone_suffix"]');
+                    const fullPhone = form.querySelector('#activity_full_phone');
+
+                    if (suffixInput && fullPhone) {
+                        let suffix = suffixInput.value || '';
+                        // keep only digits
+                        suffix = suffix.replace(/\D+/g, '');
+                        // remove leading zeros
+                        suffix = suffix.replace(/^0+/, '');
+                        fullPhone.value = suffix ? ('971' + suffix) : '';
+                    }
 
                     const data = new FormData(form);
 
