@@ -2,10 +2,15 @@
 get_header();
 
 while (have_posts()) : the_post();
-    $banner = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    $banner          = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    $activities_info = get_field('activities_info'); // main repeater (branches)
+
+    // Detect if we are on a specific branch via ?branch=INDEX
+    $selected_branch_index = isset($_GET['branch']) ? intval($_GET['branch']) : null;
+    $has_branches          = !empty($activities_info) && is_array($activities_info);
 ?>
 
-    <!-- ==================== BANNER (reuse academy banner styles) ==================== -->
+    <!-- ==================== BANNER ==================== -->
     <section class="academy-banner" style="background-image:url('<?php echo esc_url($banner); ?>');">
         <div class="overlay"></div>
         <div class="container text-center">
@@ -14,45 +19,110 @@ while (have_posts()) : the_post();
         </div>
     </section>
 
-    <!-- ==================== ACTIVITIES DETAILS (reuse academy layout) ==================== -->
+    <!-- ==================== ACTIVITIES / BRANCHES ==================== -->
     <section class="academy-details py-5">
         <div class="container">
 
-            <?php if (have_rows('activities_info')): ?>
-                <?php while (have_rows('activities_info')): the_row();
+            <?php if ($has_branches) : ?>
 
-                    $branch_name  = get_sub_field('branch');
-                    $location_url = get_sub_field('location');
+                <?php
+                // ============= MODE 1: LIST BRANCHES CARDS =============
+                if ($selected_branch_index === null || !isset($activities_info[$selected_branch_index])) :
                 ?>
+
+                    <div class="row g-4 justify-content-center">
+                        <?php foreach ($activities_info as $index => $branch) :
+
+                            $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
+                            $location_url = isset($branch['location']) ? $branch['location'] : '';
+
+                            // Link to branch details on same page ?branch=index
+                            $branch_link = add_query_arg('branch', $index, get_permalink());
+                        ?>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="academy-branch-card js-scroll-up">
+
+                                    <div class="academy-branch-card__icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+
+                                    <h2 class="branch-title mb-2">
+                                        <?php echo esc_html($branch_name ?: __('فرع الفعالية', 'main-theme')); ?>
+                                    </h2>
+
+                                    <?php if ($location_url) : ?>
+                                        <a href="<?php echo esc_url($location_url); ?>"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="branch-location-link mb-3">
+                                            <i class="fas fa-location-arrow"></i>
+                                            <?php _e('عرض الموقع على الخريطة', 'main-theme'); ?>
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <a href="<?php echo esc_url($branch_link); ?>"
+                                        class="btn btn-red w-100 mt-auto">
+                                        <?php _e('عرض الرياضات والتسجيل', 'main-theme'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                <?php
+                // ============= MODE 2: BRANCH VIEW (SHOW SPORTS + REGISTER) =============
+                else :
+
+                    $branch       = $activities_info[$selected_branch_index];
+                    $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
+                    $location_url = isset($branch['location']) ? $branch['location'] : '';
+                    $sports       = isset($branch['sports'])   ? $branch['sports']   : [];
+                ?>
+
                     <div class="academy-branch mb-5 js-scroll-up">
 
-                        <!-- Branch Title -->
-                        <?php if ($branch_name): ?>
-                            <h2 class="branch-title text-white mb-4">
-                                <i class="fas fa-map-marker-alt text-red ml-2"></i>
-                                <?php echo esc_html($branch_name); ?>
+                        <div class="academy-branch__head d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                            <h2 class="branch-title mb-0">
+                                <i class="fas fa-map-marker-alt text-red ms-2"></i>
+                                <?php echo esc_html($branch_name ?: __('فرع الفعالية', 'main-theme')); ?>
                             </h2>
-                        <?php endif; ?>
 
-                        <?php if (have_rows('sports')): ?>
-                            <?php
-                            $sport_index = 0;
-                            while (have_rows('sports')): the_row();
-                                $sport_index++;
+                            <div class="d-flex align-items-center gap-2">
+                                <a href="<?php echo esc_url(remove_query_arg('branch')); ?>"
+                                    class="btn btn-outline-light btn-sm">
+                                    <?php _e('العودة إلى جميع الفروع', 'main-theme'); ?>
+                                </a>
 
-                                $sport_title = get_sub_field('sport_title');
-                                $fees        = get_sub_field('fees');
-                                $days        = get_sub_field('training_days');
-                                $description = get_sub_field('text');
+                                <?php if ($location_url) : ?>
+                                    <a href="<?php echo esc_url($location_url); ?>"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="btn btn-light btn-sm">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <?php _e('عرض الموقع', 'main-theme'); ?>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <?php if (!empty($sports) && is_array($sports)) :
+
+                            foreach ($sports as $sport) :
+
+                                $sport_title = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
+                                $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
+                                $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
+                                $description = isset($sport['text'])          ? $sport['text']          : '';
+                                $link = isset($sport['link'])          ? $sport['link']          : '';
 
                                 // WhatsApp (raw from ACF)
-                                $whatsapp_raw = get_sub_field('whatsapp');
+                                $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
                                 $whatsapp_url = '';
                                 $wa_number    = ''; // normalized WA number used for API
 
                                 if (!empty($whatsapp_raw)) {
                                     // Trim & remove any non-digits (spaces, +, -, etc.)
-                                    $wa_number_digits = preg_replace('/\D+/', '', trim($whatsapp_raw));
+                                    $wa_number_digits = preg_replace('/\D+/', '', $whatsapp_raw);
 
                                     if ($wa_number_digits !== '') {
                                         // If starts with 0 (e.g. 050xxxxxxx) => 97150xxxxxxx
@@ -64,13 +134,12 @@ while (have_posts()) : the_post();
                                     }
                                 }
 
-                                // Image (simple img tag, like academy cards)
-                                $image         = get_sub_field('image');
+                                // Image
                                 $sport_img_url = '';
-                                if (!empty($image['id'])) {
-                                    $src = wp_get_attachment_image_src($image['id'], 'full');
-                                    if (!empty($src[0])) {
-                                        $sport_img_url = $src[0];
+                                if (!empty($sport['image'])) {
+                                    $sport_img_id  = is_array($sport['image']) ? ($sport['image']['id'] ?? 0) : $sport['image'];
+                                    if ($sport_img_id) {
+                                        $sport_img_url = wp_get_attachment_image_url($sport_img_id, 'full');
                                     }
                                 }
 
@@ -88,16 +157,16 @@ while (have_posts()) : the_post();
                                     }
                                     $day_labels = array_filter($day_labels);
                                 }
-                            ?>
+                        ?>
 
-                                <!-- Sport Card – same structure as academy page -->
+                                <!-- Sport Card – same structure as academy branch view -->
                                 <div class="sport-card js-scroll-up">
                                     <div class="sport-card-inner">
 
                                         <!-- LEFT SIDE: Info -->
                                         <div class="sport-info">
 
-                                            <!-- Jersey + Number -->
+                                            <!-- Jersey -->
                                             <div class="sport-jersey"></div>
 
                                             <!-- Name -->
@@ -142,7 +211,7 @@ while (have_posts()) : the_post();
                                                 </div>
                                             <?php endif; ?>
 
-                                            <!-- Buttons (same layout: icons row + button below) -->
+                                            <!-- Buttons -->
                                             <div class="sport-actions">
 
                                                 <div class="sport-actions-icons">
@@ -153,6 +222,17 @@ while (have_posts()) : the_post();
                                                             <i class="fas fa-map-marker-alt"></i>
                                                         </a>
                                                     <?php endif; ?>
+                                                    <?php if ($link): ?>
+                                                        <a href="<?php echo esc_url($link); ?>"
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            class="btn-share"
+                                                            data-copy="<?php echo esc_attr($link); ?>"
+                                                            title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                            <i class="fa fa-share"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+
 
                                                     <?php if ($whatsapp_url): ?>
                                                         <a href="<?php echo esc_url($whatsapp_url); ?>"
@@ -169,7 +249,7 @@ while (have_posts()) : the_post();
                                                         data-branch="<?php echo esc_attr($branch_name); ?>"
                                                         data-sport="<?php echo esc_attr($sport_title); ?>"
                                                         data-whatsapp="<?php echo esc_attr($wa_number); ?>">
-                                                        <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
+                                                        <?php _e('حجز الفعالية الرياضية', 'main-theme'); ?>
                                                     </button>
                                                 <?php endif; ?>
 
@@ -189,12 +269,24 @@ while (have_posts()) : the_post();
                                     </div>
                                 </div>
 
-                            <?php endwhile; ?>
+                            <?php
+                            endforeach; // end sports foreach
+                        else :
+                            ?>
+                            <p class="text-white-80">
+                                <?php _e('لا توجد رياضات مضافة لهذا الفرع حتى الآن.', 'main-theme'); ?>
+                            </p>
                         <?php endif; ?>
 
-                    </div>
+                    </div><!-- /.academy-branch -->
 
-                <?php endwhile; ?>
+                <?php endif; // end mode 
+                ?>
+
+            <?php else : ?>
+                <p class="text-center text-white-80">
+                    <?php _e('لا توجد فروع مضافة لهذه الفعالية حالياً.', 'main-theme'); ?>
+                </p>
             <?php endif; ?>
 
         </div>
@@ -214,8 +306,10 @@ while (have_posts()) : the_post();
                     <input type="hidden" name="sport" id="activity_sport_name">
                     <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
 
-                    <input type="text" name="name" class="form-control mb-3" placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
-                    <input type="email" name="email" class="form-control mb-3" placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
+                    <input type="text" name="name" class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
+                    <input type="email" name="email" class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
 
                     <!-- Phone with fixed 971 prefix -->
                     <div class="mb-3">
@@ -249,6 +343,13 @@ while (have_posts()) : the_post();
     <!-- ==================== JS / AJAX ==================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+
+            const ajaxUrl = "<?php echo esc_url(admin_url('admin-ajax.php')); ?>";
+            const genericError = "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>";
+            const okLabel = "<?php echo esc_js(__('تم', 'main-theme')); ?>";
+            const copySuccessMsg = "<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>";
+            const copyFailMsg = "<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>";
+            const connErrorMsg = "<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>";
 
             const modalEl = document.getElementById('activity-register-modal');
             const modal = modalEl && typeof bootstrap !== 'undefined' ?
@@ -291,10 +392,25 @@ while (have_posts()) : the_post();
 
                     const data = new FormData(form);
 
-                    const response = await fetch("<?php echo esc_url(admin_url('admin-ajax.php')); ?>", {
-                        method: "POST",
-                        body: data
-                    });
+                    let response;
+                    try {
+                        response = await fetch(ajaxUrl, {
+                            method: "POST",
+                            body: data,
+                            credentials: "same-origin"
+                        });
+                    } catch (err) {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: "error",
+                                title: connErrorMsg,
+                                confirmButtonText: okLabel
+                            });
+                        } else {
+                            alert(connErrorMsg);
+                        }
+                        return;
+                    }
 
                     let result = {};
                     try {
@@ -302,7 +418,7 @@ while (have_posts()) : the_post();
                     } catch (err) {
                         result = {
                             success: false,
-                            message: "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>"
+                            message: genericError
                         };
                     }
 
@@ -310,8 +426,10 @@ while (have_posts()) : the_post();
                         Swal.fire({
                             icon: result.success ? "success" : "error",
                             title: result.message || "",
-                            confirmButtonText: "<?php echo esc_js(__('تم', 'main-theme')); ?>"
+                            confirmButtonText: okLabel
                         });
+                    } else {
+                        alert(result.message || (result.success ? okLabel : genericError));
                     }
 
                     if (result.success) {
@@ -321,7 +439,7 @@ while (have_posts()) : the_post();
                 });
             }
 
-            // Scroll-up animation (reuse)
+            // Scroll-up animation
             const scrollElements = document.querySelectorAll('.js-scroll-up');
 
             if ('IntersectionObserver' in window && scrollElements.length) {
@@ -340,11 +458,69 @@ while (have_posts()) : the_post();
             } else {
                 scrollElements.forEach(el => el.classList.add('is-visible'));
             }
+
+            // Copy to clipboard on share click
+            document.querySelectorAll('.btn-share').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const textToCopy = this.getAttribute('data-copy') || '';
+                    if (!textToCopy) return;
+
+                    const showSuccess = () => {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: copySuccessMsg,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            alert(copySuccessMsg);
+                        }
+                    };
+
+                    const showFail = () => {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: copyFailMsg,
+                                showConfirmButton: true
+                            });
+                        } else {
+                            alert(copyFailMsg);
+                        }
+                    };
+
+                    // Modern API
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(textToCopy)
+                            .then(showSuccess)
+                            .catch(showFail);
+                    } else {
+                        // Fallback for older browsers
+                        const temp = document.createElement('textarea');
+                        temp.value = textToCopy;
+                        temp.setAttribute('readonly', '');
+                        temp.style.position = 'absolute';
+                        temp.style.left = '-9999px';
+                        document.body.appendChild(temp);
+                        temp.select();
+                        try {
+                            document.execCommand('copy');
+                            showSuccess();
+                        } catch (err) {
+                            showFail();
+                        }
+                        document.body.removeChild(temp);
+                    }
+                });
+            });
         });
     </script>
+
 
 <?php
 endwhile;
 
 get_footer();
-?>

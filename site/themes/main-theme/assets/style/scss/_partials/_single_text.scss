@@ -1,0 +1,39 @@
+.single_text {
+    position: relative;
+    padding: clamp(4rem, 6vw, 6.5rem) 0;
+    overflow: hidden;
+
+    // Background (image + dark overlay)
+        background: #f5f5f5 url('../img/player-bg.jpg') center/cover repeat;
+
+    .text {
+        
+        margin-inline: auto;
+ 
+        //font-size: clamp(1.05rem, 0.98rem + 0.25vw, 1.18rem);
+        line-height: 1.9;
+        color: $black;
+    }
+}
+
+/* Direction-aware alignment */
+html[dir="rtl"] .single_text .text {
+    text-align: right;
+}
+
+html[dir="ltr"] .single_text .text {
+    text-align: left;
+}
+
+/* Mobile tweaks */
+@media (max-width: 767.98px) {
+    .single_text {
+        padding: 3.5rem 0;
+    }
+
+    .single_text .text {
+        padding: 1.75rem 1.5rem;
+        border-radius: 18px;
+        font-size: 1rem;
+    }
+}

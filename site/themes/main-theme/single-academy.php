@@ -4,6 +4,10 @@ get_header();
 while (have_posts()) : the_post();
     $banner       = get_the_post_thumbnail_url(get_the_ID(), 'full');
     $academy_info = get_field('academy_info'); // main repeater
+
+    // Detect if we are on a specific branch page via ?branch=INDEX
+    $selected_branch_index = isset($_GET['branch']) ? intval($_GET['branch']) : null;
+    $has_branches          = !empty($academy_info) && is_array($academy_info);
 ?>
 
     <!-- ==================== البانر ==================== -->
@@ -15,40 +19,101 @@ while (have_posts()) : the_post();
         </div>
     </section>
 
-    <!-- ==================== تفاصيل الأكاديمية ==================== -->
+    <!-- ==================== تفاصيل الأكاديمية / الفروع ==================== -->
     <section class="academy-details py-5">
         <div class="container">
 
-            <?php if (! empty($academy_info) && is_array($academy_info)) : ?>
+            <?php if ($has_branches) : ?>
 
-                <?php foreach ($academy_info as $branch) :
+                <?php
+                // ============= MODE 1: ACADEMY VIEW (LIST BRANCHES ONLY) =============
+                if ($selected_branch_index === null || !isset($academy_info[$selected_branch_index])) :
+                ?>
 
+                    <div class="row g-4 justify-content-center">
+                        <?php foreach ($academy_info as $index => $branch) :
+
+                            $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
+                            $location_url = isset($branch['location']) ? $branch['location'] : '';
+
+                            // Link to branch details on same academy page ?branch=index
+                            $branch_link = add_query_arg('branch', $index, get_permalink());
+                        ?>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="academy-branch-card js-scroll-up">
+
+                                    <div class="academy-branch-card__icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+
+                                    <h2 class="branch-title mb-2">
+                                        <?php echo esc_html($branch_name ?: __('فرع الأكاديمية', 'main-theme')); ?>
+                                    </h2>
+
+                                    <?php if ($location_url) : ?>
+                                        <a href="<?php echo esc_url($location_url); ?>"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="branch-location-link mb-3">
+                                            <i class="fas fa-location-arrow"></i>
+                                            <?php _e('عرض الموقع على الخريطة', 'main-theme'); ?>
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <a href="<?php echo esc_url($branch_link); ?>"
+                                        class="btn btn-red w-100 mt-auto">
+                                        <?php _e('عرض الرياضات والتسجيل', 'main-theme'); ?>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                <?php
+                // ============= MODE 2: BRANCH VIEW (SHOW SPORTS + REGISTER) =============
+                else :
+                    $branch       = $academy_info[$selected_branch_index];
                     $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
                     $location_url = isset($branch['location']) ? $branch['location'] : '';
                     $sports       = isset($branch['sports'])   ? $branch['sports']   : [];
-
                 ?>
+
                     <div class="academy-branch mb-5 js-scroll-up">
 
-                        <!-- Branch Title -->
-                        <?php if ($branch_name) : ?>
-                            <h2 class="branch-title text-white mb-4">
-                                <i class="fas fa-map-marker-alt text-red ml-2"></i>
-                                <?php echo esc_html($branch_name); ?>
+                        <div class="academy-branch__head d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                            <h2 class="branch-title mb-0">
+                                <i class="fas fa-map-marker-alt text-red ms-2"></i>
+                                <?php echo esc_html($branch_name ?: __('فرع الأكاديمية', 'main-theme')); ?>
                             </h2>
-                        <?php endif; ?>
 
-                        <?php if (! empty($sports) && is_array($sports)) :
+                            <div class="d-flex align-items-center gap-2">
+                                <a href="<?php echo esc_url(remove_query_arg('branch')); ?>"
+                                    class="btn btn-outline-light btn-sm">
+                                    <?php _e('العودة إلى جميع الفروع', 'main-theme'); ?>
+                                </a>
 
-                            $sport_index = 0;
+                                <?php if ($location_url) : ?>
+                                    <a href="<?php echo esc_url($location_url); ?>"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="btn btn-light btn-sm">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <?php _e('عرض الموقع', 'main-theme'); ?>
+                                    </a>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+
+                        <?php if (!empty($sports) && is_array($sports)) :
 
                             foreach ($sports as $sport) :
-                                $sport_index++;
 
                                 $sport_title = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
                                 $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
                                 $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
                                 $description = isset($sport['text'])          ? $sport['text']          : '';
+                                $link = isset($sport['link'])          ? $sport['link']          : '';
 
                                 // WhatsApp (raw from ACF)
                                 $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
@@ -74,7 +139,7 @@ while (have_posts()) : the_post();
 
                                 // Normalize training days labels
                                 $day_labels = [];
-                                if (! empty($days) && is_array($days)) {
+                                if (!empty($days) && is_array($days)) {
                                     foreach ($days as $d) {
                                         if (is_array($d)) {
                                             $day_labels[] = isset($d['label']) ? $d['label'] : (isset($d['value']) ? $d['value'] : '');
@@ -86,7 +151,7 @@ while (have_posts()) : the_post();
                                 }
                         ?>
 
-                                <!-- Sport Card (new design) -->
+                                <!-- Sport Card (branch view) -->
                                 <div class="sport-card js-scroll-up">
                                     <div class="sport-card-inner">
 
@@ -108,14 +173,14 @@ while (have_posts()) : the_post();
 
                                                 <?php if ($fees) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label">الرسوم:</span>
+                                                        <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
                                                         <span class="meta-value"><?php echo esc_html($fees); ?></span>
                                                     </div>
                                                 <?php endif; ?>
 
-                                                <?php if (! empty($day_labels)) : ?>
+                                                <?php if (!empty($day_labels)) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label">أيام التدريب:</span>
+                                                        <span class="meta-label"><?php _e('أيام التدريب:', 'main-theme'); ?></span>
                                                         <span class="meta-value">
                                                             <?php echo esc_html(implode('، ', $day_labels)); ?>
                                                         </span>
@@ -124,7 +189,7 @@ while (have_posts()) : the_post();
 
                                                 <?php if ($branch_name) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label">الفرع:</span>
+                                                        <span class="meta-label"><?php _e('الفرع:', 'main-theme'); ?></span>
                                                         <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
                                                     </div>
                                                 <?php endif; ?>
@@ -132,12 +197,11 @@ while (have_posts()) : the_post();
                                             </div>
 
                                             <!-- Description -->
-                                            <?php if (! empty($description)) : ?>
+                                            <?php if (!empty($description)) : ?>
                                                 <div class="sport-bio text-white-80">
                                                     <?php echo wp_kses_post($description); ?>
                                                 </div>
                                             <?php endif; ?>
-
 
                                             <!-- Buttons -->
                                             <div class="sport-actions">
@@ -148,6 +212,16 @@ while (have_posts()) : the_post();
                                                             target="_blank"
                                                             class="btn-location" rel="noopener">
                                                             <i class="fas fa-map-marker-alt"></i>
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <?php if ($link): ?>
+                                                        <a href="<?php echo esc_url($link); ?>"
+                                                            target="_blank"
+                                                            rel="noopener"
+                                                            class="btn-share"
+                                                            data-copy="<?php echo esc_attr($link); ?>"
+                                                            title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                            <i class="fa fa-share"></i>
                                                         </a>
                                                     <?php endif; ?>
 
@@ -187,29 +261,36 @@ while (have_posts()) : the_post();
                                     </div>
                                 </div>
 
-                            <?php endforeach; // end sports foreach 
+                            <?php
+                            endforeach; // end sports foreach
+                        else :
                             ?>
+                            <p class="text-white-80">
+                                <?php _e('لا توجد رياضات مضافة لهذا الفرع حتى الآن.', 'main-theme'); ?>
+                            </p>
+                        <?php endif; ?>
 
-                        <?php endif; // has sports 
-                        ?>
+                    </div><!-- /.academy-branch -->
 
-                    </div>
-                <?php endforeach; // end branches foreach 
+                <?php endif; // end branch vs academy mode 
                 ?>
 
-            <?php endif; // has academy_info 
-            ?>
+            <?php else : ?>
+                <p class="text-center text-white-80">
+                    <?php _e('لا توجد فروع مضافة لهذه الأكاديمية حالياً.', 'main-theme'); ?>
+                </p>
+            <?php endif; ?>
 
         </div>
     </section>
 
 
-    <!-- ==================== MODAL ==================== -->
+    <!-- ==================== MODAL (used in branch view) ==================== -->
     <div id="academy-register-modal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">
 
-                <h3 class="text-center text-red mb-3">تسجيل في الأكاديمية</h3>
+                <h3 class="text-center text-red mb-3"><?php _e('تسجيل في الأكاديمية', 'main-theme'); ?></h3>
 
                 <form id="academy-register-form" novalidate>
                     <input type="hidden" name="action" value="submit_academy_registration">
@@ -219,8 +300,8 @@ while (have_posts()) : the_post();
                     <input type="hidden" name="academy_whatsapp" id="academy_whatsapp">
                     <input type="hidden" name="security" value="<?php echo esc_attr(wp_create_nonce('academy_register_nonce')); ?>">
 
-                    <input type="text" name="name" class="form-control mb-3" placeholder="الاسم الكامل" required>
-                    <input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required>
+                    <input type="text" name="name" class="form-control mb-3" placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
+                    <input type="email" name="email" class="form-control mb-3" placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
 
                     <!-- Phone with fixed 971 prefix -->
                     <div class="mb-3">
@@ -240,9 +321,11 @@ while (have_posts()) : the_post();
                     </div>
 
                     <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
-                    <input type="date" name="dob" class="form-control mb-4" required placeholder="تاريخ الميلاد">
+                    <input type="date" name="dob" class="form-control mb-4" required placeholder="<?php esc_attr_e('تاريخ الميلاد', 'main-theme'); ?>">
 
-                    <button type="submit" class="btn btn-red w-100">إرسال التسجيل</button>
+                    <button type="submit" class="btn btn-red w-100">
+                        <?php _e('إرسال التسجيل', 'main-theme'); ?>
+                    </button>
                 </form>
 
             </div>
@@ -262,7 +345,7 @@ while (have_posts()) : the_post();
                 modal = new bootstrap.Modal(modalEl);
             }
 
-            // Open modal
+            // Open modal (only useful on branch view where .open-register exists)
             document.querySelectorAll('.open-register').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const branchInput = document.getElementById('branch_name');
@@ -293,7 +376,7 @@ while (have_posts()) : the_post();
                         let suffix = suffixInput.value || '';
                         // keep only digits
                         suffix = suffix.replace(/\D+/g, '');
-                        // remove any leading zeros just in case
+                        // remove any leading zeros
                         suffix = suffix.replace(/^0+/, '');
                         fullPhone.value = suffix ? ('971' + suffix) : '';
                     }
@@ -311,8 +394,8 @@ while (have_posts()) : the_post();
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'خطأ في الاتصال، حاول مرة أخرى.',
-                                confirmButtonText: 'تم'
+                                title: '<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>',
+                                confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
                             });
                         }
                         return;
@@ -324,7 +407,7 @@ while (have_posts()) : the_post();
                     } catch (err) {
                         result = {
                             success: false,
-                            message: 'حدث خطأ، حاول مرة أخرى.'
+                            message: '<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>'
                         };
                     }
 
@@ -332,7 +415,7 @@ while (have_posts()) : the_post();
                         Swal.fire({
                             icon: result.success ? 'success' : 'error',
                             title: result.message || '',
-                            confirmButtonText: 'تم'
+                            confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
                         });
                     }
 
@@ -342,6 +425,76 @@ while (have_posts()) : the_post();
                     }
                 });
             }
+
+            /* ---------- Copy to clipboard (share button) ---------- */
+            document.querySelectorAll('.btn-share').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const textToCopy = this.getAttribute('data-copy') || '';
+                    if (!textToCopy) return;
+
+                    // Modern Clipboard API
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(textToCopy)
+                            .then(function() {
+                                if (typeof Swal !== 'undefined') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                } else {
+                                    alert('<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>');
+                                }
+                            })
+                            .catch(function() {
+                                if (typeof Swal !== 'undefined') {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: '<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>',
+                                        confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
+                                    });
+                                } else {
+                                    alert('<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>');
+                                }
+                            });
+                    } else {
+                        // Fallback for older browsers
+                        const temp = document.createElement('textarea');
+                        temp.value = textToCopy;
+                        document.body.appendChild(temp);
+                        temp.select();
+
+                        try {
+                            document.execCommand('copy');
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                alert('<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>');
+                            }
+                        } catch (err) {
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: '<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>',
+                                    confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
+                                });
+                            } else {
+                                alert('<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>');
+                            }
+                        }
+
+                        document.body.removeChild(temp);
+                    }
+                });
+            });
 
             /* ---------- Scroll-up animation ---------- */
             const scrollElements = document.querySelectorAll('.js-scroll-up');
@@ -365,7 +518,6 @@ while (have_posts()) : the_post();
             }
         });
     </script>
-
 <?php
 endwhile;
 get_footer();

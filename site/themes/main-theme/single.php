@@ -26,7 +26,6 @@ while (have_posts()) : the_post();
         <div class="container">
             <h1 class="ls-single__title"><?php echo esc_html($title); ?></h1>
             <div class="ls-single__meta">
-                <span class="ls-single__author"><i class="las la-user"></i> <?php echo esc_html($author); ?></span>
                 <span class="ls-single__date"><i class="las la-calendar"></i> <?php echo esc_html($date); ?></span>
             </div>
         </div>
