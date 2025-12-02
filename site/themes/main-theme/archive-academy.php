@@ -65,7 +65,7 @@ $bg_color    = "#0E0E0E"; // Black
 
                             <?php if (has_post_thumbnail()) : ?>
                                 <a href="<?php the_permalink(); ?>"
-                                    class="academy-thumb"
+                                    class="academy-thumb" style="background-color:transparent;"
                                     aria-label="<?php echo esc_attr(get_the_title()); ?>">
 
                                     <?php
@@ -99,8 +99,8 @@ $bg_color    = "#0E0E0E"; // Black
 
                             <div class="academy-body">
 
-                                <h3 class="academy-title">
-                                    <a href="<?php the_permalink(); ?>">
+                                <h3 class="academy-title" style="background-color:transparent">
+                                    <a style="background-color:transparent" href="<?php the_permalink(); ?>">
                                         <?php the_title(); ?>
                                     </a>
                                 </h3>
