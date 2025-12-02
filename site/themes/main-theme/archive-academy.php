@@ -2,7 +2,7 @@
 
 <?php
 // Settings for the archive header
-$page_title  = "أكاديميات ليدرز سبورتس";
+$page_title  = "أكاديميات القادة للخدمات الرياضية";
 $page_sub    = "استكشف جميع الأكاديميات الرياضية وفروع التدريب المتوفرة لدينا";
 $title_color = "#FFD700"; // Gold
 $bg_color    = "#0E0E0E"; // Black
@@ -11,7 +11,8 @@ $bg_color    = "#0E0E0E"; // Black
 <!-- ==================== ARCHIVE BANNER ==================== -->
 <section class="academy-archive-banner" style="background:#111; padding:70px 0;">
     <div class="container text-center">
-        <h1 class="archive-title pt-5" style="color:<?php echo $title_color; ?>; font-size:42px; font-weight:700;">
+        <h1 class="archive-title pt-5"
+            style="color:<?php echo esc_attr($title_color); ?>; font-size:42px; font-weight:700;">
             <?php echo esc_html($page_title); ?>
         </h1>
         <p class="archive-subtitle text-white mt-3" style="opacity:0.85;">
@@ -20,38 +21,101 @@ $bg_color    = "#0E0E0E"; // Black
     </div>
 </section>
 
-<!-- ==================== ACADEMY GRID ==================== -->
-<section class="ls-academies py-5 js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
+<!-- ==================== ACADEMY GRID (CARD STYLE) ==================== -->
+<section class="ls-academies js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
     <div class="container">
 
         <div class="row justify-content-center">
 
-            <?php if (have_posts()): ?>
+            <?php if (have_posts()) : ?>
 
-                <?php $delay = 0; ?>
+                <?php
+                $delay = 0;
 
-                <?php while (have_posts()): the_post(); ?>
+                while (have_posts()) :
+                    the_post();
 
-                    <div class="col-md-4 col-sm-12 mb-4 academy-item" data-delay="<?php echo $delay; ?>">
+                    // Label (same logic as flex block)
+                    $label = function_exists('get_field') ? (string) get_field('academy_label') : '';
 
-                        <div class="academy-card">
+                    if ($label === '') {
+                        $terms = get_the_terms(get_the_ID(), 'academy_category');
+                        if (!empty($terms) && !is_wp_error($terms)) {
+                            $label = (string) $terms[0]->name;
+                        }
+                    }
 
-                            <div class="academy-thumb-wrapper">
-                                <a href="<?php the_permalink(); ?>" class="academy-thumb">
-                                    <?php the_post_thumbnail('medium_large', ['class' => 'img-fluid']); ?>
-                                    <div class="thumb-overlay"></div>
+                    if ($label === '') {
+                        $label = get_the_title();
+                    }
+
+                    // Excerpt / short description
+                    $excerpt = function_exists('get_field') ? (string) get_field('short_description') : '';
+                    if ($excerpt === '') {
+                        $excerpt = get_the_excerpt();
+                    }
+
+                    $delay += 0.2;
+                ?>
+
+                    <div class="col-md-4 col-sm-12 mb-4 academy-item"
+                        data-delay="<?php echo esc_attr($delay); ?>">
+
+                        <article <?php post_class('academy-card h-100'); ?>>
+
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>"
+                                    class="academy-thumb"
+                                    aria-label="<?php echo esc_attr(get_the_title()); ?>">
+
+                                    <?php
+                                    the_post_thumbnail(
+                                        'medium_large',
+                                        array(
+                                            'class'   => 'img-fluid',
+                                            'loading' => 'lazy',
+                                        )
+                                    );
+                                    ?>
+
+                                    <?php if (!empty($label)) : ?>
+                                        <span class="academy-label">
+                                            <?php echo esc_html($label); ?>
+                                        </span>
+                                    <?php endif; ?>
                                 </a>
-                            </div>
+                            <?php else : ?>
+                                <a href="<?php the_permalink(); ?>"
+                                    class="academy-thumb academy-thumb--noimg"
+                                    aria-label="<?php echo esc_attr(get_the_title()); ?>">
 
-                            <h3 class="academy-title text-center mt-3">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
+                                    <?php if (!empty($label)) : ?>
+                                        <span class="academy-label">
+                                            <?php echo esc_html($label); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </a>
+                            <?php endif; ?>
 
-                        </div>
+                            <div class="academy-body">
 
-                    </div>
+                                <h3 class="academy-title">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_title(); ?>
+                                    </a>
+                                </h3>
 
-                    <?php $delay += 0.15; ?>
+                                <?php if (!empty($excerpt)) : ?>
+                                    <p class="academy-excerpt">
+                                        <?php echo wp_kses_post($excerpt); ?>
+                                    </p>
+                                <?php endif; ?>
+
+                            </div><!-- /.academy-body -->
+
+                        </article><!-- /.academy-card -->
+
+                    </div><!-- /.col -->
 
                 <?php endwhile; ?>
 
@@ -59,24 +123,26 @@ $bg_color    = "#0E0E0E"; // Black
                 <div class="col-12 text-center mt-4">
                     <div class="pagination-wrapper">
                         <?php
-                        echo paginate_links([
+                        echo paginate_links(array(
                             'mid_size'  => 2,
-                            'prev_text' => __('« السابق'),
-                            'next_text' => __('التالي »'),
-                        ]);
+                            'prev_text' => __('« السابق', 'leaderssports'),
+                            'next_text' => __('التالي »', 'leaderssports'),
+                        ));
                         ?>
                     </div>
                 </div>
 
-            <?php else: ?>
+            <?php else : ?>
+
                 <div class="col-12 text-center text-muted py-4">
                     <p><?php esc_html_e('لا توجد أكاديميات متاحة حالياً.', 'leaderssports'); ?></p>
                 </div>
+
             <?php endif; ?>
 
-        </div>
+        </div><!-- /.row -->
 
-    </div>
+    </div><!-- /.container -->
 </section>
 
 <?php get_footer(); ?>
