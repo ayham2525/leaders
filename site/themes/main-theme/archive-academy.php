@@ -9,7 +9,7 @@ $bg_color    = "#0E0E0E"; // Black
 ?>
 
 <!-- ==================== ARCHIVE BANNER ==================== -->
-<section class="academy-archive-banner" style="background:#111; padding:70px 0;">
+<section class="academy-archive-banner">
     <div class="container text-center">
         <h1 class="archive-title pt-5"
             style="color:<?php echo esc_attr($title_color); ?>; font-size:42px; font-weight:700;">

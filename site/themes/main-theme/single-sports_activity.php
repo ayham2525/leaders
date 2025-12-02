@@ -2,12 +2,7 @@
 get_header();
 
 while (have_posts()) : the_post();
-    $banner          = get_the_post_thumbnail_url(get_the_ID(), 'full');
-    $activities_info = get_field('activities_info'); // main repeater (branches)
-
-    // Detect if we are on a specific branch via ?branch=INDEX
-    $selected_branch_index = isset($_GET['branch']) ? intval($_GET['branch']) : null;
-    $has_branches          = !empty($activities_info) && is_array($activities_info);
+    $banner = get_the_post_thumbnail_url(get_the_ID(), 'full');
 ?>
 
     <!-- ==================== BANNER ==================== -->
@@ -19,110 +14,46 @@ while (have_posts()) : the_post();
         </div>
     </section>
 
-    <!-- ==================== ACTIVITIES / BRANCHES ==================== -->
+    <!-- ==================== ACTIVITIES (ALL BRANCHES + SPORTS) ==================== -->
     <section class="academy-details py-5">
         <div class="container">
 
-            <?php if ($has_branches) : ?>
+            <?php if (have_rows('activities_info')) : ?>
 
-                <?php
-                // ============= MODE 1: LIST BRANCHES CARDS =============
-                if ($selected_branch_index === null || !isset($activities_info[$selected_branch_index])) :
+                <?php while (have_rows('activities_info')) : the_row();
+
+                    $branch_name  = get_sub_field('branch');
+                    $location_url = get_sub_field('location');
                 ?>
-
-                    <div class="row g-4 justify-content-center">
-                        <?php foreach ($activities_info as $index => $branch) :
-
-                            $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
-                            $location_url = isset($branch['location']) ? $branch['location'] : '';
-
-                            // Link to branch details on same page ?branch=index
-                            $branch_link = add_query_arg('branch', $index, get_permalink());
-                        ?>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="academy-branch-card js-scroll-up">
-
-                                    <div class="academy-branch-card__icon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                    </div>
-
-                                    <h2 class="branch-title mb-2">
-                                        <?php echo esc_html($branch_name ?: __('فرع الفعالية', 'main-theme')); ?>
-                                    </h2>
-
-                                    <?php if ($location_url) : ?>
-                                        <a href="<?php echo esc_url($location_url); ?>"
-                                            target="_blank"
-                                            rel="noopener"
-                                            class="branch-location-link mb-3">
-                                            <i class="fas fa-location-arrow"></i>
-                                            <?php _e('عرض الموقع على الخريطة', 'main-theme'); ?>
-                                        </a>
-                                    <?php endif; ?>
-
-                                    <a href="<?php echo esc_url($branch_link); ?>"
-                                        class="btn btn-red w-100 mt-auto">
-                                        <?php _e('عرض الرياضات والتسجيل', 'main-theme'); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                <?php
-                // ============= MODE 2: BRANCH VIEW (SHOW SPORTS + REGISTER) =============
-                else :
-
-                    $branch       = $activities_info[$selected_branch_index];
-                    $branch_name  = isset($branch['branch'])   ? $branch['branch']   : '';
-                    $location_url = isset($branch['location']) ? $branch['location'] : '';
-                    $sports       = isset($branch['sports'])   ? $branch['sports']   : [];
-                ?>
-
                     <div class="academy-branch mb-5 js-scroll-up">
 
-                        <div class="academy-branch__head d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-                            <h2 class="branch-title mb-0">
-                                <i class="fas fa-map-marker-alt text-red ms-2"></i>
-                                <?php echo esc_html($branch_name ?: __('فرع الفعالية', 'main-theme')); ?>
+                        <!-- Branch Title -->
+                        <?php if ($branch_name) : ?>
+                            <h2 class="branch-title text-white mb-4">
+                                <i class="fas fa-map-marker-alt text-red ml-2"></i>
+                                <?php echo esc_html($branch_name); ?>
                             </h2>
+                        <?php endif; ?>
 
-                            <div class="d-flex align-items-center gap-2">
-                                <a href="<?php echo esc_url(remove_query_arg('branch')); ?>"
-                                    class="btn btn-outline-light btn-sm">
-                                    <?php _e('العودة إلى جميع الفروع', 'main-theme'); ?>
-                                </a>
+                        <?php if (have_rows('sports')) : ?>
 
-                                <?php if ($location_url) : ?>
-                                    <a href="<?php echo esc_url($location_url); ?>"
-                                        target="_blank"
-                                        rel="noopener"
-                                        class="btn btn-light btn-sm">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <?php _e('عرض الموقع', 'main-theme'); ?>
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
+                            <?php
+                            while (have_rows('sports')) : the_row();
 
-                        <?php if (!empty($sports) && is_array($sports)) :
-
-                            foreach ($sports as $sport) :
-
-                                $sport_title = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
-                                $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
-                                $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
-                                $description = isset($sport['text'])          ? $sport['text']          : '';
-                                $link = isset($sport['link'])          ? $sport['link']          : '';
+                                $sport_title = get_sub_field('sport_title');
+                                $fees        = get_sub_field('fees');
+                                $days        = get_sub_field('training_days');
+                                $description = get_sub_field('text');
+                                $link        = get_sub_field('link');
 
                                 // WhatsApp (raw from ACF)
-                                $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
+                                $whatsapp_raw = get_sub_field('whatsapp');
                                 $whatsapp_url = '';
                                 $wa_number    = ''; // normalized WA number used for API
 
                                 if (!empty($whatsapp_raw)) {
                                     // Trim & remove any non-digits (spaces, +, -, etc.)
-                                    $wa_number_digits = preg_replace('/\D+/', '', $whatsapp_raw);
+                                    $wa_number_digits = preg_replace('/\D+/', '', trim($whatsapp_raw));
 
                                     if ($wa_number_digits !== '') {
                                         // If starts with 0 (e.g. 050xxxxxxx) => 97150xxxxxxx
@@ -135,11 +66,12 @@ while (have_posts()) : the_post();
                                 }
 
                                 // Image
+                                $image         = get_sub_field('image');
                                 $sport_img_url = '';
-                                if (!empty($sport['image'])) {
-                                    $sport_img_id  = is_array($sport['image']) ? ($sport['image']['id'] ?? 0) : $sport['image'];
-                                    if ($sport_img_id) {
-                                        $sport_img_url = wp_get_attachment_image_url($sport_img_id, 'full');
+                                if (!empty($image['id'])) {
+                                    $src = wp_get_attachment_image_src($image['id'], 'full');
+                                    if (!empty($src[0])) {
+                                        $sport_img_url = $src[0];
                                     }
                                 }
 
@@ -157,9 +89,9 @@ while (have_posts()) : the_post();
                                     }
                                     $day_labels = array_filter($day_labels);
                                 }
-                        ?>
+                            ?>
 
-                                <!-- Sport Card – same structure as academy branch view -->
+                                <!-- Sport Card -->
                                 <div class="sport-card js-scroll-up">
                                     <div class="sport-card-inner">
 
@@ -170,7 +102,7 @@ while (have_posts()) : the_post();
                                             <div class="sport-jersey"></div>
 
                                             <!-- Name -->
-                                            <?php if ($sport_title): ?>
+                                            <?php if ($sport_title) : ?>
                                                 <h3 class="sport-player-name">
                                                     <?php echo esc_html($sport_title); ?>
                                                 </h3>
@@ -179,14 +111,14 @@ while (have_posts()) : the_post();
                                             <!-- Meta rows -->
                                             <div class="sport-meta">
 
-                                                <?php if ($fees): ?>
+                                                <?php if ($fees) : ?>
                                                     <div class="meta-row">
                                                         <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
                                                         <span class="meta-value"><?php echo esc_html($fees); ?></span>
                                                     </div>
                                                 <?php endif; ?>
 
-                                                <?php if (!empty($day_labels)): ?>
+                                                <?php if (!empty($day_labels)) : ?>
                                                     <div class="meta-row">
                                                         <span class="meta-label"><?php _e('أيام التدريب:', 'main-theme'); ?></span>
                                                         <span class="meta-value">
@@ -195,9 +127,9 @@ while (have_posts()) : the_post();
                                                     </div>
                                                 <?php endif; ?>
 
-                                                <?php if ($branch_name): ?>
+                                                <?php if ($branch_name) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('الفرع:', 'main-theme'); ?></span>
+                                                        <span class="meta-label"><?php _e('الفعالية:', 'main-theme'); ?></span>
                                                         <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
                                                     </div>
                                                 <?php endif; ?>
@@ -205,7 +137,7 @@ while (have_posts()) : the_post();
                                             </div>
 
                                             <!-- Description -->
-                                            <?php if (!empty($description)): ?>
+                                            <?php if (!empty($description)) : ?>
                                                 <div class="sport-bio text-white-80">
                                                     <?php echo wp_kses_post($description); ?>
                                                 </div>
@@ -215,14 +147,16 @@ while (have_posts()) : the_post();
                                             <div class="sport-actions">
 
                                                 <div class="sport-actions-icons">
-                                                    <?php if ($location_url): ?>
+                                                    <?php if ($location_url) : ?>
                                                         <a href="<?php echo esc_url($location_url); ?>"
                                                             target="_blank"
-                                                            class="btn-location" rel="noopener">
+                                                            class="btn-location"
+                                                            rel="noopener">
                                                             <i class="fas fa-map-marker-alt"></i>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <?php if ($link): ?>
+
+                                                    <?php if ($link) : ?>
                                                         <a href="<?php echo esc_url($link); ?>"
                                                             target="_blank"
                                                             rel="noopener"
@@ -233,17 +167,17 @@ while (have_posts()) : the_post();
                                                         </a>
                                                     <?php endif; ?>
 
-
-                                                    <?php if ($whatsapp_url): ?>
+                                                    <?php if ($whatsapp_url) : ?>
                                                         <a href="<?php echo esc_url($whatsapp_url); ?>"
                                                             target="_blank"
-                                                            class="btn-whatsapp" rel="noopener">
+                                                            class="btn-whatsapp"
+                                                            rel="noopener">
                                                             <i class="fab fa-whatsapp"></i>
                                                         </a>
                                                     <?php endif; ?>
                                                 </div>
 
-                                                <?php if ($sport_title): ?>
+                                                <?php if ($sport_title) : ?>
                                                     <button class="btn btn-book open-activity-register"
                                                         type="button"
                                                         data-branch="<?php echo esc_attr($branch_name); ?>"
@@ -258,7 +192,7 @@ while (have_posts()) : the_post();
                                         </div>
 
                                         <!-- RIGHT SIDE: Image -->
-                                        <?php if ($sport_img_url): ?>
+                                        <?php if ($sport_img_url) : ?>
                                             <div class="sport-photo">
                                                 <img src="<?php echo esc_url($sport_img_url); ?>"
                                                     alt="<?php echo esc_attr($sport_title); ?>"
@@ -269,23 +203,23 @@ while (have_posts()) : the_post();
                                     </div>
                                 </div>
 
-                            <?php
-                            endforeach; // end sports foreach
-                        else :
+                            <?php endwhile; // sports 
                             ?>
+
+                        <?php else : ?>
                             <p class="text-white-80">
-                                <?php _e('لا توجد رياضات مضافة لهذا الفرع حتى الآن.', 'main-theme'); ?>
+                                <?php _e('لا توجد رياضات مضافة لهذه الفعالية حتى الآن.', 'main-theme'); ?>
                             </p>
                         <?php endif; ?>
 
                     </div><!-- /.academy-branch -->
 
-                <?php endif; // end mode 
+                <?php endwhile; // activities_info 
                 ?>
 
             <?php else : ?>
                 <p class="text-center text-white-80">
-                    <?php _e('لا توجد فروع مضافة لهذه الفعالية حالياً.', 'main-theme'); ?>
+                    <?php _e('لا توجد فعاليات مضافة حالياً.', 'main-theme'); ?>
                 </p>
             <?php endif; ?>
 
@@ -383,9 +317,7 @@ while (have_posts()) : the_post();
 
                     if (suffixInput && fullPhone) {
                         let suffix = suffixInput.value || '';
-                        // keep only digits
                         suffix = suffix.replace(/\D+/g, '');
-                        // remove leading zeros
                         suffix = suffix.replace(/^0+/, '');
                         fullPhone.value = suffix ? ('971' + suffix) : '';
                     }
@@ -460,7 +392,7 @@ while (have_posts()) : the_post();
             }
 
             // Copy to clipboard on share click
-            document.querySelectorAll('.btn-share').forEach(function(btn) {
+            document.querySelectorAll('.btn-share').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
 
@@ -498,7 +430,7 @@ while (have_posts()) : the_post();
                             .then(showSuccess)
                             .catch(showFail);
                     } else {
-                        // Fallback for older browsers
+                        // Fallback
                         const temp = document.createElement('textarea');
                         temp.value = textToCopy;
                         temp.setAttribute('readonly', '');
@@ -519,8 +451,7 @@ while (have_posts()) : the_post();
         });
     </script>
 
-
 <?php
 endwhile;
-
 get_footer();
+?>

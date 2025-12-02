@@ -17,6 +17,8 @@
 @import './_partials/academy-details';
 @import './_partials/single_text';
 @import './_partials/news_archive.scss';
+@import './_partials/sports-archive';
+
 @import './footer';
 
 .site-main {
@@ -379,4 +381,19 @@ html[lang="en"] #activity-register-form input::-webkit-input-placeholder,
 html[lang="en"] #activity-register-form textarea::-webkit-input-placeholder {
     direction: ltr;
     text-align: left;
+}
+
+.academy-archive-banner , .sports-archive-banner {
+    background-image: url('../img/image.png');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: rgba(255,255,255,.85);
+  padding-top: 120px;
+  padding-bottom: 60px;
+     height: 70vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
 }

@@ -1,58 +1,109 @@
-<?php get_header(); ?>
-
 <?php
-// PAGE SETTINGS (you can change if needed)
-$bg_color    = '#0E0E0E';
-$title_color = '#FFD700';
-$page_title  = 'الأنشطة الرياضية';
-$page_sub    = 'تعرف على كافة برامج التدريب الرياضي لدينا';
+get_header();
+
+// PAGE SETTINGS (translation-ready)
+$bg_color       = '#0E0E0E';
+$title_color    = '#FFD700';
+
+$page_title     = esc_html__('الفعاليات الرياضية', 'leaderssports');
+$page_sub       = esc_html__('تعرف على كافة برامج التدريب الرياضي لدينا', 'leaderssports');
+$badge_label    = esc_html__('ليدرز سبورتس', 'leaderssports');
+$tag_label      = esc_html__('برنامج رياضي', 'leaderssports');
+$discover_label = esc_html__('اكتشف تفاصيل البرنامج', 'leaderssports');
+$no_sports_text = esc_html__('لا توجد أنشطة رياضية متاحة حالياً.', 'leaderssports');
+$prev_label     = esc_html__('« السابق', 'leaderssports');
+$next_label     = esc_html__('التالي »', 'leaderssports');
+$dir_attr       = is_rtl() ? 'rtl' : 'ltr';
 ?>
 
 <!-- ==================== ARCHIVE BANNER ==================== -->
-<section class="sports-archive-banner" style="background:#111; padding:70px 0;">
-    <div class="container text-center">
-        <h1 class="archive-title pt-5" style="color:<?php echo $title_color; ?>; font-size:42px; font-weight:700;">
-            <?php echo esc_html($page_title); ?>
-        </h1>
-        <p class="archive-subtitle text-white mt-3" style="opacity:0.8;">
-            <?php echo esc_html($page_sub); ?>
-        </p>
+<section class="sports-archive-banner js-scroll-up" dir="<?php echo esc_attr($dir_attr); ?>">
+    <div class="container">
+        <div class="sports-archive-banner__inner">
+            <div class="sports-archive-banner__content">
+
+
+                <h1 class="archive-title" style="color:<?php echo esc_attr($title_color); ?>;">
+                    <?php echo $page_title; ?>
+                </h1>
+
+                <p class="archive-subtitle">
+                    <?php echo $page_sub; ?>
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- ==================== SPORTS ACTIVITIES GRID ==================== -->
-<section class="ls-sports-activities js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
+<section class="ls-sports-activities js-scroll-up" dir="<?php echo esc_attr($dir_attr); ?>">
     <div class="container">
-
         <div class="row justify-content-center">
 
-            <?php if (have_posts()): ?>
+            <?php if (have_posts()) : ?>
                 <?php $delay = 0; ?>
 
-                <?php while (have_posts()): the_post(); ?>
+                <?php while (have_posts()) : the_post(); ?>
 
-                    <div class="col-md-4 col-sm-12 mb-4 sport-item" data-delay="<?php echo $delay; ?>">
-                        <div class="sport-card">
+                    <?php
+                    $delay   = ($delay ?? 0) + 0.15;
+                    $excerpt = wp_trim_words(get_the_excerpt(), 20);
+                    $date    = get_the_date();
+                    ?>
 
-                            <div class="sport-inner">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 sport-item js-scroll-up"
+                        style="--delay: <?php echo esc_attr($delay); ?>s;">
+                        <article <?php post_class('sport-card'); ?>>
 
-                                <?php if (has_post_thumbnail()): ?>
-                                    <a href="<?php the_permalink(); ?>" class="sport-thumb">
-                                        <?php the_post_thumbnail('medium_large', ['class' => 'img-fluid']); ?>
-                                        <div class="thumb-overlay"></div>
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>" class="sport-thumb" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+                                    <?php
+                                    the_post_thumbnail(
+                                        'medium_large',
+                                        array(
+                                            'class'    => 'sport-thumb__img',
+                                            'loading'  => 'lazy',
+                                            'decoding' => 'async',
+                                        )
+                                    );
+                                    ?>
+                                    <span class="sport-thumb__overlay" aria-hidden="true"></span>
+
+                                </a>
+                            <?php else : ?>
+
+                            <?php endif; ?>
+
+                            <div class="sport-body">
+                                <div class="sport-meta">
+                                    <span class="sport-meta__item">
+                                        <i class="las la-calendar"></i>
+                                        <?php echo esc_html($date); ?>
+                                    </span>
+                                </div>
+
+                                <h3 class="sport-title">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_title(); ?>
                                     </a>
+                                </h3>
+
+                                <?php if (! empty($excerpt)) : ?>
+                                    <p class="sport-excerpt">
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php echo esc_html($excerpt); ?>
+                                        </a>
+                                    </p>
                                 <?php endif; ?>
 
+                                <a href="<?php the_permalink(); ?>" class="sport-readmore">
+                                    <span><?php echo $discover_label; ?></span>
+                                    <i class="las la-arrow-left"></i>
+                                </a>
                             </div>
 
-                            <h3 class="sport-title text-center mt-3">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
-
-                        </div>
+                        </article>
                     </div>
-
-                    <?php $delay += 0.15; ?>
 
                 <?php endwhile; ?>
 
@@ -60,18 +111,20 @@ $page_sub    = 'تعرف على كافة برامج التدريب الرياض�
                 <div class="col-12 text-center mt-4">
                     <div class="pagination-wrapper">
                         <?php
-                        echo paginate_links([
-                            'mid_size'  => 2,
-                            'prev_text' => __('« السابق'),
-                            'next_text' => __('التالي »'),
-                        ]);
+                        echo paginate_links(
+                            array(
+                                'mid_size'  => 2,
+                                'prev_text' => $prev_label,
+                                'next_text' => $next_label,
+                            )
+                        );
                         ?>
                     </div>
                 </div>
 
-            <?php else: ?>
-                <div class="col-12 text-center text-muted">
-                    <p><?php esc_html_e('لا توجد أنشطة رياضية متاحة حالياً.', 'leaderssports'); ?></p>
+            <?php else : ?>
+                <div class="col-12 text-center text-muted py-5">
+                    <p><?php echo $no_sports_text; ?></p>
                 </div>
             <?php endif; ?>
 
