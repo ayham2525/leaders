@@ -86,36 +86,16 @@
 .sport-jersey {
     width: 70px;
     height: 70px;
-    background: $white;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-    display: flex;
+    background: transparent !important;
+     display: flex;
     align-items: center;      // vertical center
     justify-content: center;  // horizontal center
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
 
-    .sport-number {
-        font-size: 34px;
-        font-weight: 800;
-        color: $red;
-        line-height: 1;
-        position: relative;
-        z-index: 1;           // 👈 keep it above the shoulder shape
-    }
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        height: 34%;
-        border-radius: 40% 40% 40% 40%;
-        background: $white;
-        z-index: 0;           // 👈 behind the number
-    }
+ 
+ 
 }
 
 /* ==================== META ROWS ==================== */

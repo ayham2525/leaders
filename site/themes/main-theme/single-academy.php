@@ -2,8 +2,8 @@
 get_header();
 
 while (have_posts()) : the_post();
-    $banner        = get_the_post_thumbnail_url(get_the_ID(), 'full');
-    $academy_info  = get_field('academy_info'); // main repeater
+    $banner       = get_the_post_thumbnail_url(get_the_ID(), 'full');
+    $academy_info = get_field('academy_info'); // main repeater
 ?>
 
     <!-- ==================== البانر ==================== -->
@@ -45,29 +45,29 @@ while (have_posts()) : the_post();
                             foreach ($sports as $sport) :
                                 $sport_index++;
 
-                                $sport_title   = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
-                                $fees          = isset($sport['fees'])          ? $sport['fees']          : '';
-                                $days          = isset($sport['training_days']) ? $sport['training_days'] : [];
-                                $description   = isset($sport['text'])          ? $sport['text']          : '';
-                                // Inside foreach ($sports as $sport)
+                                $sport_title = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
+                                $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
+                                $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
+                                $description = isset($sport['text'])          ? $sport['text']          : '';
+
+                                // WhatsApp (raw from ACF)
                                 $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
                                 $whatsapp_url = '';
+                                $wa_number    = ''; // normalized WA number used for API
 
                                 if ($whatsapp_raw !== '') {
                                     // remove any non-digits (spaces, +, -, etc.)
-                                    $wa_number = preg_replace('/\D+/', '', $whatsapp_raw);
+                                    $wa_number_digits = preg_replace('/\D+/', '', $whatsapp_raw);
 
-                                    // if number starts with 0 (e.g. 050xxxxxxx) convert to UAE intl format 97150xxxxxxx
-                                    if (strpos($wa_number, '0') === 0) {
-                                        $wa_number = '971' . substr($wa_number, 1);
-                                    }
-
-                                    // final WhatsApp URL
-                                    if ($wa_number !== '') {
-                                        $whatsapp_url = 'https://wa.me/' . $wa_number;
+                                    if ($wa_number_digits !== '') {
+                                        // if number starts with 0 (e.g. 050xxxxxxx) convert to UAE intl format 97150xxxxxxx
+                                        if (strpos($wa_number_digits, '0') === 0) {
+                                            $wa_number_digits = '971' . substr($wa_number_digits, 1);
+                                        }
+                                        $wa_number    = $wa_number_digits;
+                                        $whatsapp_url = 'https://wa.me/' . $wa_number_digits;
                                     }
                                 }
-
 
                                 $sport_img_id  = isset($sport['image']) ? $sport['image'] : '';
                                 $sport_img_url = $sport_img_id ? wp_get_attachment_image_url($sport_img_id, 'full') : '';
@@ -77,7 +77,6 @@ while (have_posts()) : the_post();
                                 if (! empty($days) && is_array($days)) {
                                     foreach ($days as $d) {
                                         if (is_array($d)) {
-                                            // if it's a repeater/choice array
                                             $day_labels[] = isset($d['label']) ? $d['label'] : (isset($d['value']) ? $d['value'] : '');
                                         } else {
                                             $day_labels[] = $d;
@@ -85,7 +84,6 @@ while (have_posts()) : the_post();
                                     }
                                     $day_labels = array_filter($day_labels);
                                 }
-
                         ?>
 
                                 <!-- Sport Card (new design) -->
@@ -96,11 +94,7 @@ while (have_posts()) : the_post();
                                         <div class="sport-info">
 
                                             <!-- Jersey + Number -->
-                                            <div class="sport-jersey">
-                                                <span class="sport-number">
-                                                    <?php echo esc_html($sport_index); ?>
-                                                </span>
-                                            </div>
+                                            <div class="sport-jersey"></div>
 
                                             <!-- Name -->
                                             <?php if ($sport_title) : ?>
@@ -152,7 +146,7 @@ while (have_posts()) : the_post();
                                                     <?php if ($location_url) : ?>
                                                         <a href="<?php echo esc_url($location_url); ?>"
                                                             target="_blank"
-                                                            class="btn-location">
+                                                            class="btn-location" rel="noopener">
                                                             <i class="fas fa-map-marker-alt"></i>
                                                         </a>
                                                     <?php endif; ?>
@@ -160,18 +154,21 @@ while (have_posts()) : the_post();
                                                     <?php if ($whatsapp_url) : ?>
                                                         <a href="<?php echo esc_url($whatsapp_url); ?>"
                                                             target="_blank"
-                                                            class="btn-whatsapp">
+                                                            class="btn-whatsapp" rel="noopener">
                                                             <i class="fab fa-whatsapp"></i>
                                                         </a>
                                                     <?php endif; ?>
                                                 </div>
 
                                                 <?php if ($sport_title) : ?>
-                                                    <button class="btn btn-book open-register"
+                                                    <button
+                                                        class="btn btn-book open-register"
+                                                        type="button"
                                                         data-branch="<?php echo esc_attr($branch_name); ?>"
-                                                        data-sport="<?php echo esc_attr($sport_title); ?>">
-                                                        <?php _e('حجز تجربة الأداء', 'main-theme');
-                                                        ?> </button>
+                                                        data-sport="<?php echo esc_attr($sport_title); ?>"
+                                                        data-whatsapp="<?php echo esc_attr($wa_number); ?>">
+                                                        <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
+                                                    </button>
                                                 <?php endif; ?>
 
                                             </div>
@@ -208,22 +205,25 @@ while (have_posts()) : the_post();
 
 
     <!-- ==================== MODAL ==================== -->
-    <div id="academy-register-modal" class="modal fade" tabindex="-1">
+    <div id="academy-register-modal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">
 
                 <h3 class="text-center text-red mb-3">تسجيل في الأكاديمية</h3>
 
-                <form id="academy-register-form">
+                <form id="academy-register-form" novalidate>
                     <input type="hidden" name="action" value="submit_academy_registration">
-                    <input type="hidden" name="academy_id" value="<?php echo get_the_ID(); ?>">
+                    <input type="hidden" name="academy_id" value="<?php echo esc_attr(get_the_ID()); ?>">
                     <input type="hidden" name="branch" id="branch_name">
                     <input type="hidden" name="sport" id="sport_name">
+                    <input type="hidden" name="academy_whatsapp" id="academy_whatsapp">
+                    <input type="hidden" name="security" value="<?php echo esc_attr(wp_create_nonce('academy_register_nonce')); ?>">
 
                     <input type="text" name="name" class="form-control mb-3" placeholder="الاسم الكامل" required>
                     <input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required>
                     <input type="tel" name="phone" class="form-control mb-3" placeholder="رقم الهاتف" required>
-                    <input type="date" name="dob" class="form-control mb-4" required>
+                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
+                    <input type="date" name="dob" class="form-control mb-4" required placeholder="تاريخ الميلاد">
 
                     <button type="submit" class="btn btn-red w-100">إرسال التسجيل</button>
                 </form>
@@ -250,9 +250,11 @@ while (have_posts()) : the_post();
                 btn.addEventListener('click', function() {
                     const branchInput = document.getElementById('branch_name');
                     const sportInput = document.getElementById('sport_name');
+                    const whatsappInput = document.getElementById('academy_whatsapp');
 
                     if (branchInput) branchInput.value = this.dataset.branch || '';
                     if (sportInput) sportInput.value = this.dataset.sport || '';
+                    if (whatsappInput) whatsappInput.value = this.dataset.whatsapp || '';
 
                     if (modal) {
                         modal.show();
@@ -268,10 +270,23 @@ while (have_posts()) : the_post();
 
                     const data = new FormData(form);
 
-                    const response = await fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
-                        method: 'POST',
-                        body: data
-                    });
+                    let response;
+                    try {
+                        response = await fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
+                            method: 'POST',
+                            body: data,
+                            credentials: 'same-origin'
+                        });
+                    } catch (networkError) {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطأ في الاتصال، حاول مرة أخرى.',
+                                confirmButtonText: 'تم'
+                            });
+                        }
+                        return;
+                    }
 
                     let result = {};
                     try {
@@ -323,6 +338,4 @@ while (have_posts()) : the_post();
 
 <?php
 endwhile;
-
 get_footer();
-?>

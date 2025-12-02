@@ -127,7 +127,7 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
-    // GSAP
+    // GSAP (currently disabled)
     // wp_enqueue_script(
     //     'leaders-gsap',
     //     'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
@@ -144,12 +144,6 @@ add_action('wp_enqueue_scripts', function () {
     //     true
     // );
 
-    // ===============================
-    // SWIPER (banner slider)
-    // ===============================
-
-
-
     $testimonials_rel = '/assets/js/testimonials-slider.js';
     $testimonials_abs = get_stylesheet_directory() . $testimonials_rel;
 
@@ -157,7 +151,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script(
             'leaders-testimonials-slider',
             get_stylesheet_directory_uri() . $testimonials_rel,
-            ['leaders-swiper-js'], // Swiper must load first
+            ['leaders-swiper-js'],
             filemtime($testimonials_abs),
             true
         );
@@ -170,7 +164,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script(
             'sports_activites-slider',
             get_stylesheet_directory_uri() . $sports_activites_rel,
-            ['leaders-swiper-js'], // Swiper must load first
+            ['leaders-swiper-js'],
             filemtime($sports_activites_abs),
             true
         );
@@ -183,15 +177,11 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script(
             'page-banner',
             get_stylesheet_directory_uri() . $scroll_rel,
-            ['leaders-swiper-js'], // Swiper must load first
+            ['leaders-swiper-js'],
             filemtime($scroll_abs),
             true
         );
     }
-
-
-
-
 
     // ===============================
     // Banner Slider JS
@@ -269,7 +259,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script(
             'leaders-about-anim',
             get_stylesheet_directory_uri() . $about_rel,
-            ['leaders-gsap', 'leaders-gsap-scrolltrigger'],
+            ['leaders-gsap', 'leaders-gsap-scrolltrigger'], // keep if you enable GSAP
             filemtime($about_abs),
             true
         );
@@ -284,9 +274,6 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('leaders-aframe', 'https://aframe.io/releases/0.5.0/aframe.min.js', [], '0.5.0', true);
     }
 }, 10);
-
-
-
 
 /**
  * Resource hints for external CDNs
@@ -466,20 +453,20 @@ function leaderssports_register_academy_cpt()
         'description'           => __('Manage all academies and their information', 'leaderssports'),
         'labels'                => $labels,
         'supports'              => array('title', 'thumbnail', 'excerpt', 'revisions'),
-        'taxonomies'            => array(), // Add later if needed (e.g., academy_category)
+        'taxonomies'            => array(),
         'hierarchical'          => false,
         'public'                => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
-        'menu_icon'             => 'dashicons-building', // 🏫 Academy icon
+        'menu_icon'             => 'dashicons-building',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
         'has_archive'           => true,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        'show_in_rest'          => true, // ✅ enables Gutenberg + ACF Blocks
+        'show_in_rest'          => true,
         'capability_type'       => 'post',
         'rewrite'               => array('slug' => 'academy', 'with_front' => false),
     );
@@ -526,7 +513,6 @@ function leaderssports_register_academy_registration_cpt()
     register_post_type('academy_registration', $args);
 }
 add_action('init', 'leaderssports_register_academy_registration_cpt');
-
 
 /**
  * Add Registration Details Meta Box
@@ -578,7 +564,6 @@ function leaderssports_registration_full_info_box($post)
     echo '</select></td></tr></table>';
 }
 
-
 /**
  * Save Status on Update
  */
@@ -595,7 +580,6 @@ add_action('save_post_academy_registration', function ($post_id) {
     }
 });
 
-
 /**
  * Admin Columns
  */
@@ -604,9 +588,9 @@ add_filter('manage_academy_registration_posts_columns', function ($columns) {
     foreach ($columns as $key => $value) {
         $new[$key] = $value;
         if ($key === 'title') {
-            $new['status'] = __('Status', 'leaderssports');
+            $new['status']  = __('Status', 'leaderssports');
             $new['academy'] = __('Academy', 'leaderssports');
-            $new['dob'] = __('DOB', 'leaderssports');
+            $new['dob']     = __('DOB', 'leaderssports');
         }
     }
     return $new;
@@ -624,7 +608,9 @@ add_action('manage_academy_registration_posts_custom_column', function ($column,
             $academy_id = get_post_meta($post_id, 'academy_id', true);
             if ($academy_id) {
                 echo '<a href="' . esc_url(get_edit_post_link($academy_id)) . '">' . esc_html(get_the_title($academy_id)) . '</a>';
-            } else echo '—';
+            } else {
+                echo '—';
+            }
             break;
 
         case 'dob':
@@ -633,16 +619,15 @@ add_action('manage_academy_registration_posts_custom_column', function ($column,
     }
 }, 10, 2);
 
-
 /**
  * Export to CSV
  */
 add_action('restrict_manage_posts', function () {
     if (get_current_screen()->post_type !== 'academy_registration') return;
     $export_url = add_query_arg([
-        'post_type' => 'academy_registration',
+        'post_type'  => 'academy_registration',
         'export_csv' => 1,
-        '_wpnonce' => wp_create_nonce('export_academy_registrations'),
+        '_wpnonce'   => wp_create_nonce('export_academy_registrations'),
     ]);
     echo '<a href="' . esc_url($export_url) . '" class="button button-primary" style="margin-left:10px;">' . __('Export CSV', 'leaderssports') . '</a>';
 });
@@ -679,65 +664,6 @@ add_action('admin_init', function () {
         exit;
     }
 });
-
-
-/**
- * ✅ AJAX: Submit Academy Registration
- */
-add_action('wp_ajax_submit_academy_registration', 'leaderssports_submit_academy_registration');
-add_action('wp_ajax_nopriv_submit_academy_registration', 'leaderssports_submit_academy_registration');
-
-function leaderssports_submit_academy_registration()
-{
-    // Basic validation
-    if (empty($_POST['academy_id'])) {
-        wp_send_json_error(['message' => 'Academy ID missing']);
-    }
-
-    $academy_id = intval($_POST['academy_id']);
-    $name   = sanitize_text_field($_POST['name'] ?? '');
-    $email  = sanitize_email($_POST['email'] ?? '');
-    $phone  = sanitize_text_field($_POST['phone'] ?? '');
-    $dob    = sanitize_text_field($_POST['dob'] ?? '');
-    $branch = sanitize_text_field($_POST['branch'] ?? '');
-    $sport  = sanitize_text_field($_POST['sport'] ?? '');
-
-    if (empty($name) || empty($email) || empty($phone)) {
-        wp_send_json_error(['message' => __('Please fill in all required fields.', 'leaderssports')]);
-    }
-
-    // Create registration
-    $post_id = wp_insert_post([
-        'post_type'   => 'academy_registration',
-        'post_title'  => $name . ' - ' . get_the_title($academy_id),
-        'post_status' => 'publish',
-    ]);
-
-    if (is_wp_error($post_id) || !$post_id) {
-        wp_send_json_error(['message' => __('Error creating registration.', 'leaderssports')]);
-    }
-
-    // Save meta fields
-    update_post_meta($post_id, 'academy_id', $academy_id);
-    update_post_meta($post_id, 'name', $name);
-    update_post_meta($post_id, 'email', $email);
-    update_post_meta($post_id, 'phone', $phone);
-    update_post_meta($post_id, 'dob', $dob);
-    update_post_meta($post_id, 'branch', $branch);
-    update_post_meta($post_id, 'sport', $sport);
-    update_post_meta($post_id, 'status', 'pending');
-
-    // Optional: Email admin
-    $admin_email = get_option('admin_email');
-    wp_mail(
-        $admin_email,
-        'New Academy Registration: ' . get_the_title($academy_id),
-        "Name: $name\nEmail: $email\nPhone: $phone\nBranch: $branch\nSport: $sport"
-    );
-
-    wp_send_json_success(['message' => __('Registration submitted successfully!', 'leaderssports')]);
-}
-
 
 /**
  * Register Custom Post Type: Tryouts (تجارب الأداء)
@@ -780,14 +706,14 @@ function leaderssports_register_tryouts_cpt()
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 6,
-        'menu_icon'             => 'dashicons-megaphone', // 🎤 Tryout icon
+        'menu_icon'             => 'dashicons-megaphone',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
         'has_archive'           => true,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        'show_in_rest'          => true, // Gutenberg + ACF support
+        'show_in_rest'          => true,
         'capability_type'       => 'post',
         'rewrite'               => array('slug' => 'tryouts', 'with_front' => false)
     );
@@ -795,7 +721,6 @@ function leaderssports_register_tryouts_cpt()
     register_post_type('tryout', $args);
 }
 add_action('init', 'leaderssports_register_tryouts_cpt');
-
 
 /**
  * Register Custom Post Type: Tryout Registrations
@@ -836,7 +761,6 @@ function leaderssports_register_tryout_registration_cpt()
     register_post_type('tryout_registration', $args);
 }
 add_action('init', 'leaderssports_register_tryout_registration_cpt');
-
 
 add_action('add_meta_boxes', function () {
     add_meta_box(
@@ -890,8 +814,6 @@ function leaderssports_tryout_registration_box($post)
     echo '</table>';
 }
 
-
-
 /**
  * Register Custom Post Type: Sports Activities (الأنشطة الرياضية)
  */
@@ -923,7 +845,7 @@ function leaderssports_register_sports_activity_cpt()
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 7,
-        'menu_icon'             => 'dashicons-universal-access-alt', // 🏃‍♂️ activity icon
+        'menu_icon'             => 'dashicons-universal-access-alt',
         'show_in_rest'          => true,
         'has_archive'           => true,
         'rewrite'               => array('slug' => 'sports-activities', 'with_front' => false)
@@ -932,7 +854,6 @@ function leaderssports_register_sports_activity_cpt()
     register_post_type('sports_activity', $args);
 }
 add_action('init', 'leaderssports_register_sports_activity_cpt');
-
 
 /**
  * Register Custom Post Type: Sports Activity Registrations
@@ -966,7 +887,6 @@ function leaderssports_register_sports_registration_cpt()
     register_post_type('sports_registration', $args);
 }
 add_action('init', 'leaderssports_register_sports_registration_cpt');
-
 
 add_action('add_meta_boxes', function () {
     add_meta_box(
@@ -1016,7 +936,6 @@ function leaderssports_sports_registration_box($post)
     echo '</table>';
 }
 
-
 add_action('save_post_sports_registration', function ($post_id) {
     if (
         !isset($_POST['sports_registration_nonce']) ||
@@ -1030,15 +949,14 @@ add_action('save_post_sports_registration', function ($post_id) {
     }
 });
 
-
 add_filter('manage_sports_registration_posts_columns', function ($columns) {
     $new = [];
     foreach ($columns as $key => $val) {
         $new[$key] = $val;
         if ($key === 'title') {
-            $new['status'] = __('Status', 'leaderssports');
+            $new['status']   = __('Status', 'leaderssports');
             $new['activity'] = __('Activity', 'leaderssports');
-            $new['dob'] = __('DOB', 'leaderssports');
+            $new['dob']      = __('DOB', 'leaderssports');
         }
     }
     return $new;
@@ -1063,13 +981,12 @@ add_action('manage_sports_registration_posts_custom_column', function ($column, 
     }
 }, 10, 2);
 
-
 add_action('restrict_manage_posts', function () {
     if (get_current_screen()->post_type !== 'sports_registration') return;
     $export_url = add_query_arg([
-        'post_type' => 'sports_registration',
+        'post_type'  => 'sports_registration',
         'export_csv' => 1,
-        '_wpnonce' => wp_create_nonce('export_sports_registrations'),
+        '_wpnonce'   => wp_create_nonce('export_sports_registrations'),
     ]);
     echo '<a href="' . $export_url . '" class="button button-primary" style="margin-left:10px;">Export CSV</a>';
 });
@@ -1106,42 +1023,393 @@ add_action('admin_init', function () {
     }
 });
 
-
+/**
+ * AJAX: Submit Sports Registration
+ */
 add_action('wp_ajax_submit_sports_registration', 'leaderssports_submit_sports_registration');
 add_action('wp_ajax_nopriv_submit_sports_registration', 'leaderssports_submit_sports_registration');
 
+/**
+ * AJAX: Submit Sports Activity Registration + WhatsApp
+ */
 function leaderssports_submit_sports_registration()
 {
     if (empty($_POST['activity_id'])) {
-        wp_send_json_error(['message' => 'Activity ID missing']);
+        wp_send_json_error(['message' => __('Activity ID missing', 'leaderssports')]);
     }
 
-    $activity_id = intval($_POST['activity_id']);
-    $name        = sanitize_text_field($_POST['name'] ?? '');
-    $email       = sanitize_email($_POST['email'] ?? '');
-    $phone       = sanitize_text_field($_POST['phone'] ?? '');
-    $dob         = sanitize_text_field($_POST['dob'] ?? '');
-    $branch      = sanitize_text_field($_POST['branch'] ?? '');
-    $level       = sanitize_text_field($_POST['level'] ?? '');
+    $activity_id = intval($_POST['activity_id'] ?? 0);
 
-    if (!$name || !$email || !$phone) {
-        wp_send_json_error(['message' => __('Please fill required fields.', 'leaderssports')]);
+    $name   = sanitize_text_field($_POST['name']  ?? '');
+    $email  = sanitize_email($_POST['email']      ?? '');
+    $phone  = sanitize_text_field($_POST['phone'] ?? '');
+    $dob    = sanitize_text_field($_POST['dob']   ?? '');
+    $branch = sanitize_text_field($_POST['branch'] ?? '');
+    $level  = sanitize_text_field($_POST['level']  ?? '');
+    $sport  = sanitize_text_field($_POST['sport']  ?? '');
+
+    // WhatsApp for activity (from hidden field in the form)
+    $activity_whatsapp_raw = isset($_POST['activity_whatsapp'])
+        ? sanitize_text_field($_POST['activity_whatsapp'])
+        : '';
+
+    // Basic validation
+    if (!$name || !$email || !$phone || !$dob) {
+        wp_send_json_error(['message' => __('الرجاء تعبئة جميع الحقول المطلوبة.', 'leaderssports')]);
     }
 
+    if (!is_email($email)) {
+        wp_send_json_error(['message' => __('البريد الإلكتروني غير صالح.', 'leaderssports')]);
+    }
+
+    // Create registration post
     $post_id = wp_insert_post([
-        'post_type' => 'sports_registration',
-        'post_title' => $name . ' - ' . get_the_title($activity_id),
+        'post_type'   => 'sports_registration',
+        'post_title'  => $name . ' - ' . get_the_title($activity_id),
         'post_status' => 'publish'
     ]);
 
+    if (is_wp_error($post_id) || !$post_id) {
+        wp_send_json_error(['message' => __('Error creating registration.', 'leaderssports')]);
+    }
+
+    // Save meta
     update_post_meta($post_id, 'activity_id', $activity_id);
+    update_post_meta($post_id, 'name',        $name);
+    update_post_meta($post_id, 'email',       $email);
+    update_post_meta($post_id, 'phone',       $phone);
+    update_post_meta($post_id, 'dob',         $dob);
+    update_post_meta($post_id, 'branch',      $branch);
+    update_post_meta($post_id, 'level',       $level);
+    update_post_meta($post_id, 'sport',       $sport);
+    update_post_meta($post_id, 'status',      'pending');
+
+    // Optional: admin email
+    $admin_email = get_option('admin_email');
+    if ($admin_email) {
+        $subject = 'New Sports Activity Registration: ' . get_the_title($activity_id);
+        $body    = "Name: $name\nEmail: $email\nPhone: $phone\nDOB: $dob\nBranch: $branch\nSport: $sport\nLevel: $level";
+        wp_mail($admin_email, $subject, $body);
+    }
+
+    // WhatsApp sending
+    $customer_wa = $phone;
+    $activity_wa = $activity_whatsapp_raw;
+
+    $wa_results = [
+        'activity' => null,
+        'customer' => null,
+    ];
+
+    // Message to activity / coach WhatsApp
+    if (!empty($activity_wa)) {
+        $msg_for_activity  = "طلب تسجيل جديد في الفعالية الرياضية:\n";
+        $msg_for_activity .= "الاسم: {$name}\n";
+        $msg_for_activity .= "الهاتف: {$phone}\n";
+        $msg_for_activity .= "البريد: {$email}\n";
+        $msg_for_activity .= "تاريخ الميلاد: {$dob}\n";
+        $msg_for_activity .= "الفرع: {$branch}\n";
+        $msg_for_activity .= "الرياضة / النشاط: {$sport}\n";
+        if (!empty($level)) {
+            $msg_for_activity .= "المستوى: {$level}\n";
+        }
+        $msg_for_activity .= "تم الإرسال من صفحة الأنشطة الرياضية على الموقع.";
+
+        $wa_results['activity'] = leaders_send_whatsapp_4whats($activity_wa, $msg_for_activity);
+    }
+
+    // Confirmation message to customer
+    if (!empty($customer_wa)) {
+        $msg_for_customer  = "شكرًا لتسجيلك في الفعالية الرياضية 🌟\n";
+        $msg_for_customer .= "النشاط: {$sport}\n";
+        $msg_for_customer .= "الفرع: {$branch}\n";
+        if (!empty($level)) {
+            $msg_for_customer .= "المستوى: {$level}\n";
+        }
+        $msg_for_customer .= "تاريخ الميلاد المسجَّل: {$dob}\n";
+        $msg_for_customer .= "سنتواصل معك قريبًا لتأكيد التفاصيل.";
+
+        $wa_results['customer'] = leaders_send_whatsapp_4whats($customer_wa, $msg_for_customer);
+    }
+
+    // Check WA status
+    $all_wa_ok = true;
+    foreach ($wa_results as $res) {
+        if (is_array($res) && isset($res['success']) && $res['success'] === false) {
+            $all_wa_ok = false;
+            break;
+        }
+    }
+
+    $message = __('تم إرسال طلب التسجيل بنجاح.', 'leaderssports');
+    if (!$all_wa_ok) {
+        $message .= ' ' . __('(تم حفظ الطلب لكن حدث خطأ في إرسال رسالة الواتساب، سيتم التواصل معك من قبل الإدارة.)', 'leaderssports');
+    }
+
+    wp_send_json_success([
+        'message'  => $message,
+        'whatsapp' => $wa_results,
+    ]);
+}
+
+
+/**
+ * Normalize phone for WhatsApp (digits-only).
+ */
+function leaders_normalize_phone_for_whatsapp($raw, $default_cc = '971')
+{
+    $digits = preg_replace('/\D+/', '', (string) $raw);
+
+    if ($digits === '') {
+        return '';
+    }
+
+    // Strip leading 00
+    if (strpos($digits, '00') === 0) {
+        $digits = substr($digits, 2);
+    }
+
+    // Already has country code
+    if (strpos($digits, $default_cc) === 0) {
+        return $digits;
+    }
+
+    // Local starting with 0
+    if ($digits[0] === '0') {
+        return $default_cc . substr($digits, 1);
+    }
+
+    return $digits;
+}
+
+/**
+ * Send WhatsApp message via 4whats API (user.4whats.net/api/sendMessage).
+ *
+ * RETURN:
+ *   array( 'success' => bool, 'error' => string|null, 'raw' => mixed )
+ *
+ * ضع هذه التعاريف في wp-config.php:
+ *   define('LEADERS_4WHATS_INSTANCE_ID', '140523');
+ *   define('LEADERS_4WHATS_API_KEY', 'YOUR_REAL_API_KEY');
+ */
+function leaders_send_whatsapp_4whats($to_number, $message_text)
+{
+    $instanceid = defined('LEADERS_4WHATS_INSTANCE_ID') ? LEADERS_4WHATS_INSTANCE_ID : '';
+    $token      = defined('LEADERS_4WHATS_API_KEY')      ? LEADERS_4WHATS_API_KEY      : '';
+
+    if (empty($instanceid) || empty($token)) {
+        $msg = '4whats: instanceid or token not configured.';
+        error_log($msg);
+        return array(
+            'success' => false,
+            'error'   => $msg,
+            'raw'     => null,
+        );
+    }
+
+    $to_number    = leaders_normalize_phone_for_whatsapp($to_number);
+    $message_text = trim((string) $message_text);
+
+    if ($to_number === '' || $message_text === '') {
+        $msg = '4whats: empty number or message.';
+        error_log($msg);
+        return array(
+            'success' => false,
+            'error'   => $msg,
+            'raw'     => null,
+        );
+    }
+
+    $endpoint = 'https://user.4whats.net/api/sendMessage';
+
+    $query_args = array(
+        'instanceid' => $instanceid,
+        'token'      => $token,
+        'phone'      => $to_number,
+        'body'       => $message_text,
+    );
+
+    $url      = add_query_arg($query_args, $endpoint);
+    $response = wp_remote_get($url, array('timeout' => 20));
+
+    if (is_wp_error($response)) {
+        $err = $response->get_error_message();
+        error_log('4whats WP_Error: ' . $err);
+
+        return array(
+            'success' => false,
+            'error'   => $err,
+            'raw'     => null,
+        );
+    }
+
+    $code = wp_remote_retrieve_response_code($response);
+    $body = wp_remote_retrieve_body($response);
+    $json = json_decode($body, true);
+
+    // نعتبره ناجح لو HTTP 200-299
+    $ok = ($code >= 200 && $code < 300);
+
+    // في حال الـ API يرجّع success/status
+    if (is_array($json)) {
+        if (isset($json['success'])) {
+            $ok = (bool) $json['success'];
+        } elseif (isset($json['status']) && strtolower($json['status']) === 'success') {
+            $ok = true;
+        }
+    }
+
+    if (!$ok) {
+        $err_msg = null;
+
+        if (is_array($json)) {
+            $err_msg = $json['message'] ?? $json['error'] ?? null;
+        }
+        if (!$err_msg) {
+            $err_msg = '4whats HTTP ' . $code . ': ' . $body;
+        }
+
+        error_log($err_msg);
+
+        return array(
+            'success' => false,
+            'error'   => $err_msg,
+            'raw'     => $json ?: $body,
+        );
+    }
+
+    return array(
+        'success' => true,
+        'error'   => null,
+        'raw'     => $json ?: $body,
+    );
+}
+
+/**
+ * Unified AJAX handler: Academy Registration + WhatsApp
+ */
+function leaders_submit_academy_registration_handler()
+{
+    // Nonce check
+    if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'academy_register_nonce')) {
+        wp_send_json_error(array(
+            'message' => 'انتهت صلاحية الجلسة، حدّث الصفحة وحاول مرة أخرى.'
+        ));
+    }
+
+    // Academy ID
+    $academy_id = isset($_POST['academy_id']) ? intval($_POST['academy_id']) : 0;
+    if (!$academy_id) {
+        wp_send_json_error(array(
+            'message' => 'معرّف الأكاديمية غير موجود.'
+        ));
+    }
+
+    // Sanitize input
+    $name   = isset($_POST['name'])   ? sanitize_text_field(wp_unslash($_POST['name']))   : '';
+    $email  = isset($_POST['email'])  ? sanitize_email(wp_unslash($_POST['email']))       : '';
+    $phone  = isset($_POST['phone'])  ? sanitize_text_field(wp_unslash($_POST['phone']))  : '';
+    $dob    = isset($_POST['dob'])    ? sanitize_text_field(wp_unslash($_POST['dob']))    : '';
+    $branch = isset($_POST['branch']) ? sanitize_text_field(wp_unslash($_POST['branch'])) : '';
+    $sport  = isset($_POST['sport'])  ? sanitize_text_field(wp_unslash($_POST['sport']))  : '';
+    $academy_whatsapp_raw = isset($_POST['academy_whatsapp']) ? wp_unslash($_POST['academy_whatsapp']) : '';
+
+    if ($name === '' || $email === '' || $phone === '' || $dob === '') {
+        wp_send_json_error(array(
+            'message' => 'الرجاء تعبئة جميع الحقول المطلوبة.'
+        ));
+    }
+
+    if (!is_email($email)) {
+        wp_send_json_error(array(
+            'message' => 'البريد الإلكتروني غير صالح.'
+        ));
+    }
+
+    // إنشاء سجل التسجيل في الأكاديمية
+    $post_id = wp_insert_post(array(
+        'post_type'   => 'academy_registration',
+        'post_title'  => $name . ' - ' . get_the_title($academy_id),
+        'post_status' => 'publish',
+    ));
+
+    if (is_wp_error($post_id) || !$post_id) {
+        wp_send_json_error(array(
+            'message' => __('Error creating registration.', 'leaderssports'),
+        ));
+    }
+
+    // حفظ الميتا
+    update_post_meta($post_id, 'academy_id', $academy_id);
     update_post_meta($post_id, 'name', $name);
     update_post_meta($post_id, 'email', $email);
     update_post_meta($post_id, 'phone', $phone);
     update_post_meta($post_id, 'dob', $dob);
     update_post_meta($post_id, 'branch', $branch);
-    update_post_meta($post_id, 'level', $level);
+    update_post_meta($post_id, 'sport', $sport);
     update_post_meta($post_id, 'status', 'pending');
 
-    wp_send_json_success(['message' => __('Registration submitted successfully!', 'leaderssports')]);
+    // إرسال إيميل للأدمن (اختياري)
+    $admin_email = get_option('admin_email');
+    if ($admin_email) {
+        $subject = 'New Academy Registration: ' . get_the_title($academy_id);
+        $body    = "Name: $name\nEmail: $email\nPhone: $phone\nDOB: $dob\nBranch: $branch\nSport: $sport";
+        wp_mail($admin_email, $subject, $body);
+    }
+
+    // إعداد أرقام الواتساب
+    $customer_wa = $phone;
+    $academy_wa  = $academy_whatsapp_raw;
+
+    $wa_results = array(
+        'academy'  => null,
+        'customer' => null,
+    );
+
+    // رسالة للأكاديمية (تتضمن تاريخ الميلاد)
+    if (!empty($academy_wa)) {
+        $msg_for_academy  = "طلب تسجيل جديد في الأكاديمية:\n";
+        $msg_for_academy .= "الاسم: {$name}\n";
+        $msg_for_academy .= "الهاتف: {$phone}\n";
+        $msg_for_academy .= "البريد: {$email}\n";
+        $msg_for_academy .= "تاريخ الميلاد: {$dob}\n";
+        $msg_for_academy .= "الفرع: {$branch}\n";
+        $msg_for_academy .= "الرياضة: {$sport}\n";
+        $msg_for_academy .= "تم الإرسال من موقع الأكاديمية.";
+
+        $wa_results['academy'] = leaders_send_whatsapp_4whats($academy_wa, $msg_for_academy);
+    }
+
+    // رسالة تأكيد للعميل
+    if (!empty($customer_wa)) {
+        $msg_for_customer  = "شكرًا لتسجيلك في الأكاديمية 🌟\n";
+        $msg_for_customer .= "الفرع: {$branch}\n";
+        $msg_for_customer .= "الرياضة: {$sport}\n";
+        $msg_for_customer .= "تاريخ الميلاد المسجَّل: {$dob}\n";
+        $msg_for_customer .= "سنتواصل معك قريبًا لتأكيد موعد التجربة.";
+
+        $wa_results['customer'] = leaders_send_whatsapp_4whats($customer_wa, $msg_for_customer);
+    }
+
+    // نحدد هل كل رسائل الواتساب نجحت أم لا
+    $all_wa_ok = true;
+    foreach ($wa_results as $res) {
+        if (is_array($res) && $res['success'] === false) {
+            $all_wa_ok = false;
+            break;
+        }
+    }
+
+    $message = 'تم إرسال طلب التسجيل بنجاح.';
+    if (!$all_wa_ok) {
+        $message .= ' (تم حفظ الطلب لكن حدث خطأ في إرسال رسالة الواتساب، سيتم التواصل معك من قبل الإدارة.)';
+    }
+
+    wp_send_json_success(array(
+        'message'  => $message,
+        'whatsapp' => $wa_results,
+    ));
 }
+
+add_action('wp_ajax_submit_academy_registration',        'leaders_submit_academy_registration_handler');
+add_action('wp_ajax_nopriv_submit_academy_registration', 'leaders_submit_academy_registration_handler');

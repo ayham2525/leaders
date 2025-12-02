@@ -43,21 +43,24 @@ while (have_posts()) : the_post();
                                 $sport_title = get_sub_field('sport_title');
                                 $fees        = get_sub_field('fees');
                                 $days        = get_sub_field('training_days');
-                                $whatsapp    = get_sub_field('whatsapp');
                                 $description = get_sub_field('text');
 
-                                // WhatsApp URL (same logic as academy page)
+                                // WhatsApp (raw from ACF)
+                                $whatsapp_raw = get_sub_field('whatsapp');
                                 $whatsapp_url = '';
-                                if (!empty($whatsapp)) {
-                                    $whatsapp_raw = trim($whatsapp);
-                                    $wa_number    = preg_replace('/\D+/', '', $whatsapp_raw);
+                                $wa_number    = ''; // normalized WA number used for API
 
-                                    if ($wa_number !== '') {
-                                        // if starts with 0 (e.g. 050xxxxxxx) => 97150xxxxxxx
-                                        if (strpos($wa_number, '0') === 0) {
-                                            $wa_number = '971' . substr($wa_number, 1);
+                                if (!empty($whatsapp_raw)) {
+                                    // Trim & remove any non-digits (spaces, +, -, etc.)
+                                    $wa_number_digits = preg_replace('/\D+/', '', trim($whatsapp_raw));
+
+                                    if ($wa_number_digits !== '') {
+                                        // If starts with 0 (e.g. 050xxxxxxx) => 97150xxxxxxx
+                                        if (strpos($wa_number_digits, '0') === 0) {
+                                            $wa_number_digits = '971' . substr($wa_number_digits, 1);
                                         }
-                                        $whatsapp_url = 'https://wa.me/' . $wa_number;
+                                        $wa_number    = $wa_number_digits;
+                                        $whatsapp_url = 'https://wa.me/' . $wa_number_digits;
                                     }
                                 }
 
@@ -95,11 +98,7 @@ while (have_posts()) : the_post();
                                         <div class="sport-info">
 
                                             <!-- Jersey + Number -->
-                                            <div class="sport-jersey">
-                                                <span class="sport-number">
-                                                    <?php echo esc_html($sport_index); ?>
-                                                </span>
-                                            </div>
+                                            <div class="sport-jersey"></div>
 
                                             <!-- Name -->
                                             <?php if ($sport_title): ?>
@@ -150,7 +149,7 @@ while (have_posts()) : the_post();
                                                     <?php if ($location_url): ?>
                                                         <a href="<?php echo esc_url($location_url); ?>"
                                                             target="_blank"
-                                                            class="btn-location">
+                                                            class="btn-location" rel="noopener">
                                                             <i class="fas fa-map-marker-alt"></i>
                                                         </a>
                                                     <?php endif; ?>
@@ -158,7 +157,7 @@ while (have_posts()) : the_post();
                                                     <?php if ($whatsapp_url): ?>
                                                         <a href="<?php echo esc_url($whatsapp_url); ?>"
                                                             target="_blank"
-                                                            class="btn-whatsapp">
+                                                            class="btn-whatsapp" rel="noopener">
                                                             <i class="fab fa-whatsapp"></i>
                                                         </a>
                                                     <?php endif; ?>
@@ -166,8 +165,10 @@ while (have_posts()) : the_post();
 
                                                 <?php if ($sport_title): ?>
                                                     <button class="btn btn-book open-activity-register"
+                                                        type="button"
                                                         data-branch="<?php echo esc_attr($branch_name); ?>"
-                                                        data-sport="<?php echo esc_attr($sport_title); ?>">
+                                                        data-sport="<?php echo esc_attr($sport_title); ?>"
+                                                        data-whatsapp="<?php echo esc_attr($wa_number); ?>">
                                                         <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
                                                     </button>
                                                 <?php endif; ?>
@@ -211,6 +212,7 @@ while (have_posts()) : the_post();
                     <input type="hidden" name="activity_id" value="<?php echo get_the_ID(); ?>">
                     <input type="hidden" name="branch" id="activity_branch_name">
                     <input type="hidden" name="sport" id="activity_sport_name">
+                    <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
 
                     <input type="text" name="name" class="form-control mb-3" placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
                     <input type="email" name="email" class="form-control mb-3" placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
@@ -240,9 +242,11 @@ while (have_posts()) : the_post();
                 btn.addEventListener("click", () => {
                     const branchInput = document.getElementById("activity_branch_name");
                     const sportInput = document.getElementById("activity_sport_name");
+                    const waInput = document.getElementById("activity_whatsapp");
 
                     if (branchInput) branchInput.value = btn.dataset.branch || '';
                     if (sportInput) sportInput.value = btn.dataset.sport || '';
+                    if (waInput) waInput.value = btn.dataset.whatsapp || '';
 
                     if (modal) modal.show();
                 });
