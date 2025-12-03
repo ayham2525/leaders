@@ -59,7 +59,7 @@
 
     .sport-bio {
         p {
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.7;
             margin-top: 10px;
             margin-bottom: 18px;
@@ -109,17 +109,19 @@
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .meta-label {
         font-weight: 700;
         color: $black;
+          font-size: 16px;
     }
 
     .meta-value {
         color: $red;
         font-weight: 600;
+          font-size: 16px;
     }
 }
 
@@ -264,6 +266,10 @@ html[dir="rtl"] {
     .sport-bio p {
         text-align: right !important;
         direction: rtl !important;
+        & a{
+            background-color: transparent !important;
+            text-decoration: none !important;
+        }
     }
 
     .sport-meta {
