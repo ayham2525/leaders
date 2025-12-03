@@ -12,60 +12,57 @@
     }
 
     .branch-title {
-       font-weight: 700;
+        font-weight: 700;
         font-size: 24px;
         color: #555 !important;
+        margin-bottom: 20px;
     }
 }
 
 /* ==================== SPORT CARD ==================== */
 
 .sport-card {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     background-color: transparent !important;
 
     .sport-card-inner {
-        background-color: transparent !important;
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
-        background: transparent !important;
-        border-radius: 28px;
-        box-shadow: unset !important;
+        background: rgba($white, 0.96);
+        border-radius: 20px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
         overflow: hidden;
-        min-height: 360px;
         position: relative;
-        @include MaxQuery($mid){
-            display: block;
-             flex-direction: row;
-        }
+        padding: 24px 24px 28px;
+        min-height: auto;
+
+        display: flex;
+        flex-direction: column;  // title → image → content → buttons
+        align-items: stretch;
+        justify-content: flex-start;
     }
 }
 
-/* ==================== LEFT SIDE (INFO) ==================== */
+/* ==================== LEFT SIDE (INFO) – NOW FULL WIDTH ==================== */
 
 .sport-info {
-    flex: 0 0 52%;
-    padding: 40px 50px;
-    text-align: left; // base, overridden by RTL/LTR rules below
+    flex: 1 1 auto;
+    padding: 0;                     // card already has padding
+    text-align: left;               // base, overridden by RTL/LTR rules below
     direction: ltr;
     color: $black;
 
     .sport-player-name {
-       
         font-weight: 800;
         font-size: 30px;
-        margin-bottom: 25px;
+        margin-bottom: 18px;
         color: $black;
-        
     }
 
     .sport-bio {
         p {
             font-size: 14px;
             line-height: 1.7;
-            margin-top: 15px;
-            margin-bottom: 22px;
+            margin-top: 10px;
+            margin-bottom: 18px;
             color: #555;
         }
     }
@@ -74,8 +71,9 @@
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 5px;
-        @include MaxQuery($mid){
+        margin-top: 10px;
+
+        @include MaxQuery($mid) {
             display: block;
         }
     }
@@ -87,15 +85,12 @@
     width: 70px;
     height: 70px;
     background: transparent !important;
-     display: flex;
+    display: flex;
     align-items: center;      // vertical center
     justify-content: center;  // horizontal center
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     position: relative;
     overflow: hidden;
-
- 
- 
 }
 
 /* ==================== META ROWS ==================== */
@@ -127,15 +122,14 @@
     }
 }
 
-/* ==================== RIGHT SIDE (IMAGE) ==================== */
+/* ==================== IMAGE (NOW INLINE UNDER TITLE) ==================== */
 
 .sport-photo {
-    flex: 0 0 48%;
+    width: 100%;
     position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 30px 20px 0;
+    display: block;
+    margin-bottom: 16px;
+    padding: 0;
     background: transparent !important;
 
     &::before,
@@ -145,6 +139,7 @@
     }
 
     .sport-img {
+        width: 100%;
         max-width: 100%;
         height: auto;
         object-fit: contain;
@@ -157,6 +152,7 @@
 
 /* ==================== BUTTONS ==================== */
 /* container – equal space between all three */
+
 .sport-actions {
     display: flex;
     align-items: center;
@@ -166,6 +162,7 @@
 }
 
 /* shared base */
+
 .btn-location,
 .btn-share,
 .btn-whatsapp,
@@ -174,10 +171,11 @@
     font-size: 14px;
     font-weight: 600;
     margin: 0;
-    border:  unset !important;
+    border: unset !important;
 }
 
-/* round icon buttons (map + WhatsApp) */
+/* round icon buttons (map + WhatsApp + share) */
+
 .btn-location,
 .btn-share,
 .btn-whatsapp {
@@ -198,6 +196,7 @@
 }
 
 /* حجز button with icon */
+
 .btn-book {
     background: $red;
     color: $white;
@@ -207,6 +206,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px; // space between icon and text
+    width: 50% !important;
 
     i {
         font-size: 16px;
@@ -220,7 +220,7 @@
 
 /* RTL: icon on left of text (inside the red button) */
 html[dir="rtl"] .btn-book {
-    flex-direction: row-reverse; // icon to the right, text to the left visually
+    flex-direction: row-reverse; // icon visually on the right
 }
 
 /* LTR: default order (icon left, text right) */
@@ -229,18 +229,19 @@ html[dir="ltr"] .btn-book {
 }
 
 /* NO hover effects: keep same look on hover */
+
 .btn-share:hover,
 .btn-location:hover,
 .btn-whatsapp:hover,
 .btn-book:hover {
     background: inherit;
-   
     border-color: inherit;
 
     i {
-        
+        // keep same color
     }
 }
+
 /* ==================== DIRECTION BASED ON LANGUAGE ==================== */
 
 /* RTL (Arabic) */
@@ -251,10 +252,6 @@ html[dir="rtl"] {
 
     .academy-details .branch-title {
         text-align: right;
-    }
-
-    .sport-card-inner {
-        flex-direction: row-reverse; // image on left, text on right
     }
 
     .sport-info {
@@ -270,6 +267,7 @@ html[dir="rtl"] {
 
     .sport-meta {
         direction: rtl;
+        text-transform: none; // avoid weird uppercase in Arabic
     }
 }
 
@@ -283,10 +281,6 @@ html[dir="ltr"] {
         text-align: left;
     }
 
-    .sport-card-inner {
-        flex-direction: row; // image on right as per markup
-    }
-
     .sport-info {
         text-align: left !important;
         direction: ltr !important;
@@ -300,34 +294,38 @@ html[dir="ltr"] {
 
     .sport-meta {
         direction: ltr;
+        text-transform: uppercase;
     }
 }
 
 /* ==================== RESPONSIVE ==================== */
 
 @include MaxQuery($desktop) {
-    .sport-info {
-        padding: 32px 32px;
+    .sport-card {
+        .sport-card-inner {
+            padding: 24px 24px 28px;
+        }
+
+        .sport-info {
+            .sport-player-name {
+                font-size: 28px;
+            }
+        }
     }
 }
 
 @include MaxQuery($mid) {
     .sport-card {
         .sport-card-inner {
-            flex-direction: column-reverse;
-            min-height: auto;
-        }
-
-        .sport-photo {
-            flex: 0 0 auto;
-            padding: 20px 20px 0;
+            padding: 20px 18px 22px;
         }
 
         .sport-info {
-            padding: 24px 20px;
+            padding: 0;
 
             .sport-player-name {
                 font-size: 24px;
+                text-align: center;
             }
 
             .sport-meta {
@@ -338,6 +336,7 @@ html[dir="ltr"] {
 
             .sport-actions {
                 justify-content: center;
+                text-align: center;
             }
 
             .sport-jersey {
@@ -402,14 +401,16 @@ html[dir="ltr"] {
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            & a , a:hover{
-             font-size: 1.3rem;
-            font-weight: 800;
-            color: $black;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
+
+            & a,
+            a:hover {
+                font-size: 1.3rem;
+                font-weight: 800;
+                color: $black;
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                text-decoration: none;
             }
 
             i {
@@ -442,7 +443,6 @@ html[dir="ltr"] {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
-            text-decoration: none;
 
             i {
                 font-size: 0.9rem;

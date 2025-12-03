@@ -1048,10 +1048,8 @@ function leaderssports_submit_sports_registration()
     $level  = sanitize_text_field($_POST['level']  ?? '');
     $sport  = sanitize_text_field($_POST['sport']  ?? '');
 
-    // WhatsApp for activity (from hidden field in the form)
-    $activity_whatsapp_raw = isset($_POST['activity_whatsapp'])
-        ? sanitize_text_field($_POST['activity_whatsapp'])
-        : '';
+    // WhatsApp for activity / coach (coming from hidden field)
+    $activity_wa = sanitize_text_field($_POST['activity_whatsapp'] ?? '');
 
     // Basic validation
     if (!$name || !$email || !$phone || !$dob) {
@@ -1066,7 +1064,7 @@ function leaderssports_submit_sports_registration()
     $post_id = wp_insert_post([
         'post_type'   => 'sports_registration',
         'post_title'  => $name . ' - ' . get_the_title($activity_id),
-        'post_status' => 'publish'
+        'post_status' => 'publish',
     ]);
 
     if (is_wp_error($post_id) || !$post_id) {
@@ -1092,17 +1090,14 @@ function leaderssports_submit_sports_registration()
         wp_mail($admin_email, $subject, $body);
     }
 
-    // WhatsApp sending
-    $customer_wa = $phone;
-    $activity_wa = $activity_whatsapp_raw;
-
+    // === WhatsApp sending – COACH / ACTIVITY ONLY ===
     $wa_results = [
         'activity' => null,
-        'customer' => null,
     ];
 
-    // Message to activity / coach WhatsApp
-    if (!empty($activity_wa)) {
+    if (!empty($activity_wa) && function_exists('leaders_send_whatsapp_4whats')) {
+
+        // Build message WITH new lines
         $msg_for_activity  = "طلب تسجيل جديد في الفعالية الرياضية:\n";
         $msg_for_activity .= "الاسم: {$name}\n";
         $msg_for_activity .= "الهاتف: {$phone}\n";
@@ -1113,23 +1108,16 @@ function leaderssports_submit_sports_registration()
         if (!empty($level)) {
             $msg_for_activity .= "المستوى: {$level}\n";
         }
-        $msg_for_activity .= "تم الإرسال من صفحة الأنشطة الرياضية على الموقع.";
+        $msg_for_activity .= "تم الإرسال من نموذج الأنشطة الرياضية على موقع ليدرز سبورتس.";
+
+        // 🔹 Normalize line breaks but KEEP \n
+        $msg_for_activity = str_replace(["\r\n", "\r"], "\n", $msg_for_activity);
+
+        // 🔹 Remove other control characters (tabs, etc.) but NOT \n (0x0A)
+        $msg_for_activity = preg_replace('/[\x00-\x09\x0B-\x0C\x0E-\x1F\x7F]+/u', ' ', $msg_for_activity);
+        $msg_for_activity = trim($msg_for_activity);
 
         $wa_results['activity'] = leaders_send_whatsapp_4whats($activity_wa, $msg_for_activity);
-    }
-
-    // Confirmation message to customer
-    if (!empty($customer_wa)) {
-        $msg_for_customer  = "شكرًا لتسجيلك في الفعالية الرياضية 🌟\n";
-        $msg_for_customer .= "النشاط: {$sport}\n";
-        $msg_for_customer .= "الفرع: {$branch}\n";
-        if (!empty($level)) {
-            $msg_for_customer .= "المستوى: {$level}\n";
-        }
-        $msg_for_customer .= "تاريخ الميلاد المسجَّل: {$dob}\n";
-        $msg_for_customer .= "سنتواصل معك قريبًا لتأكيد التفاصيل.";
-
-        $wa_results['customer'] = leaders_send_whatsapp_4whats($customer_wa, $msg_for_customer);
     }
 
     // Check WA status
@@ -1143,7 +1131,7 @@ function leaderssports_submit_sports_registration()
 
     $message = __('تم إرسال طلب التسجيل بنجاح.', 'leaderssports');
     if (!$all_wa_ok) {
-        $message .= ' ' . __('(تم حفظ الطلب لكن حدث خطأ في إرسال رسالة الواتساب، سيتم التواصل معك من قبل الإدارة.)', 'leaderssports');
+        $message .= ' ' . __('(تم حفظ الطلب لكن حدث خطأ في إرسال رسالة الواتساب للمدرب/المسؤول.)', 'leaderssports');
     }
 
     wp_send_json_success([

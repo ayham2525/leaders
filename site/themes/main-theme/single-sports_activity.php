@@ -46,10 +46,10 @@ while (have_posts()) : the_post();
                                 $description = get_sub_field('text');
                                 $link        = get_sub_field('link');
 
-                                // WhatsApp (raw from ACF)
-                                $whatsapp_raw = get_sub_field('whatsapp');
-                                $whatsapp_url = '';
-                                $wa_number    = ''; // normalized WA number used for API
+                                // WhatsApp (raw from ACF) – for icon + backend API
+                                $whatsapp_raw   = get_sub_field('whatsapp');
+                                $whatsapp_url   = '';
+                                $wa_number_api  = '';
 
                                 if (!empty($whatsapp_raw)) {
                                     // Trim & remove any non-digits (spaces, +, -, etc.)
@@ -60,8 +60,10 @@ while (have_posts()) : the_post();
                                         if (strpos($wa_number_digits, '0') === 0) {
                                             $wa_number_digits = '971' . substr($wa_number_digits, 1);
                                         }
-                                        $wa_number    = $wa_number_digits;
-                                        $whatsapp_url = 'https://wa.me/' . $wa_number_digits;
+                                        // link for front-end
+                                        $whatsapp_url  = 'https://wa.me/' . $wa_number_digits;
+                                        // digits only for API
+                                        $wa_number_api = $wa_number_digits;
                                     }
                                 }
 
@@ -95,20 +97,28 @@ while (have_posts()) : the_post();
                                 <div class="sport-card js-scroll-up">
                                     <div class="sport-card-inner">
 
-                                        <!-- LEFT SIDE: Info -->
                                         <div class="sport-info">
 
-                                            <!-- Jersey -->
-                                            <div class="sport-jersey"></div>
-
-                                            <!-- Name -->
+                                            <!-- Title FIRST -->
                                             <?php if ($sport_title) : ?>
-                                                <h3 class="sport-player-name">
+                                                <h3 class="sport-player-name mb-3">
                                                     <?php echo esc_html($sport_title); ?>
                                                 </h3>
                                             <?php endif; ?>
 
-                                            <!-- Meta rows -->
+                                            <!-- Image SECOND (img-fluid) -->
+                                            <?php if ($sport_img_url) : ?>
+                                                <div class="sport-photo mb-3">
+                                                    <img src="<?php echo esc_url($sport_img_url); ?>"
+                                                        alt="<?php echo esc_attr($sport_title); ?>"
+                                                        class="sport-img img-fluid">
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Jersey (can be decorative / background) -->
+                                            <div class="sport-jersey"></div>
+
+                                            <!-- Content (fees, days, period) -->
                                             <div class="sport-meta">
 
                                                 <?php if ($fees) : ?>
@@ -120,7 +130,7 @@ while (have_posts()) : the_post();
 
                                                 <?php if (!empty($day_labels)) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('أيام التدريب:', 'main-theme'); ?></span>
+                                                        <span class="meta-label"><?php _e('الآيام:', 'main-theme'); ?></span>
                                                         <span class="meta-value">
                                                             <?php echo esc_html(implode('، ', $day_labels)); ?>
                                                         </span>
@@ -129,7 +139,7 @@ while (have_posts()) : the_post();
 
                                                 <?php if ($branch_name) : ?>
                                                     <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('الفعالية:', 'main-theme'); ?></span>
+                                                        <span class="meta-label"><?php _e('الفترة:', 'main-theme'); ?></span>
                                                         <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
                                                     </div>
                                                 <?php endif; ?>
@@ -138,13 +148,13 @@ while (have_posts()) : the_post();
 
                                             <!-- Description -->
                                             <?php if (!empty($description)) : ?>
-                                                <div class="sport-bio text-white-80">
+                                                <div class="sport-bio text-white-80 mt-3">
                                                     <?php echo wp_kses_post($description); ?>
                                                 </div>
                                             <?php endif; ?>
 
-                                            <!-- Buttons -->
-                                            <div class="sport-actions">
+                                            <!-- Links + Buttons LAST -->
+                                            <div class="sport-actions mt-4">
 
                                                 <div class="sport-actions-icons">
                                                     <?php if ($location_url) : ?>
@@ -178,11 +188,11 @@ while (have_posts()) : the_post();
                                                 </div>
 
                                                 <?php if ($sport_title) : ?>
-                                                    <button class="btn btn-book open-activity-register"
+                                                    <button class="btn btn-book open-activity-register mt-3"
                                                         type="button"
                                                         data-branch="<?php echo esc_attr($branch_name); ?>"
                                                         data-sport="<?php echo esc_attr($sport_title); ?>"
-                                                        data-whatsapp="<?php echo esc_attr($wa_number); ?>">
+                                                        data-whatsapp="<?php echo esc_attr($wa_number_api); ?>">
                                                         <?php _e('حجز الفعالية الرياضية', 'main-theme'); ?>
                                                     </button>
                                                 <?php endif; ?>
@@ -190,15 +200,6 @@ while (have_posts()) : the_post();
                                             </div>
 
                                         </div>
-
-                                        <!-- RIGHT SIDE: Image -->
-                                        <?php if ($sport_img_url) : ?>
-                                            <div class="sport-photo">
-                                                <img src="<?php echo esc_url($sport_img_url); ?>"
-                                                    alt="<?php echo esc_attr($sport_title); ?>"
-                                                    class="sport-img">
-                                            </div>
-                                        <?php endif; ?>
 
                                     </div>
                                 </div>
@@ -238,6 +239,7 @@ while (have_posts()) : the_post();
                     <input type="hidden" name="activity_id" value="<?php echo get_the_ID(); ?>">
                     <input type="hidden" name="branch" id="activity_branch_name">
                     <input type="hidden" name="sport" id="activity_sport_name">
+                    <!-- NEW: WhatsApp for coach/activity -->
                     <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
 
                     <input type="text" name="name" class="form-control mb-3"
@@ -311,6 +313,29 @@ while (have_posts()) : the_post();
                 form.addEventListener("submit", async (e) => {
                     e.preventDefault();
 
+                    const submitBtn = form.querySelector('button[type="submit"]');
+
+                    const setLoading = (isLoading) => {
+                        if (!submitBtn) return;
+
+                        if (isLoading) {
+                            submitBtn.disabled = true;
+                            if (!submitBtn.dataset.originalHtml) {
+                                submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+                            }
+                            submitBtn.innerHTML =
+                                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' +
+                                submitBtn.dataset.originalHtml;
+                        } else {
+                            submitBtn.disabled = false;
+                            if (submitBtn.dataset.originalHtml) {
+                                submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+                            }
+                        }
+                    };
+
+                    setLoading(true);
+
                     // Build full phone: 971 + suffix digits
                     const suffixInput = form.querySelector('input[name="phone_suffix"]');
                     const fullPhone = form.querySelector('#activity_full_phone');
@@ -332,6 +357,8 @@ while (have_posts()) : the_post();
                             credentials: "same-origin"
                         });
                     } catch (err) {
+                        setLoading(false);
+
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: "error",
@@ -353,6 +380,8 @@ while (have_posts()) : the_post();
                             message: genericError
                         };
                     }
+
+                    setLoading(false);
 
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({
