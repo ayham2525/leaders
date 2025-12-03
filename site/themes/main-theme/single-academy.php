@@ -158,7 +158,7 @@ while (have_posts()) : the_post();
                                         <div class="row">
                                             <div class="col-12">
                                                 <?php if ($sport_title) : ?>
-                                                    <h3 class="sport-player-name mb-3" style="color:#000">
+                                                    <h3 class="sport-player-name mb-3 py-3" style="color:#000">
                                                         <?php echo esc_html($sport_title); ?>
                                                     </h3>
                                                 <?php endif; ?>

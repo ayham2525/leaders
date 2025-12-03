@@ -1276,6 +1276,28 @@ function leaders_send_whatsapp_4whats($to_number, $message_text)
 /**
  * Unified AJAX handler: Academy Registration + WhatsApp
  */
+/**
+
+ * - KEEP numbers
+ * - KEEP spaces
+ * - KEEP new lines \n
+ * - KEEP basic punctuation (: . , ،)
+ * - REMOVE other special chars like - _ ! @ # $ % ^ & * = + { } [ ] < > | ~ ` etc.
+ */
+if (! function_exists('leaders_clean_whatsapp_text')) {
+    function leaders_clean_whatsapp_text($text)
+    {
+        // Remove unwanted characters, keep Arabic, English, digits, whitespace, new lines, and basic punctuation.
+        $cleaned = preg_replace('/[^\p{Arabic}A-Za-z0-9\s\n:.,،]/u', '', $text);
+
+        // Normalize multiple spaces
+        $cleaned = preg_replace('/[ ]{2,}/', ' ', $cleaned);
+
+        // Trim start/end
+        return trim($cleaned);
+    }
+}
+
 function leaders_submit_academy_registration_handler()
 {
     // Nonce check
@@ -1365,14 +1387,16 @@ function leaders_submit_academy_registration_handler()
         $msg_for_academy .= "الرياضة: {$sport}\n";
         $msg_for_academy .= "تم الإرسال من موقع الأكاديمية.";
 
+        // 🔹 Clean special characters but keep new lines
+        $msg_for_academy = leaders_clean_whatsapp_text($msg_for_academy);
+
         $wa_results['academy'] = leaders_send_whatsapp_4whats($academy_wa, $msg_for_academy);
     }
-
 
     // نحدد هل كل رسائل الواتساب نجحت أم لا
     $all_wa_ok = true;
     foreach ($wa_results as $res) {
-        if (is_array($res) && $res['success'] === false) {
+        if (is_array($res) && isset($res['success']) && $res['success'] === false) {
             $all_wa_ok = false;
             break;
         }
