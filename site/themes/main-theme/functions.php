@@ -1368,16 +1368,6 @@ function leaders_submit_academy_registration_handler()
         $wa_results['academy'] = leaders_send_whatsapp_4whats($academy_wa, $msg_for_academy);
     }
 
-    // رسالة تأكيد للعميل
-    if (!empty($customer_wa)) {
-        $msg_for_customer  = "شكرًا لتسجيلك في الأكاديمية 🌟\n";
-        $msg_for_customer .= "الفرع: {$branch}\n";
-        $msg_for_customer .= "الرياضة: {$sport}\n";
-        $msg_for_customer .= "تاريخ الميلاد المسجَّل: {$dob}\n";
-        $msg_for_customer .= "سنتواصل معك قريبًا لتأكيد موعد التجربة.";
-
-        $wa_results['customer'] = leaders_send_whatsapp_4whats($customer_wa, $msg_for_customer);
-    }
 
     // نحدد هل كل رسائل الواتساب نجحت أم لا
     $all_wa_ok = true;

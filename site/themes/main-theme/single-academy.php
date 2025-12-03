@@ -113,12 +113,12 @@ while (have_posts()) : the_post();
                                 $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
                                 $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
                                 $description = isset($sport['text'])          ? $sport['text']          : '';
-                                $link = isset($sport['link'])          ? $sport['link']          : '';
+                                $link        = isset($sport['link'])          ? $sport['link']          : '';
 
                                 // WhatsApp (raw from ACF)
                                 $whatsapp_raw = isset($sport['whatsapp']) ? trim($sport['whatsapp']) : '';
                                 $whatsapp_url = '';
-                                $wa_number    = ''; // normalized WA number used for API
+                                $wa_number    = ''; // normalized WA number used for API / hidden field
 
                                 if ($whatsapp_raw !== '') {
                                     // remove any non-digits (spaces, +, -, etc.)
@@ -152,114 +152,130 @@ while (have_posts()) : the_post();
                         ?>
 
                                 <!-- Sport Card (branch view) -->
+                                <!-- Sport Card (branch view) -->
                                 <div class="sport-card js-scroll-up">
                                     <div class="sport-card-inner">
-
-                                        <!-- LEFT SIDE: Info -->
-                                        <div class="sport-info">
-
-                                            <!-- Jersey + Number -->
-                                            <div class="sport-jersey"></div>
-
-                                            <!-- Name -->
-                                            <?php if ($sport_title) : ?>
-                                                <h3 class="sport-player-name">
-                                                    <?php echo esc_html($sport_title); ?>
-                                                </h3>
-                                            <?php endif; ?>
-
-                                            <!-- Meta rows -->
-                                            <div class="sport-meta">
-
-                                                <?php if ($fees) : ?>
-                                                    <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
-                                                        <span class="meta-value"><?php echo esc_html($fees); ?></span>
-                                                    </div>
-                                                <?php endif; ?>
-
-                                                <?php if (!empty($day_labels)) : ?>
-                                                    <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('أيام التدريب:', 'main-theme'); ?></span>
-                                                        <span class="meta-value">
-                                                            <?php echo esc_html(implode('، ', $day_labels)); ?>
-                                                        </span>
-                                                    </div>
-                                                <?php endif; ?>
-
-                                                <?php if ($branch_name) : ?>
-                                                    <div class="meta-row">
-                                                        <span class="meta-label"><?php _e('الفرع:', 'main-theme'); ?></span>
-                                                        <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
-                                                    </div>
-                                                <?php endif; ?>
-
-                                            </div>
-
-                                            <!-- Description -->
-                                            <?php if (!empty($description)) : ?>
-                                                <div class="sport-bio text-white-80">
-                                                    <?php echo wp_kses_post($description); ?>
-                                                </div>
-                                            <?php endif; ?>
-
-                                            <!-- Buttons -->
-                                            <div class="sport-actions">
-
-                                                <div class="sport-actions-icons">
-                                                    <?php if ($location_url) : ?>
-                                                        <a href="<?php echo esc_url($location_url); ?>"
-                                                            target="_blank"
-                                                            class="btn-location" rel="noopener">
-                                                            <i class="fas fa-map-marker-alt"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                    <?php if ($link): ?>
-                                                        <a href="<?php echo esc_url($link); ?>"
-                                                            target="_blank"
-                                                            rel="noopener"
-                                                            class="btn-share"
-                                                            data-copy="<?php echo esc_attr($link); ?>"
-                                                            title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
-                                                            <i class="fa fa-share"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-
-                                                    <?php if ($whatsapp_url) : ?>
-                                                        <a href="<?php echo esc_url($whatsapp_url); ?>"
-                                                            target="_blank"
-                                                            class="btn-whatsapp" rel="noopener">
-                                                            <i class="fab fa-whatsapp"></i>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                </div>
-
+                                        <div class="row">
+                                            <div class="col-12">
                                                 <?php if ($sport_title) : ?>
-                                                    <button
-                                                        class="btn btn-book open-register"
-                                                        type="button"
-                                                        data-branch="<?php echo esc_attr($branch_name); ?>"
-                                                        data-sport="<?php echo esc_attr($sport_title); ?>"
-                                                        data-whatsapp="<?php echo esc_attr($wa_number); ?>">
-                                                        <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
-                                                    </button>
+                                                    <h3 class="sport-player-name mb-3" style="color:#000">
+                                                        <?php echo esc_html($sport_title); ?>
+                                                    </h3>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+
+                                                <?php if ($sport_img_url) : ?>
+                                                    <div class="sport-photo">
+                                                        <img
+                                                            src="<?php echo esc_url($sport_img_url); ?>"
+                                                            alt="<?php echo esc_attr($sport_title); ?>"
+                                                            class="sport-img img-fluid">
+                                                    </div>
                                                 <?php endif; ?>
 
                                             </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="sport-meta">
 
-                                        </div>
+                                                    <?php if ($fees) : ?>
+                                                        <div class="meta-row">
+                                                            <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
+                                                            <span class="meta-value"><?php echo esc_html($fees); ?></span>
+                                                        </div>
+                                                    <?php endif; ?>
 
-                                        <!-- RIGHT SIDE: Player image -->
-                                        <?php if ($sport_img_url) : ?>
-                                            <div class="sport-photo">
-                                                <img src="<?php echo esc_url($sport_img_url); ?>"
-                                                    alt="<?php echo esc_attr($sport_title); ?>"
-                                                    class="sport-img">
+                                                    <?php if (!empty($day_labels)) : ?>
+                                                        <div class="meta-row">
+                                                            <span class="meta-label"><?php _e('أيام التدريب:', 'main-theme'); ?></span>
+                                                            <span class="meta-value">
+                                                                <?php echo esc_html(implode('، ', $day_labels)); ?>
+                                                            </span>
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <?php if ($branch_name) : ?>
+                                                        <div class="meta-row">
+                                                            <span class="meta-label"><?php _e('الفرع:', 'main-theme'); ?></span>
+                                                            <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                </div>
                                             </div>
-                                        <?php endif; ?>
 
-                                    </div>
-                                </div>
+
+
+                                            <!-- REST OF CONTENT (col-md-12 col-sm-12) -->
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <!-- Meta rows -->
+
+
+                                                <!-- Description -->
+                                                <?php if (!empty($description)) : ?>
+                                                    <div class="sport-bio mt-3" style="color:#000">
+                                                        <?php echo wp_kses_post($description); ?>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <!-- Buttons -->
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="sport-actions mt-3">
+
+                                                        <div class="sport-actions-icons">
+
+                                                            <?php if ($location_url) : ?>
+                                                                <a href="<?php echo esc_url($location_url); ?>"
+                                                                    target="_blank"
+                                                                    class="btn-location"
+                                                                    rel="noopener">
+                                                                    <i class="fas fa-map-marker-alt"></i>
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($link): ?>
+                                                                <a href="<?php echo esc_url($link); ?>"
+                                                                    target="_blank"
+                                                                    rel="noopener"
+                                                                    class="btn-share"
+                                                                    data-copy="<?php echo esc_attr($link); ?>"
+                                                                    title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                                    <i class="fa fa-share"></i>
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($whatsapp_url) : ?>
+                                                                <a href="<?php echo esc_url($whatsapp_url); ?>"
+                                                                    target="_blank"
+                                                                    class="btn-whatsapp"
+                                                                    rel="noopener">
+                                                                    <i class="fab fa-whatsapp"></i>
+                                                                </a>
+                                                            <?php endif; ?>
+
+                                                        </div>
+
+                                                        <?php if ($sport_title) : ?>
+                                                            <button
+                                                                class="btn btn-book open-register"
+                                                                type="button"
+                                                                data-branch="<?php echo esc_attr($branch_name); ?>"
+                                                                data-sport="<?php echo esc_attr($sport_title); ?>"
+                                                                data-whatsapp="<?php echo esc_attr($wa_number); ?>">
+                                                                <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
+                                                            </button>
+                                                        <?php endif; ?>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div><!-- /.row -->
+                                    </div><!-- /.sport-card-inner -->
+                                </div><!-- /.sport-card -->
+
 
                             <?php
                             endforeach; // end sports foreach
@@ -337,15 +353,20 @@ while (have_posts()) : the_post();
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            /* ---------- Modal & AJAX ---------- */
+            const ajaxUrl = "<?php echo esc_url(admin_url('admin-ajax.php')); ?>";
+            const genericError = "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>";
+            const okLabel = "<?php echo esc_js(__('تم', 'main-theme')); ?>";
+            const copySuccessMsg = "<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>";
+            const copyFailMsg = "<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>";
+            const connErrorMsg = "<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>";
+
+            /* ---------- Modal ---------- */
             const modalEl = document.getElementById('academy-register-modal');
-            let modal = null;
+            const modal = (modalEl && typeof bootstrap !== 'undefined') ?
+                new bootstrap.Modal(modalEl) :
+                null;
 
-            if (modalEl && typeof bootstrap !== 'undefined') {
-                modal = new bootstrap.Modal(modalEl);
-            }
-
-            // Open modal (only useful on branch view where .open-register exists)
+            // Open modal (branch view)
             document.querySelectorAll('.open-register').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const branchInput = document.getElementById('branch_name');
@@ -362,11 +383,34 @@ while (have_posts()) : the_post();
                 });
             });
 
-            // Submit to backend
+            /* ---------- Submit AJAX ---------- */
             const form = document.getElementById('academy-register-form');
             if (form) {
                 form.addEventListener('submit', async function(e) {
                     e.preventDefault();
+
+                    const submitBtn = form.querySelector('button[type="submit"]');
+
+                    const setLoading = (isLoading) => {
+                        if (!submitBtn) return;
+
+                        if (isLoading) {
+                            submitBtn.disabled = true;
+                            if (!submitBtn.dataset.originalHtml) {
+                                submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+                            }
+                            submitBtn.innerHTML =
+                                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' +
+                                submitBtn.dataset.originalHtml;
+                        } else {
+                            submitBtn.disabled = false;
+                            if (submitBtn.dataset.originalHtml) {
+                                submitBtn.innerHTML = submitBtn.dataset.originalHtml;
+                            }
+                        }
+                    };
+
+                    setLoading(true);
 
                     // Build full phone: 971 + suffix digits
                     const suffixInput = form.querySelector('input[name="phone_suffix"]');
@@ -374,10 +418,8 @@ while (have_posts()) : the_post();
 
                     if (suffixInput && fullPhone) {
                         let suffix = suffixInput.value || '';
-                        // keep only digits
-                        suffix = suffix.replace(/\D+/g, '');
-                        // remove any leading zeros
-                        suffix = suffix.replace(/^0+/, '');
+                        suffix = suffix.replace(/\D+/g, ''); // keep digits only
+                        suffix = suffix.replace(/^0+/, ''); // remove leading zeros
                         fullPhone.value = suffix ? ('971' + suffix) : '';
                     }
 
@@ -385,18 +427,22 @@ while (have_posts()) : the_post();
 
                     let response;
                     try {
-                        response = await fetch('<?php echo esc_url(admin_url('admin-ajax.php')); ?>', {
+                        response = await fetch(ajaxUrl, {
                             method: 'POST',
                             body: data,
                             credentials: 'same-origin'
                         });
                     } catch (networkError) {
+                        setLoading(false);
+
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'error',
-                                title: '<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>',
-                                confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
+                                title: connErrorMsg,
+                                confirmButtonText: okLabel
                             });
+                        } else {
+                            alert(connErrorMsg);
                         }
                         return;
                     }
@@ -407,16 +453,20 @@ while (have_posts()) : the_post();
                     } catch (err) {
                         result = {
                             success: false,
-                            message: '<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>'
+                            message: genericError
                         };
                     }
+
+                    setLoading(false);
 
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({
                             icon: result.success ? 'success' : 'error',
                             title: result.message || '',
-                            confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
+                            confirmButtonText: okLabel
                         });
+                    } else {
+                        alert(result.message || (result.success ? okLabel : genericError));
                     }
 
                     if (result.success) {
@@ -434,61 +484,49 @@ while (have_posts()) : the_post();
                     const textToCopy = this.getAttribute('data-copy') || '';
                     if (!textToCopy) return;
 
-                    // Modern Clipboard API
+                    const showSuccess = () => {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: copySuccessMsg,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            alert(copySuccessMsg);
+                        }
+                    };
+
+                    const showFail = () => {
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: copyFailMsg,
+                                confirmButtonText: okLabel
+                            });
+                        } else {
+                            alert(copyFailMsg);
+                        }
+                    };
+
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(textToCopy)
-                            .then(function() {
-                                if (typeof Swal !== 'undefined') {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: '<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                } else {
-                                    alert('<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>');
-                                }
-                            })
-                            .catch(function() {
-                                if (typeof Swal !== 'undefined') {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: '<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>',
-                                        confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
-                                    });
-                                } else {
-                                    alert('<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>');
-                                }
-                            });
+                            .then(showSuccess)
+                            .catch(showFail);
                     } else {
-                        // Fallback for older browsers
                         const temp = document.createElement('textarea');
                         temp.value = textToCopy;
+                        temp.setAttribute('readonly', '');
+                        temp.style.position = 'absolute';
+                        temp.style.left = '-9999px';
                         document.body.appendChild(temp);
                         temp.select();
 
                         try {
                             document.execCommand('copy');
-                            if (typeof Swal !== 'undefined') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: '<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                            } else {
-                                alert('<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>');
-                            }
+                            showSuccess();
                         } catch (err) {
-                            if (typeof Swal !== 'undefined') {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: '<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>',
-                                    confirmButtonText: '<?php echo esc_js(__('تم', 'main-theme')); ?>'
-                                });
-                            } else {
-                                alert('<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>');
-                            }
+                            showFail();
                         }
 
                         document.body.removeChild(temp);
@@ -513,7 +551,6 @@ while (have_posts()) : the_post();
 
                 scrollElements.forEach(el => observer.observe(el));
             } else {
-                // Fallback: show all
                 scrollElements.forEach(el => el.classList.add('is-visible'));
             }
         });
