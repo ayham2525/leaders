@@ -18,6 +18,7 @@
 @import './_partials/single_text';
 @import './_partials/news_archive.scss';
 @import './_partials/sports-archive';
+@import './_partials/single-activity.scss';
 
 @import './footer';
 
@@ -384,7 +385,7 @@ html[lang="en"] #activity-register-form textarea::-webkit-input-placeholder {
 }
 
 .academy-archive-banner , .sports-archive-banner {
-    background-image: url('../img/image.png');
+    background-image: url('../img/player-bg.jpg');
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -395,5 +396,9 @@ html[lang="en"] #activity-register-form textarea::-webkit-input-placeholder {
    display: flex;
    justify-content: center;
    align-items: center;
+     @include MaxQuery($sm){
+    height: 50vh;
+   }
+ 
 
 }

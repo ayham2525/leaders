@@ -5,46 +5,54 @@ while (have_posts()) : the_post();
     $banner = get_the_post_thumbnail_url(get_the_ID(), 'full');
 ?>
 
-    <!-- ==================== BANNER ==================== -->
-    <section class="academy-banner" style="background-image:url('<?php echo esc_url($banner); ?>');">
-        <div class="overlay"></div>
-        <div class="container text-center">
-            <h1 class="academy-title"><?php the_title(); ?></h1>
-            <div class="divider mx-auto mt-3"></div>
-        </div>
-    </section>
-
-    <!-- ==================== ACTIVITIES (ALL BRANCHES + SPORTS) ==================== -->
-    <section class="academy-details py-5">
+    <div class="single-activity-banner">
         <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="activity-title"><?php the_title(); ?></h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <?php if (have_rows('activities_info')) : ?>
+    <section class="single-activity-details py-5">
+        <div class="container">
+            <div class="row">
+                <?php if (have_rows('activities_info')) : ?>
 
-                <?php while (have_rows('activities_info')) : the_row();
+                    <?php
 
-                    $branch_name  = get_sub_field('branch');
-                    $location_url = get_sub_field('location');
-                ?>
-                    <div class="academy-branch mb-5 js-scroll-up">
+                    while (have_rows('activities_info')) : the_row();
 
-                        <!-- Branch Title -->
-                        <?php if ($branch_name) : ?>
-                            <h2 class="branch-title text-white mb-4">
-                                <i class="fas fa-map-marker-alt text-red ml-2"></i>
-                                <?php echo esc_html($branch_name); ?>
-                            </h2>
-                        <?php endif; ?>
-
+                        $branch_name  = get_sub_field('branch');
+                        $location_url = get_sub_field('location');
+                    ?>
+                        <h2 class="branch-title p-0 m-0">
+                            <?php echo esc_html($branch_name); ?>
+                        </h2>
                         <?php if (have_rows('sports')) : ?>
 
                             <?php
+                            $sport_index = 0;
                             while (have_rows('sports')) : the_row();
-
+                                $sport_index++;
                                 $sport_title = get_sub_field('sport_title');
                                 $fees        = get_sub_field('fees');
                                 $days        = get_sub_field('training_days');
                                 $description = get_sub_field('text');
                                 $link        = get_sub_field('link');
+                                $faqs        =  get_sub_field('faq');
+
+
+                                // Unique IDs for this sport block (Bootstrap 5)
+                                $tab_prefix       = 'sport-' . $sport_index . '-';
+                                $tabs_id          = $tab_prefix . 'tabs';
+                                $tabs_content_id  = $tab_prefix . 'tabs-content';
+                                $desc_tab_id      = $tab_prefix . 'desc-tab';
+                                $faq_tab_id       = $tab_prefix . 'faq-tab';
+                                $desc_pane_id     = $tab_prefix . 'desc-pane';
+                                $faq_pane_id      = $tab_prefix . 'faq-pane';
+                                $faq_accordion_id = $tab_prefix . 'faq-accordion';
 
                                 // WhatsApp (raw from ACF) – for icon + backend API
                                 $whatsapp_raw   = get_sub_field('whatsapp');
@@ -94,96 +102,57 @@ while (have_posts()) : the_post();
                             ?>
 
                                 <!-- Sport Card -->
-                                <div class="sport-card js-scroll-up">
-                                    <div class="sport-card-inner">
+                                <div class="activity-card js-scroll-up pb-5">
 
-                                        <div class="sport-info">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <?php if ($sport_title) : ?>
-                                                        <h3 class="sport-player-name py-3">
-                                                            <?php echo esc_html($sport_title); ?>
-                                                        </h3>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <?php if ($sport_img_url) : ?>
-                                                        <div class="sport-photo mb-3">
-                                                            <img src="<?php echo esc_url($sport_img_url); ?>"
-                                                                alt="<?php echo esc_attr($sport_title); ?>"
-                                                                class="sport-img img-fluid">
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="sport-meta">
 
-                                                        <?php if ($fees) : ?>
-                                                            <div class="meta-row">
-                                                                <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
-                                                                <span class="meta-value"><?php echo esc_html($fees); ?></span>
-                                                            </div>
+                                    <div class="activity-info">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <?php if ($sport_title) : ?>
+                                                    <h3 class="activity-name py-3">
+                                                        <?php echo esc_html($sport_title); ?>
+                                                    </h3>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <?php if ($sport_img_url): ?>
+                                                    <img src="<?php echo esc_url($sport_img_url); ?>"
+                                                        alt="<?php echo esc_attr($sport_title); ?>"
+                                                        class="img-fluid">
+                                                <?php endif; ?>
+                                                <div class="sport-actions mt-4">
+
+                                                    <div class="sport-actions-icons">
+                                                        <?php if ($location_url) : ?>
+                                                            <a href="<?php echo esc_url($location_url); ?>"
+                                                                target="_blank"
+                                                                class="btn-location"
+                                                                rel="noopener">
+                                                                <i class="fas fa-map-marker-alt"></i>
+                                                            </a>
                                                         <?php endif; ?>
 
-                                                        <?php if (!empty($day_labels)) : ?>
-                                                            <div class="meta-row">
-                                                                <span class="meta-label"><?php _e('الآيام:', 'main-theme'); ?></span>
-                                                                <span class="meta-value">
-                                                                    <?php echo esc_html(implode('، ', $day_labels)); ?>
-                                                                </span>
-                                                            </div>
+                                                        <?php if ($link) : ?>
+                                                            <a href="<?php echo esc_url($link); ?>"
+                                                                target="_blank"
+                                                                rel="noopener"
+                                                                class="btn-share"
+                                                                data-copy="<?php echo esc_attr($link); ?>"
+                                                                title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                                <i class="fa fa-share"></i>
+                                                            </a>
                                                         <?php endif; ?>
 
-                                                        <?php if ($branch_name) : ?>
-                                                            <div class="meta-row">
-                                                                <span class="meta-label"><?php _e('الفترة:', 'main-theme'); ?></span>
-                                                                <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
-                                                            </div>
+                                                        <?php if ($whatsapp_url) : ?>
+                                                            <a href="<?php echo esc_url($whatsapp_url); ?>"
+                                                                target="_blank"
+                                                                class="btn-whatsapp"
+                                                                rel="noopener">
+                                                                <i class="fab fa-whatsapp"></i>
+                                                            </a>
                                                         <?php endif; ?>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <?php if (!empty($description)) : ?>
-                                                        <div class="sport-bio text-white-80 mt-3">
-                                                            <?php echo wp_kses_post($description); ?>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <div class="col-md-6 col-sm-12">
-                                                    <div class="sport-actions mt-4">
-
-                                                        <div class="sport-actions-icons">
-                                                            <?php if ($location_url) : ?>
-                                                                <a href="<?php echo esc_url($location_url); ?>"
-                                                                    target="_blank"
-                                                                    class="btn-location"
-                                                                    rel="noopener">
-                                                                    <i class="fas fa-map-marker-alt"></i>
-                                                                </a>
-                                                            <?php endif; ?>
-
-                                                            <?php if ($link) : ?>
-                                                                <a href="<?php echo esc_url($link); ?>"
-                                                                    target="_blank"
-                                                                    rel="noopener"
-                                                                    class="btn-share"
-                                                                    data-copy="<?php echo esc_attr($link); ?>"
-                                                                    title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
-                                                                    <i class="fa fa-share"></i>
-                                                                </a>
-                                                            <?php endif; ?>
-
-                                                            <?php if ($whatsapp_url) : ?>
-                                                                <a href="<?php echo esc_url($whatsapp_url); ?>"
-                                                                    target="_blank"
-                                                                    class="btn-whatsapp"
-                                                                    rel="noopener">
-                                                                    <i class="fab fa-whatsapp"></i>
-                                                                </a>
-                                                            <?php endif; ?>
-                                                        </div>
-
                                                         <?php if ($sport_title) : ?>
                                                             <button class="btn btn-book open-activity-register mt-3"
                                                                 type="button"
@@ -193,24 +162,160 @@ while (have_posts()) : the_post();
                                                                 <?php _e('حجز الفعالية الرياضية', 'main-theme'); ?>
                                                             </button>
                                                         <?php endif; ?>
-
                                                     </div>
+
+
+
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 col-sm-12">
+
+
+                                                <table class="program-meta-table">
+                                                    <tr>
+                                                        <td class="td-title">
+                                                            <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="meta-value"><?php echo esc_html($fees); ?></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title">
+                                                            <span class="meta-label"><?php _e('الأيام:', 'main-theme'); ?></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="meta-value">
+                                                                <?php echo esc_html(implode('، ', $day_labels)); ?>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="td-title">
+                                                            <span class="meta-label"><?php _e('الفترة:', 'main-theme'); ?></span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
 
 
 
+                                                <div class="program-tabs mt-4">
+                                                    <!-- Tabs Header -->
+                                                    <ul class="nav nav-tabs" id="<?php echo esc_attr($tabs_id); ?>" role="tablist">
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link active"
+                                                                id="<?php echo esc_attr($desc_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($desc_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($desc_pane_id); ?>"
+                                                                aria-selected="true">
+                                                                <?php _e('الوصف', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link"
+                                                                id="<?php echo esc_attr($faq_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($faq_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($faq_pane_id); ?>"
+                                                                aria-selected="false">
+                                                                <?php _e('الأسئلة الشائعة', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!-- Tabs Content -->
+                                                    <div class="tab-content p-3" id="<?php echo esc_attr($tabs_content_id); ?>">
+                                                        <!-- وصف البرنامج -->
+                                                        <div
+                                                            class="tab-pane fade show active"
+                                                            id="<?php echo esc_attr($desc_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($desc_tab_id); ?>">
+                                                            <div class="program-description">
+                                                                <?php echo wp_kses_post($description); ?>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- FAQ بالأكورديون -->
+                                                        <div
+                                                            class="tab-pane fade"
+                                                            id="<?php echo esc_attr($faq_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($faq_tab_id); ?>">
+
+                                                            <?php if ($faqs) : ?>
+                                                                <div class="accordion" id="<?php echo esc_attr($faq_accordion_id); ?>">
+                                                                    <?php foreach ($faqs as $index => $faq) :
+                                                                        $question   = $faq['title'] ?? '';
+                                                                        $answer     = $faq['text'] ?? '';
+                                                                        $is_first   = ($index === 0);
+
+                                                                        $heading_id  = 'faq-heading-' . $sport_index . '-' . $index;
+                                                                        $collapse_id = 'faq-collapse-' . $sport_index . '-' . $index;
+                                                                    ?>
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header" id="<?php echo esc_attr($heading_id); ?>">
+                                                                                <button
+                                                                                    class="accordion-button<?php echo $is_first ? '' : ' collapsed'; ?> text-end"
+                                                                                    type="button"
+                                                                                    data-bs-toggle="collapse"
+                                                                                    data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
+                                                                                    aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
+                                                                                    aria-controls="<?php echo esc_attr($collapse_id); ?>">
+                                                                                    <?php echo esc_html($question); ?>
+                                                                                </button>
+                                                                            </h2>
+
+                                                                            <div
+                                                                                id="<?php echo esc_attr($collapse_id); ?>"
+                                                                                class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>"
+                                                                                aria-labelledby="<?php echo esc_attr($heading_id); ?>"
+                                                                                data-bs-parent="#<?php echo esc_attr($faq_accordion_id); ?>">
+                                                                                <div class="accordion-body">
+                                                                                    <?php echo wpautop($answer); ?>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                <p class="text-muted mb-0">
+                                                                    <?php _e('لا توجد أسئلة شائعة مضافة بعد.', 'main-theme'); ?>
+                                                                </p>
+                                                            <?php endif; ?>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
-
-
-
-
-
+                                            </div>
 
                                         </div>
 
+
+
+
+
+
+
+
+
+
+
                                     </div>
+
+
                                 </div>
 
                             <?php endwhile; // sports 
@@ -221,22 +326,12 @@ while (have_posts()) : the_post();
                                 <?php _e('لا توجد رياضات مضافة لهذه الفعالية حتى الآن.', 'main-theme'); ?>
                             </p>
                         <?php endif; ?>
-
-                    </div><!-- /.academy-branch -->
-
-                <?php endwhile; // activities_info 
-                ?>
-
-            <?php else : ?>
-                <p class="text-center text-white-80">
-                    <?php _e('لا توجد فعاليات مضافة حالياً.', 'main-theme'); ?>
-                </p>
-            <?php endif; ?>
-
+            </div>
+        <?php endwhile ?>
+    <?php endif; ?>
         </div>
     </section>
 
-    <!-- ==================== MODAL ==================== -->
     <div id="activity-register-modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">

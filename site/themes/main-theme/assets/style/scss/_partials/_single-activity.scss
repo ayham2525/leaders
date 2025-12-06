@@ -1,0 +1,276 @@
+/* ==================== ACADEMY DETAILS ==================== */
+
+.single-activity-banner {
+  height: 30vh !important;
+  background-color: $white;
+    background-image: url('../img/texture_bg.png');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  // vertical centering
+  display: flex;
+  align-items: center;
+
+  .container {
+    width: 100%;
+  }
+
+  .row {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start; // default: LTR -> left
+  }
+
+  .activity-title {
+    margin: 0;
+    text-align: left; // default for English
+    color: $red;
+    font-weight: bold;
+  }
+  /* RTL: right-align text + move it to the right side */
+}
+html[dir="rtl"] .single-activity-banner {
+  .row {
+    justify-content: flex-end;
+  }
+
+  .activity-title {
+    text-align: right;
+  }
+}
+
+
+
+.single-activity-details{
+    background-color: $white;
+      background-image: url('../img/player-bg.jpg');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+    & .branch-title{
+        color: black;
+        font-weight: bold;
+         
+    }
+    & .activity-name{
+        color: $red;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    & table {
+  width: 100%;
+  border-collapse: collapse; // ensures clean borders
+  border: 1px solid #ddd;    // outer border
+  @include MaxQuery($mid){
+    margin-top:32px;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd;  // inner cell borders
+    padding: 8px 10px;
+    & .meta-label{
+        font-weight: bold;
+        color: $white;
+    }
+  }
+  .td-title{
+    background-color: $red;
+    color: $white;
+  }
+
+  th {
+    background: #f7f7f7;     // optional for better visibility
+    font-weight: 700;
+  }
+}
+
+.program-tabs {
+  margin-top: 1.5rem;
+ 
+
+  /* TABS HEADER */
+  .nav-tabs {
+    border-bottom: 1px solid $border-color;
+    gap: 4px;
+
+    .nav-link {
+      border: none;
+      border-radius: .75rem .75rem 0 0;
+      padding: .6rem 1.2rem;
+      font-weight: 600;
+      font-size: .95rem;
+      color: #555;
+      background-color: transparent;
+      transition: all .2s ease;
+
+      &:hover:not(.active) {
+        background-color: rgba(0,0,0,.03);
+        color: #222;
+      }
+
+      &.active {
+        color: $red;
+        background-color: #fff;
+        box-shadow: 0 -1px 0 #fff, 0 0 0 1px $border-color;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+
+  /* TABS BODY WRAPPER */
+  .tab-content {
+    background-color: #fff;
+    border-radius: 0 0 .75rem .75rem;
+    border: 1px solid $border-color;
+    border-top: none;
+    padding: 1.25rem;
+  }
+
+  .program-description {
+    font-size: .95rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  /* FAQ ACCORDION */
+  .accordion {
+    --bs-accordion-border-color: #e3e6ec;
+    --bs-accordion-bg: #fff;
+    --bs-accordion-border-radius: .75rem;
+
+    .accordion-item {
+      border-radius: .75rem;
+      overflow: hidden;
+      margin-bottom: .5rem;
+      border: 1px solid #e3e6ec;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, .04);
+    }
+
+    .accordion-button {
+      background-color: #fff;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: .85rem 1.25rem;
+      color: #111827;
+      box-shadow: none;
+      text-align: right; // للغة العربية
+      transition: background-color .2s ease, color .2s ease;
+
+      &::after {
+        // نلغي السهم الافتراضي ونرسم سهم بسيط
+        background-image: none;
+        content: "";
+        width: 9px;
+        height: 9px;
+        border: 2px solid #9ca3af;
+        border-top: 0;
+        border-right: 0;
+        transform: rotate(-45deg);
+        margin-inline-start: 0;
+        margin-inline-end: .5rem;
+      }
+
+      &:not(.collapsed) {
+        background-color: rgba($red, .06);
+        color: $red;
+
+        &::after {
+          border-color: $red;
+          transform: rotate(135deg); // سهم للأعلى عند الفتح
+        }
+      }
+    }
+
+    .accordion-body {
+      font-size: .9rem;
+      line-height: 1.9;
+      color: #374151;
+      background-color: #f9fafb;
+      padding: .9rem 1.25rem 1rem;
+    }
+  }
+
+  /* RTL tweaks */
+  html[dir="rtl"] & {
+    .nav-tabs {
+      justify-content: flex-start;
+    }
+
+    .accordion-button {
+      justify-content: space-between;
+    }
+  }
+}
+.sport-actions {
+  margin-top: 1.5rem;
+
+  .sport-actions-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center; // or space-between / flex-end as you like
+    gap: 16px;               // equal space between all items
+    width: 100%;
+    flex-wrap: nowrap;       // 👈 keep them on ONE line
+
+    > a,
+    > button {
+      outline: none;
+      border: none;
+      text-decoration: none;
+      transition: all .2s ease;
+      white-space: nowrap;   // prevent button text from breaking
+    }
+
+    /* MAIN BOOK BUTTON */
+    .btn-book {
+      padding: .55rem 1.8rem;
+      border-radius: 999px;
+      background-color: $red;
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      width: auto;
+      box-shadow: 0 6px 16px rgba($red, .35);
+
+      &:hover {
+        background-color: darken($red, 4%);
+        transform: translateY(-1px);
+      }
+    }
+
+    /* ICON BUTTONS */
+    .btn-location,
+    .btn-share,
+    .btn-whatsapp {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, .04);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .08);
+      font-size: 18px;
+      padding: 0;
+      color: $red;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-whatsapp {
+      color: #1fa855;
+
+      &:hover {
+        background-color: #1fa855;
+        color: #fff;
+      }
+    }
+  }
+}
+
+}

@@ -20,10 +20,11 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
 <section class="sports-archive-banner js-scroll-up" dir="<?php echo esc_attr($dir_attr); ?>">
     <div class="container">
         <div class="sports-archive-banner__inner">
+
             <div class="sports-archive-banner__content">
 
 
-                <h1 class="archive-title" style="color:<?php echo esc_attr($title_color); ?>;">
+                <h1 class="archive-title">
                     <?php echo $page_title; ?>
                 </h1>
 
@@ -31,6 +32,7 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
                     <?php echo $page_sub; ?>
                 </p>
             </div>
+
         </div>
     </div>
 </section>
@@ -44,7 +46,6 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
                 <?php $delay = 0; ?>
 
                 <?php while (have_posts()) : the_post(); ?>
-
                     <?php
                     $delay   = ($delay ?? 0) + 0.15;
                     $excerpt = wp_trim_words(get_the_excerpt(), 20);
@@ -56,7 +57,10 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
                         <article <?php post_class('sport-card'); ?>>
 
                             <?php if (has_post_thumbnail()) : ?>
-                                <a href="<?php the_permalink(); ?>" class="sport-thumb" aria-label="<?php echo esc_attr(get_the_title()); ?>">
+                                <a href="<?php the_permalink(); ?>"
+                                    class="sport-thumb"
+                                    aria-label="<?php echo esc_attr(get_the_title()); ?>">
+
                                     <?php
                                     the_post_thumbnail(
                                         'medium_large',
@@ -67,11 +71,13 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
                                         )
                                     );
                                     ?>
+
                                     <span class="sport-thumb__overlay" aria-hidden="true"></span>
 
+                                    <span class="sport-tag">
+                                        <?php echo esc_html($tag_label); ?>
+                                    </span>
                                 </a>
-                            <?php else : ?>
-
                             <?php endif; ?>
 
                             <div class="sport-body">
@@ -90,9 +96,7 @@ $dir_attr       = is_rtl() ? 'rtl' : 'ltr';
 
                                 <?php if (! empty($excerpt)) : ?>
                                     <p class="sport-excerpt">
-                                        <a href="<?php the_permalink(); ?>">
-                                            <?php echo esc_html($excerpt); ?>
-                                        </a>
+                                        <?php echo esc_html($excerpt); ?>
                                     </p>
                                 <?php endif; ?>
 

@@ -8,9 +8,28 @@ $brand-gold: #FFD700;
 $brand-white:#FFFFFF;
 
 .site-footer {
+  position: relative;   // needed for overlay
+  z-index: 0;
+
+  /* ===== OVERLAY ABOVE BG, BELOW CONTENT ===== */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7); // overlay strength (adjust if needed)
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* make footer content sit above the overlay */
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
   // لو كان --anim-bg موجود يستخدمه، وإلا استخدم لون البراند الأساسي
   background-color: var(--anim-bg, $brand-black);
-  background-image: url('../img/texture_bg.png');
+  background-image: url('../img/blackwhite-bg.webp');
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;

@@ -1,514 +1,357 @@
-/* ==================== ACADEMY DETAILS ==================== */
+/* ==================== ACADEMY – BRANCHES & SPORTS ==================== */
 
 .academy-details {
-    background: #f5f5f5 url('../img/player-bg.jpg') center/cover repeat;
-    position: relative;
-    color: $white;
+  background-color: $white;
+  background-image: url('../img/player-bg.jpg');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 
-    .academy-branch {
-        position: relative;
-        z-index: 2;
-        background-color: transparent !important;
-    }
+  /* عنوان الفرع داخل صفحة الأكاديمية */
+  .branch-title {
+    color: #000;
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
 
-    .branch-title {
-        font-weight: 700;
-        font-size: 24px;
-        color: #555 !important;
-        margin-bottom: 20px;
-    }
+  .academy-branch-card__icon{
+    box-shadow: unset !important;
+    color: $red !important;
 }
 
-/* ==================== SPORT CARD ==================== */
+  /* ========== LIST VIEW: BRANCH CARDS (MODE 1) ========== */
+.academy-branch-card {
+  position: relative;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  min-height: 220px;
+  height: 100%;        // 👈 مهم
+  overflow: hidden;
 
-.sport-card {
-    margin-bottom: 32px;
-    background-color: transparent !important;
-
-    .sport-card-inner {
-        background: rgba($white, 0.96);
-        border-radius: 20px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
-        overflow: hidden;
-        position: relative;
-        padding: 24px 24px 28px;
-        min-height: auto;
-
-        display: flex;
-        flex-direction: column;  // title → image → content → buttons
-        align-items: stretch;
-        justify-content: flex-start;
-    }
-}
-
-/* ==================== LEFT SIDE (INFO) – NOW FULL WIDTH ==================== */
-
-.sport-info {
-    flex: 1 1 auto;
-    padding: 0;                     // card already has padding
-    text-align: left;               // base, overridden by RTL/LTR rules below
-    direction: ltr;
-    color: $black;
-
-    .sport-player-name {
-        font-weight: 800;
-        font-size: 30px;
-        margin-bottom: 18px;
-        color: $black;
-    }
-
-    .sport-bio {
-        p {
-            font-size: 16px;
-            line-height: 1.7;
-            margin-top: 10px;
-            margin-bottom: 18px;
-            color: #555;
-        }
-    }
-
-    .sport-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 10px;
-
-        @include MaxQuery($mid) {
-            display: block;
-        }
-    }
-}
-
-/* ==================== JERSEY / NUMBER ==================== */
-
-.sport-jersey {
-    width: 70px;
-    height: 70px;
-    background: transparent !important;
-    display: flex;
-    align-items: center;      // vertical center
-    justify-content: center;  // horizontal center
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* ==================== META ROWS ==================== */
-
-.sport-meta {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 40px;
-    row-gap: 8px;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: .03em;
-    margin-bottom: 16px;
-
-    .meta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        font-size: 16px;
-    }
-
-    .meta-label {
-        font-weight: 700;
-        color: $black;
-          font-size: 16px;
-    }
-
-    .meta-value {
-        color: $red;
-        font-weight: 600;
-          font-size: 16px;
-    }
-}
-
-/* ==================== IMAGE (NOW INLINE UNDER TITLE) ==================== */
-
-.sport-photo {
-    width: 100%;
-    position: relative;
-    display: block;
-    margin-bottom: 16px;
-    padding: 0;
-    background: transparent !important;
-
-    &::before,
-    &::after {
-        content: none !important;
-        display: none !important;
-    }
-
-    .sport-img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        display: block;
-        filter: none !important;
-        mix-blend-mode: normal !important;
-        opacity: 1 !important;
-    }
-}
-
-/* ==================== BUTTONS ==================== */
-/* container – equal space between all three */
-
-.sport-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 18px;
-}
-
-/* shared base */
-
-.btn-location,
-.btn-share,
-.btn-whatsapp,
-.btn-book {
+  &__icon {
+    width: 46px;
+    height: 46px;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-    border: unset !important;
-}
-
-/* round icon buttons (map + WhatsApp + share) */
-
-.btn-location,
-.btn-share,
-.btn-whatsapp {
-    background: transparent !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($red, .08);
     color: $red;
-    border: 1px solid $red;
-    width: 44px;
-    height: 44px;
+    font-size: 1.2rem;
+    margin-bottom: .75rem;
+    box-shadow: 0 10px 25px rgba($red, .35);
+  }
+
+  .branch-title {
+    margin-bottom: .35rem;
+  }
+
+  .branch-location-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 0;
+    gap: .4rem;
+    font-size: .9rem;
+    color: #374151;
+    text-decoration: none;
 
     i {
-        font-size: 18px;
-        color: $red;
+      font-size: .9rem;
+      color: $red;
     }
+
+    &:hover {
+      color: $red;
+    }
+  }
+
+  .btn.btn-red {
+    margin-top: auto;       // 👈 يخلي الزر ينزل تحت
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .95rem;
+    box-shadow: 0 10px 25px rgba($red, .35);
+  }
 }
 
-/* حجز button with icon */
 
-.btn-book {
-    background: $red;
-    color: $white;
-    border: 1px solid $red;
-    padding: 10px 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; // space between icon and text
-    width: 50% !important;
-
-    i {
-        font-size: 16px;
-        color: $white;
-    }
-
-    span {
-        display: inline-block;
-    }
-}
-
-/* RTL: icon on left of text (inside the red button) */
-html[dir="rtl"] .btn-book {
-    flex-direction: row-reverse; // icon visually on the right
-}
-
-/* LTR: default order (icon left, text right) */
-html[dir="ltr"] .btn-book {
-    flex-direction: row;
-}
-
-/* NO hover effects: keep same look on hover */
-
-.btn-share:hover,
-.btn-location:hover,
-.btn-whatsapp:hover,
-.btn-book:hover {
-    background: inherit;
-    border-color: inherit;
-
-    i {
-        // keep same color
-    }
-}
-
-/* ==================== DIRECTION BASED ON LANGUAGE ==================== */
-
-/* RTL (Arabic) */
-html[dir="rtl"] {
-    .academy-details {
-        direction: rtl;
-    }
-
-    .academy-details .branch-title {
-        text-align: right;
-    }
-
-    .sport-info {
-        text-align: right !important;
-        direction: rtl !important;
-    }
-
-    .sport-bio,
-    .sport-bio p {
-        text-align: right !important;
-        direction: rtl !important;
-        & a{
-            background-color: transparent !important;
-            text-decoration: none !important;
-        }
-    }
-
-    .sport-meta {
-        direction: rtl;
-        text-transform: none; // avoid weird uppercase in Arabic
-    }
-}
-
-/* LTR (English) */
-html[dir="ltr"] {
-    .academy-details {
-        direction: ltr;
-    }
-
-    .academy-details .branch-title {
-        text-align: left;
-    }
-
-    .sport-info {
-        text-align: left !important;
-        direction: ltr !important;
-    }
-
-    .sport-bio,
-    .sport-bio p {
-        text-align: left !important;
-        direction: ltr !important;
-    }
-
-    .sport-meta {
-        direction: ltr;
-        text-transform: uppercase;
-    }
-}
-
-/* ==================== RESPONSIVE ==================== */
-
-@include MaxQuery($desktop) {
-    .sport-card {
-        .sport-card-inner {
-            padding: 24px 24px 28px;
-        }
-
-        .sport-info {
-            .sport-player-name {
-                font-size: 28px;
-            }
-        }
-    }
-}
-
-@include MaxQuery($mid) {
-    .sport-card {
-        .sport-card-inner {
-            padding: 20px 18px 22px;
-        }
-
-        .sport-info {
-            padding: 0;
-
-            .sport-player-name {
-                font-size: 24px;
-                text-align: center;
-            }
-
-            .sport-meta {
-                grid-template-columns: 1fr;
-                text-align: center;
-                justify-items: center;
-            }
-
-            .sport-actions {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .sport-jersey {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-    }
-}
-
-/* ==================== SCROLL-UP ANIMATION ==================== */
-
-.js-scroll-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
-
-    &.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-// ==================== Academy Branch Cards ====================
-
-.academy-details {
-    .academy-branch-card {
-        background: rgba($white, 0.96);
-        border-radius: 20px;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
-        padding: 24px 24px 28px;
+  /* ========== BRANCH VIEW HEADER (MODE 2) ========== */
+  .academy-branch {
+    background-color: transparent;
+    &__head {
+      .branch-title {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: right;
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset-inline-start: -40px;
-            inset-block-end: -40px;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: rgba($red, 0.04);
-            pointer-events: none;
-        }
-
-        &:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
-        }
-
-        .branch-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: $black;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-
-            & a,
-            a:hover {
-                font-size: 1.3rem;
-                font-weight: 800;
-                color: $black;
-                display: flex;
-                align-items: center;
-                gap: 0.4rem;
-                text-decoration: none;
-            }
-
-            i {
-                color: #ffd800; // marker yellow
-                font-size: 1.1rem;
-            }
-        }
-
-        &__icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: rgba($red, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-
-            i {
-                color: $red;
-                font-size: 1.1rem;
-            }
-        }
-
-        .branch-location-link {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: $black;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-
-            i {
-                font-size: 0.9rem;
-                color: #ffd800;
-            }
-
-            &:hover {
-                text-decoration: none;
-            }
-        }
-
-        .btn {
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding-inline: 1.4rem;
-            padding-block: 0.55rem;
-        }
-    }
-}
-
-// Branch view header tweaks
-.academy-branch__head {
-    .branch-title {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: $white;
+        align-items: center;
+        gap: .4rem;
+        font-size: 1.5rem;
 
         i {
-            color: #ffd800;
+          color: $red;
+          font-size: 1.1rem;
         }
+      }
+
+      .btn {
+        font-size: .85rem;
+        border-radius: 999px;
+        padding-inline: 1.1rem;
+      }
+    }
+  }
+
+  /* ========== SPORT CARD (SAME LOOK AS SINGLE ACTIVITY) ========== */
+  .activity-card {
+    background-color: rgba(255, 255, 255, .96);
+    border-radius: 1.5rem;
+    padding: 1.75rem 1.75rem 1.75rem;
+    margin-bottom: 2.25rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, .16);
+    position: relative;
+    overflow: hidden;
+
+    @include MaxQuery($mid) {
+      padding: 1.25rem 1.1rem;
     }
 
-    .btn-outline-light {
-        border-radius: 999px;
-        font-size: 0.85rem;
-        padding-inline: 1.2rem;
+    .activity-name {
+      color: $red;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
     }
 
-    .btn-light {
-        border-radius: 999px;
-        font-size: 0.85rem;
+    img {
+      border-radius: 1.25rem;
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
+
+    .program-meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+
+      @include MaxQuery($mid) {
+        margin-top: 32px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px 10px;
+
+        .meta-label {
+          font-weight: 700;
+          color: $white;
+        }
+      }
+
+      .td-title {
+        background-color: $red;
+        color: $white;
+        width: 30%;
+        white-space: nowrap;
+      }
+
+      th {
+        background: #f7f7f7;
+        font-weight: 700;
+      }
+    }
+  }
+
 }
 
-// Responsive
-@media (max-width: 767.98px) {
-    .academy-details {
-        .academy-branch-card {
-            text-align: center;
-            align-items: center;
+/* ========== PROGRAM TABS (SHARED) ========== */
 
-            .branch-title {
-                justify-content: center;
-            }
+.program-tabs {
+  margin-top: 1.5rem;
 
-            .branch-location-link {
-                justify-content: center;
-            }
-        }
+  .nav-tabs {
+    border-bottom: 1px solid $border-color;
+    gap: 4px;
+
+    .nav-link {
+      border: none;
+      border-radius: .75rem .75rem 0 0;
+      padding: .6rem 1.2rem;
+      font-weight: 600;
+      font-size: .95rem;
+      color: #555;
+      background-color: transparent;
+      transition: all .2s ease;
+
+      &:hover:not(.active) {
+        background-color: rgba(0, 0, 0, .03);
+        color: #222;
+      }
+
+      &.active {
+        color: $red;
+        background-color: #fff;
+        box-shadow: 0 -1px 0 #fff, 0 0 0 1px $border-color;
+        border-bottom-color: transparent;
+      }
     }
+  }
+
+  .tab-content {
+    background-color: #fff;
+    border-radius: 0 0 .75rem .75rem;
+    border: 1px solid $border-color;
+    border-top: none;
+    padding: 1.25rem;
+  }
+
+  .program-description {
+    font-size: .95rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .accordion {
+    --bs-accordion-border-color: #e3e6ec;
+    --bs-accordion-bg: #fff;
+    --bs-accordion-border-radius: .75rem;
+
+    .accordion-item {
+      border-radius: .75rem;
+      overflow: hidden;
+      margin-bottom: .5rem;
+      border: 1px solid #e3e6ec;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, .04);
+    }
+
+    .accordion-button {
+      background-color: #fff;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: .85rem 1.25rem;
+      color: #111827;
+      box-shadow: none;
+      text-align: right;
+      transition: background-color .2s ease, color .2s ease;
+
+      &::after {
+        background-image: none;
+        content: "";
+        width: 9px;
+        height: 9px;
+        border: 2px solid #9ca3af;
+        border-top: 0;
+        border-right: 0;
+        transform: rotate(-45deg);
+        margin-inline-start: 0;
+        margin-inline-end: .5rem;
+      }
+
+      &:not(.collapsed) {
+        background-color: rgba($red, .06);
+        color: $red;
+
+        &::after {
+          border-color: $red;
+          transform: rotate(135deg);
+        }
+      }
+    }
+
+    .accordion-body {
+      font-size: .9rem;
+      line-height: 1.9;
+      color: #374151;
+      background-color: #f9fafb;
+      padding: .9rem 1.25rem 1rem;
+    }
+  }
+
+  html[dir="rtl"] & {
+    .nav-tabs {
+      justify-content: flex-start;
+    }
+
+    .accordion-button {
+      justify-content: space-between;
+    }
+  }
+}
+
+
+
+/* ========== SPORT ACTIONS (SHARED) ========== */
+
+.sport-actions {
+  margin-top: 1.5rem;
+
+  .sport-actions-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    > a,
+    > button {
+      outline: none;
+      border: none;
+      text-decoration: none;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-book {
+      padding: .55rem 1.8rem;
+      border-radius: 999px;
+      background-color: $red;
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      width: auto;
+      box-shadow: 0 6px 16px rgba($red, .35);
+
+      &:hover {
+        background-color: darken($red, 4%);
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-location,
+    .btn-share,
+    .btn-whatsapp {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, .04);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .08);
+      font-size: 18px;
+      padding: 0;
+      color: $red;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-whatsapp {
+      color: #1fa855;
+
+      &:hover {
+        background-color: #1fa855;
+        color: #fff;
+      }
+    }
+  }
 }

@@ -159,12 +159,13 @@ $ls-white: #ffffff;
         background 0.2s ease,
         transform 0.2s ease,
         box-shadow 0.2s ease;
+        color: $ls-red !important;
 
     &:hover {
         background: darken($ls-red, 7%);
         transform: translateY(-2px);
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.7);
-        color: $ls-white;
+        color: $ls-white !important;
     }
 }
 
