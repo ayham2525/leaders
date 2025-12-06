@@ -62,6 +62,7 @@ html[dir="rtl"] .single-activity-banner {
   width: 100%;
   border-collapse: collapse; // ensures clean borders
   border: 1px solid #ddd;    // outer border
+  background-color: $white !important;
   @include MaxQuery($mid){
     margin-top:32px;
   }
