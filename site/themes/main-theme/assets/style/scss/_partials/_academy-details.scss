@@ -138,6 +138,7 @@
       width: 100%;
       border-collapse: collapse;
       border: 1px solid #ddd;
+      background-color: $white !important;
 
       @include MaxQuery($mid) {
         margin-top: 32px;
