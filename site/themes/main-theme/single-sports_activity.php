@@ -242,7 +242,26 @@ while (have_posts()) : the_post();
                                                             role="tabpanel"
                                                             aria-labelledby="<?php echo esc_attr($desc_tab_id); ?>">
                                                             <div class="program-description">
-                                                                <?php echo wp_kses_post($description); ?>
+                                                                <?php
+                                                                $desc = (string) $description;
+
+                                                                // 1) استبدال img القادم من فيسبوك بالـ alt (الإيموجي)
+                                                                $desc = preg_replace(
+                                                                    '/<img[^>]+alt="([^"]+)"[^>]*>/u',
+                                                                    '$1',
+                                                                    $desc
+                                                                );
+
+                                                                // 2) تحويل div إلى سطر جديد عشان تحافظ على النقاط
+                                                                $desc = str_replace(['<div dir="auto">', '<div>', '</div>'], ['', '', "<br>"], $desc);
+
+                                                                // 3) إزالة span وأغلب الوسوم الغير مهمة (نخلي بس br و strong و em مثلاً)
+                                                                $desc = strip_tags($desc, '<br><strong><b><em><i>');
+
+                                                                // 4) عرض آمن
+                                                                echo wp_kses_post($desc);
+                                                                ?>
+
                                                             </div>
                                                         </div>
 
