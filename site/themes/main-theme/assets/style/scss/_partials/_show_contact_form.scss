@@ -101,6 +101,14 @@ html[dir="ltr"] .show_contact_form .contact-title::after{
   margin-inline-end: auto;   /* keep underline under the left-aligned title */
 }
 
+html[lang="en"], html[lang="en-US"]{
+  .show_contact_form .contact-title{ text-align: left; }
+  .show_contact_form .contact-title::after{
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+  }
+}
+
     .contact-subtitle {
         font-size: 15px;
         line-height: 1.9;
