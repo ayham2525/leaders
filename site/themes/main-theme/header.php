@@ -30,31 +30,125 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
                                                       if ($navbar_position === 'fixed_top')  echo ' fixed-top';
                                                       if ($navbar_position === 'fixed_bottom') echo ' fixed-bottom';
                                                       if (is_home() || is_front_page()) echo ' home'; ?>">
-        <div class="container-fluid">
+        <?php $is_rtl = is_rtl(); ?>
 
-          <!-- Open menu button (hamburger) -->
-          <button id="openMenuBtn"
-            class="menu-toggle"
-            aria-controls="offcanvasMenu"
-            aria-expanded="false"
-            aria-label="<?php esc_attr_e('Open menu', 'wp_bootstrap_starter'); ?>">
-            <!-- Hamburger SVG -->
-            <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
-            </svg>
-          </button>
 
-          <a class="navbar-brand" href="<?php echo esc_url(home_url()); ?>">
-            <?php if ($header_logo = get_theme_mod('header_logo')): ?>
-              <img src="<?php echo esc_url($header_logo); ?>" alt="<?php bloginfo('name'); ?>" />
-            <?php else: echo esc_html(get_bloginfo('name', 'display'));
-            endif; ?>
-          </a>
+        <?php if ($is_rtl) : ?>
+          <!-- ================= ARABIC (RTL) ================= -->
+          <div class="container-fluid header-row header-row--rtl">
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDummy" aria-label="<?php esc_attr_e('Toggle navigation', 'wp_bootstrap_starter'); ?>">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
+            <!-- LEFT: Logo -->
+            <a class="navbar-brand" href="<?php echo esc_url(home_url()); ?>">
+              <?php if ($header_logo = get_theme_mod('header_logo')): ?>
+                <img src="<?php echo esc_url($header_logo); ?>" alt="<?php bloginfo('name'); ?>" />
+              <?php else: echo esc_html(get_bloginfo('name', 'display'));
+              endif; ?>
+            </a>
+
+            <!-- RIGHT: Language then Menu -->
+            <div class="header-actions">
+
+              <?php if (function_exists('apply_filters')) :
+                $langs = apply_filters('wpml_active_languages', null, [
+                  'skip_missing' => 0,
+                  'orderby'      => 'code',
+                ]);
+
+                if (!empty($langs)) :
+                  $en = $langs['en'] ?? null;
+                  $ar = $langs['ar'] ?? null;
+                  $items = array_filter([$ar, $en]); // AR then EN
+                  if (empty($items)) $items = $langs;
+              ?>
+                  <div class="lang-pills" aria-label="Language switcher">
+                    <?php foreach ($items as $l) :
+                      $code   = strtoupper($l['language_code'] ?? '');
+                      $url    = $l['url'] ?? home_url('/');
+                      $active = !empty($l['active']);
+                    ?>
+                      <a class="lang-pill <?php echo $active ? 'is-active' : ''; ?>"
+                        href="<?php echo esc_url($url); ?>">
+                        <?php echo esc_html($code); ?>
+                      </a>
+                    <?php endforeach; ?>
+                  </div>
+              <?php endif;
+              endif; ?>
+
+              <button id="openMenuBtn"
+                class="menu-toggle"
+                aria-controls="offcanvasMenu"
+                aria-expanded="false"
+                aria-label="<?php esc_attr_e('Open menu', 'wp_bootstrap_starter'); ?>">
+                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+              </button>
+
+            </div>
+          </div>
+
+        <?php else : ?>
+          <!-- ================= ENGLISH (LTR) ================= -->
+          <div class="container-fluid header-row header-row--ltr">
+
+            <!-- LEFT: Menu then Language -->
+            <div class="header-actions">
+
+              <button id="openMenuBtn"
+                class="menu-toggle"
+                aria-controls="offcanvasMenu"
+                aria-expanded="false"
+                aria-label="<?php esc_attr_e('Open menu', 'wp_bootstrap_starter'); ?>">
+                <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+              </button>
+
+              <?php if (function_exists('apply_filters')) :
+                $langs = apply_filters('wpml_active_languages', null, [
+                  'skip_missing' => 0,
+                  'orderby'      => 'code',
+                ]);
+
+                if (!empty($langs)) :
+                  $en = $langs['en'] ?? null;
+                  $ar = $langs['ar'] ?? null;
+                  $items = array_filter([$en, $ar]); // EN then AR
+                  if (empty($items)) $items = $langs;
+              ?>
+                  <div class="lang-pills" aria-label="Language switcher">
+                    <?php foreach ($items as $l) :
+                      $code   = strtoupper($l['language_code'] ?? '');
+                      $url    = $l['url'] ?? home_url('/');
+                      $active = !empty($l['active']);
+                    ?>
+                      <a class="lang-pill <?php echo $active ? 'is-active' : ''; ?>"
+                        href="<?php echo esc_url($url); ?>">
+                        <?php echo esc_html($code); ?>
+                      </a>
+                    <?php endforeach; ?>
+                  </div>
+              <?php endif;
+              endif; ?>
+
+            </div>
+
+            <!-- RIGHT: Logo -->
+            <a class="navbar-brand" href="<?php echo esc_url(home_url()); ?>">
+              <?php if ($header_logo = get_theme_mod('header_logo')): ?>
+                <img src="<?php echo esc_url($header_logo); ?>" alt="<?php bloginfo('name'); ?>" />
+              <?php else: echo esc_html(get_bloginfo('name', 'display'));
+              endif; ?>
+            </a>
+
+          </div>
+        <?php endif; ?>
+
+
+
+
+
       </nav>
     </header>
 
@@ -133,5 +227,27 @@ $search_enabled  = get_theme_mod('search_enabled', '1'); // Get custom meta-valu
           } else {
             header.classList.remove("scrolled");
           }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+          const switcher = document.querySelector('[data-lang]');
+          if (!switcher) return;
+
+          const btn = switcher.querySelector('.lang-switcher__btn');
+
+          const close = () => {
+            switcher.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+          };
+
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = switcher.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+
+          document.addEventListener('click', close);
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') close();
+          });
         });
       </script>

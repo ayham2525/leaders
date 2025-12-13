@@ -202,3 +202,350 @@ html[dir="rtl"] .floating-quicklinks {
   .offcanvas-menu, .offcanvas-overlay,
   .floating-quicklinks a { transition: none; }
 }
+
+ 
+
+/* Small pill language switcher */
+.lang-pills{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.10);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+}
+
+.lang-pill{
+  height: 32px;
+  min-width: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: $black;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .5px;
+  transition: background .18s ease, transform .18s ease, color .18s ease;
+
+  &:hover{
+    transform: translateY(-1px);
+    background: rgba(0,0,0,.06);
+  }
+
+  &.is-active{
+    background: $gold;
+    color: $black;
+  }
+}
+
+
+/* ========= FORCE HEADER LAYOUT (same in AR + EN) ========= */
+/* ===============================
+   HEADER ORDER FIX (WPML + RTL)
+   EN: [menu] [lang] [logo-right]
+   AR: [logo-left] [lang] [menu-right]
+================================ */
+
+/* The row */
+nav#header .header-row{
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* Elements default sizing */
+nav#header .navbar-brand img{
+  max-width: 120px;
+  display: block;
+}
+
+/* Keep pills consistent */
+nav#header .lang-pills{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.10);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+  direction: ltr; /* keep EN/AR pills readable */
+}
+
+nav#header .lang-pill{
+  height: 32px;
+  min-width: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #212121;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .5px;
+  transition: background .18s ease, transform .18s ease, color .18s ease;
+}
+nav#header .lang-pill:hover{
+  transform: translateY(-1px);
+  background: rgba(0,0,0,.06);
+}
+nav#header .lang-pill.is-active{
+  background: #FFD700; /* your gold */
+  color: #212121;
+}
+
+/* Menu button */
+nav#header .menu-toggle{
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #212121;
+  cursor: pointer;
+}
+
+/* ========= HEADER ROW (UPDATED FOR YOUR PHP VARIANTS) ========= */
+
+nav#header .header-row{
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 12px !important;
+  justify-content: flex-start !important; /* we will push using auto margins */
+}
+
+/* Reset any bootstrap default margins that cause centering */
+nav#header .navbar-brand{
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+nav#header .navbar-brand img{
+  max-width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* Actions wrapper */
+nav#header .header-actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Keep pills stable (readable) */
+nav#header .lang-pills{
+  direction: ltr;
+}
+
+/* ============= ENGLISH (LTR) =============
+   HTML:
+   [header-actions] .......... [logo]
+   => push logo to the far right
+*/
+nav#header .header-row--ltr .navbar-brand{
+  margin-left: auto !important; /* push logo to far right */
+}
+
+/* ============= ARABIC (RTL) =============
+   HTML:
+   [logo] .......... [header-actions]
+   => push actions to the far right
+*/
+nav#header .header-row--rtl .header-actions{
+  margin-left: auto !important; /* push actions to far right */
+}
+
+/* Optional: ensure the action items stay tight */
+nav#header .header-row--rtl .header-actions,
+nav#header .header-row--ltr .header-actions{
+  flex-shrink: 0;
+}
+
+/* Mobile tweaks */
+@media (max-width: 576px){
+  nav#header .navbar-brand img{ max-width: 100px; }
+  nav#header .header-row{ gap: 10px !important; }
+  nav#header .header-actions{ gap: 10px; }
+}
+
+ 
+/* shared */
+nav#header .header-row{
+  display: flex;
+  align-items: center;
+ 
+  gap: 12px;
+  width: 100%;
+}
+
+/* actions */
+nav#header .header-actions{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* language pills (same as before, keep if already added) */
+nav#header .lang-pills{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.10);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+  direction: ltr;
+}
+
+nav#header .lang-pill{
+  height: 32px;
+  min-width: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #212121;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .5px;
+}
+nav#header .lang-pill.is-active{ background: #FFD700; color: #212121; }
+
+/* menu button */
+nav#header .menu-toggle{
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #212121;
+  cursor: pointer;
+}
+
+/* ===============================
+   HEADER ORDER FIX (FINAL)
+   EN: left [menu + lang]  | right [logo]
+   AR: left [logo]         | right [lang + menu]
+================================ */
+
+nav#header .header-row{
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+
+/* IMPORTANT:
+   Force the header row layout to behave the same in both languages,
+   so RTL doesn't flip "flex-start" to the right. */
+nav#header .header-row--rtl,
+nav#header .header-row--ltr{
+  direction: ltr; /* keeps positioning stable */
+}
+
+/* Logo */
+nav#header .navbar-brand{
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+}
+nav#header .navbar-brand img{
+  max-width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* Actions wrapper */
+nav#header .header-actions{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Language pills */
+nav#header .lang-pills{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(0,0,0,.10);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+  direction: ltr; /* keep EN/AR pills readable */
+}
+
+nav#header .lang-pill{
+  height: 32px;
+  min-width: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #212121;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .5px;
+}
+nav#header .lang-pill.is-active{ background: #FFD700; color: #212121; }
+
+/* Menu button */
+nav#header .menu-toggle{
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #212121;
+  cursor: pointer;
+}
+
+/* ===== Positioning Rules ===== */
+
+/* EN (LTR markup): [actions] .... [logo]  => push logo to the far right */
+nav#header .header-row--ltr .navbar-brand{
+  margin-inline-start: auto !important;
+}
+
+/* AR (RTL markup): [logo] .... [actions]  => push actions to the far right */
+nav#header .header-row--rtl .header-actions{
+  margin-inline-start: auto !important;
+}
+
+/* Mobile */
+@media (max-width: 576px){
+  nav#header .navbar-brand img{ max-width: 100px; }
+  nav#header .header-row{ gap: 10px !important; }
+  nav#header .header-actions{ gap: 10px; }
+}
