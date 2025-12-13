@@ -91,6 +91,15 @@
             margin-inline-start: 0;
         }
     }
+    /* ENGLISH (LTR) only */
+html[dir="ltr"] .show_contact_form .contact-title{
+  text-align: left;
+}
+
+html[dir="ltr"] .show_contact_form .contact-title::after{
+  margin-inline-start: 0;
+  margin-inline-end: auto;   /* keep underline under the left-aligned title */
+}
 
     .contact-subtitle {
         font-size: 15px;
