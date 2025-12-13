@@ -68,7 +68,7 @@
     letter-spacing: .06em;
   }
 
-  /* DEFAULT: make it neutral (we will set EN/AR below) */
+  /* ===== Title (Default = EN/LTR) ===== */
   .contact-title{
     font-size: 34px;
     font-weight: 800;
@@ -76,7 +76,9 @@
     margin-bottom: 14px;
     position: relative;
     color: $white !important;
-    text-align: left; /* default LTR */
+
+    /* EN default */
+    text-align: left;
 
     &::after{
       content: "";
@@ -85,21 +87,15 @@
       background: $red;
       display: block;
       margin-top: 10px;
+
+      /* underline LEFT */
       margin-left: 0;
       margin-right: auto;
+      margin-inline-start: 0;
+      margin-inline-end: auto;
     }
-    
   }
-/* AR: keep title text right, but underline LEFT */
-html[dir="rtl"] .show_contact_form .contact-title::after{
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  margin-inline-start: 0 !important;
-  margin-inline-end: auto !important;
-}
-html[dir="rtl"] .show_contact_form .contact-title{
-  text-align: right !important;
-}
+
   .contact-subtitle{
     font-size: 15px;
     line-height: 1.9;
@@ -182,7 +178,7 @@ html[dir="rtl"] .show_contact_form .contact-title{
       color: $white;
       margin-bottom: 4px;
       display: block;
-      text-align: left; /* default LTR */
+      text-align: left; /* EN default */
     }
 
     input,
@@ -195,7 +191,7 @@ html[dir="rtl"] .show_contact_form .contact-title{
       padding: 11px 14px;
       transition: .3s ease;
       font-size: 14px;
-      text-align: left; /* default LTR */
+      text-align: left; /* EN default */
 
       &::placeholder{ color: rgba($white,.45); }
 
@@ -253,8 +249,6 @@ html[dir="rtl"] .show_contact_form .contact-title{
     .contact-info-panel{ margin-bottom: 24px; }
   }
 
-  /* IMPORTANT:
-     keep EN/AR alignment even on mid screens (don’t force center) */
   @include MaxQuery($mid){
     .contact-info-panel,
     .contact-form{
@@ -272,18 +266,20 @@ html[dir="rtl"] .show_contact_form .contact-title{
 
 /* ===========================================
    ARABIC (RTL) OVERRIDES
-   Put OUTSIDE .show_contact_form (important)
+   NOTE: Title stays RIGHT, underline stays LEFT ✅
 =========================================== */
 html[dir="rtl"] .show_contact_form{
+
   .contact-title{
     text-align: right !important;
+  }
 
-    &::after{
-      margin-left: auto !important;
-      margin-right: 0 !important;
-      margin-inline-start: auto !important;
-      margin-inline-end: 0 !important;
-    }
+  /* underline LEFT even in Arabic */
+  .contact-title::after{
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    margin-inline-start: 0 !important;
+    margin-inline-end: auto !important;
   }
 
   .contact-info-item{
