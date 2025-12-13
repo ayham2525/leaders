@@ -92,22 +92,25 @@
         }
     }
     /* ENGLISH (LTR) only */
-html[dir="ltr"] .show_contact_form .contact-title{
-  text-align: left;
+/* FORCE ENGLISH Contact title to the LEFT (WPML) */
+html[lang="en-US"] .show_contact_form .contact-title,
+html[lang="en"] .show_contact_form .contact-title,
+body.wpml-ls-en .show_contact_form .contact-title,
+html[lang^="en"] .show_contact_form .contact-title{
+  text-align: left !important;
+  direction: ltr !important;
 }
 
-html[dir="ltr"] .show_contact_form .contact-title::after{
-  margin-inline-start: 0;
-  margin-inline-end: auto;   /* keep underline under the left-aligned title */
+html[lang="en-US"] .show_contact_form .contact-title::after,
+html[lang="en"] .show_contact_form .contact-title::after,
+body.wpml-ls-en .show_contact_form .contact-title::after,
+html[lang^="en"] .show_contact_form .contact-title::after{
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: auto !important;
 }
 
-html[lang="en"], html[lang="en-US"]{
-  .show_contact_form .contact-title{ text-align: left; }
-  .show_contact_form .contact-title::after{
-    margin-inline-start: 0;
-    margin-inline-end: auto;
-  }
-}
 
     .contact-subtitle {
         font-size: 15px;
