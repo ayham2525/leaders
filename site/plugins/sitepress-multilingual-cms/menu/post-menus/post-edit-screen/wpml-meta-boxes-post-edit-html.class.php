@@ -620,6 +620,11 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 		$source_lang = filter_var( isset( $_GET['source_lang'] ) ? $_GET['source_lang'] : '', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$source_lang = 'all' === $source_lang ? $this->sitepress->get_default_language() : $source_lang;
 		$lang        = filter_var( isset( $_GET['lang'] ) ? $_GET['lang'] : '', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+		if ( ! $lang ) {
+			$lang = $this->sitepress->get_language_for_element( $post->ID, 'post_' . $post->post_type );
+		}
+
 		$source_lang = ! $source_lang && isset( $_GET['post'] ) && $lang !== $this->sitepress->get_default_language()
 				? $this->post_translation->get_source_lang_code( $post->ID ) : $source_lang;
 

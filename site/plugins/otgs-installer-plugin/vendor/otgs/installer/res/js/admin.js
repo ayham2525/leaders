@@ -25,7 +25,6 @@ var otgs_wp_installer = {
 
         otgs_wp_installer.scroll_to_repository();
         otgs_wp_installer.maybe_register();
-        otgs_wp_installer.update_downloads_form();
 
         if (typeof pagenow != 'undefined' && pagenow == 'plugins') {
 
@@ -215,10 +214,11 @@ var otgs_wp_installer = {
     update_downloads_form: function () {
 
         var checked = jQuery('.otgsi_downloads_form :checkbox:checked[name="downloads[]"]').length;
+
         if (checked) {
-            jQuery('.otgsi_downloads_form').closest('form').find(':submit, :checkbox[name=activate]').removeAttr('disabled');
+            jQuery(this).closest('form').find(':submit, :checkbox[name=activate]').removeAttr('disabled');
         } else {
-            jQuery('.otgsi_downloads_form').closest('form').find(':submit, :checkbox[name=activate]').attr('disabled', 'disabled');
+            jQuery(this).closest('form').find(':submit, :checkbox[name=activate]').attr('disabled', 'disabled');
         }
 
 

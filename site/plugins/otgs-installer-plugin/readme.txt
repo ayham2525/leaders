@@ -1,2 +1,2 @@
 === OTGS Installer Plugin ===
-Stable tag: 3.1.14
+Stable tag: 3.1.10

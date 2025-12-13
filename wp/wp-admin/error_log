@@ -46,3 +46,18 @@
 [02-Dec-2025 10:15:13 UTC] 4whats: instanceid or token not configured.
 [02-Dec-2025 10:16:14 UTC] 4whats: instanceid or token not configured.
 [02-Dec-2025 10:16:14 UTC] 4whats: instanceid or token not configured.
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 291
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 293
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 294
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 291
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 293
+[13-Dec-2025 17:10:32 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 294
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 291
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 293
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 294
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 291
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 293
+[13-Dec-2025 17:13:20 UTC] PHP Warning:  Attempt to read property "name" on array in /home/leadersa/leaderssports.ae/site/plugins/wpml-string-translation/menu/string-translation.php on line 294
+[13-Dec-2025 19:28:58 UTC] WPML: Failed to send site key to AMS: AMS API returned false
+[13-Dec-2025 19:31:32 UTC] WPML: Failed to send site key to AMS: AMS API returned false
+[13-Dec-2025 19:35:35 UTC] WPML: Failed to send site key to AMS: AMS API returned false

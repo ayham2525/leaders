@@ -287,18 +287,15 @@
     line-height: 1.625;
     color: var(--gray-dim);
 }
-.installer-plugins .installer_checkbox input[type=checkbox] {
-    width: 16px;
-    height: 16px;
+input[type=checkbox] {
     border: 1px solid rgba(51, 135, 158, 0.5);
     border-radius: 2px;
     position: relative;
 }
-.installer-plugins .installer_checkbox input[type=checkbox]:hover,
-.installer-plugins .installer_checkbox input[type=checkbox]:focus {
+input[type=checkbox]:hover, input[type=checkbox]:focus {
     border-color: var(--wpml-blue);
 }
-.installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:checked::before {
+input[type=checkbox]:checked::before {
     content: '';
     width: 4px;
     height: 8px;
@@ -309,12 +306,7 @@
     left: 8px;
     transform: rotate(45deg);
 }
-@media (max-width: 782px) {
-    .installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:checked::before {
-        left: 9px;
-    }
-}
-.installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:disabled {
+input[type=checkbox]:disabled {
     border: 1px solid rgba(51, 135, 158, 0.15);
     background-color: var(--wpml-blue-lightest);
     cursor: not-allowed;
@@ -581,41 +573,4 @@ tr#repository-wpml_wpml td:nth-of-type(2) p strong {
     font-size: 16px;
     line-height: 1.5;
     color: var(--gray-dark);
-}
-
-
-/** Notification */
-
-.widefat .otgs-reset * {
-    all: unset;
-}
-
-.otgs-reset .notification {
-    display: flex;
-    align-items: center;
-    padding: 12px 40px 12px 20px;
-    gap: 12px;
-    border-radius: 5px;
-    background: #33879E1A;
-    border-left: 4px solid #33879E;
-    max-width:  552px;
-    width:50%;
-}
-
-.otgs-reset .otgs-blue{
-    color:#33879E;
-}
-.otgs-reset .otgs-text-xs{
-    font-size: 12px;
-}
-.otgs-reset .otgs-text-sm{
-    font-size: 16px;
-    line-height: 16px;
-}
-.otgs-reset .otgs-ml-auto{
-    margin-left: auto;
-}
-
-.otgs-cursor-pointer{
-    cursor:pointer !important;
 }

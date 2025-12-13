@@ -13,8 +13,9 @@ class DownloadsList {
 			'repository_id' => $repository_id
 		] ) );
 
-		$disabled = ! OTGS_Installer()->can_plugin_be_installed($download,$repository_id)  ? 'disabled' : '';
-		$checked = $download['is_preselected_plugin'] ? 'checked' : '';
+		$disabled = ( OTGS_Installer()->plugin_is_installed( $download['name'], $download['slug'], $download['version'] )
+		              && ! OTGS_Installer()->plugin_is_embedded_version( $download['name'], $download['slug'] )
+		              || OTGS_Installer()->dependencies->cant_download( $repository_id ) ) ? 'disabled="disabled"' : '';
 
 		$upToDateClass = '';
 		if ( $v = OTGS_Installer()->plugin_is_installed( $download['name'], $download['slug'] ) ) {
@@ -60,7 +61,7 @@ class DownloadsList {
 		return '<tr id="'.$download_id.'_plugin-row">
 	                <td class="installer_checkbox for_spinner_js">
 	                    <label>
-	                       <input type="checkbox" ' . $checked . ' name="downloads[]" value="' . $download_data . '" data-slug="' . $download['slug'] . '" ' . $disabled . ' />&nbsp;
+	                    <input type="checkbox" name="downloads[]" value="' . $download_data . '" data-slug="' . $download['slug'] . '" ' . $disabled . ' />&nbsp;
 	                    </label>
 	                    <span class="spinner"></span>
 	                </td>

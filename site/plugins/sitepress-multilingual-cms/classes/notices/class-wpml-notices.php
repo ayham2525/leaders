@@ -1,6 +1,7 @@
 <?php
 
 use WPML\Core\WP\App\Resources;
+use WPML\LIB\WP\User;
 
 /**
  * @author OnTheGo Systems
@@ -193,6 +194,15 @@ class WPML_Notices {
 	public function save_to_option() {
 		if ( null === $this->notices ) {
 			// Nothing to save.
+			return;
+		}
+
+		$is_allowed_user = is_user_logged_in() && (
+			current_user_can( User::CAP_MANAGE_TRANSLATIONS ) ||
+			current_user_can( User::CAP_TRANSLATE )
+		);
+
+		if ( ! $is_allowed_user ) {
 			return;
 		}
 

@@ -182,7 +182,7 @@ class RecommendationsManager {
 
 						if (
 							array_key_exists( 'download_recommendation_section', $pluginData ) &&
-							is_string( $pluginData['download_recommendation_section']) &&  !empty( $pluginData['download_recommendation_section'] )
+							is_string( $pluginData['download_recommendation_section'] )
 						) {
 							$pluginsRecommendations[ $pluginData['download_recommendation_section'] ]['plugins'][ $pluginData['slug'] ] = $sectionPlugin;
 							$pluginsData[ $pluginData['slug'] ]                                                                         = $recommendation;
@@ -194,12 +194,14 @@ class RecommendationsManager {
 			$recommendationsForInstallerPlugins = $this->prepareRecommendationsForInstalledPlugins( $repositoryId, $subscription, $downloads, $installedPlugins, $pluginsRecommendations, $pluginsData );
 			$pluginsData = $recommendationsForInstallerPlugins->getPluginsData();
 
-			$pluginsRecommendations = $recommendationsForInstallerPlugins->getRecommendations();
-
 			foreach ( $recommendationsForInstallerPlugins->getRecommendations() as $section => $plugins_recommendation ) {
-				$pluginsRecommendations[ $section ]['title'] = $sections[ $section ][ $language ]['name'] ?? $sections[ $section ]['en']['name'] ?? '';
-				$pluginsRecommendations[ $section ]['order'] = $sections[ $section ][ $language ]['order'] ?? $sections[ $section ]['en']['order'] ?? '';
+				// Use current site lang if available, otherwise 'en'.
+				$lang = array_key_exists( $language, $sections[ $section ] )
+					? $language
+					: 'en';
 
+				$pluginsRecommendations[ $section ]['title'] = $sections[ $section ][ $lang ]['name'];
+				$pluginsRecommendations[ $section ]['order'] = $sections[ $section ][ $lang ]['order'];
 			}
 		}
 

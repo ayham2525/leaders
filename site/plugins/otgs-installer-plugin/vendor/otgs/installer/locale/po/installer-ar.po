@@ -7,10 +7,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-21T14:15:01+00:00\n"
+"POT-Creation-Date: 2025-01-16T17:01:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: installer\n"
+
+msgid "Translate with PTC"
+msgstr "ترجم مع PTC"
 
 #. translators: %1$s and %2$s are opening and closing link tags.
 #: includes/admin-notices/notices/Account.php:107
@@ -47,7 +50,6 @@ msgstr "موقعك عرضة للتغييرات المعطلة في إصدارا�
 msgid "Your site is vulnerable to breaking changes in future WordPress releases. Renew your account to protect your site with the latest %s releases."
 msgstr "موقعك عرضة للتغييرات المعطلة في إصدارات ووردبريس المستقبلية. جدِّد حسابك لحماية موقعك بأحدث إصدارات %s."
 
-#. translators: %s Product url
 #: includes/admin-notices/notices/Texts.php:52
 msgid "This site is registered on %s as a development site."
 msgstr "هذا الموقع مسجل على %s كموقع تطوير."
@@ -94,7 +96,6 @@ msgstr "مساعدة؟"
 msgid "See the %1$s and let us know in %2$s."
 msgstr "راجع %1$s وأعلمنا في %2$s."
 
-#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
 #: includes/admin-notices/notices/Texts.php:84
 msgid "communication error details"
 msgstr "تفاصيل خطأ في الاتصال"
@@ -117,7 +118,7 @@ msgid "Ignore and don't ask me again"
 msgstr "تجاهل ولا تسألني مرة أخرى"
 
 #: includes/admin-notices/notices/Texts.php:147
-#: includes/class-wp-installer.php:525
+#: includes/class-wp-installer.php:545
 #: includes/upgrade/AutoUpgrade.php:114
 #: templates/repository-register.php:49
 msgid "Register"
@@ -232,27 +233,27 @@ msgid_plural "Your %s account expires in %d days."
 msgstr[0] "ستنتهي صلاحية حسابك %s خلال %d يوم."
 msgstr[1] "تنتهي صلاحية حسابك %s خلال %d يوم."
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:110
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:97
 msgid "Reporting to"
 msgstr "تقرير إلى"
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:111
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:98
 msgid "Report to"
 msgstr "تقرير إلى"
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:112
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:99
 msgid "Send theme and plugins information, in order to get faster support and compatibility alerts"
 msgstr "إرسال معلومات القالب والمكونات الإضافية، من أجل الحصول على دعم أسرع وتنبيهات التوافق"
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:114
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:101
 msgid "Don't send this information and skip compatibility alerts"
 msgstr "عدم إرسال هذه المعلومات وتخطي تنبيهات التوافق"
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:116
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:103
 msgid "which theme and plugins you are using."
 msgstr "القالب والإضافات التي تستخدمها."
 
-#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:160
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:142
 msgid "Privacy and data usage policy"
 msgstr "سياسة الخصوصية"
 
@@ -268,111 +269,107 @@ msgstr "بيتا"
 msgid "Production"
 msgstr "الإنتاج"
 
-#: includes/class-wp-installer.php:190
+#: includes/class-wp-installer.php:193
 msgid "Installing %s"
 msgstr "تثبيت %s"
 
-#: includes/class-wp-installer.php:191
+#: includes/class-wp-installer.php:194
 msgid "Updating %s"
 msgstr "تحديث %s"
 
-#: includes/class-wp-installer.php:192
+#: includes/class-wp-installer.php:195
 msgid "Activating %s"
 msgstr "تفعيل %s"
 
-#: includes/class-wp-installer.php:358
 #: includes/class-wp-installer.php:359
-#: includes/class-wp-installer.php:1127
+#: includes/class-wp-installer.php:360
+#: includes/class-wp-installer.php:1183
 msgid "Installer"
 msgstr "المثبت"
 
-#: includes/class-wp-installer.php:513
+#: includes/class-wp-installer.php:534
 msgid "Upgrade"
 msgstr "ترقية"
 
-#: includes/class-wp-installer.php:519
+#: includes/class-wp-installer.php:539
 msgid "Registered"
 msgstr "مسجل"
 
-#: includes/class-wp-installer.php:701
+#: includes/class-wp-installer.php:743
 msgid ""
 "You are using an invalid site key defined as the constant %s (most likely in wp-config.php).\n"
 "                                                Please remove it or use the correct value in order to be able to register correctly."
 msgstr "أنت تستخدم مفتاح موقع غير صالح معرف كثابت %s (على الأرجح في wp-config.php). يرجى إزالته أو استخدام القيمة الصحيحة للتسجيل بشكل صحيح."
 
-#: includes/class-wp-installer.php:827
+#: includes/class-wp-installer.php:877
 msgid "Commercial"
 msgstr "تجاري"
 
-#: includes/class-wp-installer.php:1017
+#: includes/class-wp-installer.php:1076
 msgid "Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):"
 msgstr "يتعذر على المثبت عرض معلومات المنتجات لأن التحديث التلقائي لـ %s تم تعطيله صراحةً باستخدام التكوين أدناه (عادةً في wp-config.php):"
 
-#: includes/class-wp-installer.php:1019
+#: includes/class-wp-installer.php:1078
 msgid "In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code."
 msgstr "من أجل الاطلاع على معلومات المنتجات، يرجى تشغيل %s التحقق من التحديثات اليدوية %s لتهيئة قائمة المنتجات أو إزالة الرمز أعلاه (مؤقتًا)."
 
-#: includes/class-wp-installer.php:1047
+#: includes/class-wp-installer.php:1105
 msgid "Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:"
 msgstr "مشكلة اتصال مؤقتة"
 
-#: includes/class-wp-installer.php:1074
-#: includes/class-wp-installer.php:1078
+#: includes/class-wp-installer.php:1131
+#: includes/class-wp-installer.php:1135
 msgid "Information about new versions is invalid. It may be a temporary communication problem, please check for updates again."
 msgstr "معلومات غير صالحة"
 
-#: includes/class-wp-installer.php:1118
+#: includes/class-wp-installer.php:1175
 msgid "Sorry, you are not allowed to manage Installer for this site."
 msgstr "عذرًا، لا يُسمح لك بإدارة برنامج التثبيت لهذا الموقع."
 
-#: includes/class-wp-installer.php:1157
+#: includes/class-wp-installer.php:1221
 msgid "No repositories defined."
 msgstr "لا توجد مستودعات"
 
-#: includes/class-wp-installer.php:1379
-msgid "We have preselected the plugins your site needs to be fully multilingual."
-msgstr "لقد قمنا باختيار الإضافات التي يحتاجها موقعك مسبقًا ليكون متعدد اللغات بشكل كامل."
-
-#: includes/class-wp-installer.php:1615
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:71
+#: includes/class-wp-installer.php:1597
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
 msgid "Invalid site key for the current site."
 msgstr "المفتاح غير صالح"
 
-#: includes/class-wp-installer.php:1616
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:71
+#: includes/class-wp-installer.php:1598
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
 msgid "Please note that the site key is case sensitive."
 msgstr "المفتاح حساس لحالة الأحرف"
 
-#: includes/class-wp-installer.php:1621
+#: includes/class-wp-installer.php:1604
 msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet."
 msgstr "%s يتعذر الوصول إلى %s للتسجيل. حاول مرة أخرى لمعرفة ما إذا كانت المشكلة مؤقتة. إذا استمرت المشكلة، تأكد من أن هذا الموقع متصل بالإنترنت."
 
-#: includes/class-wp-installer.php:2262
+#: includes/class-wp-installer.php:2302
 msgid "Connection failed! Please refresh the page and try again. (%s)"
 msgstr "فشل الاتصال! الرجاء تحديث الصفحة والمحاولة مرة أخرى. (%s)"
 
-#: includes/class-wp-installer.php:2265
+#: includes/class-wp-installer.php:2305
 msgid "Your subscription appears to no longer be valid. Please try to register again using a valid site key."
 msgstr "يبدو أن اشتراكك لم يعد صالحاً. يرجى محاولة التسجيل مرة أخرى باستخدام مفتاح موقع صالح."
 
-#: includes/class-wp-installer.php:2894
-#: includes/class-wp-installer.php:2956
+#: includes/class-wp-installer.php:3009
+#: includes/class-wp-installer.php:3087
 msgid "%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first."
 msgstr "%s لا يمكن التحديث لأن تسجيل موقعك غير صالح. يُرجى %s تسجيل %s%s مرة أخرى لهذا الموقع أولاً."
 
-#: includes/class-wp-installer.php:2979
+#: includes/class-wp-installer.php:3111
 msgid "Update Plugin"
 msgstr "تحديث المكون الإضافي"
 
-#: includes/class-wp-installer.php:2980
+#: includes/class-wp-installer.php:3112
 msgid "Return to the plugins page"
 msgstr "العودة للإضافات"
 
-#: includes/products/commercial-tab/DownloadsList.php:28
+#: includes/products/commercial-tab/DownloadsList.php:29
 msgid "(embedded)"
 msgstr "(مضمنة)"
 
-#: includes/products/commercial-tab/DownloadsList.php:42
+#: includes/products/commercial-tab/DownloadsList.php:43
 msgid "Release notes"
 msgstr "ملاحظات الإصدار"
 
@@ -380,19 +377,19 @@ msgstr "ملاحظات الإصدار"
 msgid "Information about versions of %s are invalid. It may be a temporary communication problem, please check for updates again."
 msgstr "المعلومات حول إصدارات %s غير صالحة. قد تكون مشكلة مؤقتة في الاتصال، يرجى التحقق من التحديثات مرة أخرى."
 
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:44
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:40
 msgid "Empty site key!"
 msgstr "مفتاح فارغ!"
 
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:48
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:44
 msgid "Invalid request!"
 msgstr "طلب غير صالح!"
 
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:123
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:125
 msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
 msgstr "مفتاح الموقع غير صالح للموقع الحالي. إذا استمر الخطأ، حاول إلغاء التسجيل أولاً ثم التسجيل مرة أخرى بنفس مفتاح الموقع."
 
-#: includes/site-key/class-otgs-installer-site-key-ajax.php:177
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:179
 msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
 msgstr "%s يتعذر الوصول إلى %s للتسجيل. حاول مرة أخرى لمعرفة ما إذا كانت المشكلة مؤقتة. إذا استمرت المشكلة، تأكد من أن هذا الموقع متصل بالإنترنت. لا يزال بإمكانك استخدام الإضافة بدون تسجيل، ولكن لن تتلقى تحديثات تلقائية."
 
@@ -479,11 +476,11 @@ msgstr "خادم واجهة الأدوات"
 msgid " to use auto-updates"
 msgstr " لاستخدام التحديثات التلقائية"
 
-#: loader.php:72
+#: loader.php:67
 msgid "This site is registered on %s as a development site. Switch to a production site key to %s."
 msgstr "هذا الموقع مسجل على %s كموقع تطوير. قم بالتبديل إلى مفتاح موقع الإنتاج إلى %s."
 
-#: loader.php:77
+#: loader.php:72
 msgid "This site is registered on Toolset.com as a development site."
 msgstr "هذا الموقع مسجل على موقع Toolset.com كموقع تطوير."
 
@@ -528,7 +525,8 @@ msgid "You are using a potentially less stable channel for %s. If you didn't ena
 msgstr "أنت تستخدم قناة يحتمل أن تكون أقل استقرارًا لـ %s. إذا لم تقم بتمكين هذا عن قصد، فيجب عليك التبديل إلى قناة \"الإنتاج\"."
 
 #: templates/downloads-list-compact.php:8
-#: templates/downloads-list.php:29
+#: templates/downloads-list.php:15
+#: templates/downloads-list.php:44
 msgid "Plugin"
 msgstr "المكوّن الإضافي"
 
@@ -537,7 +535,8 @@ msgid "Available"
 msgstr "متوفرة"
 
 #: templates/downloads-list-compact.php:10
-#: templates/downloads-list.php:30
+#: templates/downloads-list.php:16
+#: templates/downloads-list.php:45
 msgid "Installed"
 msgstr "تم التثبيت"
 
@@ -570,22 +569,22 @@ msgid "activated"
 msgstr "مفعّل"
 
 #: templates/downloads-list-compact.php:65
-#: templates/downloads-list.php:55
+#: templates/downloads-list.php:71
 msgid "Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s."
 msgstr "التنزيل غير ممكن لأن WordPress لا يمكنه الكتابة في مجلد الإضافات. %s كيفية الإصلاح%s."
 
 #: templates/downloads-list-compact.php:72
-#: templates/downloads-list.php:62
+#: templates/downloads-list.php:78
 msgid "Download"
 msgstr "تنزيل"
 
 #: templates/downloads-list-compact.php:74
-#: templates/downloads-list.php:66
+#: templates/downloads-list.php:82
 msgid "Activate after download"
 msgstr "التفعيل بعد التنزيل"
 
 #: templates/downloads-list-compact.php:77
-#: templates/downloads-list.php:70
+#: templates/downloads-list.php:86
 msgid "Operation complete!"
 msgstr "اكتملت العملية!"
 
@@ -598,15 +597,17 @@ msgstr "فشل التنزيل!
 
 انقر موافق لإعادة التحقق من اشتراكك أو إلغاء للمحاولة مرة أخرى."
 
-#: templates/downloads-list.php:31
+#: templates/downloads-list.php:17
+#: templates/downloads-list.php:46
 msgid "Current"
 msgstr "الحالي"
 
-#: templates/downloads-list.php:32
+#: templates/downloads-list.php:18
+#: templates/downloads-list.php:47
 msgid "Released"
 msgstr "تم الإصدار"
 
-#: templates/downloads-list.php:72
+#: templates/downloads-list.php:88
 msgid ""
 "Download failed!\n"
 "\n"
@@ -682,7 +683,6 @@ msgstr "%s الدعم على موقع wpml.org"
 msgid "Do you have an account on %s?"
 msgstr "هل لديك حساب على %s؟?"
 
-#. translators: %s replaced with wpml.org or toolset.com
 #: templates/repository-end-users.php:18
 msgid "Great! You just need to extend your subscription."
 msgstr "عظيم! ما عليك سوى تمديد اشتراكك."
@@ -692,7 +692,6 @@ msgstr "عظيم! ما عليك سوى تمديد اشتراكك."
 msgid "You have a %s account. You just need to extend your subscription."
 msgstr "لديك حساب %s. تحتاج فقط إلى تمديد اشتراكك."
 
-#. translators: %s replaced with wpml.org or toolset.com
 #: templates/repository-end-users.php:21
 msgid "Extend Subscription"
 msgstr "تمديد الاشتراك"
@@ -712,7 +711,6 @@ msgstr "ليس لديك حساب %1$s حتى الآن. تحتاج إلى إعد�
 msgid "Set Up Renewal For %s"
 msgstr "إعداد التجديد لـ %s"
 
-#. translators: %s replaced with wpml.org or toolset.com
 #: templates/repository-end-users.php:28
 msgid "No worries. We can check that for you."
 msgstr "لا تقلق، نتحقق."
@@ -813,10 +811,10 @@ msgstr "إلغاء تسجيل %s من هذا الموقع"
 msgid "Check for updates"
 msgstr "تحقق من وجود تحديثات"
 
-#: templates/repository-registered.php:13
-msgid "%s is registered on this site using the following sitekey: <strong>%s</strong>. You will receive automatic updates until %s"
-msgstr "تم تسجيل %s على هذا الموقع باستخدام مفتاح الموقع التالي: <strong>%s</strong>. ستتلقى تحديثات تلقائية حتى %s"
+#: templates/repository-registered.php:10
+msgid "%s is registered on this site. You will receive automatic updates until %s"
+msgstr "تم تسجيل %s على هذا الموقع. ستتلقى تحديثات تلقائية حتى %s"
 
-#: templates/repository-registered.php:19
-msgid "%s is registered on this site using the following sitekey: <strong>%s</strong>. Your Lifetime account gives you updates for life."
-msgstr "تم تسجيل %s على هذا الموقع باستخدام مفتاح الموقع التالي: <strong>%s</strong>. يمنحك حسابك مدى الحياة تحديثات دائمة."
+#: templates/repository-registered.php:11
+msgid "%s is registered on this site. Your Lifetime account gives you updates for life."
+msgstr "%s مسجل على هذا الموقع. يمنحك حسابك مدى الحياة تحديثات مدى الحياة."
