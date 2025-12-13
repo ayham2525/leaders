@@ -88,8 +88,18 @@
       margin-left: 0;
       margin-right: auto;
     }
+    
   }
-
+/* AR: keep title text right, but underline LEFT */
+html[dir="rtl"] .show_contact_form .contact-title::after{
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  margin-inline-start: 0 !important;
+  margin-inline-end: auto !important;
+}
+html[dir="rtl"] .show_contact_form .contact-title{
+  text-align: right !important;
+}
   .contact-subtitle{
     font-size: 15px;
     line-height: 1.9;
