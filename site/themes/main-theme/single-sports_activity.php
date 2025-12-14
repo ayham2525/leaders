@@ -121,8 +121,19 @@ while (have_posts()) : the_post();
                                                             <span class="meta-label"><?php _e('Days:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
+                                                            <?php
+                                                            $day_names = [];
+
+                                                            if (!empty($days) && is_array($days)) {
+                                                                foreach ($days as $day) {
+                                                                    if (is_array($day) && isset($day['label'])) {
+                                                                        $day_names[] = $day['label'];
+                                                                    }
+                                                                }
+                                                            }
+                                                            ?>
                                                             <span class="meta-value">
-                                                                <?php echo esc_html(implode(', ', (array) $days)); ?>
+                                                                <?php echo esc_html(implode(', ', $day_names)); ?>
                                                             </span>
                                                         </td>
                                                     </tr>
