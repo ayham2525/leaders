@@ -52,11 +52,22 @@ while (have_posts()) : the_post();
                                         <div class="row">
                                             <!-- Image & Actions -->
                                             <div class="col-md-6 col-sm-12">
-                                                <?php if ($image = get_sub_field('image')) : ?>
-                                                    <img src="<?php echo esc_url($image['url']); ?>"
+                                                <?php
+                                                $image = get_sub_field('image');
+
+                                                if (!empty($image) && isset($image['id'])) :
+                                                    $img_url = wp_get_attachment_image_url($image['id'], 'large');
+                                                    $x = $image['left'] ?? 50;
+                                                    $y = $image['top'] ?? 50;
+                                                ?>
+                                                    <img
+                                                        src="<?php echo esc_url($img_url); ?>"
                                                         alt="<?php echo esc_attr($sport_title); ?>"
-                                                        class="img-fluid">
+                                                        class="img-fluid"
+                                                        style="object-position: <?php echo esc_attr($x); ?>% <?php echo esc_attr($y); ?>%;">
                                                 <?php endif; ?>
+
+
 
                                                 <div class="sport-actions mt-4">
                                                     <div class="sport-actions-icons">
