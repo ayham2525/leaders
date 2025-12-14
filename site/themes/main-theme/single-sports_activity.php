@@ -20,111 +20,47 @@ while (have_posts()) : the_post();
             <div class="row">
                 <?php if (have_rows('activities_info')) : ?>
 
-                    <?php
-
-                    while (have_rows('activities_info')) : the_row();
-
+                    <?php while (have_rows('activities_info')) : the_row();
                         $branch_name  = get_sub_field('branch');
                         $location_url = get_sub_field('location');
                     ?>
+
                         <h2 class="branch-title p-0 m-0">
                             <?php echo esc_html($branch_name); ?>
                         </h2>
-                        <?php if (have_rows('sports')) : ?>
 
-                            <?php
-                            $sport_index = 0;
-                            while (have_rows('sports')) : the_row();
+                        <?php if (have_rows('sports')) : ?>
+                            <?php $sport_index = 0; ?>
+
+                            <?php while (have_rows('sports')) : the_row();
                                 $sport_index++;
                                 $sport_title = get_sub_field('sport_title');
                                 $fees        = get_sub_field('fees');
                                 $days        = get_sub_field('training_days');
                                 $description = get_sub_field('text');
                                 $link        = get_sub_field('link');
-                                $faqs        =  get_sub_field('faq');
-
-
-                                // Unique IDs for this sport block (Bootstrap 5)
-                                $tab_prefix       = 'sport-' . $sport_index . '-';
-                                $tabs_id          = $tab_prefix . 'tabs';
-                                $tabs_content_id  = $tab_prefix . 'tabs-content';
-                                $desc_tab_id      = $tab_prefix . 'desc-tab';
-                                $faq_tab_id       = $tab_prefix . 'faq-tab';
-                                $desc_pane_id     = $tab_prefix . 'desc-pane';
-                                $faq_pane_id      = $tab_prefix . 'faq-pane';
-                                $faq_accordion_id = $tab_prefix . 'faq-accordion';
-
-                                // WhatsApp (raw from ACF) – for icon + backend API
-                                $whatsapp_raw   = get_sub_field('whatsapp');
-                                $whatsapp_url   = '';
-                                $wa_number_api  = '';
-
-                                if (!empty($whatsapp_raw)) {
-                                    // Trim & remove any non-digits (spaces, +, -, etc.)
-                                    $wa_number_digits = preg_replace('/\D+/', '', trim($whatsapp_raw));
-
-                                    if ($wa_number_digits !== '') {
-                                        // If starts with 0 (e.g. 050xxxxxxx) => 97150xxxxxxx
-                                        if (strpos($wa_number_digits, '0') === 0) {
-                                            $wa_number_digits = '971' . substr($wa_number_digits, 1);
-                                        }
-                                        // link for front-end
-                                        $whatsapp_url  = 'https://wa.me/' . $wa_number_digits;
-                                        // digits only for API
-                                        $wa_number_api = $wa_number_digits;
-                                    }
-                                }
-
-                                // Image
-                                $image         = get_sub_field('image');
-                                $sport_img_url = '';
-                                if (!empty($image['id'])) {
-                                    $src = wp_get_attachment_image_src($image['id'], 'full');
-                                    if (!empty($src[0])) {
-                                        $sport_img_url = $src[0];
-                                    }
-                                }
-
-                                // Normalize training days labels
-                                $day_labels = [];
-                                if (!empty($days) && is_array($days)) {
-                                    foreach ($days as $d) {
-                                        if (is_array($d)) {
-                                            $day_labels[] = isset($d['label'])
-                                                ? $d['label']
-                                                : (isset($d['value']) ? $d['value'] : '');
-                                        } else {
-                                            $day_labels[] = $d;
-                                        }
-                                    }
-                                    $day_labels = array_filter($day_labels);
-                                }
+                                $faqs        = get_sub_field('faq');
                             ?>
 
-                                <!-- Sport Card -->
                                 <div class="activity-card js-scroll-up pb-5">
-
-
                                     <div class="activity-info">
+
+                                        <h3 class="activity-name py-3">
+                                            <?php echo esc_html($sport_title); ?>
+                                        </h3>
+
                                         <div class="row">
-                                            <div class="col-12">
-                                                <?php if ($sport_title) : ?>
-                                                    <h3 class="activity-name py-3">
-                                                        <?php echo esc_html($sport_title); ?>
-                                                    </h3>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                                            <!-- Image & Actions -->
                                             <div class="col-md-6 col-sm-12">
-                                                <?php if ($sport_img_url): ?>
-                                                    <img src="<?php echo esc_url($sport_img_url); ?>"
+                                                <?php if ($image = get_sub_field('image')) : ?>
+                                                    <img src="<?php echo esc_url($image['url']); ?>"
                                                         alt="<?php echo esc_attr($sport_title); ?>"
                                                         class="img-fluid">
                                                 <?php endif; ?>
-                                                <div class="sport-actions mt-4">
 
+                                                <div class="sport-actions mt-4">
                                                     <div class="sport-actions-icons">
+
                                                         <?php if ($location_url) : ?>
                                                             <a href="<?php echo esc_url($location_url); ?>"
                                                                 target="_blank"
@@ -137,44 +73,33 @@ while (have_posts()) : the_post();
                                                         <?php if ($link) : ?>
                                                             <a href="<?php echo esc_url($link); ?>"
                                                                 target="_blank"
-                                                                rel="noopener"
                                                                 class="btn-share"
                                                                 data-copy="<?php echo esc_attr($link); ?>"
-                                                                title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                                title="<?php esc_attr_e('Copy location link', 'main-theme'); ?>">
                                                                 <i class="fa fa-share"></i>
                                                             </a>
                                                         <?php endif; ?>
 
-                                                        <?php if ($whatsapp_url) : ?>
-                                                            <a href="<?php echo esc_url($whatsapp_url); ?>"
-                                                                target="_blank"
-                                                                class="btn-whatsapp"
-                                                                rel="noopener">
-                                                                <i class="fab fa-whatsapp"></i>
-                                                            </a>
-                                                        <?php endif; ?>
                                                         <?php if ($sport_title) : ?>
                                                             <button class="btn btn-book open-activity-register mt-3"
                                                                 type="button"
                                                                 data-branch="<?php echo esc_attr($branch_name); ?>"
-                                                                data-sport="<?php echo esc_attr($sport_title); ?>"
-                                                                data-whatsapp="<?php echo esc_attr($wa_number_api); ?>">
-                                                                <?php _e('حجز الفعالية الرياضية', 'main-theme'); ?>
+                                                                data-sport="<?php echo esc_attr($sport_title); ?>">
+                                                                <?php _e('Book Sports Activity', 'main-theme'); ?>
                                                             </button>
                                                         <?php endif; ?>
+
                                                     </div>
-
-
-
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-sm-12">
 
+                                            <!-- Meta & Tabs -->
+                                            <div class="col-md-6 col-sm-12">
 
                                                 <table class="program-meta-table">
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Fees:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value"><?php echo esc_html($fees); ?></span>
@@ -182,17 +107,17 @@ while (have_posts()) : the_post();
                                                     </tr>
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الأيام:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Days:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value">
-                                                                <?php echo esc_html(implode('، ', $day_labels)); ?>
+                                                                <?php echo esc_html(implode(', ', (array) $days)); ?>
                                                             </span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الفترة:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Branch:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
@@ -200,198 +125,95 @@ while (have_posts()) : the_post();
                                                     </tr>
                                                 </table>
 
-
-
                                                 <div class="program-tabs mt-4">
-                                                    <!-- Tabs Header -->
-                                                    <ul class="nav nav-tabs" id="<?php echo esc_attr($tabs_id); ?>" role="tablist">
-                                                        <li class="nav-item" role="presentation">
-                                                            <button
-                                                                class="nav-link active"
-                                                                id="<?php echo esc_attr($desc_tab_id); ?>"
-                                                                data-bs-toggle="tab"
-                                                                data-bs-target="#<?php echo esc_attr($desc_pane_id); ?>"
-                                                                type="button"
-                                                                role="tab"
-                                                                aria-controls="<?php echo esc_attr($desc_pane_id); ?>"
-                                                                aria-selected="true">
-                                                                <?php _e('الوصف', 'main-theme'); ?>
+                                                    <ul class="nav nav-tabs" role="tablist">
+                                                        <li class="nav-item">
+                                                            <button class="nav-link active" data-bs-toggle="tab">
+                                                                <?php _e('Description', 'main-theme'); ?>
                                                             </button>
                                                         </li>
-                                                        <li class="nav-item" role="presentation">
-                                                            <button
-                                                                class="nav-link"
-                                                                id="<?php echo esc_attr($faq_tab_id); ?>"
-                                                                data-bs-toggle="tab"
-                                                                data-bs-target="#<?php echo esc_attr($faq_pane_id); ?>"
-                                                                type="button"
-                                                                role="tab"
-                                                                aria-controls="<?php echo esc_attr($faq_pane_id); ?>"
-                                                                aria-selected="false">
-                                                                <?php _e('الأسئلة الشائعة', 'main-theme'); ?>
+                                                        <li class="nav-item">
+                                                            <button class="nav-link" data-bs-toggle="tab">
+                                                                <?php _e('FAQs', 'main-theme'); ?>
                                                             </button>
                                                         </li>
                                                     </ul>
 
-                                                    <!-- Tabs Content -->
-                                                    <div class="tab-content p-3" id="<?php echo esc_attr($tabs_content_id); ?>">
-                                                        <!-- وصف البرنامج -->
-                                                        <div
-                                                            class="tab-pane fade show active"
-                                                            id="<?php echo esc_attr($desc_pane_id); ?>"
-                                                            role="tabpanel"
-                                                            aria-labelledby="<?php echo esc_attr($desc_tab_id); ?>">
-                                                            <div class="program-description">
-                                                                <?php
-                                                                $desc = (string) $description;
-
-                                                                // 1) استبدال img القادم من فيسبوك بالـ alt (الإيموجي)
-                                                                $desc = preg_replace(
-                                                                    '/<img[^>]+alt="([^"]+)"[^>]*>/u',
-                                                                    '$1',
-                                                                    $desc
-                                                                );
-
-                                                                // 2) تحويل div إلى سطر جديد عشان تحافظ على النقاط
-                                                                $desc = str_replace(['<div dir="auto">', '<div>', '</div>'], ['', '', "<br>"], $desc);
-
-                                                                // 3) إزالة span وأغلب الوسوم الغير مهمة (نخلي بس br و strong و em مثلاً)
-                                                                $desc = strip_tags($desc, '<br><strong><b><em><i>');
-
-                                                                // 4) عرض آمن
-                                                                echo wp_kses_post($desc);
-                                                                ?>
-
-                                                            </div>
+                                                    <div class="tab-content p-3">
+                                                        <div class="tab-pane fade show active">
+                                                            <?php echo wp_kses_post($description); ?>
                                                         </div>
 
-                                                        <!-- FAQ بالأكورديون -->
-                                                        <div
-                                                            class="tab-pane fade"
-                                                            id="<?php echo esc_attr($faq_pane_id); ?>"
-                                                            role="tabpanel"
-                                                            aria-labelledby="<?php echo esc_attr($faq_tab_id); ?>">
-
-                                                            <?php if ($faqs) : ?>
-                                                                <div class="accordion" id="<?php echo esc_attr($faq_accordion_id); ?>">
-                                                                    <?php foreach ($faqs as $index => $faq) :
-                                                                        $question   = $faq['title'] ?? '';
-                                                                        $answer     = $faq['text'] ?? '';
-                                                                        $is_first   = ($index === 0);
-
-                                                                        $heading_id  = 'faq-heading-' . $sport_index . '-' . $index;
-                                                                        $collapse_id = 'faq-collapse-' . $sport_index . '-' . $index;
-                                                                    ?>
-                                                                        <div class="accordion-item">
-                                                                            <h2 class="accordion-header" id="<?php echo esc_attr($heading_id); ?>">
-                                                                                <button
-                                                                                    class="accordion-button<?php echo $is_first ? '' : ' collapsed'; ?> text-end"
-                                                                                    type="button"
-                                                                                    data-bs-toggle="collapse"
-                                                                                    data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
-                                                                                    aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
-                                                                                    aria-controls="<?php echo esc_attr($collapse_id); ?>">
-                                                                                    <?php echo esc_html($question); ?>
-                                                                                </button>
-                                                                            </h2>
-
-                                                                            <div
-                                                                                id="<?php echo esc_attr($collapse_id); ?>"
-                                                                                class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>"
-                                                                                aria-labelledby="<?php echo esc_attr($heading_id); ?>"
-                                                                                data-bs-parent="#<?php echo esc_attr($faq_accordion_id); ?>">
-                                                                                <div class="accordion-body">
-                                                                                    <?php echo wpautop($answer); ?>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    <?php endforeach; ?>
-                                                                </div>
+                                                        <div class="tab-pane fade">
+                                                            <?php if (!empty($faqs)) : ?>
+                                                                <?php foreach ($faqs as $faq) : ?>
+                                                                    <p><strong><?php echo esc_html($faq['title']); ?></strong></p>
+                                                                    <p><?php echo wp_kses_post($faq['text']); ?></p>
+                                                                <?php endforeach; ?>
                                                             <?php else : ?>
-                                                                <p class="text-muted mb-0">
-                                                                    <?php _e('لا توجد أسئلة شائعة مضافة بعد.', 'main-theme'); ?>
+                                                                <p class="text-muted">
+                                                                    <?php _e('No FAQs available yet.', 'main-theme'); ?>
                                                                 </p>
                                                             <?php endif; ?>
-
                                                         </div>
                                                     </div>
                                                 </div>
 
-
                                             </div>
-
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
                                     </div>
-
-
                                 </div>
 
-                            <?php endwhile; // sports 
-                            ?>
+                            <?php endwhile; ?>
 
                         <?php else : ?>
-                            <p class="text-white-80">
-                                <?php _e('لا توجد رياضات مضافة لهذه الفعالية حتى الآن.', 'main-theme'); ?>
+                            <p class="text-muted">
+                                <?php _e('No sports added for this activity yet.', 'main-theme'); ?>
                             </p>
                         <?php endif; ?>
+
+                    <?php endwhile; ?>
+
+                <?php else : ?>
+                    <p class="text-muted text-center">
+                        <?php _e('No activity information available.', 'main-theme'); ?>
+                    </p>
+                <?php endif; ?>
             </div>
-        <?php endwhile ?>
-    <?php endif; ?>
         </div>
     </section>
 
+    <!-- ==================== MODAL ==================== -->
     <div id="activity-register-modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">
 
-                <h3 class="text-center text-red mb-3"><?php _e('حجز الفعالية الرياضية', 'main-theme'); ?></h3>
+                <h3 class="text-center text-red mb-3">
+                    <?php _e('Book Sports Activity', 'main-theme'); ?>
+                </h3>
 
                 <form id="activity-register-form">
                     <input type="hidden" name="action" value="submit_sports_registration">
-                    <input type="hidden" name="activity_id" value="<?php echo get_the_ID(); ?>">
-                    <input type="hidden" name="branch" id="activity_branch_name">
-                    <input type="hidden" name="sport" id="activity_sport_name">
-                    <!-- NEW: WhatsApp for coach/activity -->
-                    <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
 
                     <input type="text" name="name" class="form-control mb-3"
-                        placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
-                    <input type="email" name="email" class="form-control mb-3"
-                        placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
+                        placeholder="<?php esc_attr_e('Full Name', 'main-theme'); ?>" required>
 
-                    <!-- Phone with fixed 971 prefix -->
-                    <div class="mb-3">
-                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
-                        <div class="input-group">
-                            <span class="input-group-text">+971</span>
-                            <input
-                                type="tel"
-                                name="phone_suffix"
-                                class="form-control"
-                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
-                                inputmode="tel"
-                                dir="ltr"
-                                required>
-                        </div>
-                        <input type="hidden" name="phone" id="activity_full_phone">
+                    <input type="email" name="email" class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('Email Address', 'main-theme'); ?>" required>
+
+                    <label><?php _e('Phone Number', 'main-theme'); ?></label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">+971</span>
+                        <input type="tel" name="phone_suffix" class="form-control"
+                            placeholder="<?php esc_attr_e('Mobile number without leading zero', 'main-theme'); ?>"
+                            required>
                     </div>
 
-                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
+                    <label><?php _e('Date of Birth', 'main-theme'); ?></label>
                     <input type="date" name="dob" class="form-control mb-4" required>
 
                     <button type="submit" class="btn btn-red w-100">
-                        <?php _e('إرسال التسجيل', 'main-theme'); ?>
+                        <?php _e('Submit Registration', 'main-theme'); ?>
                     </button>
                 </form>
 
@@ -399,16 +221,17 @@ while (have_posts()) : the_post();
         </div>
     </div>
 
+
     <!-- ==================== JS / AJAX ==================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
             const ajaxUrl = "<?php echo esc_url(admin_url('admin-ajax.php')); ?>";
-            const genericError = "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>";
-            const okLabel = "<?php echo esc_js(__('تم', 'main-theme')); ?>";
-            const copySuccessMsg = "<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>";
-            const copyFailMsg = "<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>";
-            const connErrorMsg = "<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>";
+            const genericError = "<?php echo esc_js(__('An error occurred, please try again.', 'main-theme')); ?>";
+            const okLabel = "<?php echo esc_js(__('OK', 'main-theme')); ?>";
+            const copySuccessMsg = "<?php echo esc_js(__('Link copied successfully.', 'main-theme')); ?>";
+            const copyFailMsg = "<?php echo esc_js(__('Failed to copy the link, please try again.', 'main-theme')); ?>";
+            const connErrorMsg = "<?php echo esc_js(__('Connection error, please try again.', 'main-theme')); ?>";
 
             const modalEl = document.getElementById('activity-register-modal');
             const modal = modalEl && typeof bootstrap !== 'undefined' ?
