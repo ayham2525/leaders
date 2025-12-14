@@ -47,7 +47,7 @@ while (have_posts()) : the_post();
                                     </div>
 
                                     <h2 class="branch-title mb-2">
-                                        <?php echo esc_html($branch_name ?: __('فرع الأكاديمية', 'main-theme')); ?>
+                                        <?php echo esc_html($branch_name ?: __('Academy Branch', 'main-theme')); ?>
                                     </h2>
 
                                     <?php if ($location_url) : ?>
@@ -56,14 +56,16 @@ while (have_posts()) : the_post();
                                             rel="noopener"
                                             class="branch-location-link mb-3">
                                             <i class="fas fa-location-arrow"></i>
-                                            <?php _e('عرض الموقع على الخريطة', 'main-theme'); ?>
+                                            <?php _e('View location on map', 'main-theme'); ?>
                                         </a>
+
                                     <?php endif; ?>
 
                                     <a href="<?php echo esc_url($branch_link); ?>"
                                         class="btn btn-red w-100 mt-auto">
-                                        <?php _e('عرض الرياضات والتسجيل', 'main-theme'); ?>
+                                        <?php _e('View sports & register', 'main-theme'); ?>
                                     </a>
+
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -84,13 +86,13 @@ while (have_posts()) : the_post();
                         <div class="academy-branch__head d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                             <h2 class="branch-title mb-0">
                                 <i class="fas fa-map-marker-alt text-red ms-2"></i>
-                                <?php echo esc_html($branch_name ?: __('فرع الأكاديمية', 'main-theme')); ?>
+                                <?php echo esc_html($branch_name ?: __('Academy Branch', 'main-theme')); ?>
                             </h2>
 
                             <div class="d-flex align-items-center gap-2">
                                 <a href="<?php echo esc_url(remove_query_arg('branch')); ?>"
                                     class="btn  btn-sm">
-                                    <?php _e('العودة إلى جميع الفروع', 'main-theme'); ?>
+                                    <?php _e('Back to all branches', 'main-theme'); ?>
                                 </a>
 
                                 <?php if ($location_url) : ?>
@@ -99,7 +101,7 @@ while (have_posts()) : the_post();
                                         rel="noopener"
                                         class="btn btn-light btn-sm">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        <?php _e('عرض الموقع', 'main-theme'); ?>
+                                        <?php _e('View location', 'main-theme'); ?>
                                     </a>
                                 <?php endif; ?>
 
@@ -208,9 +210,10 @@ while (have_posts()) : the_post();
                                                                 rel="noopener"
                                                                 class="btn-share"
                                                                 data-copy="<?php echo esc_attr($link); ?>"
-                                                                title="<?php esc_attr_e('نسخ رابط الموقع', 'main-theme'); ?>">
+                                                                title="<?php esc_attr_e('Copy link', 'main-theme'); ?>">
                                                                 <i class="fa fa-share"></i>
                                                             </a>
+
                                                         <?php endif; ?>
 
                                                         <?php if ($whatsapp_url) : ?>
@@ -229,7 +232,7 @@ while (have_posts()) : the_post();
                                                                 data-branch="<?php echo esc_attr($branch_name); ?>"
                                                                 data-sport="<?php echo esc_attr($sport_title); ?>"
                                                                 data-whatsapp="<?php echo esc_attr($wa_number_api); ?>">
-                                                                <?php _e('حجز تجربة الأداء', 'main-theme'); ?>
+                                                                <?php _e('Book a tryout', 'main-theme'); ?>
                                                             </button>
                                                         <?php endif; ?>
 
@@ -243,7 +246,7 @@ while (have_posts()) : the_post();
                                                 <table class="program-meta-table">
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الرسوم:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Fees:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value"><?php echo esc_html($fees); ?></span>
@@ -251,7 +254,7 @@ while (have_posts()) : the_post();
                                                     </tr>
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الأيام:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Days:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value">
@@ -261,7 +264,7 @@ while (have_posts()) : the_post();
                                                     </tr>
                                                     <tr>
                                                         <td class="td-title">
-                                                            <span class="meta-label"><?php _e('الفرع:', 'main-theme'); ?></span>
+                                                            <span class="meta-label"><?php _e('Branch:', 'main-theme'); ?></span>
                                                         </td>
                                                         <td>
                                                             <span class="meta-value"><?php echo esc_html($branch_name); ?></span>
@@ -282,7 +285,7 @@ while (have_posts()) : the_post();
                                                                 role="tab"
                                                                 aria-controls="<?php echo esc_attr($desc_pane_id); ?>"
                                                                 aria-selected="true">
-                                                                <?php _e('الوصف', 'main-theme'); ?>
+                                                                <?php _e('Description', 'main-theme'); ?>
                                                             </button>
                                                         </li>
                                                         <li class="nav-item" role="presentation">
@@ -295,7 +298,7 @@ while (have_posts()) : the_post();
                                                                 role="tab"
                                                                 aria-controls="<?php echo esc_attr($faq_pane_id); ?>"
                                                                 aria-selected="false">
-                                                                <?php _e('الأسئلة الشائعة', 'main-theme'); ?>
+                                                                <?php _e('FAQs', 'main-theme'); ?>
                                                             </button>
                                                         </li>
                                                     </ul>
@@ -377,7 +380,7 @@ while (have_posts()) : the_post();
                                                                 </div>
                                                             <?php else : ?>
                                                                 <p class="text-muted mb-0">
-                                                                    <?php _e('لا توجد أسئلة شائعة مضافة بعد.', 'main-theme'); ?>
+                                                                    <?php _e('No FAQs added yet.', 'main-theme'); ?>
                                                                 </p>
                                                             <?php endif; ?>
 
@@ -395,7 +398,7 @@ while (have_posts()) : the_post();
                         else :
                             ?>
                             <p class="text-white-80">
-                                <?php _e('لا توجد رياضات مضافة لهذا الفرع حتى الآن.', 'main-theme'); ?>
+                                <?php _e('No sports added to this branch yet.', 'main-theme'); ?>
                             </p>
                         <?php endif; ?>
 
@@ -406,7 +409,7 @@ while (have_posts()) : the_post();
 
             <?php else : ?>
                 <p class="text-center text-white-80">
-                    <?php _e('لا توجد فروع مضافة لهذه الأكاديمية حالياً.', 'main-theme'); ?>
+                    <?php _e('No branches available for this academy at the moment.', 'main-theme'); ?>
                 </p>
             <?php endif; ?>
 
@@ -420,7 +423,9 @@ while (have_posts()) : the_post();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">
 
-                <h3 class="text-center text-red mb-3"><?php _e('تسجيل في الأكاديمية', 'main-theme'); ?></h3>
+                <h3 class="text-center text-red mb-3">
+                    <?php _e('Academy Registration', 'main-theme'); ?>
+                </h3>
 
                 <form id="academy-register-form" novalidate>
                     <input type="hidden" name="action" value="submit_academy_registration">
@@ -430,32 +435,49 @@ while (have_posts()) : the_post();
                     <input type="hidden" name="academy_whatsapp" id="academy_whatsapp">
                     <input type="hidden" name="security" value="<?php echo esc_attr(wp_create_nonce('academy_register_nonce')); ?>">
 
-                    <input type="text" name="name" class="form-control mb-3" placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
-                    <input type="email" name="email" class="form-control mb-3" placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
+                    <input type="text"
+                        name="name"
+                        class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('Full name', 'main-theme'); ?>"
+                        required>
 
+                    <input type="email"
+                        name="email"
+                        class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('Email address', 'main-theme'); ?>"
+                        required>
                     <!-- Phone with fixed 971 prefix -->
                     <div class="mb-3">
-                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
+                        <label class="form-label d-block">
+                            <?php _e('Phone number', 'main-theme'); ?>
+                        </label>
                         <div class="input-group">
                             <span class="input-group-text">+971</span>
                             <input
                                 type="tel"
                                 name="phone_suffix"
                                 class="form-control"
-                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
+                                placeholder="<?php esc_attr_e('Phone number without the leading 0', 'main-theme'); ?>"
                                 inputmode="tel"
                                 dir="ltr"
                                 required>
+
                         </div>
                         <input type="hidden" name="phone" id="full_phone">
                     </div>
 
-                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
-                    <input type="date" name="dob" class="form-control mb-4" required placeholder="<?php esc_attr_e('تاريخ الميلاد', 'main-theme'); ?>">
+                    <label><?php _e('Date of birth', 'main-theme'); ?></label>
+                    <input
+                        type="date"
+                        name="dob"
+                        class="form-control mb-4"
+                        required
+                        placeholder="<?php esc_attr_e('Date of birth', 'main-theme'); ?>">
 
                     <button type="submit" class="btn btn-red w-100">
-                        <?php _e('إرسال التسجيل', 'main-theme'); ?>
+                        <?php _e('Submit registration', 'main-theme'); ?>
                     </button>
+
                 </form>
 
             </div>
@@ -468,11 +490,11 @@ while (have_posts()) : the_post();
         document.addEventListener('DOMContentLoaded', function() {
 
             const ajaxUrl = "<?php echo esc_url(admin_url('admin-ajax.php')); ?>";
-            const genericError = "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>";
-            const okLabel = "<?php echo esc_js(__('تم', 'main-theme')); ?>";
-            const copySuccessMsg = "<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>";
-            const copyFailMsg = "<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>";
-            const connErrorMsg = "<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>";
+            const genericError = "<?php echo esc_js(__('An error occurred, please try again.', 'main-theme')); ?>";
+            const okLabel = "<?php echo esc_js(__('OK', 'main-theme')); ?>";
+            const copySuccessMsg = "<?php echo esc_js(__('Link copied successfully.', 'main-theme')); ?>";
+            const copyFailMsg = "<?php echo esc_js(__('Failed to copy the link, please try again.', 'main-theme')); ?>";
+            const connErrorMsg = "<?php echo esc_js(__('Connection error, please try again.', 'main-theme')); ?>";
 
             /* ---------- Modal ---------- */
             const modalEl = document.getElementById('academy-register-modal');
