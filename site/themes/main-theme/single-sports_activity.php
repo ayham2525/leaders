@@ -40,6 +40,7 @@ while (have_posts()) : the_post();
                                 $description = get_sub_field('text');
                                 $link        = get_sub_field('link');
                                 $faqs        = get_sub_field('faq');
+
                             ?>
 
                                 <div class="activity-card js-scroll-up pb-5">
