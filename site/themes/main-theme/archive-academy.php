@@ -2,8 +2,8 @@
 
 <?php
 // ==================== ARCHIVE HEADER SETTINGS ====================
-$page_title = __('أكاديميات القادة للخدمات الرياضية', 'leaderssports');
-$page_sub   = __('استكشف جميع الأكاديميات الرياضية وفروع التدريب المتوفرة لدينا', 'leaderssports');
+$page_title = __('Leaders Sports Academies', 'main-theme');
+$page_sub   = __('Explore all sports academies and available training branches', 'main-theme');
 
 $title_color = '#FFD700'; // Gold
 $bg_color    = '#0E0E0E'; // Black
@@ -115,8 +115,8 @@ $bg_color    = '#0E0E0E'; // Black
                         <?php
                         echo paginate_links([
                             'mid_size'  => 2,
-                            'prev_text' => __('« السابق', 'leaderssports'),
-                            'next_text' => __('التالي »', 'leaderssports'),
+                            'prev_text' => __('« Previous', 'main-theme'),
+                            'next_text' => __('Next »', 'main-theme'),
                         ]);
                         ?>
                     </div>
@@ -125,7 +125,7 @@ $bg_color    = '#0E0E0E'; // Black
             <?php else : ?>
 
                 <div class="col-12 text-center text-muted py-4">
-                    <p><?php esc_html_e('لا توجد أكاديميات متاحة حالياً.', 'leaderssports'); ?></p>
+                    <p><?php esc_html_e('No academies available at the moment.', 'main-theme'); ?></p>
                 </div>
 
             <?php endif; ?>

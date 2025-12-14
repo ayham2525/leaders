@@ -21,33 +21,41 @@ if (get_sub_field('visible')) :
     ]);
 ?>
 
-    <section class="ls-sports-activities js-scroll-up" style="background: <?php echo esc_attr($bg_color); ?>;">
+    <section class="ls-sports-activities js-scroll-up"
+        style="background: <?php echo esc_attr($bg_color); ?>;">
         <div class="container-fluid px-0">
 
-            <?php if ($title || $subtitle): ?>
+            <?php if ($title || $subtitle) : ?>
                 <div class="section-head text-center mb-4">
-                    <?php if ($title): ?>
-                        <h2 class="section-title" style="color: <?php echo esc_attr($title_color); ?>;">
+
+                    <?php if ($title) : ?>
+                        <h2 class="section-title"
+                            style="color: <?php echo esc_attr($title_color); ?>;">
                             <?php echo esc_html($title); ?>
                         </h2>
                     <?php endif; ?>
 
-                    <?php if ($subtitle): ?>
+                    <?php if ($subtitle) : ?>
                         <p class="section-subtitle text-white">
                             <?php echo esc_html($subtitle); ?>
                         </p>
                     <?php endif; ?>
+
                 </div>
             <?php endif; ?>
 
-            <?php if ($activities->have_posts()): ?>
+            <?php if ($activities->have_posts()) : ?>
 
                 <div class="ls-sports-slider owl-carousel">
-                    <?php while ($activities->have_posts()): $activities->the_post(); ?>
+
+                    <?php while ($activities->have_posts()) : $activities->the_post(); ?>
 
                         <?php
-                        // اختياري: وصف قصير من ACF أو من الملخص
-                        $excerpt = function_exists('get_field') ? (string) get_field('short_description') : '';
+                        // Optional: short description from ACF or excerpt fallback
+                        $excerpt = function_exists('get_field')
+                            ? (string) get_field('short_description')
+                            : '';
+
                         if ($excerpt === '') {
                             $excerpt = get_the_excerpt();
                         }
@@ -57,31 +65,40 @@ if (get_sub_field('visible')) :
                             <div class="sport-slide-inner">
                                 <div class="row no-gutters align-items-stretch">
 
-                                    <!-- النص / اسم النشاط -->
+                                    <!-- Text -->
                                     <div class="col-lg-5 col-md-6">
                                         <div class="sport-text-panel">
-
 
                                             <h3 class="sport-name">
                                                 <?php the_title(); ?>
                                             </h3>
 
-                                            <?php if (!empty($excerpt)): ?>
+                                            <?php if (!empty($excerpt)) : ?>
                                                 <p class="sport-desc">
-                                                    <?php echo esc_html(wp_trim_words(wp_strip_all_tags($excerpt), 26, '…')); ?>
+                                                    <?php
+                                                    echo esc_html(
+                                                        wp_trim_words(
+                                                            wp_strip_all_tags($excerpt),
+                                                            26,
+                                                            '…'
+                                                        )
+                                                    );
+                                                    ?>
                                                 </p>
                                             <?php endif; ?>
 
                                             <a href="<?php the_permalink(); ?>" class="sport-link">
-                                                <?php esc_html_e('المزيد', 'leaderssports'); ?>
+                                                <?php esc_html_e('Learn more', 'main-theme'); ?>
                                             </a>
+
                                         </div>
                                     </div>
 
-                                    <!-- الصورة -->
+                                    <!-- Image -->
                                     <div class="col-lg-7 col-md-6">
                                         <div class="sport-image-wrap">
-                                            <?php if (has_post_thumbnail()): ?>
+
+                                            <?php if (has_post_thumbnail()) : ?>
                                                 <?php
                                                 the_post_thumbnail(
                                                     'large',
@@ -91,9 +108,10 @@ if (get_sub_field('visible')) :
                                                     ]
                                                 );
                                                 ?>
-                                            <?php else: ?>
+                                            <?php else : ?>
                                                 <div class="sport-image sport-image--placeholder"></div>
                                             <?php endif; ?>
+
                                         </div>
                                     </div>
 
@@ -103,14 +121,22 @@ if (get_sub_field('visible')) :
 
                     <?php endwhile;
                     wp_reset_postdata(); ?>
+
                 </div><!-- /.ls-sports-slider -->
 
-            <?php else: ?>
+            <?php else : ?>
+
                 <div class="row justify-content-center">
                     <div class="col-12 text-center text-muted">
-                        <p><?php esc_html_e('No sports activities available at the moment.', 'leaderssports'); ?></p>
+                        <p>
+                            <?php esc_html_e(
+                                'No sports activities available at the moment.',
+                                'main-theme'
+                            ); ?>
+                        </p>
                     </div>
                 </div>
+
             <?php endif; ?>
 
         </div><!-- /.container-fluid -->
