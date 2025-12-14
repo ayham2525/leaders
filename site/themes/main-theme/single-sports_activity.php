@@ -21,7 +21,7 @@ while (have_posts()) : the_post();
 
                 <?php if (have_rows('activities_info')) : ?>
                     <?php while (have_rows('activities_info')) : the_row();
-
+                        $branch_index++;
                         $branch_name  = get_sub_field('branch');
                         $location_url = get_sub_field('location');
                     ?>
@@ -36,6 +36,7 @@ while (have_posts()) : the_post();
                             <?php while (have_rows('sports')) : the_row();
                                 $sport_index++;
 
+                                /* ================= BASIC DATA ================= */
                                 $sport_title = get_sub_field('sport_title');
                                 $fees        = get_sub_field('fees');
                                 $days        = get_sub_field('training_days');
@@ -43,7 +44,22 @@ while (have_posts()) : the_post();
                                 $link        = get_sub_field('link');
                                 $faqs        = get_sub_field('faq');
 
-                                /* ---------- WhatsApp ---------- */
+                                /* ================= UNIQUE PREFIX (CRITICAL) ================= */
+                                $prefix = 'branch-' . $branch_index . '-sport-' . $sport_index;
+                                /* ================= TABS IDS (SAME AS WORKING PAGE) ================= */
+                                $tabs_id           = $prefix . '-tabs';
+                                $tabs_content_id   = $prefix . '-tabs-content';
+
+                                $desc_tab_id       = $prefix . '-tab-desc';
+                                $faq_tab_id        = $prefix . '-tab-faq';
+
+                                $desc_pane_id      = $prefix . '-pane-desc';
+                                $faq_pane_id       = $prefix . '-pane-faq';
+
+                                $faq_accordion_id  = $prefix . '-faq-accordion';
+
+
+                                /* ================= WHATSAPP ================= */
                                 $whatsapp_raw  = trim(get_sub_field('whatsapp'));
                                 $whatsapp_url  = '';
                                 $wa_number_api = '';
@@ -57,13 +73,13 @@ while (have_posts()) : the_post();
                                     $whatsapp_url  = 'https://wa.me/' . $digits;
                                 }
 
-                                /* ---------- Image ---------- */
+                                /* ================= IMAGE ================= */
                                 $image = get_sub_field('image');
-                                $sport_img_url = $image && isset($image['id'])
+                                $sport_img_url = ($image && isset($image['id']))
                                     ? wp_get_attachment_image_url($image['id'], 'full')
                                     : '';
 
-                                /* ---------- Days ---------- */
+                                /* ================= DAYS ================= */
                                 $day_labels = [];
                                 if (is_array($days)) {
                                     foreach ($days as $d) {
@@ -72,9 +88,6 @@ while (have_posts()) : the_post();
                                             : $d;
                                     }
                                 }
-
-                                /* ---------- IDs ---------- */
-                                $prefix = 'sport-' . $sport_index;
                             ?>
 
                                 <div class="activity-card js-scroll-up pb-5">
@@ -85,8 +98,10 @@ while (have_posts()) : the_post();
                                         </h3>
 
                                         <div class="row">
-                                            <!-- LEFT -->
+
+                                            <!-- ================= LEFT ================= -->
                                             <div class="col-md-6 col-sm-12">
+
                                                 <?php if ($sport_img_url) : ?>
                                                     <img src="<?php echo esc_url($sport_img_url); ?>"
                                                         class="img-fluid"
@@ -96,7 +111,7 @@ while (have_posts()) : the_post();
                                                 <div class="sport-actions mt-4">
                                                     <div class="sport-actions-icons">
 
-                                                        <?php if ($location_url) : ?>
+                                                        <?php if (!empty($location_url)) : ?>
                                                             <a href="<?php echo esc_url($location_url); ?>"
                                                                 target="_blank"
                                                                 class="btn-location">
@@ -122,8 +137,8 @@ while (have_posts()) : the_post();
                                                             </a>
                                                         <?php endif; ?>
 
-                                                        <button class="btn btn-book open-activity-register mt-3"
-                                                            type="button"
+                                                        <button type="button"
+                                                            class="btn btn-book open-activity-register mt-3"
                                                             data-branch="<?php echo esc_attr($branch_name); ?>"
                                                             data-sport="<?php echo esc_attr($sport_title); ?>"
                                                             data-whatsapp="<?php echo esc_attr($wa_number_api); ?>">
@@ -134,7 +149,7 @@ while (have_posts()) : the_post();
                                                 </div>
                                             </div>
 
-                                            <!-- RIGHT -->
+                                            <!-- ================= RIGHT ================= -->
                                             <div class="col-md-6 col-sm-12">
 
                                                 <table class="program-meta-table">
@@ -152,61 +167,137 @@ while (have_posts()) : the_post();
                                                     </tr>
                                                 </table>
 
-                                                <!-- Tabs -->
-                                                <ul class="nav nav-tabs mt-4" role="tablist">
-                                                    <li class="nav-item">
-                                                        <button class="nav-link active"
-                                                            data-bs-toggle="tab"
-                                                            data-bs-target="#<?php echo $prefix; ?>-desc">
-                                                            <?php _e('Description', 'main-theme'); ?>
-                                                        </button>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <button class="nav-link"
-                                                            data-bs-toggle="tab"
-                                                            data-bs-target="#<?php echo $prefix; ?>-faq">
-                                                            <?php _e('FAQs', 'main-theme'); ?>
-                                                        </button>
-                                                    </li>
-                                                </ul>
+                                                <!-- ================= TABS ================= -->
+                                                <div class="program-tabs mt-4">
 
-                                                <div class="tab-content p-3">
-                                                    <div class="tab-pane fade show active"
-                                                        id="<?php echo $prefix; ?>-desc">
-                                                        <?php echo wp_kses_post($description); ?>
-                                                    </div>
+                                                    <!-- Tabs Header -->
+                                                    <ul class="nav nav-tabs"
+                                                        id="<?php echo esc_attr($tabs_id); ?>"
+                                                        role="tablist">
 
-                                                    <div class="tab-pane fade"
-                                                        id="<?php echo $prefix; ?>-faq">
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link active"
+                                                                id="<?php echo esc_attr($desc_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($desc_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($desc_pane_id); ?>"
+                                                                aria-selected="true">
+                                                                <?php _e('Description', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
 
-                                                        <?php if ($faqs) : ?>
-                                                            <div class="accordion" id="<?php echo $prefix; ?>-accordion">
-                                                                <?php foreach ($faqs as $i => $faq) : ?>
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header">
-                                                                            <button class="accordion-button <?php echo $i ? 'collapsed' : ''; ?>"
-                                                                                data-bs-toggle="collapse"
-                                                                                data-bs-target="#<?php echo $prefix . '-faq-' . $i; ?>">
-                                                                                <?php echo esc_html($faq['title']); ?>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="<?php echo $prefix . '-faq-' . $i; ?>"
-                                                                            class="accordion-collapse collapse <?php echo !$i ? 'show' : ''; ?>">
-                                                                            <div class="accordion-body">
-                                                                                <?php echo wpautop($faq['text']); ?>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link"
+                                                                id="<?php echo esc_attr($faq_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($faq_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($faq_pane_id); ?>"
+                                                                aria-selected="false">
+                                                                <?php _e('FAQs', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!-- Tabs Content -->
+                                                    <div class="tab-content p-3"
+                                                        id="<?php echo esc_attr($tabs_content_id); ?>">
+
+                                                        <!-- Description -->
+                                                        <div
+                                                            class="tab-pane fade show active"
+                                                            id="<?php echo esc_attr($desc_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($desc_tab_id); ?>">
+
+                                                            <div class="program-description">
+                                                                <?php
+                                                                $desc = (string) $description;
+
+                                                                // Replace Facebook emoji images with alt text
+                                                                $desc = preg_replace(
+                                                                    '/<img[^>]+alt="([^"]+)"[^>]*>/u',
+                                                                    '$1',
+                                                                    $desc
+                                                                );
+
+                                                                // Normalize divs to line breaks
+                                                                $desc = str_replace(
+                                                                    ['<div dir="auto">', '<div>', '</div>'],
+                                                                    ['', '', '<br>'],
+                                                                    $desc
+                                                                );
+
+                                                                // Keep only safe formatting
+                                                                $desc = strip_tags($desc, '<br><strong><b><em><i>');
+
+                                                                echo wp_kses_post($desc);
+                                                                ?>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- FAQ -->
+                                                        <div
+                                                            class="tab-pane fade"
+                                                            id="<?php echo esc_attr($faq_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($faq_tab_id); ?>">
+
+                                                            <?php if (!empty($faqs)) : ?>
+                                                                <div class="accordion"
+                                                                    id="<?php echo esc_attr($faq_accordion_id); ?>">
+
+                                                                    <?php foreach ($faqs as $index => $faq) :
+                                                                        $question   = $faq['title'] ?? '';
+                                                                        $answer     = $faq['text'] ?? '';
+                                                                        $is_first   = ($index === 0);
+
+                                                                        $heading_id  = $faq_accordion_id . '-heading-' . $index;
+                                                                        $collapse_id = $faq_accordion_id . '-collapse-' . $index;
+                                                                    ?>
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header"
+                                                                                id="<?php echo esc_attr($heading_id); ?>">
+
+                                                                                <button
+                                                                                    class="accordion-button<?php echo $is_first ? '' : ' collapsed'; ?> text-end"
+                                                                                    type="button"
+                                                                                    data-bs-toggle="collapse"
+                                                                                    data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
+                                                                                    aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
+                                                                                    aria-controls="<?php echo esc_attr($collapse_id); ?>">
+                                                                                    <?php echo esc_html($question); ?>
+                                                                                </button>
+                                                                            </h2>
+
+                                                                            <div
+                                                                                id="<?php echo esc_attr($collapse_id); ?>"
+                                                                                class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>"
+                                                                                aria-labelledby="<?php echo esc_attr($heading_id); ?>"
+                                                                                data-bs-parent="#<?php echo esc_attr($faq_accordion_id); ?>">
+
+                                                                                <div class="accordion-body">
+                                                                                    <?php echo wpautop($answer); ?>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                <?php endforeach; ?>
-                                                            </div>
-                                                        <?php else : ?>
-                                                            <p class="text-muted">
-                                                                <?php _e('No FAQs available yet.', 'main-theme'); ?>
-                                                            </p>
-                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                <p class="text-muted mb-0">
+                                                                    <?php _e('No FAQs added yet.', 'main-theme'); ?>
+                                                                </p>
+                                                            <?php endif; ?>
 
+                                                        </div>
                                                     </div>
                                                 </div>
+
 
                                             </div>
                                         </div>
@@ -214,6 +305,7 @@ while (have_posts()) : the_post();
                                 </div>
 
                             <?php endwhile; ?>
+
                         <?php endif; ?>
 
                     <?php endwhile; ?>
