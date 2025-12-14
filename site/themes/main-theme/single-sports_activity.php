@@ -224,6 +224,54 @@ while (have_posts()) : the_post();
     </section>
 
 
+    <div id="activity-register-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content form-card p-4">
+
+                <h3 class="text-center text-red mb-3"><?php _e('حجز الفعالية الرياضية', 'main-theme'); ?></h3>
+
+                <form id="activity-register-form">
+                    <input type="hidden" name="action" value="submit_sports_registration">
+                    <input type="hidden" name="activity_id" value="<?php echo get_the_ID(); ?>">
+                    <input type="hidden" name="branch" id="activity_branch_name">
+                    <input type="hidden" name="sport" id="activity_sport_name">
+                    <!-- NEW: WhatsApp for coach/activity -->
+                    <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
+
+                    <input type="text" name="name" class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
+                    <input type="email" name="email" class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
+
+                    <!-- Phone with fixed 971 prefix -->
+                    <div class="mb-3">
+                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
+                        <div class="input-group">
+                            <span class="input-group-text">+971</span>
+                            <input
+                                type="tel"
+                                name="phone_suffix"
+                                class="form-control"
+                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
+                                inputmode="tel"
+                                dir="ltr"
+                                required>
+                        </div>
+                        <input type="hidden" name="phone" id="activity_full_phone">
+                    </div>
+
+                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
+                    <input type="date" name="dob" class="form-control mb-4" required>
+
+                    <button type="submit" class="btn btn-red w-100">
+                        <?php _e('إرسال التسجيل', 'main-theme'); ?>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== JS / AJAX ==================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
