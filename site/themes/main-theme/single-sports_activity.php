@@ -228,43 +228,66 @@ while (have_posts()) : the_post();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content form-card p-4">
 
-                <h3 class="text-center text-red mb-3"><?php _e('حجز الفعالية الرياضية', 'main-theme'); ?></h3>
+                <h3 class="text-center text-red mb-3">
+                    <?php _e('Book Sports Activity', 'main-theme'); ?>
+                </h3>
 
                 <form id="activity-register-form">
                     <input type="hidden" name="action" value="submit_sports_registration">
                     <input type="hidden" name="activity_id" value="<?php echo get_the_ID(); ?>">
                     <input type="hidden" name="branch" id="activity_branch_name">
                     <input type="hidden" name="sport" id="activity_sport_name">
-                    <!-- NEW: WhatsApp for coach/activity -->
+
+                    <!-- WhatsApp (coach / activity) -->
                     <input type="hidden" name="activity_whatsapp" id="activity_whatsapp">
 
-                    <input type="text" name="name" class="form-control mb-3"
-                        placeholder="<?php esc_attr_e('الاسم الكامل', 'main-theme'); ?>" required>
-                    <input type="email" name="email" class="form-control mb-3"
-                        placeholder="<?php esc_attr_e('البريد الإلكتروني', 'main-theme'); ?>" required>
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('Full Name', 'main-theme'); ?>"
+                        required>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control mb-3"
+                        placeholder="<?php esc_attr_e('Email Address', 'main-theme'); ?>"
+                        required>
 
                     <!-- Phone with fixed 971 prefix -->
                     <div class="mb-3">
-                        <label class="form-label d-block"><?php _e('رقم الهاتف', 'main-theme'); ?></label>
+                        <label class="form-label d-block">
+                            <?php _e('Phone Number', 'main-theme'); ?>
+                        </label>
+
                         <div class="input-group">
                             <span class="input-group-text">+971</span>
                             <input
                                 type="tel"
                                 name="phone_suffix"
                                 class="form-control"
-                                placeholder="<?php esc_attr_e('رقم الهاتف بدون 0 الأولى', 'main-theme'); ?>"
+                                placeholder="<?php esc_attr_e('Mobile number without leading zero', 'main-theme'); ?>"
                                 inputmode="tel"
                                 dir="ltr"
                                 required>
                         </div>
+
                         <input type="hidden" name="phone" id="activity_full_phone">
                     </div>
 
-                    <label><?php _e('تاريخ الميلاد', 'main-theme'); ?></label>
-                    <input type="date" name="dob" class="form-control mb-4" required>
+                    <label>
+                        <?php _e('Date of Birth', 'main-theme'); ?>
+                    </label>
+
+                    <input
+                        type="date"
+                        name="dob"
+                        class="form-control mb-4"
+                        required>
 
                     <button type="submit" class="btn btn-red w-100">
-                        <?php _e('إرسال التسجيل', 'main-theme'); ?>
+                        <?php _e('Submit Registration', 'main-theme'); ?>
                     </button>
                 </form>
 
@@ -272,16 +295,17 @@ while (have_posts()) : the_post();
         </div>
     </div>
 
+
     <!-- ==================== JS / AJAX ==================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
             const ajaxUrl = "<?php echo esc_url(admin_url('admin-ajax.php')); ?>";
-            const genericError = "<?php echo esc_js(__('حدث خطأ، حاول مرة أخرى.', 'main-theme')); ?>";
-            const okLabel = "<?php echo esc_js(__('تم', 'main-theme')); ?>";
-            const copySuccessMsg = "<?php echo esc_js(__('تم نسخ الرابط', 'main-theme')); ?>";
-            const copyFailMsg = "<?php echo esc_js(__('تعذر نسخ الرابط، حاول مرة أخرى.', 'main-theme')); ?>";
-            const connErrorMsg = "<?php echo esc_js(__('خطأ في الاتصال، حاول مرة أخرى.', 'main-theme')); ?>";
+            const genericError = "<?php echo esc_js(__('An error occurred, please try again.', 'main-theme')); ?>";
+            const okLabel = "<?php echo esc_js(__('OK', 'main-theme')); ?>";
+            const copySuccessMsg = "<?php echo esc_js(__('Link copied successfully.', 'main-theme')); ?>";
+            const copyFailMsg = "<?php echo esc_js(__('Failed to copy the link, please try again.', 'main-theme')); ?>";
+            const connErrorMsg = "<?php echo esc_js(__('Connection error, please try again.', 'main-theme')); ?>";
 
             const modalEl = document.getElementById('activity-register-modal');
             const modal = modalEl && typeof bootstrap !== 'undefined' ?

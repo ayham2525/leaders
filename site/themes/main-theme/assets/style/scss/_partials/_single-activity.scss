@@ -43,6 +43,32 @@ html[dir="rtl"] .single-activity-banner {
 
 
 .single-activity-details{
+
+      .nav-link {
+      border: none;
+      border-radius: .75rem .75rem 0 0;
+      padding: .6rem 1.2rem;
+      font-weight: 600;
+      font-size: .95rem;
+      color: #555 !important;
+      background-color: transparent;
+      transition: all .2s ease;
+      & a , a:hover{
+         color: #555 !important;
+      }
+
+      &:hover:not(.active) {
+        background-color: rgba(0,0,0,.03);
+        color: #222;
+      }
+
+      &.active {
+        color: $red;
+        background-color: #fff;
+        box-shadow: 0 -1px 0 #fff, 0 0 0 1px $border-color;
+        border-bottom-color: transparent;
+      }
+    }
     background-color: $white;
       background-image: url('../img/player-bg.jpg');
   background-position: center top;
@@ -102,9 +128,12 @@ html[dir="rtl"] .single-activity-banner {
       padding: .6rem 1.2rem;
       font-weight: 600;
       font-size: .95rem;
-      color: #555;
+      color: #555 !important;
       background-color: transparent;
       transition: all .2s ease;
+      & a , a:hover{
+         color: #555 !important;
+      }
 
       &:hover:not(.active) {
         background-color: rgba(0,0,0,.03);
@@ -119,6 +148,8 @@ html[dir="rtl"] .single-activity-banner {
       }
     }
   }
+
+  
 
   /* TABS BODY WRAPPER */
   .tab-content {
