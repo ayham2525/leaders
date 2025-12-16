@@ -61,3 +61,5 @@
 [13-Dec-2025 19:28:58 UTC] WPML: Failed to send site key to AMS: AMS API returned false
 [13-Dec-2025 19:31:32 UTC] WPML: Failed to send site key to AMS: AMS API returned false
 [13-Dec-2025 19:35:35 UTC] WPML: Failed to send site key to AMS: AMS API returned false
+[14-Dec-2025 01:53:43 UTC] 4whats HTTP 200: {"success":false,"reason":"Phone not connected","currentStatus":"normal","queueNumber":"62581353"}
+[14-Dec-2025 02:38:35 UTC] 4whats HTTP 200: {"success":false,"reason":"Phone not connected","currentStatus":"","queueNumber":"62581454"}
