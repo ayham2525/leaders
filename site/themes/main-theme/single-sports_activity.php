@@ -40,21 +40,26 @@ while (have_posts()) : the_post();
                                 $sport_title = get_sub_field('sport_title');
                                 $fees        = get_sub_field('fees');
                                 $days = [];
+                                $is_rtl = is_rtl();
 
                                 if (!empty($sport['training_days'])) {
-                                    // Always cast to array
-                                    $raw_days = (array) $sport['training_days'];
 
-                                    foreach ($raw_days as $day) {
+                                    foreach ((array) $sport['training_days'] as $day) {
 
-                                        // Handle nested arrays (ACF repeater / select return)
+                                        // ACF safety
                                         if (is_array($day)) {
                                             $day = $day['label'] ?? $day['value'] ?? '';
                                         }
 
-                                        if ($day) {
-                                            // Translate day names properly
-                                            $days[] = __(trim($day), 'main-theme');
+                                        $day = trim($day);
+                                        if (!$day) continue;
+
+                                        $key = normalize_day_key($day, $days_map);
+
+                                        if ($key) {
+                                            $days[] = $is_rtl
+                                                ? $days_map[$key]['ar']
+                                                : $days_map[$key]['en'];
                                         }
                                     }
                                 }

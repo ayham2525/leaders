@@ -1415,3 +1415,24 @@ function leaders_submit_academy_registration_handler()
 
 add_action('wp_ajax_submit_academy_registration',        'leaders_submit_academy_registration_handler');
 add_action('wp_ajax_nopriv_submit_academy_registration', 'leaders_submit_academy_registration_handler');
+
+
+$days_map = [
+    'Saturday'  => ['en' => 'Saturday',  'ar' => 'السبت'],
+    'Sunday'    => ['en' => 'Sunday',    'ar' => 'الأحد'],
+    'Monday'    => ['en' => 'Monday',    'ar' => 'الاثنين'],
+    'Tuesday'   => ['en' => 'Tuesday',   'ar' => 'الثلاثاء'],
+    'Wednesday' => ['en' => 'Wednesday', 'ar' => 'الأربعاء'],
+    'Thursday'  => ['en' => 'Thursday',  'ar' => 'الخميس'],
+    'Friday'    => ['en' => 'Friday',    'ar' => 'الجمعة'],
+];
+
+function normalize_day_key($day, $days_map)
+{
+    foreach ($days_map as $key => $labels) {
+        if ($day === $labels['en'] || $day === $labels['ar']) {
+            return $key;
+        }
+    }
+    return null;
+}
