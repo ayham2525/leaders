@@ -118,7 +118,26 @@ while (have_posts()) : the_post();
 
                                 $sport_title = isset($sport['sport_title'])   ? $sport['sport_title']   : '';
                                 $fees        = isset($sport['fees'])          ? $sport['fees']          : '';
-                                $days        = isset($sport['training_days']) ? $sport['training_days'] : [];
+                                $days = [];
+
+                                if (!empty($sport['training_days'])) {
+                                    // Always cast to array
+                                    $raw_days = (array) $sport['training_days'];
+
+                                    foreach ($raw_days as $day) {
+
+                                        // Handle nested arrays (ACF repeater / select return)
+                                        if (is_array($day)) {
+                                            $day = $day['label'] ?? $day['value'] ?? '';
+                                        }
+
+                                        if ($day) {
+                                            // Translate day names properly
+                                            $days[] = __(trim($day), 'main-theme');
+                                        }
+                                    }
+                                }
+
                                 $description = isset($sport['text'])          ? $sport['text']          : '';
                                 $link        = isset($sport['link'])          ? $sport['link']          : '';
                                 $faqs        = isset($sport['faq'])           ? $sport['faq']           : [];
