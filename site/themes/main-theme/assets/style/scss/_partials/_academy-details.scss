@@ -178,6 +178,20 @@
 /* ==================== FAQ FIX (EN + AR) ==================== */
 
 .program-tabs {
+   html[dir="ltr"] &,
+  html[dir="rtl"] & {
+
+    .accordion-button {
+      text-align: left;
+      padding-left: 56px;   /* space for arrow */
+      padding-right: 20px;
+
+      &::after {
+        left: 20px;
+        right: auto;
+      }
+    }
+  }
 
   .accordion {
 
