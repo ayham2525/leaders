@@ -295,7 +295,7 @@ while (have_posts()) : the_post();
                                                                                     data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
                                                                                     aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
                                                                                     aria-controls="<?php echo esc_attr($collapse_id); ?>">
-                                                                                    <?php echo esc_html($question); ?>
+                                                                                    <?php echo ($question); ?>
                                                                                 </button>
                                                                             </h2>
 
