@@ -106,7 +106,10 @@ html[dir="rtl"] .single-activity-banner {
 /* ======================================================
    PROGRAM TABS – FAQ (REVERSED ARROW LOGIC)
 ====================================================== */
-
+.nav-tabs .nav-item .nav-link{
+    color: $black !important;
+   
+}
 .nav-tabs .nav-item .nav-link.active {
     color: #FFD700 !important;
     background-color: #0E0E0E !important;
