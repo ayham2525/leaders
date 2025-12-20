@@ -305,6 +305,31 @@
   }
 }
 
+/* ======================================================
+   FORCE ACCORDION ARROW POSITION (ENGLISH)
+====================================================== */
+
+html[dir="ltr"] .program-tabs .accordion .accordion-button {
+  position: relative;
+  text-align: right;
+  padding-right: 56px;   /* space for arrow */
+  padding-left: 20px;
+}
+
+/* 🔴 KILL BOOTSTRAP BEHAVIOR */
+html[dir="ltr"] .program-tabs .accordion .accordion-button::after {
+  margin-left: 0 !important;   /* <-- THIS IS THE KEY */
+  margin-right: 0 !important;
+  position: absolute !important;
+  right: 20px !important;      /* ARROW ON RIGHT */
+  left: auto !important;
+}
+
+/* OPEN STATE */
+html[dir="ltr"] .program-tabs .accordion .accordion-button:not(.collapsed)::after {
+  transform: translateY(-50%) rotate(135deg);
+  border-color: #D32F2F;
+}
 
 
 
