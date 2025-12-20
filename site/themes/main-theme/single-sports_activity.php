@@ -192,72 +192,135 @@ while (have_posts()) : the_post();
                                                 </table>
 
                                                 <!-- ================= TABS ================= -->
-                                                <?php
-                                                if (!isset($faqs) || !is_array($faqs)) {
-                                                    $faqs = [];
-                                                }
-                                                ?>
+                                                <div class="program-tabs mt-4">
 
-                                                <div
-                                                    class="tab-pane fade"
-                                                    id="<?php echo esc_attr($faq_pane_id); ?>"
-                                                    role="tabpanel"
-                                                    aria-labelledby="<?php echo esc_attr($faq_tab_id); ?>">
+                                                    <!-- Tabs Header -->
+                                                    <ul class="nav nav-tabs"
+                                                        id="<?php echo esc_attr($tabs_id); ?>"
+                                                        role="tablist">
 
-                                                    <?php if (!empty($faqs)) : ?>
-                                                        <div class="accordion program-faq-accordion"
-                                                            id="<?php echo esc_attr($faq_accordion_id); ?>">
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link active"
+                                                                id="<?php echo esc_attr($desc_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($desc_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($desc_pane_id); ?>"
+                                                                aria-selected="true">
+                                                                <?php _e('Description', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
 
-                                                            <?php foreach ($faqs as $index => $faq) :
-                                                                $question   = $faq['title'] ?? '';
-                                                                $answer     = $faq['text'] ?? '';
+                                                        <li class="nav-item" role="presentation">
+                                                            <button
+                                                                class="nav-link"
+                                                                id="<?php echo esc_attr($faq_tab_id); ?>"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#<?php echo esc_attr($faq_pane_id); ?>"
+                                                                type="button"
+                                                                role="tab"
+                                                                aria-controls="<?php echo esc_attr($faq_pane_id); ?>"
+                                                                aria-selected="false">
+                                                                <?php _e('FAQs', 'main-theme'); ?>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
 
-                                                                if (!$question || !$answer) {
-                                                                    continue;
-                                                                }
+                                                    <!-- Tabs Content -->
+                                                    <div class="tab-content p-3"
+                                                        id="<?php echo esc_attr($tabs_content_id); ?>">
 
-                                                                $is_first   = ($index === 0);
-                                                                $heading_id  = $faq_accordion_id . '-heading-' . $index;
-                                                                $collapse_id = $faq_accordion_id . '-collapse-' . $index;
-                                                            ?>
-                                                                <div class="accordion-item">
-                                                                    <h2 class="accordion-header"
-                                                                        id="<?php echo esc_attr($heading_id); ?>">
+                                                        <!-- Description -->
+                                                        <div
+                                                            class="tab-pane fade show active"
+                                                            id="<?php echo esc_attr($desc_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($desc_tab_id); ?>">
 
-                                                                        <button
-                                                                            class="accordion-button<?php echo $is_first ? '' : ' collapsed'; ?>"
-                                                                            type="button"
-                                                                            data-bs-toggle="collapse"
-                                                                            data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
-                                                                            aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
-                                                                            aria-controls="<?php echo esc_attr($collapse_id); ?>">
+                                                            <div class="program-description">
+                                                                <?php
+                                                                $desc = (string) $description;
 
-                                                                            <?php echo esc_html($question); ?>
-                                                                        </button>
-                                                                    </h2>
+                                                                // Replace Facebook emoji images with alt text
+                                                                $desc = preg_replace(
+                                                                    '/<img[^>]+alt="([^"]+)"[^>]*>/u',
+                                                                    '$1',
+                                                                    $desc
+                                                                );
 
-                                                                    <div
-                                                                        id="<?php echo esc_attr($collapse_id); ?>"
-                                                                        class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>"
-                                                                        aria-labelledby="<?php echo esc_attr($heading_id); ?>"
-                                                                        data-bs-parent="#<?php echo esc_attr($faq_accordion_id); ?>">
+                                                                // Normalize divs to line breaks
+                                                                $desc = str_replace(
+                                                                    ['<div dir="auto">', '<div>', '</div>'],
+                                                                    ['', '', '<br>'],
+                                                                    $desc
+                                                                );
 
-                                                                        <div class="accordion-body">
-                                                                            <?php echo wpautop($answer); ?>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            <?php endforeach; ?>
+                                                                // Keep only safe formatting
+                                                                $desc = strip_tags($desc, '<br><strong><b><em><i>');
+
+                                                                echo wp_kses_post($desc);
+                                                                ?>
+                                                            </div>
                                                         </div>
 
-                                                    <?php else : ?>
-                                                        <p class="text-muted mb-0">
-                                                            <?php _e('No FAQs added yet.', 'main-theme'); ?>
-                                                        </p>
-                                                    <?php endif; ?>
+                                                        <!-- FAQ -->
+                                                        <div
+                                                            class="tab-pane fade"
+                                                            id="<?php echo esc_attr($faq_pane_id); ?>"
+                                                            role="tabpanel"
+                                                            aria-labelledby="<?php echo esc_attr($faq_tab_id); ?>">
 
+                                                            <?php if (!empty($faqs)) : ?>
+                                                                <div class="accordion"
+                                                                    id="<?php echo esc_attr($faq_accordion_id); ?>">
+
+                                                                    <?php foreach ($faqs as $index => $faq) :
+                                                                        $question   = $faq['title'] ?? '';
+                                                                        $answer     = $faq['text'] ?? '';
+                                                                        $is_first   = ($index === 0);
+
+                                                                        $heading_id  = $faq_accordion_id . '-heading-' . $index;
+                                                                        $collapse_id = $faq_accordion_id . '-collapse-' . $index;
+                                                                    ?>
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header"
+                                                                                id="<?php echo esc_attr($heading_id); ?>">
+
+                                                                                <button
+                                                                                    class="accordion-button<?php echo $is_first ? '' : ' collapsed'; ?>"
+                                                                                    type="button"
+                                                                                    data-bs-toggle="collapse"
+                                                                                    data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
+                                                                                    aria-expanded="<?php echo $is_first ? 'true' : 'false'; ?>"
+                                                                                    aria-controls="<?php echo esc_attr($collapse_id); ?>">
+                                                                                    <?php echo esc_html($question); ?>
+                                                                                </button>
+                                                                            </h2>
+
+                                                                            <div
+                                                                                id="<?php echo esc_attr($collapse_id); ?>"
+                                                                                class="accordion-collapse collapse<?php echo $is_first ? ' show' : ''; ?>"
+                                                                                aria-labelledby="<?php echo esc_attr($heading_id); ?>"
+                                                                                data-bs-parent="#<?php echo esc_attr($faq_accordion_id); ?>">
+
+                                                                                <div class="accordion-body">
+                                                                                    <?php echo wpautop($answer); ?>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                <p class="text-muted mb-0">
+                                                                    <?php _e('No FAQs added yet.', 'main-theme'); ?>
+                                                                </p>
+                                                            <?php endif; ?>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
-
 
 
                                             </div>
