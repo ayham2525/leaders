@@ -9,84 +9,203 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
 
+  /* عنوان الفرع داخل صفحة الأكاديمية */
   .branch-title {
     color: #000;
     font-weight: 700;
     font-size: 1.4rem;
   }
 
-  .academy-branch-card__icon {
+  .academy-branch-card__icon{
     box-shadow: unset !important;
     color: $red !important;
+}
+
+  /* ========== LIST VIEW: BRANCH CARDS (MODE 1) ========== */
+.academy-branch-card {
+  position: relative;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  min-height: 220px;
+  height: 100%;        // 👈 مهم
+  overflow: hidden;
+
+  &__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($red, .08);
+    color: $red;
+    font-size: 1.2rem;
+    margin-bottom: .75rem;
+    box-shadow: 0 10px 25px rgba($red, .35);
   }
 
-  /* ========== BRANCH CARD ========== */
-  .academy-branch-card {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1.5rem 1.75rem 1.75rem;
-    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
-    display: flex;
-    flex-direction: column;
-    min-height: 220px;
+  .branch-title {
+    margin-bottom: .35rem;
+  }
 
-    &__icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba($red, .08);
+  .branch-location-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .9rem;
+    color: #374151;
+    text-decoration: none;
+
+    i {
+      font-size: .9rem;
       color: $red;
-      box-shadow: 0 10px 25px rgba($red, .35);
     }
 
-    .btn.btn-red {
-      margin-top: auto;
-      border-radius: 999px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba($red, .35);
+    &:hover {
+      color: $red;
     }
   }
 
-  /* ========== ACTIVITY CARD ========== */
+  .btn.btn-red {
+    margin-top: auto;       // 👈 يخلي الزر ينزل تحت
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .95rem;
+    box-shadow: 0 10px 25px rgba($red, .35);
+  }
+}
+
+
+  /* ========== BRANCH VIEW HEADER (MODE 2) ========== */
+  .academy-branch {
+    background-color: transparent;
+    &__head {
+      .branch-title {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+        font-size: 1.5rem;
+
+        i {
+          color: $red;
+          font-size: 1.1rem;
+        }
+      }
+
+      .btn {
+        font-size: .85rem;
+        border-radius: 999px;
+        padding-inline: 1.1rem;
+      }
+    }
+  }
+
+  /* ========== SPORT CARD (SAME LOOK AS SINGLE ACTIVITY) ========== */
   .activity-card {
-    background: rgba(255,255,255,.96);
+    background-color: rgba(255, 255, 255, .96);
     border-radius: 1.5rem;
-    padding: 1.75rem;
-    box-shadow: 0 18px 45px rgba(15,23,42,.16);
+    padding: 1.75rem 1.75rem 1.75rem;
+    margin-bottom: 2.25rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, .16);
+    position: relative;
+    overflow: hidden;
+
+    @include MaxQuery($mid) {
+      padding: 1.25rem 1.1rem;
+    }
 
     .activity-name {
       color: $red;
       font-size: 22px;
       font-weight: 700;
+      margin: 0;
     }
 
     img {
       border-radius: 1.25rem;
+      display: block;
       width: 100%;
+      height: auto;
       object-fit: cover;
     }
+
+    .program-meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+      background-color: $white !important;
+
+      @include MaxQuery($mid) {
+        margin-top: 32px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px 10px;
+
+        .meta-label {
+          font-weight: 700;
+          color: $white;
+        }
+      }
+
+      .td-title {
+        background-color: $red;
+        color: $white;
+        width: 30%;
+        white-space: nowrap;
+      }
+
+      th {
+        background: #f7f7f7;
+        font-weight: 700;
+      }
+    }
   }
+
 }
 
-/* ======================================================
-   PROGRAM TABS – FAQ (FINAL FIX)
-====================================================== */
+/* ========== PROGRAM TABS (SHARED) ========== */
+
+/* ==================== FAQ FIX (EN + AR) ==================== */
+
+/* ==================== FAQ FIX (EN + AR) ==================== */
 
 .program-tabs {
+   html[dir="ltr"] &,
+  html[dir="rtl"] & {
 
-  /* ---------- ACCORDION ---------- */
+    .accordion-button {
+      text-align: left;
+      padding-left: 56px;   /* space for arrow */
+      padding-right: 20px;
+
+      &::after {
+        left: 20px;
+        right: auto;
+      }
+    }
+  }
+
   .accordion {
 
     .accordion-item {
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid #e5e7eb;
-      box-shadow: 0 6px 18px rgba(15,23,42,.06);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
       margin-bottom: 12px;
       background: #fff;
+    }
+
+    .accordion-header {
+      margin: 0;
     }
 
     .accordion-button {
@@ -99,34 +218,38 @@
       border: none;
       box-shadow: none;
 
-      /* ❌ Kill Bootstrap arrow */
+      /* 🔴 REMOVE BOOTSTRAP DEFAULT ICON */
       background-image: none !important;
 
-      /* ✅ ARROW ALWAYS LEFT */
-      padding: 18px 20px 18px 56px;
+      /* Prevent text overlap */
       display: flex;
       align-items: center;
 
-      br { display: none !important; }
+      /* Hide accidental <br> */
+      br {
+        display: none !important;
+      }
 
-      &:focus { box-shadow: none; }
+      &:focus {
+        box-shadow: none;
+      }
 
+      /* Custom arrow */
       &::after {
         content: "";
         position: absolute;
         top: 50%;
-        left: 20px; /* ✅ ALWAYS LEFT */
         width: 10px;
         height: 10px;
         border: 2px solid #9ca3af;
         border-top: 0;
         border-right: 0;
         transform: translateY(-50%) rotate(-45deg);
-        transition: all .25s ease;
+        transition: transform 0.25s ease, border-color 0.25s ease;
       }
 
       &:not(.collapsed) {
-        background: rgba($red,.08);
+        background: rgba($red, 0.08);
         color: $red;
 
         &::after {
@@ -137,7 +260,7 @@
     }
 
     .accordion-body {
-      font-size: .95rem;
+      font-size: 0.95rem;
       line-height: 1.85;
       color: #374151;
       background: #fff;
@@ -145,11 +268,47 @@
     }
   }
 
+  /* ==================== LTR (ENGLISH) ==================== */
+  html[dir="ltr"] & {
+
+    .accordion-button {
+      text-align: left;
+      padding: 18px 56px 18px 20px; /* space for arrow on right */
+
+      &::after {
+        right: 20px;
+        left: auto;
+      }
+    }
+  }
+
+  /* ==================== RTL (ARABIC) ==================== */
+  html[dir="rtl"] & {
+
+    .accordion-button {
+      text-align: right;
+      padding: 18px 20px 18px 56px; /* space for arrow on left */
+
+      &::after {
+        left: 20px;
+        right: auto;
+      }
+    }
+  }
+
   /* ==================== MOBILE ==================== */
   @include MaxQuery($sm) {
+
     .accordion-button {
+      font-size: 0.95rem;
+    }
+
+    html[dir="ltr"] & .accordion-button {
+      padding: 16px 48px 16px 16px;
+    }
+
+    html[dir="rtl"] & .accordion-button {
       padding: 16px 16px 16px 48px;
-      font-size: .95rem;
     }
   }
 
@@ -165,9 +324,10 @@
   }
 }
 
-/* ======================================================
-   SPORT ACTIONS
-====================================================== */
+
+
+
+/* ========== SPORT ACTIONS (SHARED) ========== */
 
 .sport-actions {
   margin-top: 1.5rem;
@@ -177,18 +337,61 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    > a,
+    > button {
+      outline: none;
+      border: none;
+      text-decoration: none;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
 
     .btn-book {
       padding: .55rem 1.8rem;
       border-radius: 999px;
-      background: $red;
+      background-color: $red;
       color: #fff;
       font-weight: 700;
-      box-shadow: 0 6px 16px rgba($red,.35);
+      font-size: .95rem;
+      width: auto;
+      box-shadow: 0 6px 16px rgba($red, .35);
 
       &:hover {
-        background: darken($red,4%);
+        background-color: darken($red, 4%);
         transform: translateY(-1px);
+      }
+    }
+
+    .btn-location,
+    .btn-share,
+    .btn-whatsapp {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, .04);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .08);
+      font-size: 18px;
+      padding: 0;
+      color: $red;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-whatsapp {
+      color: #1fa855;
+
+      &:hover {
+        background-color: #1fa855;
+        color: #fff;
       }
     }
   }

@@ -9,15 +9,18 @@
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
+
   display: flex;
   align-items: center;
 
-  .container { width: 100%; }
+  .container {
+    width: 100%;
+  }
 
   .row {
     display: flex;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: flex-start; // LTR default
   }
 
   .activity-title {
@@ -28,9 +31,15 @@
   }
 }
 
+/* RTL Banner */
 html[dir="rtl"] .single-activity-banner {
-  .row { justify-content: flex-end; }
-  .activity-title { text-align: right; }
+  .row {
+    justify-content: flex-end;
+  }
+
+  .activity-title {
+    text-align: right;
+  }
 }
 
 /* ======================================================
@@ -55,13 +64,19 @@ html[dir="rtl"] .single-activity-banner {
     font-weight: 700;
   }
 
+  /* -------- META TABLE -------- */
   table {
     width: 100%;
     border-collapse: collapse;
     background: #fff;
     border: 1px solid #ddd;
 
-    th, td {
+    @include MaxQuery($mid) {
+      margin-top: 32px;
+    }
+
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 8px 10px;
       font-size: .9rem;
@@ -82,12 +97,28 @@ html[dir="rtl"] .single-activity-banner {
 }
 
 /* ======================================================
-   PROGRAM TABS – FAQ (FINAL FIX)
+   PROGRAM TABS (DESCRIPTION + FAQ)
 ====================================================== */
+
+/* ==================== FAQ FIX (EN + AR) ==================== */
+
 
 .program-tabs {
 
-  /* ---------- ACCORDION ---------- */
+   html[dir="ltr"] &,
+  html[dir="rtl"] & {
+
+    .accordion-button {
+      text-align: left;
+      padding-left: 56px;   /* space for arrow */
+      padding-right: 20px;
+
+      &::after {
+        left: 20px;
+        right: auto;
+      }
+    }
+  }
   .accordion {
 
     .accordion-item {
@@ -99,6 +130,10 @@ html[dir="rtl"] .single-activity-banner {
       background: #fff;
     }
 
+    .accordion-header {
+      margin: 0;
+    }
+
     .accordion-button {
       position: relative;
       background: #f9fafb;
@@ -108,33 +143,39 @@ html[dir="rtl"] .single-activity-banner {
       color: #111827;
       border: none;
       box-shadow: none;
+
+      /* 🔴 REMOVE BOOTSTRAP DEFAULT ICON */
       background-image: none !important;
+
+      /* Prevent text overlap */
       display: flex;
       align-items: center;
 
-      /* ✅ ARROW ALWAYS LEFT */
-      padding: 18px 20px 18px 56px;
+      /* Hide accidental <br> */
+      br {
+        display: none !important;
+      }
 
-      br { display: none !important; }
+      &:focus {
+        box-shadow: none;
+      }
 
-      &:focus { box-shadow: none; }
-
+      /* Custom arrow */
       &::after {
         content: "";
         position: absolute;
         top: 50%;
-        left: 20px;              /* ✅ ALWAYS LEFT */
         width: 10px;
         height: 10px;
         border: 2px solid #9ca3af;
         border-top: 0;
         border-right: 0;
         transform: translateY(-50%) rotate(-45deg);
-        transition: all 0.25s ease;
+        transition: transform 0.25s ease, border-color 0.25s ease;
       }
 
       &:not(.collapsed) {
-        background: rgba($red, .08);
+        background: rgba($red, 0.08);
         color: $red;
 
         &::after {
@@ -145,7 +186,7 @@ html[dir="rtl"] .single-activity-banner {
     }
 
     .accordion-body {
-      font-size: .95rem;
+      font-size: 0.95rem;
       line-height: 1.85;
       color: #374151;
       background: #fff;
@@ -153,11 +194,47 @@ html[dir="rtl"] .single-activity-banner {
     }
   }
 
+  /* ==================== LTR (ENGLISH) ==================== */
+  html[dir="ltr"] & {
+
+    .accordion-button {
+      text-align: left;
+      padding: 18px 56px 18px 20px; /* space for arrow on right */
+
+      &::after {
+        right: 20px;
+        left: auto;
+      }
+    }
+  }
+
+  /* ==================== RTL (ARABIC) ==================== */
+  html[dir="rtl"] & {
+
+    .accordion-button {
+      text-align: right;
+      padding: 18px 20px 18px 56px; /* space for arrow on left */
+
+      &::after {
+        left: 20px;
+        right: auto;
+      }
+    }
+  }
+
   /* ==================== MOBILE ==================== */
   @include MaxQuery($sm) {
+
     .accordion-button {
+      font-size: 0.95rem;
+    }
+
+    html[dir="ltr"] & .accordion-button {
+      padding: 16px 48px 16px 16px;
+    }
+
+    html[dir="rtl"] & .accordion-button {
       padding: 16px 16px 16px 48px;
-      font-size: .95rem;
     }
   }
 
@@ -173,6 +250,7 @@ html[dir="rtl"] .single-activity-banner {
   }
 }
 
+
 /* ======================================================
    SPORT ACTIONS
 ====================================================== */
@@ -185,6 +263,17 @@ html[dir="rtl"] .single-activity-banner {
     align-items: center;
     justify-content: center;
     gap: 16px;
+    width: 100%;
+    flex-wrap: nowrap;
+
+    > a,
+    > button {
+      border: none;
+      background: none;
+      text-decoration: none;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
 
     .btn-book {
       padding: .55rem 1.8rem;
@@ -198,6 +287,35 @@ html[dir="rtl"] .single-activity-banner {
       &:hover {
         background: darken($red, 4%);
         transform: translateY(-1px);
+      }
+    }
+
+    .btn-location,
+    .btn-share,
+    .btn-whatsapp {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.04);
+      box-shadow: 0 6px 16px rgba(15,23,42,.08);
+      font-size: 18px;
+      color: $red;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn-whatsapp {
+      color: #1fa855;
+
+      &:hover {
+        background: #1fa855;
+        color: #fff;
       }
     }
   }
