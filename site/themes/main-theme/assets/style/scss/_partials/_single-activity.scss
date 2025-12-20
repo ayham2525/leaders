@@ -235,20 +235,26 @@ html[dir="rtl"] .single-activity-banner {
    FORCE ACCORDION ARROW POSITION (ENGLISH)
 ====================================================== */
 
+/* ===============================
+   LTR (English) – Arrow on RIGHT
+   =============================== */
+
 html[dir="ltr"] .program-tabs .accordion .accordion-button {
   position: relative;
-  text-align: right;
-  padding-right: 56px;   /* space for arrow */
+  text-align: left;          /* English text */
+  padding-right: 56px;       /* space for arrow */
   padding-left: 20px;
 }
 
-/* 🔴 KILL BOOTSTRAP BEHAVIOR */
+/* 🔴 OVERRIDE BOOTSTRAP ARROW */
 html[dir="ltr"] .program-tabs .accordion .accordion-button::after {
-  margin-left: 0 !important;   /* <-- THIS IS THE KEY */
-  margin-right: 0 !important;
-  position: absolute !important;
-  right: 20px !important;      /* ARROW ON RIGHT */
-  left: auto !important;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 20px;               /* ARROW ON RIGHT */
+  left: auto;
+  margin: 0 !important;      /* kill bootstrap margins */
+  transform: translateY(-50%) rotate(-45deg);
 }
 
 /* OPEN STATE */
@@ -256,6 +262,7 @@ html[dir="ltr"] .program-tabs .accordion .accordion-button:not(.collapsed)::afte
   transform: translateY(-50%) rotate(135deg);
   border-color: #D32F2F;
 }
+
 /* ======================================================
    SPORT ACTIONS
 ====================================================== */
