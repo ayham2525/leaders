@@ -331,6 +331,31 @@ html[dir="ltr"] .program-tabs .accordion .accordion-button:not(.collapsed)::afte
   border-color: #D32F2F;
 }
 
+html[dir="ltr"] {
+  .program-faq-accordion .accordion-button {
+    text-align: left;
+    padding-left: 56px;
+    padding-right: 20px;
+
+    &::after {
+      left: 20px;
+      right: auto;
+    }
+  }
+}
+
+html[dir="rtl"] {
+  .program-faq-accordion .accordion-button {
+    text-align: right;
+    padding-right: 56px;
+    padding-left: 20px;
+
+    &::after {
+      right: 20px;
+      left: auto;
+    }
+  }
+}
 
 
 /* ========== SPORT ACTIONS (SHARED) ========== */
