@@ -103,22 +103,12 @@ html[dir="rtl"] .single-activity-banner {
 /* ==================== FAQ FIX (EN + AR) ==================== */
 
 
+/* ======================================================
+   PROGRAM TABS – FAQ (REVERSED ARROW LOGIC)
+====================================================== */
+
 .program-tabs {
 
-   html[dir="ltr"] &,
-  html[dir="rtl"] & {
-
-    .accordion-button {
-      text-align: left;
-      padding-left: 56px;   /* space for arrow */
-      padding-right: 20px;
-
-      &::after {
-        left: 20px;
-        right: auto;
-      }
-    }
-  }
   .accordion {
 
     .accordion-item {
@@ -143,24 +133,15 @@ html[dir="rtl"] .single-activity-banner {
       color: #111827;
       border: none;
       box-shadow: none;
-
-      /* 🔴 REMOVE BOOTSTRAP DEFAULT ICON */
       background-image: none !important;
-
-      /* Prevent text overlap */
       display: flex;
       align-items: center;
 
-      /* Hide accidental <br> */
-      br {
-        display: none !important;
-      }
+      br { display: none !important; }
 
-      &:focus {
-        box-shadow: none;
-      }
+      &:focus { box-shadow: none; }
 
-      /* Custom arrow */
+      /* ===== CUSTOM ARROW ===== */
       &::after {
         content: "";
         position: absolute;
@@ -171,11 +152,11 @@ html[dir="rtl"] .single-activity-banner {
         border-top: 0;
         border-right: 0;
         transform: translateY(-50%) rotate(-45deg);
-        transition: transform 0.25s ease, border-color 0.25s ease;
+        transition: transform .25s ease, border-color .25s ease;
       }
 
       &:not(.collapsed) {
-        background: rgba($red, 0.08);
+        background: rgba($red, .08);
         color: $red;
 
         &::after {
@@ -186,7 +167,7 @@ html[dir="rtl"] .single-activity-banner {
     }
 
     .accordion-body {
-      font-size: 0.95rem;
+      font-size: .95rem;
       line-height: 1.85;
       color: #374151;
       background: #fff;
@@ -194,12 +175,14 @@ html[dir="rtl"] .single-activity-banner {
     }
   }
 
-  /* ==================== LTR (ENGLISH) ==================== */
+  /* ======================================================
+     ENGLISH (LTR) → ARROW RIGHT, TEXT RIGHT
+  ====================================================== */
   html[dir="ltr"] & {
 
     .accordion-button {
-      text-align: left;
-      padding: 18px 56px 18px 20px; /* space for arrow on right */
+      text-align: right;
+      padding: 18px 56px 18px 20px; /* space for arrow on RIGHT */
 
       &::after {
         right: 20px;
@@ -208,12 +191,14 @@ html[dir="rtl"] .single-activity-banner {
     }
   }
 
-  /* ==================== RTL (ARABIC) ==================== */
+  /* ======================================================
+     ARABIC (RTL) → ARROW LEFT, TEXT LEFT
+  ====================================================== */
   html[dir="rtl"] & {
 
     .accordion-button {
-      text-align: right;
-      padding: 18px 20px 18px 56px; /* space for arrow on left */
+      text-align: left;
+      padding: 18px 20px 18px 56px; /* space for arrow on LEFT */
 
       &::after {
         left: 20px;
@@ -224,10 +209,6 @@ html[dir="rtl"] .single-activity-banner {
 
   /* ==================== MOBILE ==================== */
   @include MaxQuery($sm) {
-
-    .accordion-button {
-      font-size: 0.95rem;
-    }
 
     html[dir="ltr"] & .accordion-button {
       padding: 16px 48px 16px 16px;
@@ -249,7 +230,6 @@ html[dir="rtl"] .single-activity-banner {
     background-color: $red !important;
   }
 }
-
 
 /* ======================================================
    SPORT ACTIONS
