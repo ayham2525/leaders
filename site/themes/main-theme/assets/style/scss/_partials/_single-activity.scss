@@ -102,9 +102,10 @@ html[dir="rtl"] .single-activity-banner {
 
 /* ==================== FAQ FIX (EN + AR) ==================== */
 
+/* ==================== FAQ FIX (EN + AR) ==================== */
+
 .program-tabs {
 
-  /* ---------- FAQ ACCORDION ---------- */
   .accordion {
 
     .accordion-item {
@@ -113,6 +114,7 @@ html[dir="rtl"] .single-activity-banner {
       border: 1px solid #e5e7eb;
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
       margin-bottom: 12px;
+      background: #fff;
     }
 
     .accordion-header {
@@ -124,13 +126,19 @@ html[dir="rtl"] .single-activity-banner {
       background: #f9fafb;
       font-weight: 700;
       font-size: 1rem;
-      line-height: 1.5;
-      padding: 18px 56px 18px 20px;
+      line-height: 1.6;
       color: #111827;
-      box-shadow: none;
       border: none;
+      box-shadow: none;
 
-      /* 🔴 FIX: hide accidental <br> inside question */
+      /* 🔴 REMOVE BOOTSTRAP DEFAULT ICON */
+      background-image: none !important;
+
+      /* Prevent text overlap */
+      display: flex;
+      align-items: center;
+
+      /* Hide accidental <br> */
       br {
         display: none !important;
       }
@@ -139,17 +147,18 @@ html[dir="rtl"] .single-activity-banner {
         box-shadow: none;
       }
 
+      /* Custom arrow */
       &::after {
         content: "";
         position: absolute;
         top: 50%;
-        transform: translateY(-50%) rotate(-45deg);
         width: 10px;
         height: 10px;
         border: 2px solid #9ca3af;
         border-top: 0;
         border-right: 0;
-        transition: all 0.25s ease;
+        transform: translateY(-50%) rotate(-45deg);
+        transition: transform 0.25s ease, border-color 0.25s ease;
       }
 
       &:not(.collapsed) {
@@ -177,8 +186,7 @@ html[dir="rtl"] .single-activity-banner {
 
     .accordion-button {
       text-align: left;
-      padding-left: 20px;
-      padding-right: 56px;
+      padding: 18px 56px 18px 20px; /* space for arrow on right */
 
       &::after {
         right: 20px;
@@ -192,8 +200,7 @@ html[dir="rtl"] .single-activity-banner {
 
     .accordion-button {
       text-align: right;
-      padding-right: 20px;
-      padding-left: 56px;
+      padding: 18px 20px 18px 56px; /* space for arrow on left */
 
       &::after {
         left: 20px;
@@ -207,12 +214,26 @@ html[dir="rtl"] .single-activity-banner {
 
     .accordion-button {
       font-size: 0.95rem;
+    }
+
+    html[dir="ltr"] & .accordion-button {
       padding: 16px 48px 16px 16px;
     }
 
     html[dir="rtl"] & .accordion-button {
       padding: 16px 16px 16px 48px;
     }
+  }
+
+  /* ==================== TABS COLORS ==================== */
+  .nav-link,
+  .nav-link:hover {
+    color: $black;
+  }
+
+  .nav-link.active {
+    color: $white !important;
+    background-color: $red !important;
   }
 }
 
