@@ -1419,7 +1419,7 @@ add_action('wp_ajax_nopriv_submit_academy_registration', 'leaders_submit_academy
 $days_map = [
     'Saturday'  => ['en' => 'Saturday',  'ar' => 'السبت'],
     'Sunday'    => ['en' => 'Sunday',    'ar' => 'الأحد'],
-    'Monday'    => ['en' => 'Monday',    'ar' => 'الاثنين'],
+    'Monday'    => ['en' => 'Monday',    'ar' => 'الإثنين'],
     'Tuesday'   => ['en' => 'Tuesday',   'ar' => 'الثلاثاء'],
     'Wednesday' => ['en' => 'Wednesday', 'ar' => 'الأربعاء'],
     'Thursday'  => ['en' => 'Thursday',  'ar' => 'الخميس'],
