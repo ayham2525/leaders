@@ -1416,7 +1416,6 @@ function leaders_submit_academy_registration_handler()
 add_action('wp_ajax_submit_academy_registration',        'leaders_submit_academy_registration_handler');
 add_action('wp_ajax_nopriv_submit_academy_registration', 'leaders_submit_academy_registration_handler');
 
-
 $days_map = [
     'Saturday'  => ['en' => 'Saturday',  'ar' => 'السبت'],
     'Sunday'    => ['en' => 'Sunday',    'ar' => 'الأحد'],
@@ -1427,12 +1426,32 @@ $days_map = [
     'Friday'    => ['en' => 'Friday',    'ar' => 'الجمعة'],
 ];
 
+function normalize_text($s)
+{
+    $s = is_string($s) ? $s : '';
+    $s = preg_replace('/\s+/u', ' ', $s);   // collapse spaces
+    $s = trim($s);
+    return mb_strtolower($s, 'UTF-8');
+}
+
 function normalize_day_key($day, $days_map)
 {
+    // If ACF returns array (value/label)
+    if (is_array($day)) {
+        $day = $day['value'] ?? $day['label'] ?? '';
+    }
+
+    $d = normalize_text($day);
+
+    // Accept direct keys like "Saturday"
     foreach ($days_map as $key => $labels) {
-        if ($day === $labels['en'] || $day === $labels['ar']) {
+        if ($d === normalize_text($key)) {
+            return $key;
+        }
+        if ($d === normalize_text($labels['en']) || $d === normalize_text($labels['ar'])) {
             return $key;
         }
     }
+
     return null;
 }
